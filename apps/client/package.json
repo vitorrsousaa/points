@@ -14,6 +14,7 @@
 		"test:watch": "vitest run --watch"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.9.0",
 		"@shared/config-css": "*",
 		"@shared/ui": "*",
 		"@tanstack/react-query": "^5.40.0",
