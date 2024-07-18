@@ -6,3 +6,8 @@ export * from "./form";
 export * from "./password-input";
 export * from "./separator";
 export * from "./input-otp";
+export * from "./tooltip";
+export * from "./icon";
+export * from "./breadcrumb";
+export * from "./dropdown";
+export * from "./sheet";
