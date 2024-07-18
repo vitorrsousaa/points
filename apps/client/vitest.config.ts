@@ -7,7 +7,7 @@ export default mergeConfig(
 	configShared,
 	defineProject({
 		test: {
-			globals:true
+			globals: true,
 		},
 		resolve: {
 			alias: {
@@ -19,6 +19,7 @@ export default mergeConfig(
 				"@/contexts": path.resolve(__dirname, "./src/app/contexts"),
 				"@/config": path.resolve(__dirname, "./src/app/config"),
 				"@/libs": path.resolve(__dirname, "./src/app/libs"),
+				"@/layouts": path.resolve(__dirname, "./src/view/layouts"),
 			},
 		},
 	}),
