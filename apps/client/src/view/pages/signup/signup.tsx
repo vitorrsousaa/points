@@ -1,3 +1,4 @@
+import { ROUTES } from "@/config/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
@@ -123,8 +124,8 @@ export function Signup() {
 						<div className="text-center text-sm">
 							Já possui uma conta ?{" "}
 							<Link
+								// to={ROUTES.LOGIN}
 								to="/"
-								// to={ROUTES.CONFIRMATION_ACCOUNT}
 								className="font-medium text-primary"
 							>
 								Faça login!
@@ -132,8 +133,7 @@ export function Signup() {
 						</div>
 						<div className="text-center text-sm">
 							<Link
-								to="/"
-								// to={ROUTES.LOGIN}
+								to={ROUTES.CONFIRMATION_ACCOUNT}
 								className="text-sm font-medium text-primary"
 							>
 								Confirme sua conta aqui.
