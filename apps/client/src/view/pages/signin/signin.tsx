@@ -25,23 +25,18 @@ import { Link } from "react-router-dom";
 import * as z from "zod";
 
 const formSchema = z.object({
-	username: z
-		.string()
-		.min(2, "O nome deve conter ao menos 2 caracteres.")
-		.max(50),
 	email: z
 		.string({ message: "O e-mail é obrigatório." })
 		.email("Formato de e-mail inválido."),
 	password: z.string().min(6, "A senha deve conter ao menos 6 caracteres."),
 });
 
-type SignupFormSchema = z.infer<typeof formSchema>;
+type SigninFormSchema = z.infer<typeof formSchema>;
 
-export function Signup() {
-	const methods = useForm<SignupFormSchema>({
+export function Signin() {
+	const methods = useForm<SigninFormSchema>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			username: "",
 			email: "",
 			password: "",
 		},
@@ -57,31 +52,14 @@ export function Signup() {
 		<div className="flex h-full items-center justify-center">
 			<Card className="mx-auto max-w-sm">
 				<CardHeader>
-					<CardTitle className="text-xl">Crie sua conta</CardTitle>
+					<CardTitle className="text-xl">Faça login</CardTitle>
 					<CardDescription>
-						Adicione as informações para cadastrar a sua loja.
+						Faça login e acesse o painel de administrador da sua loja.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<Form {...methods}>
-						<form onSubmit={handleSubmit} id="signup">
-							<FormField
-								control={control}
-								name="username"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Username</FormLabel>
-										<FormControl>
-											<Input placeholder="Nome da sua loja" {...field} />
-										</FormControl>
-										<FormDescription>
-											Esse é o nome público da sua loja e a forma como as
-											pessoas vão te encontrar.
-										</FormDescription>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+						<form onSubmit={handleSubmit} id="Signin">
 							<FormField
 								control={control}
 								name="email"
@@ -118,13 +96,13 @@ export function Signup() {
 					</Form>
 					<Separator className="mt-4 mb-4" />
 					<div className="space-y-2 w-full">
-						<Button type="submit" form="signup" className="w-full">
-							Criar conta
+						<Button type="submit" form="Signin" className="w-full">
+							Acessar conta
 						</Button>
 						<div className="text-center text-sm">
-							Já possui uma conta ?{" "}
-							<Link to={ROUTES.SIGNIN} className="font-medium text-primary">
-								Faça login!
+							Ainda não tem uma conta ?{" "}
+							<Link to={ROUTES.SIGNUP} className="font-medium text-primary">
+								Crie agora!
 							</Link>
 						</div>
 						<div className="text-center text-sm">
