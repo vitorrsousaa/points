@@ -14,3 +14,6 @@ export * from "./sheet";
 export * from "./table";
 export * from "./spinner";
 export * from "./badge";
+export * from "./switch";
+export * from "./money-input";
+export * from "./text-area";
