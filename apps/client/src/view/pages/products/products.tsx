@@ -61,7 +61,7 @@ export function Products() {
 						</DropdownMenuContent>
 					</DropdownMenu>
 
-					<Link to={ROUTES.PRODUCTS}>
+					<Link to={ROUTES.NEW_PRODUCT}>
 						<Button size="sm" className="h-9 gap-1">
 							<Icon name="plusCircle" className="h-3.5 w-3.5" />
 							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
