@@ -11,3 +11,4 @@ export * from "./icon";
 export * from "./breadcrumb";
 export * from "./dropdown";
 export * from "./sheet";
+export * from "./table";
