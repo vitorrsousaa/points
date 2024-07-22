@@ -12,7 +12,7 @@ import {
 
 const navItems = [
 	{
-		href: ROUTES.SIGNIN,
+		href: ROUTES.PRODUCTS,
 		icon: <Icon name="group" className="h-5 w-5" />,
 		label: "Produtos",
 	},
