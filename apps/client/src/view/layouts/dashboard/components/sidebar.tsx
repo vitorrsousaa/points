@@ -13,7 +13,7 @@ import {
 const navItems = [
 	{
 		href: ROUTES.PRODUCTS,
-		icon: <Icon name="group" className="h-5 w-5" />,
+		icon: <Icon name="layers" className="h-5 w-5" />,
 		label: "Produtos",
 	},
 	{
