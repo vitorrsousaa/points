@@ -12,3 +12,5 @@ export * from "./breadcrumb";
 export * from "./dropdown";
 export * from "./sheet";
 export * from "./table";
+export * from "./spinner";
+export * from "./badge";
