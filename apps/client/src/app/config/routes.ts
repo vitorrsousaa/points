@@ -5,4 +5,5 @@ export const ROUTES = {
 	CONFIRMATION_ACCOUNT: "/confirmation-account",
 	PRODUCTS: "/products",
 	NEW_PRODUCT: "/new-product",
+	ATHLETES: "/atletas",
 } as const;

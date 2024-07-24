@@ -22,9 +22,9 @@ const navItems = [
 		label: "Categorias",
 	},
 	{
-		href: ROUTES.SIGNIN,
+		href: ROUTES.ATHLETES,
 		icon: <Icon name="person" className="h-5 w-5" />,
-		label: "Usuários",
+		label: "Atletas",
 	},
 ];
 

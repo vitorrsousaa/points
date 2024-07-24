@@ -1,8 +1,8 @@
 import { ROUTES } from "@/config/routes";
+import { Athletes } from "@/pages/athletes";
 import { ConfirmationAccount } from "@/pages/confirmation-account";
 import { Dashboard } from "@/pages/dashboard";
 import { NewProduct } from "@/pages/new-product";
-import { Products } from "@/pages/products";
 import { Signin } from "@/pages/signin";
 import { Signup } from "@/pages/signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -21,8 +21,8 @@ export function Router() {
 				/>
 				<Route element={<DashboardLayout />}>
 					<Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
-					<Route path={ROUTES.PRODUCTS} element={<Products />} />
 					<Route path={ROUTES.NEW_PRODUCT} element={<NewProduct />} />
+					<Route path={ROUTES.ATHLETES} element={<Athletes />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
