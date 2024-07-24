@@ -3,6 +3,7 @@ import { Athletes } from "@/pages/athletes";
 import { ConfirmationAccount } from "@/pages/confirmation-account";
 import { Dashboard } from "@/pages/dashboard";
 import { NewAthlete } from "@/pages/new-athlete";
+import { Settings } from "@/pages/settings";
 import { Signin } from "@/pages/signin";
 import { Signup } from "@/pages/signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -23,6 +24,7 @@ export function Router() {
 					<Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
 					<Route path={ROUTES.ATHLETES} element={<Athletes />} />
 					<Route path={ROUTES.NEW_ATHLETE} element={<NewAthlete />} />
+					<Route path={ROUTES.SETTINGS} element={<Settings />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -17,3 +17,6 @@ export * from "./badge";
 export * from "./switch";
 export * from "./money-input";
 export * from "./text-area";
+export * from "./theme-provider";
+export * from "./mode-toggle";
+export * from "./select";

@@ -18,8 +18,8 @@ const navItems = [
 	},
 	{
 		href: ROUTES.SIGNIN,
-		icon: <Icon name="layers" className="h-5 w-5" />,
-		label: "Categorias",
+		icon: <Icon name="reader" className="h-5 w-5" />,
+		label: "Exercícios",
 	},
 	{
 		href: ROUTES.ATHLETES,

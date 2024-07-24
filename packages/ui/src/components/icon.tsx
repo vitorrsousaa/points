@@ -11,6 +11,7 @@ import {
 	LayersIcon,
 	PersonIcon,
 	PlusCircledIcon,
+	ReaderIcon,
 	TrashIcon,
 } from "@radix-ui/react-icons";
 
@@ -34,6 +35,7 @@ const icons = {
 	crossCircled: CrossCircledIcon,
 	trash: TrashIcon,
 	filter: ListFilter,
+	reader: ReaderIcon,
 } as const;
 
 export function Icon(props: IconProps) {

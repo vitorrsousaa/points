@@ -77,7 +77,7 @@ export function DashboardLayout() {
 							<DropdownMenuLabel>Minha conta</DropdownMenuLabel>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem>
-								<Link to={ROUTES.SIGNIN}>Configurações</Link>
+								<Link to={ROUTES.SETTINGS}>Configurações</Link>
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem

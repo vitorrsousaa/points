@@ -5,4 +5,5 @@ export const ROUTES = {
 	CONFIRMATION_ACCOUNT: "/confirmation-account",
 	ATHLETES: "/atletas",
 	NEW_ATHLETE: "/new-athlete",
+	SETTINGS: "/settings",
 } as const;

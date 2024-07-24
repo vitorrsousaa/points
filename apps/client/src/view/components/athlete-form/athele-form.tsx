@@ -22,7 +22,7 @@ export interface AtheleFormProps {
 export function AthleteForm(props: AtheleFormProps) {
 	const { formId = "athlete-form", isSubmitting } = props;
 
-	const { methods, handleSubmit } = useAthleteFormHook(props);
+	const { methods, isUpdating, handleSubmit } = useAthleteFormHook(props);
 
 	return (
 		<Form {...methods}>
@@ -50,23 +50,25 @@ export function AthleteForm(props: AtheleFormProps) {
 							</FormItem>
 						)}
 					/>
-					<FormField
-						control={methods.control}
-						name="status"
-						render={({ field: { value, onChange, name } }) => (
-							<FormItem className="w-full items-center flex-row flex justify-between gap-4 min-[580px]:max-w-40">
-								<FormLabel>Status</FormLabel>
-								<FormControl>
-									<Switch
-										checked={value}
-										onCheckedChange={onChange}
-										name={name}
-										disabled={isSubmitting}
-									/>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
+					{isUpdating && (
+						<FormField
+							control={methods.control}
+							name="status"
+							render={({ field: { value, onChange, name } }) => (
+								<FormItem className="w-full items-center flex-row flex justify-between gap-4 min-[580px]:max-w-40">
+									<FormLabel>Status</FormLabel>
+									<FormControl>
+										<Switch
+											checked={value}
+											onCheckedChange={onChange}
+											name={name}
+											disabled={isSubmitting}
+										/>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
+					)}
 				</div>
 				<div className="flex flex-col gap-2 sm:flex-row w-full">
 					<FormField
@@ -88,6 +90,32 @@ export function AthleteForm(props: AtheleFormProps) {
 								</FormControl>
 								<FormDescription>
 									Adicione o peso do atleta, em Kilograma (Kg).
+								</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</div>
+				<div className="flex flex-col gap-2 sm:flex-row w-full">
+					<FormField
+						control={methods.control}
+						name="age"
+						render={({ field: { value, onChange, name } }) => (
+							<FormItem className="w-full">
+								<FormLabel>Idade do atleta</FormLabel>
+								<FormControl>
+									<Input
+										name={name}
+										min={0.1}
+										disabled={isSubmitting}
+										required
+										onChange={onChange}
+										value={value}
+										type="number"
+									/>
+								</FormControl>
+								<FormDescription>
+									Adicione o idade do atleta, em Kilograma (Kg).
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
