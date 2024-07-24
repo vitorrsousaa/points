@@ -5,6 +5,7 @@ export const AthleteFormSchema = z.object({
 	weight: z.number().min(1, "Precisa ser maior do que zero").nonnegative(),
 	age: z.number().min(1, "Precisa ser maior do que zero").nonnegative(),
 	status: z.boolean(),
+	email: z.string().email("Email inválido"),
 });
 
 export type TAthleteFormSchema = z.infer<typeof AthleteFormSchema>;
@@ -14,4 +15,5 @@ export const defaultInitialValues: TAthleteFormSchema = {
 	weight: 0,
 	status: true,
 	age: 0,
+	email: "",
 };

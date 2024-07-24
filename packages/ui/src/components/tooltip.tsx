@@ -6,7 +6,7 @@ import * as React from "react";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
-const Tooltip = TooltipPrimitive.Root;
+const TooltipRoot = TooltipPrimitive.Root;
 
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
@@ -26,4 +26,21 @@ const TooltipContent = React.forwardRef<
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+interface TooltipProps {
+	children: React.ReactNode;
+	content?: string;
+	contentProps?: React.ComponentProps<typeof TooltipContent>;
+}
+
+function Tooltip({ children, content, contentProps }: TooltipProps) {
+	return (
+		<TooltipProvider>
+			<TooltipRoot>
+				<TooltipTrigger asChild>{children}</TooltipTrigger>
+				<TooltipContent {...contentProps}>{content}</TooltipContent>
+			</TooltipRoot>
+		</TooltipProvider>
+	);
+}
+
+export { Tooltip };

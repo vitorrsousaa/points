@@ -9,6 +9,7 @@ import {
 	HomeIcon,
 	InstagramLogoIcon,
 	LayersIcon,
+	LightningBoltIcon,
 	PersonIcon,
 	PlusCircledIcon,
 	ReaderIcon,
@@ -36,6 +37,7 @@ const icons = {
 	trash: TrashIcon,
 	filter: ListFilter,
 	reader: ReaderIcon,
+	lightning: LightningBoltIcon,
 } as const;
 
 export function Icon(props: IconProps) {

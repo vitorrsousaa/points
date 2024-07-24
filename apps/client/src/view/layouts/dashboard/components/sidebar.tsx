@@ -1,23 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 
 import { ROUTES } from "@/config/routes";
-import {
-	Icon,
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-	cn,
-} from "@shared/ui";
+import { Icon, Tooltip, cn } from "@shared/ui";
 
 const navItems = [
 	{
-		href: ROUTES.ATHLETES,
-		icon: <Icon name="layers" className="h-5 w-5" />,
-		label: "Produtos",
-	},
-	{
-		href: ROUTES.SIGNIN,
+		href: ROUTES.EXERCISES,
 		icon: <Icon name="reader" className="h-5 w-5" />,
 		label: "Exercícios",
 	},
@@ -47,41 +35,34 @@ export function Sidebar() {
 				</Link>
 
 				{navItems.map((item) => (
-					<TooltipProvider key={`${item.href}-${item.label}`}>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<Link
-									to={item.href}
-									className={cn(
-										"flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-										pathname === item.href &&
-											"bg-accent text-accent-foreground",
-									)}
-								>
-									{item.icon}
-									<span className="sr-only">{item.label}</span>
-								</Link>
-							</TooltipTrigger>
-							<TooltipContent side="right">{item.label}</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+					<Tooltip
+						content={item.label}
+						contentProps={{ side: "right" }}
+						key={`${item.href}-${item.label}`}
+					>
+						<Link
+							to={item.href}
+							className={cn(
+								"flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
+								pathname === item.href && "bg-accent text-accent-foreground",
+							)}
+						>
+							{item.icon}
+							<span className="sr-only">{item.label}</span>
+						</Link>
+					</Tooltip>
 				))}
 			</nav>
 			<nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
-				<TooltipProvider>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Link
-								to={ROUTES.SIGNIN}
-								className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-							>
-								<Icon name="settings" className="h-5 w-5" />
-								<span className="sr-only">Configurações</span>
-							</Link>
-						</TooltipTrigger>
-						<TooltipContent side="right">Configurações</TooltipContent>
-					</Tooltip>
-				</TooltipProvider>
+				<Tooltip content="Configurações" contentProps={{ side: "right" }}>
+					<Link
+						to={ROUTES.SETTINGS}
+						className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+					>
+						<Icon name="settings" className="h-5 w-5" />
+						<span className="sr-only">Configurações</span>
+					</Link>
+				</Tooltip>
 			</nav>
 		</aside>
 	);

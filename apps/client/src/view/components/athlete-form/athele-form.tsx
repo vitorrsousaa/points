@@ -50,6 +50,28 @@ export function AthleteForm(props: AtheleFormProps) {
 							</FormItem>
 						)}
 					/>
+					<FormField
+						control={methods.control}
+						name="name"
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormLabel>E-mail</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="E-mail do atleta"
+										type="email"
+										required
+										disabled={isSubmitting}
+										{...field}
+									/>
+								</FormControl>
+								<FormDescription>
+									Preencha com o e-mail do atleta.
+								</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 					{isUpdating && (
 						<FormField
 							control={methods.control}

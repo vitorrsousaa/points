@@ -12,6 +12,7 @@ import {
 	Icon,
 	Spinner,
 	TableCell,
+	Tooltip,
 	TableRow as UITableRow,
 	cn,
 } from "@shared/ui";
@@ -62,23 +63,33 @@ export function TableActions({
 			) : status === "pending" ? (
 				<Spinner className="w-5 h-5" />
 			) : (
-				<>
+				<div className="space-x-2">
+					<Tooltip content="Ver treino">
+						<Button aria-haspopup="true" size="icon" variant="ghost">
+							<Icon name="lightning" className="h-4 w-4" />
+							<span className="sr-only">Toggle menu</span>
+						</Button>
+					</Tooltip>
 					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button aria-haspopup="true" size="icon" variant="ghost">
-								<Icon name="dots" className="h-4 w-4" />
-								<span className="sr-only">Toggle menu</span>
-							</Button>
-						</DropdownMenuTrigger>
+						<Tooltip content="Ações">
+							<DropdownMenuTrigger asChild>
+								<Button aria-haspopup="true" size="icon" variant="ghost">
+									<Icon name="dots" className="h-4 w-4" />
+									<span className="sr-only">Toggle menu</span>
+								</Button>
+							</DropdownMenuTrigger>
+						</Tooltip>
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Ações</DropdownMenuLabel>
+
 							<Link to={ROUTES.ATHLETES}>
 								<DropdownMenuItem>Editar</DropdownMenuItem>
 							</Link>
+
 							<DropdownMenuItem>Deletar</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
-				</>
+				</div>
 			)}
 		</TableCell>
 	);

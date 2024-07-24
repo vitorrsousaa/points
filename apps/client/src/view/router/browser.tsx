@@ -2,6 +2,7 @@ import { ROUTES } from "@/config/routes";
 import { Athletes } from "@/pages/athletes";
 import { ConfirmationAccount } from "@/pages/confirmation-account";
 import { Dashboard } from "@/pages/dashboard";
+import { Exercises } from "@/pages/exercises";
 import { NewAthlete } from "@/pages/new-athlete";
 import { Settings } from "@/pages/settings";
 import { Signin } from "@/pages/signin";
@@ -25,6 +26,7 @@ export function Router() {
 					<Route path={ROUTES.ATHLETES} element={<Athletes />} />
 					<Route path={ROUTES.NEW_ATHLETE} element={<NewAthlete />} />
 					<Route path={ROUTES.SETTINGS} element={<Settings />} />
+					<Route path={ROUTES.EXERCISES} element={<Exercises />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
