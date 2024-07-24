@@ -22,7 +22,7 @@ interface TableRowProps {
 	status?: "pending" | "error";
 }
 
-export function TableRowProduct({ children, status }: TableRowProps) {
+export function TableRowAthlete({ children, status }: TableRowProps) {
 	return (
 		<UITableRow
 			className={cn(
@@ -35,19 +35,19 @@ export function TableRowProduct({ children, status }: TableRowProps) {
 	);
 }
 
-export function TableAvailableProduct({
+export function TableAvailableAthlete({
 	isAvailable,
 }: { isAvailable: boolean }) {
 	return (
 		<TableCell className="hidden md:table-cell">
 			<Badge variant={isAvailable ? "default" : "secondary"}>
-				{isAvailable ? "Disponível" : "Indisponível"}
+				{isAvailable ? "Ativo" : "Inativo"}
 			</Badge>
 		</TableCell>
 	);
 }
 
-export function TableActionsProduct({
+export function TableActions({
 	status,
 	productId,
 }: {
@@ -72,7 +72,7 @@ export function TableActionsProduct({
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Ações</DropdownMenuLabel>
-							<Link to={ROUTES.PRODUCTS}>
+							<Link to={ROUTES.ATHLETES}>
 								<DropdownMenuItem>Editar</DropdownMenuItem>
 							</Link>
 							<DropdownMenuItem>Deletar</DropdownMenuItem>

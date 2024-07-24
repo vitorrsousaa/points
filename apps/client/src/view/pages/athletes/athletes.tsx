@@ -16,7 +16,6 @@ import {
 	DropdownMenuTrigger,
 	Icon,
 	Input,
-	// Spinner,
 	Table,
 	TableBody,
 	TableCell,
@@ -26,19 +25,19 @@ import {
 } from "@shared/ui";
 import { Link } from "react-router-dom";
 import {
-	TableActionsProduct,
-	TableAvailableProduct,
-	TableRowProduct,
-} from "./components/table-row";
+	TableActions,
+	TableAvailableAthlete,
+	TableRowAthlete,
+} from "../athletes/components/table-row";
 
-export function Products() {
+export function Athletes() {
 	return (
 		<>
 			<div className="grid flex-1 items-start gap-4 md:gap-8">
 				<div className="ml-auto flex items-center gap-2">
 					<Input
 						className="h-9 w-72"
-						placeholder="Pesquise pelo nome do produto"
+						placeholder="Pesquise pelo nome do atleta"
 						type="text"
 					/>
 
@@ -61,11 +60,11 @@ export function Products() {
 						</DropdownMenuContent>
 					</DropdownMenu>
 
-					<Link to={ROUTES.NEW_PRODUCT}>
+					<Link to={ROUTES.NEW_ATHLETE}>
 						<Button size="sm" className="h-9 gap-1">
 							<Icon name="plusCircle" className="h-3.5 w-3.5" />
 							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-								Adicionar produto
+								Adicionar atleta
 							</span>
 						</Button>
 					</Link>
@@ -73,8 +72,8 @@ export function Products() {
 
 				<Card>
 					<CardHeader>
-						<CardTitle>Produtos</CardTitle>
-						<CardDescription>Gerencie seus produtos.</CardDescription>
+						<CardTitle>Atletas</CardTitle>
+						<CardDescription>Gerencie seus atletas.</CardDescription>
 					</CardHeader>
 					<CardContent>
 						<Table>
@@ -83,7 +82,7 @@ export function Products() {
 									<TableHead>Nome</TableHead>
 									<TableHead>Categoria</TableHead>
 									<TableHead className="hidden md:table-cell">Status</TableHead>
-									<TableHead>Preço</TableHead>
+									<TableHead>Peso (kg)</TableHead>
 
 									<TableHead className="hidden min-[540px]:table-cell">
 										<span className="sr-only">Actions</span>
@@ -91,19 +90,19 @@ export function Products() {
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								<TableRowProduct>
-									<TableCell>nome do produto</TableCell>
+								<TableRowAthlete>
+									<TableCell>nome do atleta</TableCell>
 
 									<TableCell>
 										<Badge variant="outline">Categoria</Badge>
 									</TableCell>
 
-									<TableAvailableProduct isAvailable />
+									<TableAvailableAthlete isAvailable />
 
 									<TableCell className="hidden md:table-cell">123</TableCell>
 
-									<TableActionsProduct status={undefined} productId={"123"} />
-								</TableRowProduct>
+									<TableActions status={undefined} productId={"123"} />
+								</TableRowAthlete>
 							</TableBody>
 						</Table>
 					</CardContent>

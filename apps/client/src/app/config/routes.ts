@@ -3,7 +3,6 @@ export const ROUTES = {
 	SIGNIN: "/login",
 	SIGNUP: "/signup",
 	CONFIRMATION_ACCOUNT: "/confirmation-account",
-	PRODUCTS: "/products",
-	NEW_PRODUCT: "/new-product",
 	ATHLETES: "/atletas",
+	NEW_ATHLETE: "/new-athlete",
 } as const;

@@ -16,7 +16,7 @@ export function AuthGuard({ isPrivate }: AuthGuardProps) {
 	}
 
 	if (signedIn && !isPrivate) {
-		return <Navigate to={ROUTES.HOME} replace />;
+		return <Navigate to={ROUTES.DASHBOARD} replace />;
 	}
 
 	return <Outlet />;

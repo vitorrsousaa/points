@@ -1,17 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import type { ProductFormProps } from "./product-form";
-import {
-	ProductFormSchema,
-	type TProductFormSchema,
-	defaultInitialValues,
-} from "./product-form.schema";
+import type { AtheleFormProps } from "./athele-form";
+import { AthleteFormSchema, defaultInitialValues } from "./athlete-form.schema";
 
-export function useProductFormHook(props: ProductFormProps) {
+export function useAthleteFormHook(props: AtheleFormProps) {
 	const { initialValues, onSubmit } = props;
 
-	const methods = useForm<TProductFormSchema>({
-		resolver: zodResolver(ProductFormSchema),
+	const methods = useForm({
+		resolver: zodResolver(AthleteFormSchema),
 		defaultValues: initialValues || defaultInitialValues,
 	});
 

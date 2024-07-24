@@ -1,4 +1,3 @@
-import { formatMoney } from "@/utils/money-formatter";
 import {
 	Form,
 	FormControl,
@@ -8,24 +7,22 @@ import {
 	FormLabel,
 	FormMessage,
 	Input,
-	MoneyInput,
 	Switch,
-	Textarea,
 } from "@shared/ui";
-import { useProductFormHook } from "./product-form.hook";
-import type { TProductFormSchema } from "./product-form.schema";
+import { useAthleteFormHook } from "./athlete-form.hook";
+import type { TAthleteFormSchema } from "./athlete-form.schema";
 
-export interface ProductFormProps {
+export interface AtheleFormProps {
 	formId?: string;
-	initialValues?: TProductFormSchema;
-	onSubmit: (data: TProductFormSchema) => Promise<void>;
+	onSubmit: (data: TAthleteFormSchema) => Promise<void>;
 	isSubmitting?: boolean;
+	initialValues?: TAthleteFormSchema;
 }
 
-export function ProductForm(props: ProductFormProps) {
-	const { formId = "product-form", isSubmitting } = props;
+export function AthleteForm(props: AtheleFormProps) {
+	const { formId = "athlete-form", isSubmitting } = props;
 
-	const { methods, handleSubmit } = useProductFormHook(props);
+	const { methods, handleSubmit } = useAthleteFormHook(props);
 
 	return (
 		<Form {...methods}>
@@ -39,7 +36,7 @@ export function ProductForm(props: ProductFormProps) {
 								<FormLabel>Nome</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="Nome do produto"
+										placeholder="Nome do atleta"
 										type="text"
 										required
 										disabled={isSubmitting}
@@ -47,7 +44,7 @@ export function ProductForm(props: ProductFormProps) {
 									/>
 								</FormControl>
 								<FormDescription>
-									Preencha com o nome do produto.
+									Preencha com o nome do atleta.
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
@@ -55,10 +52,10 @@ export function ProductForm(props: ProductFormProps) {
 					/>
 					<FormField
 						control={methods.control}
-						name="isAvailable"
+						name="status"
 						render={({ field: { value, onChange, name } }) => (
 							<FormItem className="w-full items-center flex-row flex justify-between gap-4 min-[580px]:max-w-40">
-								<FormLabel>Disponibilidade</FormLabel>
+								<FormLabel>Status</FormLabel>
 								<FormControl>
 									<Switch
 										checked={value}
@@ -74,68 +71,29 @@ export function ProductForm(props: ProductFormProps) {
 				<div className="flex flex-col gap-2 sm:flex-row w-full">
 					<FormField
 						control={methods.control}
-						name="price"
+						name="weight"
 						render={({ field: { value, onChange, name } }) => (
 							<FormItem className="w-full">
-								<FormLabel>Preço do produto</FormLabel>
+								<FormLabel>Peso do atleta</FormLabel>
 								<FormControl>
-									<MoneyInput
+									<Input
 										name={name}
 										min={0.1}
 										disabled={isSubmitting}
 										required
 										onChange={onChange}
 										value={value}
-										moneyFormatter={formatMoney}
+										type="number"
 									/>
 								</FormControl>
-								<FormDescription>Adicione o valor do produto.</FormDescription>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={methods.control}
-						name="category"
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormLabel>Categoria</FormLabel>
-								<Input
-									placeholder="Categoria do produto"
-									type="text"
-									required
-									disabled={isSubmitting}
-									{...field}
-								/>
 								<FormDescription>
-									Informe a categoria do produto
+									Adicione o peso do atleta, em Kilograma (Kg).
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 				</div>
-
-				<FormField
-					control={methods.control}
-					name="description"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Descrição</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder="Escreva uma descrição sobre o produto"
-									className="resize-none"
-									{...field}
-								/>
-							</FormControl>
-							<FormDescription>
-								Esta descrição vai ser exibida na página do produto.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
 			</form>
 		</Form>
 	);

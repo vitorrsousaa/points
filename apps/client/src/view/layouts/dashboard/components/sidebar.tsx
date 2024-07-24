@@ -12,7 +12,7 @@ import {
 
 const navItems = [
 	{
-		href: ROUTES.PRODUCTS,
+		href: ROUTES.ATHLETES,
 		icon: <Icon name="layers" className="h-5 w-5" />,
 		label: "Produtos",
 	},
