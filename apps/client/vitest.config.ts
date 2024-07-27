@@ -20,6 +20,7 @@ export default mergeConfig(
 				"@/config": path.resolve(__dirname, "./src/app/config"),
 				"@/libs": path.resolve(__dirname, "./src/app/libs"),
 				"@/layouts": path.resolve(__dirname, "./src/view/layouts"),
+				"@/ui": path.resolve(__dirname, "./src/view/ui"),
 			},
 		},
 	}),

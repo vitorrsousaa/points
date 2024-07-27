@@ -33,7 +33,8 @@
 			"@/contexts/*": ["./src/app/contexts/*"],
 			"@/config/*": ["./src/app/config/*"],
 			"@/libs/*": ["./src/app/libs/*"],
-			"@/layouts/*": ["./src/view/layouts/*"]
+			"@/layouts/*": ["./src/view/layouts/*"],
+			"@/ui/*": ["./src/view/ui/*"]
 		}
 	},
 	"include": ["src"]
