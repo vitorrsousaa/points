@@ -11,7 +11,7 @@ import {
 } from "@shared/ui";
 
 export function Settings() {
-	const { setTheme } = useTheme();
+	const { setTheme, theme } = useTheme();
 	return (
 		<div className={"flex w-full flex-col justify-between sm:flex-row "}>
 			<div className={cn("mb-6 sm:mb-0 sm:w-72")}>
@@ -20,7 +20,10 @@ export function Settings() {
 					Personalize a aparência da sua aplicação.
 				</small>
 			</div>
-			<Select onValueChange={(event: string) => setTheme(event as Theme)}>
+			<Select
+				onValueChange={(event: string) => setTheme(event as Theme)}
+				value={theme}
+			>
 				<SelectTrigger className="w-[180px]">
 					<SelectValue placeholder="Selecione o tema" />
 				</SelectTrigger>
