@@ -1,0 +1,68 @@
+documentation:
+  version: '1.0.0'
+  title: 'Training'
+  description: 'API documentation about api'
+  security:
+    - CognitoAuthorizer: []
+  securitySchemes:
+      CognitoAuthorizer: 
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+  tags:
+    - name: Auth
+      description: 'Routes for authentication'
+      x-displayName: Authentication
+    - name: Patients
+      description: 'Routes for patients'
+    - name: Doctors
+      description: 'Routes for doctors'
+  models:
+    - name: ValidationErrorResponse
+      description: This is a schema for responses when occurs errors on validation schema.
+      contentType: application/json
+      schema: ${file(docs/models/validation-response.json)}
+    - name: ErrorResponse
+      description: This is a schema for unknown or server errors.
+      contentType: application/json
+      schema: ${file(docs/models/error-response.json)}
+    - name: PutDocumentResponse
+      description: PUT Document response model (external reference example)
+      contentType: application/json
+      schema: ${file(docs/models/put-document-response.json)}
+    - name: AuthSignupModel
+      description: Auth signup model
+      contentType: application/json
+      schema: ${file(docs/models/auth/signup.json)}
+    - name: NotAuthorizedResponse
+      description: Not Authorized response model
+      contentType: application/json
+      schema: 
+        $schema: http://json-schema.org/draft-04/schema#
+        type: object
+        properties:
+          message:
+            type: string
+            description: Not Authorized
+            example: Not Authorized
+    - name: DoctorModel
+      description: Doctor model
+      content: 
+        application/json:
+          schema: &DoctorModel
+            type: object
+            properties:
+              id: 
+                type: string
+                format: uuid
+                example: 123456
+              name:
+                type: string
+                example: John Doe
+    - name: DoctorsResponse
+      description: Doctors response model
+      content:
+        application/json:
+          schema:
+            type: array
+            items: *DoctorModel

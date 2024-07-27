@@ -1,5 +1,5 @@
-import { ZodError } from "@errors/zod";
-import type { IResponse } from "@interfaces/http";
+import type { IResponse } from "@application/interfaces/http";
+import { ZodError } from "../errors/zod";
 
 import type * as z from "zod";
 

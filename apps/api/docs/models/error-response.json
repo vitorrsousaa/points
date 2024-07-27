@@ -1,0 +1,19 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Internal Server Error Response Schema",
+	"description": "Schema for internal server error responses.",
+	"type": "object",
+	"required": ["error"],
+	"properties": {
+		"error": {
+			"type": "string",
+			"description": "A message describing the error.",
+			"required": ["status", "message"],
+			"additionalProperties": false
+		}
+	},
+	"example": {
+		"error": "Internal Server Error"
+	},
+	"additionalProperties": false
+}

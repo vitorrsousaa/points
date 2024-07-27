@@ -1,0 +1,175 @@
+service: Training
+useDotenv: true
+frameworkVersion: '3'
+
+plugins:
+  - serverless-esbuild
+  - serverless-openapi-documenter
+  
+package:
+  individually: true
+  excludeDevDependencies: true
+  
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  deploymentMethod: direct
+  architecture: arm64
+  accessKeyId: ${env:AWS_ACCESS_KEY_ID}
+  secretAccessKeyId: ${env:AWS_SECRET_ACCESS_KEY}
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "cognito-idp:AdminGetUser"
+          Resource: !GetAtt TrainingUserPool.Arn
+        - Effect: "Allow"
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:UpdateItem
+            - dynamodb:Scan
+            - dynamodb:Query
+          Resource: 
+            - !GetAtt TrainingUserTable.Arn
+            - !Sub ${TrainingUserTable.Arn}/index/EmailIndex
+  environment:
+    COGNITO_POOL_ID: !Ref TrainingUserPool
+    COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
+    STAGE: ${self:provider.stage}
+  httpApi:
+    authorizers:
+      CognitoAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: !GetAtt TrainingUserPool.ProviderURL
+        audience:
+          - !Ref TrainingUserPoolClient
+          
+resources:
+  Resources:
+    TrainingUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: TrainingUserPool-${self:provider.stage}
+        MfaConfiguration: OFF
+        AutoVerifiedAttributes:
+          - email
+        AdminCreateUserConfig:
+          AllowAdminCreateUserOnly: false
+        UsernameAttributes:
+          - email
+        AccountRecoverySetting:
+          RecoveryMechanisms:
+            - Name: verified_email
+              Priority: 1
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: true
+            RequireNumbers: true
+            RequireSymbols: true
+            RequireUppercase: true
+        Schema:
+          - Name: given_name
+            Required: true
+            Mutable: true
+            AttributeDataType: String
+          - Name: family_name
+            Required: true
+            Mutable: true
+            AttributeDataType: String
+    TrainingUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties: 
+        ClientName: TrainingUserPoolClient-${self:provider.stage}
+        UserPoolId: !Ref TrainingUserPool
+        ExplicitAuthFlows:
+          - ALLOW_USER_PASSWORD_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+        TokenValidityUnits:
+          AccessToken: hours
+          RefreshToken: hours
+        AccessTokenValidity: 4
+        RefreshTokenValidity: 56
+    TrainingUserTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        TableName: TrainingUsersTable-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: EmailIndex
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        
+custom:
+  documentation: ${file(serverless.doc.yml):documentation}
+  stages:
+    - dev
+    - prod
+  esbuild:
+    bundle: true
+    minify: true
+    sourcemap: false
+    target: node20
+    exclude:
+      - '@aws-sdk/*'
+    define:
+      require.resolve: undefined
+    platform: node
+    concurrency: 10 
+    
+functions:
+  cognitoCustomMessage:
+    handler: src/server/functions/auth/cognitoCustomMessage.handler
+    events:
+      - cognitoUserPool:
+          pool: TrainingUserPool-${self:provider.stage}
+          trigger: CustomMessage
+          existing: true
+          forceDeploy: true
+  signup:
+    handler: src/server/functions/auth/signup.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/signup
+          documentation: ${file(src/server/functions/auth/signup/handler.doc.yml):signup}
+  profile:
+    handler: src/server/functions/auth/profile.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /auth/profile
+          authorizer:
+            name: CognitoAuthorizer
+          documentation: ${file(src/server/functions/auth/profile/handler.doc.yml):profile}
+  accountConfirmation:
+    handler: src/server/functions/auth/accountConfirmation.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/account-confirmation
+          documentation: ${file(src/server/functions/auth/accountConfirmation/handler.doc.yml):accountConfirmation}
+  signin:
+    handler: src/server/functions/auth/signin.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/signin
+          documentation: ${file(src/server/functions/auth/signin/handler.doc.yml):signin}

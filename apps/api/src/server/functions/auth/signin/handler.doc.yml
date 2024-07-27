@@ -1,0 +1,50 @@
+signin:
+  summary: auth/signin
+  description: Signin user and return accessToken
+  security: []
+  tags: 
+    - Auth
+  requestBody:
+    description: A basic information about user
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        email:
+          type: string
+          example: user@email.com
+        password:
+          type: string
+          example: password
+      required:  
+        - email
+        - password
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return the accessToken
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              accessToken:
+                type: string
+                example: eyJraWQiOiJYYnFtWEl4cnlwUlwvNFFRbVB2SGxSMmlc
+    - statusCode: 401
+      responseBody:
+        description: Invalid Credentials
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse
+    

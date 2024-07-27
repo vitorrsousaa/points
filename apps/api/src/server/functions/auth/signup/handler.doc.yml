@@ -1,0 +1,56 @@
+signup:
+  summary: auth/signup
+  description: Creates a user and sends a validation code to email. This route can be used to create a patient, doctor or admin.
+  security: []
+  tags: 
+    - Auth
+  requestBody:
+    description: A basic information about user. If the user is a patient, the doctorId is required.
+    required: true
+  requestModels:
+    application/json: AuthSignupModel
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return the userId create by the server
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              userId:
+                type: string
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 400
+      responseBody:
+        description: Invalid Password
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Invalid Password
+                example: Invalid Password
+    - statusCode: 409
+      responseBody:
+        description: Username already exists
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Username already exists
+                example: Username already exists
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse

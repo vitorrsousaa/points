@@ -1,0 +1,34 @@
+profile:
+  summary: auth/profile
+  description: Retrieve the profile of the authenticated user
+  tags: 
+    - Auth
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: User profile data
+      responseModels:
+        application/json:
+          schema: ${file(docs/models/auth/profile.json)}
+    - statusCode: 401
+      responseBody:
+        description: Not Authorized
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 404
+      responseBody:
+        description: An error message when user not found
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: User not found
+                example: User not found
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse

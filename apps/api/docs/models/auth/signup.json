@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Signup Input Schema",
+	"description": "Schema for input data when signing up a user.",
+	"type": "object",
+	"required": ["firstName", "lastName", "email", "password", "role"],
+	"properties": {
+		"firstName": {
+			"type": "string"
+		},
+		"lastName": {
+			"type": "string"
+		},
+		"email": {
+			"type": "string",
+			"format": "email"
+		},
+		"password": {
+			"type": "string",
+			"minLength": 8
+		},
+		"role": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": ["PATIENT", "DOCTOR", "ADMIN"]
+			},
+			"uniqueItems": true
+		}
+	},
+	"additionalProperties": false
+}

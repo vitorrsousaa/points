@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Validation Error Response Schema",
+	"description": "Schema for validation error responses.",
+	"type": "object",
+	"required": ["errors"],
+	"properties": {
+		"errors": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"field": {
+						"type": "string",
+						"description": "The field that has a validation error."
+					},
+					"message": {
+						"type": "string",
+						"description": "A message describing the validation error."
+					}
+				},
+				"required": ["field", "message"],
+				"additionalProperties": false
+			}
+		}
+	},
+	"example": {
+		"errors": [
+			{
+				"field": "email",
+				"message": "Invalid email"
+			},
+			{
+				"field": "password",
+				"message": "Password must be at least 8 characters long"
+			}
+		]
+	},
+	"additionalProperties": false
+}

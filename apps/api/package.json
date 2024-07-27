@@ -3,36 +3,40 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"start": "node dist/index.js",
-		"dev": "tsup --watch --onSuccess \"node dist/index.js\"",
+		"deploy:dev": "serverless deploy --stage dev --verbose",
+		"deploy:prod": "serverless deploy --stage prod --verbose",
 		"build": "tsup",
 		"clean": "rm -rf dist",
 		"typecheck": "tsc --noEmit",
 		"lint": "biome lint --apply ./src",
 		"test": "vitest run",
 		"test:watch": "vitest run --watch",
+		"test:ui": "vitest --ui",
 		"check": "biome check --apply ./src",
-		"format": "biome format --write ./src"
+		"format": "biome format --write ./src",
+		"generate:docs": "serverless openapi generate -f json",
+		"build:docs": "npx redocly build-docs openapi.json -o ../api-docs/index.html"
 	},
 	"dependencies": {
+		"@aws-sdk/client-cognito-identity-provider": "^3.620.0",
+		"@aws-sdk/client-dynamodb": "^3.620.0",
+		"@aws-sdk/lib-dynamodb": "^3.620.0",
 		"@shared/logger": "*",
-		"body-parser": "^1.20.2",
-		"cors": "^2.8.5",
-		"express": "^4.18.3",
-		"morgan": "^1.10.0",
+		"dotenv": "^16.4.5",
+		"serverless-openapi-documenter": "^0.0.103",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
+		"@redocly/cli": "^1.18.1",
 		"@shared/typescript-config": "*",
 		"@shared/vitest-presets": "*",
-		"@types/body-parser": "^1.19.5",
-		"@types/cors": "^2.8.17",
-		"@types/express": "^4.17.21",
-		"@types/morgan": "^1.9.9",
+		"@types/aws-lambda": "^8.10.142",
 		"@types/node": "^20.11.24",
 		"@types/supertest": "^6.0.2",
+		"serverless-esbuild": "^1.52.1",
 		"supertest": "^6.3.4",
 		"tsup": "^8.0.2",
-		"typescript": "^5.3.3"
+		"typescript": "^5.3.3",
+		"vite-tsconfig-paths": "^4.3.2"
 	}
 }

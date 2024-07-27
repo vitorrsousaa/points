@@ -1,0 +1,67 @@
+accountConfirmation:
+  summary: auth/account-confirmation
+  description: Confirm user account
+  security: []
+  tags: 
+    - Auth
+  requestBody:
+    description: A basic information about user
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        email:
+          type: string
+          example: user@email.com
+        code:
+          type: string
+          example: 123456
+      required:
+        - email
+        - code
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return the userId create by the server
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              userId:
+                type: string
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 400
+      responseBody:
+        description: Expired Code
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Expired Code
+                example: Expired Code
+    - statusCode: 404
+      responseBody:
+        description: User not found
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: User not found
+                example: User not found
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse

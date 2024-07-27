@@ -2,17 +2,10 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@libs/*": ["./src/app/libs/*"],
-			"@adapters/*": ["./src/server/adapters/*"],
-			"@interfaces/*": ["./src/app/interfaces/*"],
-			"@modules/*": ["./src/app/modules/*"],
-			"@utils/*": ["./src/app/utils/*"],
-			"@providers/*": ["./src/app/providers/*"],
-			"@factories/*": ["./src/factories/*"],
-			"@errors/*": ["./src/app/errors/*"],
-			"@config/*": ["./src/app/config/*"],
-			"@repositories/*": ["./src/app/database/repositories/*"],
-			"@database": ["./src/app/database/database.ts"]
+			"@application/*": ["./src/app/*"],
+			"@server/*": ["./src/server/*"],
+			"@core/*": ["./src/core/*"],
+			"@factories/*": ["./src/factories/*"]
 		}
 	}
 }
