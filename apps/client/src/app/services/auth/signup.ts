@@ -1,13 +1,15 @@
 import { httpClient } from "../httpClient";
 
-interface SignupParams {
+export interface SignupParams {
 	email: string;
 	password: string;
-	name: string;
+	firstName: string;
+	lastName: string;
+	role: string[];
 }
 
 export async function signup(params: SignupParams) {
-	const { data } = await httpClient.post<{ accessToken: string }>(
+	const { data } = await httpClient.post<{ userId: string }>(
 		"/auth/signup",
 		params,
 	);

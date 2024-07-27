@@ -41,3 +41,14 @@ export function useResetPassword(): {
 		resetPassword: mutateAsync,
 	};
 }
+
+export function useSignup() {
+	const { isPending, mutateAsync } = useMutation({
+		mutationFn: authService.signup,
+	});
+
+	return {
+		isCreatingAccount: isPending,
+		signup: mutateAsync,
+	};
+}

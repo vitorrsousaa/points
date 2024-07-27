@@ -1,5 +1,5 @@
 import { ROUTES } from "@/config/routes";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
 	Button,
 	Card,
@@ -20,38 +20,12 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@shared/ui";
-import { useForm } from "react-hook-form";
+
 import { Link } from "react-router-dom";
-import * as z from "zod";
-
-const formSchema = z.object({
-	username: z
-		.string()
-		.min(2, "O nome deve conter ao menos 2 caracteres.")
-		.max(50),
-	email: z
-		.string({ message: "O e-mail é obrigatório." })
-		.email("Formato de e-mail inválido."),
-	password: z.string().min(6, "A senha deve conter ao menos 6 caracteres."),
-});
-
-type SignupFormSchema = z.infer<typeof formSchema>;
+import { useSignupHook } from "./signup.hook";
 
 export function Signup() {
-	const methods = useForm<SignupFormSchema>({
-		resolver: zodResolver(formSchema),
-		defaultValues: {
-			username: "",
-			email: "",
-			password: "",
-		},
-	});
-
-	const { control, handleSubmit: hookFormSubmit } = methods;
-
-	const handleSubmit = hookFormSubmit((data) => {
-		console.log(data);
-	});
+	const { methods, isCreatingAccount, control, handleSubmit } = useSignupHook();
 
 	return (
 		<div className="flex h-full items-center justify-center">
@@ -65,26 +39,42 @@ export function Signup() {
 				<CardContent>
 					<Form {...methods}>
 						<form onSubmit={handleSubmit} id="signup">
-							<FormField
-								control={control}
-								name="username"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Username</FormLabel>
-										<FormControl>
-											<Input placeholder="Nome da sua loja" {...field} />
-										</FormControl>
-										<FormDescription>
-											Esse é o nome público da sua loja e a forma como as
-											pessoas vão te encontrar.
-										</FormDescription>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+							<div className="flex flex-row align-center gap-2">
+								<FormField
+									control={control}
+									name="firstName"
+									disabled={isCreatingAccount}
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Primeiro nome</FormLabel>
+											<FormControl>
+												<Input placeholder="John" {...field} />
+											</FormControl>
+
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={control}
+									name="lastName"
+									disabled={isCreatingAccount}
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Segundo nome</FormLabel>
+											<FormControl>
+												<Input placeholder="Doe" {...field} />
+											</FormControl>
+
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
 							<FormField
 								control={control}
 								name="email"
+								disabled={isCreatingAccount}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>E-mail</FormLabel>
@@ -101,6 +91,7 @@ export function Signup() {
 							<FormField
 								control={control}
 								name="password"
+								disabled={isCreatingAccount}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Senha</FormLabel>
@@ -108,7 +99,8 @@ export function Signup() {
 											<PasswordInput placeholder="*******" {...field} />
 										</FormControl>
 										<FormDescription>
-											Informe sua senha de acesso.
+											Informe sua senha de acesso. A senha deve conter números,
+											letras e caracteres especiais.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -118,7 +110,12 @@ export function Signup() {
 					</Form>
 					<Separator className="mt-4 mb-4" />
 					<div className="space-y-2 w-full">
-						<Button type="submit" form="signup" className="w-full">
+						<Button
+							type="submit"
+							form="signup"
+							className="w-full"
+							isLoading={isCreatingAccount}
+						>
 							Criar conta
 						</Button>
 						<div className="text-center text-sm">

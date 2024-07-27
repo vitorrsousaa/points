@@ -10,7 +10,12 @@ function App() {
 			<QueryClientProvider>
 				<Router />
 
-				<Toaster />
+				<Toaster
+					position="bottom-right"
+					toastOptions={{
+						duration: 3000,
+					}}
+				/>
 			</QueryClientProvider>
 		</ThemeProvider>
 	);
