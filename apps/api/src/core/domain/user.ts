@@ -8,6 +8,5 @@ export type User = {
 	email: string;
 	name: string;
 	role: TRole;
-	doctorId: string | null;
 	accountConfirmation: boolean;
 };

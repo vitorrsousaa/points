@@ -6,7 +6,6 @@ export type UserPersistance = {
 	name: string;
 	email: string;
 	role: TRole;
-	doctorId: string | null;
 	accountConfirmation: boolean;
 };
 

@@ -11,9 +11,8 @@ export const SignupInputSchema = z.object({
 	email: z.string().email({ message: "Invalid email" }),
 	password: z.string().min(8),
 	role: z.array(
-		z.union([z.literal("PATIENT"), z.literal("DOCTOR"), z.literal("ADMIN")]),
+		z.union([z.literal("COACH"), z.literal("ATHLETE"), z.literal("ADMIN")]),
 	),
-	doctorId: z.string().optional(),
 });
 
 export type TCreateUserDTO = z.infer<typeof SignupInputSchema>;
@@ -32,16 +31,13 @@ export class SignupService implements ISignupService {
 		private readonly userRepository: IUserRepository,
 	) {}
 	async execute(data: ISignupInput): Promise<ISignupOutput> {
-		this.verifyRoles(data.role, data);
+		// this.verifyRoles(data.role, data);
 
 		const { userId } = await this.authProvider.signup(data);
-
-		const hasPatient = data.role.includes("PATIENT");
 
 		await this.userRepository.create({
 			id: userId,
 			accountConfirmation: false,
-			doctorId: hasPatient ? data.doctorId || null : null,
 			email: data.email,
 			name: `${data.firstName} ${data.lastName}`,
 			role: data.role,
@@ -50,11 +46,11 @@ export class SignupService implements ISignupService {
 		return { userId };
 	}
 
-	private verifyRoles(role: TRole, object: Record<string, unknown>) {
-		if (role.includes("PATIENT")) {
-			if (!object.doctorId) {
-				throw new DoctorIsRequired();
-			}
-		}
-	}
+	// private verifyRoles(role: TRole, object: Record<string, unknown>) {
+	// 	if (role.includes("PATIENT")) {
+	// 		if (!object.doctorId) {
+	// 			throw new DoctorIsRequired();
+	// 		}
+	// 	}
+	// }
 }

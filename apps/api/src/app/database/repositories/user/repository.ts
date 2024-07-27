@@ -12,7 +12,6 @@ export class UserRepository implements IUserRepository {
 	async create(createInput: UserPersistance): Promise<User> {
 		await this.dbInstance.create(this.TABLE_NAME, {
 			...createInput,
-			doctorId: createInput.doctorId || "null",
 		});
 
 		return this.mapToDomain(createInput);
@@ -78,7 +77,6 @@ export class UserRepository implements IUserRepository {
 			id: item.id,
 			name: item.name,
 			role: item.role,
-			doctorId: item.doctorId,
 			accountConfirmation: item.accountConfirmation,
 		};
 	}

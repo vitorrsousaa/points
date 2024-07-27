@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const roleSchema = z.array(
-	z.union([z.literal("PATIENT"), z.literal("DOCTOR"), z.literal("ADMIN")]),
+	z.union([z.literal("COACH"), z.literal("ATHLETE"), z.literal("ADMIN")]),
 );
 
 /**

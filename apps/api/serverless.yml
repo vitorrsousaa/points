@@ -49,6 +49,17 @@ provider:
         issuerUrl: !GetAtt TrainingUserPool.ProviderURL
         audience:
           - !Ref TrainingUserPoolClient
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedHeaders:
+        - '*'
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
           
 resources:
   Resources:
