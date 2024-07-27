@@ -1,5 +1,5 @@
 import { ROUTES } from "@/config/routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
 	Badge,
@@ -56,6 +56,9 @@ export function TableActions({
 	productId: string;
 }) {
 	console.log(productId);
+
+	const navigate = useNavigate();
+
 	return (
 		<TableCell className="hidden min-[540px]:flex text-center justify-center h-12 items-center">
 			{status === "error" ? (
@@ -65,7 +68,12 @@ export function TableActions({
 			) : (
 				<div className="space-x-2">
 					<Tooltip content="Ver treino">
-						<Button aria-haspopup="true" size="icon" variant="ghost">
+						<Button
+							aria-haspopup="true"
+							size="icon"
+							variant="ghost"
+							onClick={() => navigate(ROUTES.TRAINING)}
+						>
 							<Icon name="lightning" className="h-4 w-4" />
 							<span className="sr-only">Toggle menu</span>
 						</Button>

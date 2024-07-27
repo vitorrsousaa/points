@@ -7,6 +7,7 @@ import { NewAthlete } from "@/pages/new-athlete";
 import { Settings } from "@/pages/settings";
 import { Signin } from "@/pages/signin";
 import { Signup } from "@/pages/signup";
+import { Training } from "@/pages/training";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../layouts/dashboard";
 
@@ -27,6 +28,7 @@ export function Router() {
 					<Route path={ROUTES.NEW_ATHLETE} element={<NewAthlete />} />
 					<Route path={ROUTES.SETTINGS} element={<Settings />} />
 					<Route path={ROUTES.EXERCISES} element={<Exercises />} />
+					<Route path={ROUTES.TRAINING} element={<Training />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
