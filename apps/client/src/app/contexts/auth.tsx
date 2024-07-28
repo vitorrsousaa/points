@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 				signin,
 				signout,
 				email: data?.email as string,
-				name: data?.firstName ? `${data?.firstName} ${data?.lastName}` : "",
+				name: data?.name ?? "",
 			}}
 		>
 			<PageLoader isLoading={isFetching} />

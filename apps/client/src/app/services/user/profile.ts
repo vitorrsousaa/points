@@ -2,8 +2,7 @@ import { httpClient } from "../httpClient";
 
 type MeResponse = {
 	email: string;
-	firstName: string;
-	lastName: string;
+	name: string;
 };
 
 export async function profile() {

@@ -52,7 +52,7 @@ export function AthleteForm(props: AtheleFormProps) {
 					/>
 					<FormField
 						control={methods.control}
-						name="name"
+						name="email"
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormLabel>E-mail</FormLabel>
@@ -102,10 +102,9 @@ export function AthleteForm(props: AtheleFormProps) {
 								<FormControl>
 									<Input
 										name={name}
-										min={0.1}
 										disabled={isSubmitting}
 										required
-										onChange={onChange}
+										onChange={(e) => onChange(Number.parseInt(e.target.value))}
 										value={value}
 										type="number"
 									/>
@@ -128,10 +127,9 @@ export function AthleteForm(props: AtheleFormProps) {
 								<FormControl>
 									<Input
 										name={name}
-										min={0.1}
 										disabled={isSubmitting}
 										required
-										onChange={onChange}
+										onChange={(e) => onChange(Number.parseInt(e.target.value))}
 										value={value}
 										type="number"
 									/>
