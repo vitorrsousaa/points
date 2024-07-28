@@ -1,6 +1,6 @@
 import { httpClient } from "../httpClient";
 
-interface AccountConfirmationParams {
+export interface AccountConfirmationParams {
 	email: string;
 	code: string;
 }

@@ -1,6 +1,7 @@
 import { STORAGE_KEYS } from "@/config/storages";
 import { delay } from "@/utils/delay";
 import axios from "axios";
+import { AppError } from "../errors/app-error";
 
 const { VITE_API_BASE_URL, DEV: IS_DEVELOPMENT } = import.meta.env;
 
@@ -28,10 +29,19 @@ httpClient.interceptors.request.use((config) => {
 	return config;
 });
 
-httpClient.interceptors.response.use(async (data) => {
-	if (IS_DEVELOPMENT) {
-		await delay();
-	}
+httpClient.interceptors.response.use(
+	async (data) => {
+		if (IS_DEVELOPMENT) {
+			await delay();
+		}
 
-	return data;
-});
+		return data;
+	},
+	async (error) => {
+		if (IS_DEVELOPMENT) {
+			await delay();
+		}
+
+		return Promise.reject(new AppError(error));
+	},
+);

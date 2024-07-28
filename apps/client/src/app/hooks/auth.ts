@@ -52,3 +52,14 @@ export function useSignup() {
 		signup: mutateAsync,
 	};
 }
+
+export function useAccountConfirmation() {
+	const { isPending, mutateAsync } = useMutation({
+		mutationFn: authService.accountConfirmation,
+	});
+
+	return {
+		isConfirmingAccount: isPending,
+		confirmAccount: mutateAsync,
+	};
+}

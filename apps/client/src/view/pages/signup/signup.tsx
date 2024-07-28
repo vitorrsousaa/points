@@ -127,7 +127,7 @@ export function Signup() {
 						<div className="text-center text-sm">
 							<Link
 								to={ROUTES.CONFIRMATION_ACCOUNT}
-								className="text-sm font-medium text-primary"
+								className="text-sm font-medium text-primary "
 							>
 								Confirme sua conta aqui.
 							</Link>

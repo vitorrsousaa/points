@@ -1,4 +1,5 @@
 import { ROUTES } from "@/config/routes";
+import { useAccountConfirmation } from "@/hooks/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
@@ -21,7 +22,8 @@ import {
 	Separator,
 } from "@shared/ui";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 import * as z from "zod";
 
@@ -48,21 +50,23 @@ export function ConfirmationAccount() {
 		formState: { isValid },
 	} = form;
 
-	// const { mutateAsync, isPending } = useMutation({
-	// 	mutationFn: authService.accountConfirmation,
-	// });
+	const { confirmAccount, isConfirmingAccount } = useAccountConfirmation();
 
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const handleSubmit = hookFormSubmit(async (values) => {
-		console.log(values);
-		// try {
-		// 	await mutateAsync({ code: values.code, email: values.email });
-		// 	toast.success("Conta confirmada com sucesso");
-		// 	navigate(ROUTES.LOGIN);
-		// } catch {
-		// 	toast.error("Código inválido");
-		// }
+		await toast.promise(confirmAccount(values), {
+			loading: "Confirmando conta...",
+			success: "Conta confirmada com sucesso",
+			error: (error) => {
+				if (error.message === "Expired Code") {
+					return "Código expirado";
+				}
+
+				return "Código inválido";
+			},
+		});
+		navigate(ROUTES.SIGNIN);
 	});
 
 	return (
@@ -81,6 +85,7 @@ export function ConfirmationAccount() {
 							<FormField
 								control={form.control}
 								name="email"
+								disabled={isConfirmingAccount}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Email</FormLabel>
@@ -100,6 +105,7 @@ export function ConfirmationAccount() {
 							<FormField
 								control={form.control}
 								name="code"
+								disabled={isConfirmingAccount}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Code Password</FormLabel>
@@ -125,7 +131,7 @@ export function ConfirmationAccount() {
 							<Button
 								type="submit"
 								className="w-full"
-								// isLoading={isPending}
+								isLoading={isConfirmingAccount}
 								disabled={!isValid}
 							>
 								Confirme sua conta
