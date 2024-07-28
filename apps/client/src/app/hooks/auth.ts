@@ -63,3 +63,14 @@ export function useAccountConfirmation() {
 		confirmAccount: mutateAsync,
 	};
 }
+
+export function useSignin() {
+	const { isPending, mutateAsync } = useMutation({
+		mutationFn: authService.signin,
+	});
+
+	return {
+		isLoggingAccount: isPending,
+		signin: mutateAsync,
+	};
+}

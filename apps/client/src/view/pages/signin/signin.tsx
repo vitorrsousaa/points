@@ -1,4 +1,5 @@
 import { ROUTES } from "@/config/routes";
+import { useAuth, useSignin } from "@/hooks/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
@@ -21,7 +22,8 @@ import {
 	FormMessage,
 } from "@shared/ui";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -42,10 +44,28 @@ export function Signin() {
 		},
 	});
 
-	const { control, handleSubmit: hookFormSubmit } = methods;
+	const { control, handleSubmit: hookFormSubmit, setError } = methods;
 
-	const handleSubmit = hookFormSubmit((data) => {
-		console.log(data);
+	const navigate = useNavigate();
+
+	const { signin } = useAuth();
+
+	const { isLoggingAccount, signin: apiSignin } = useSignin();
+
+	const handleSubmit = hookFormSubmit(async (data) => {
+		try {
+			const { accessToken } = await apiSignin(data);
+			console.log({ accessToken });
+			signin(accessToken);
+			navigate(ROUTES.DASHBOARD);
+
+			toast.success("Bem-vindo de volta!");
+		} catch (error) {
+			toast.error("Credenciais inválidas");
+			setError("password", {
+				message: "E-mail ou senha inválido",
+			});
+		}
 	});
 
 	return (
@@ -63,6 +83,7 @@ export function Signin() {
 							<FormField
 								control={control}
 								name="email"
+								disabled={isLoggingAccount}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>E-mail</FormLabel>
@@ -77,6 +98,7 @@ export function Signin() {
 								)}
 							/>
 							<FormField
+								disabled={isLoggingAccount}
 								control={control}
 								name="password"
 								render={({ field }) => (
@@ -96,7 +118,12 @@ export function Signin() {
 					</Form>
 					<Separator className="mt-4 mb-4" />
 					<div className="space-y-2 w-full">
-						<Button type="submit" form="Signin" className="w-full">
+						<Button
+							type="submit"
+							form="Signin"
+							className="w-full"
+							isLoading={isLoggingAccount}
+						>
 							Acessar conta
 						</Button>
 						<div className="text-center text-sm">
