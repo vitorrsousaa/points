@@ -45,17 +45,7 @@ describe("Service: Signup", () => {
 		// Assert
 		await expect(service.execute(signupData)).rejects.toThrow("Signup failed");
 	});
-	it("should throw an error when user is PATIENT but not there is a doctorId", async () => {
-		// Arrange
 
-		// Act
-		const role = ["PATIENT"] as typeof signupData.role;
-
-		// Assert
-		await expect(service.execute({ ...signupData, role })).rejects.toThrow(
-			"doctorId is required for PATIENT role",
-		);
-	});
 	it('should call "create" method from userRepository', async () => {
 		// Arrange
 		mockedAuthProvider.signup.mockResolvedValue({ userId: "userId" });
@@ -67,52 +57,9 @@ describe("Service: Signup", () => {
 		expect(mockedUserRepository.create).toHaveBeenCalledWith({
 			id: "userId",
 			accountConfirmation: false,
-			doctorId: null,
 			email: signupData.email,
 			name: `${signupData.firstName} ${signupData.lastName}`,
 			role: signupData.role,
-		});
-	});
-	it('should call "create" method from userRepository with doctorId if the user is PATIENT and doctorId is defined', async () => {
-		// Arrange
-		mockedAuthProvider.signup.mockResolvedValue({ userId: "userId" });
-
-		// Act
-		await service.execute({
-			...signupData,
-			role: ["PATIENT"],
-			doctorId: "doctorId",
-		});
-
-		// Assert
-		expect(mockedUserRepository.create).toHaveBeenCalledWith({
-			id: "userId",
-			accountConfirmation: false,
-			doctorId: "doctorId",
-			email: signupData.email,
-			name: `${signupData.firstName} ${signupData.lastName}`,
-			role: ["PATIENT"],
-		});
-	});
-	it('should call "create" method from userRepository without doctorId if the user is not PATIENT and doctorId is defined', async () => {
-		// Arrange
-		mockedAuthProvider.signup.mockResolvedValue({ userId: "userId" });
-
-		// Act
-		await service.execute({
-			...signupData,
-			role: ["ADMIN"],
-			doctorId: "doctorId",
-		});
-
-		// Assert
-		expect(mockedUserRepository.create).toHaveBeenCalledWith({
-			id: "userId",
-			accountConfirmation: false,
-			doctorId: null,
-			email: signupData.email,
-			name: `${signupData.firstName} ${signupData.lastName}`,
-			role: ["ADMIN"],
 		});
 	});
 });
