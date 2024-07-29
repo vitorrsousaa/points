@@ -11,7 +11,7 @@ export interface CreateAthleteParams {
 }
 
 export async function create(params: CreateAthleteParams) {
-	const { data } = await httpClient.post("/athlete/create", params);
+	const { data } = await httpClient.post("/athlete", params);
 
 	return data;
 }

@@ -31,6 +31,10 @@ import {
 } from "../athletes/components/table-row";
 
 export function Athletes() {
+	const athletes = [];
+
+	const hastAthletes = athletes.length > 0;
+
 	return (
 		<>
 			<div className="grid flex-1 items-start gap-4 md:gap-8">
@@ -76,41 +80,59 @@ export function Athletes() {
 						<CardDescription>Gerencie seus atletas.</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<Table>
-							<TableHeader>
-								<TableRow>
-									<TableHead>Nome</TableHead>
-									<TableHead>Categoria</TableHead>
-									<TableHead className="hidden md:table-cell">Status</TableHead>
-									<TableHead>Peso (kg)</TableHead>
+						{hastAthletes ? (
+							<>
+								<Table>
+									<TableHeader>
+										<TableRow>
+											<TableHead>Nome</TableHead>
+											<TableHead>Categoria</TableHead>
+											<TableHead className="hidden md:table-cell">
+												Status
+											</TableHead>
+											<TableHead>Peso (kg)</TableHead>
 
-									<TableHead className="hidden min-[540px]:table-cell">
-										<span className="sr-only">Actions</span>
-									</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								<TableRowAthlete>
-									<TableCell>nome do atleta</TableCell>
+											<TableHead className="hidden min-[540px]:table-cell">
+												<span className="sr-only">Actions</span>
+											</TableHead>
+										</TableRow>
+									</TableHeader>
+									<TableBody>
+										<TableRowAthlete>
+											<TableCell>nome do atleta</TableCell>
 
-									<TableCell>
-										<Badge variant="outline">Categoria</Badge>
-									</TableCell>
+											<TableCell>
+												<Badge variant="outline">Categoria</Badge>
+											</TableCell>
 
-									<TableAvailableAthlete isAvailable />
+											<TableAvailableAthlete isAvailable />
 
-									<TableCell className="hidden md:table-cell">123</TableCell>
+											<TableCell className="hidden md:table-cell">
+												123
+											</TableCell>
 
-									<TableActions status={undefined} productId={"123"} />
-								</TableRowAthlete>
-							</TableBody>
-						</Table>
+											<TableActions status={undefined} productId={"123"} />
+										</TableRowAthlete>
+									</TableBody>
+								</Table>
+							</>
+						) : (
+							<div className="h-full w-full flex items-center justify-center flex-col gap-4">
+								<small>Você ainda não tem atletas cadastrados.</small>
+								<small>
+									Clique no botão abaixo para cadastrar o primeiro atleta.
+								</small>
+								<Link to={ROUTES.NEW_ATHLETE}>
+									<Button size="sm" className="h-9 gap-1">
+										<Icon name="plusCircle" className="h-3.5 w-3.5" />
+										<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+											Adicionar atleta
+										</span>
+									</Button>
+								</Link>
+							</div>
+						)}
 					</CardContent>
-					<CardFooter>
-						<div className="text-xs text-muted-foreground">
-							Exibindo <strong>{12}</strong> produtos.
-						</div>
-					</CardFooter>
 				</Card>
 			</div>
 		</>
