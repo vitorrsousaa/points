@@ -24,13 +24,16 @@ export function AthleteForm(props: AtheleFormProps) {
 
 	const { methods, isUpdating, handleSubmit } = useAthleteFormHook(props);
 
+	// TODO: add height field to the form
+	// TODO: add firstName and lastName fields to the form
+
 	return (
 		<Form {...methods}>
 			<form id={formId} onSubmit={handleSubmit} className="flex flex-col gap-2">
 				<div className="flex flex-col gap-4 min-[580px]:flex-row">
 					<FormField
 						control={methods.control}
-						name="name"
+						name="firstName"
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormLabel>Nome</FormLabel>
@@ -52,26 +55,27 @@ export function AthleteForm(props: AtheleFormProps) {
 					/>
 					<FormField
 						control={methods.control}
-						name="email"
+						name="lastName"
 						render={({ field }) => (
 							<FormItem className="w-full">
-								<FormLabel>E-mail</FormLabel>
+								<FormLabel>Nome</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="E-mail do atleta"
-										type="email"
+										placeholder="Segundo Nome do atleta"
+										type="text"
 										required
 										disabled={isSubmitting}
 										{...field}
 									/>
 								</FormControl>
 								<FormDescription>
-									Preencha com o e-mail do atleta.
+									Preencha com o nome do atleta.
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
+
 					{isUpdating && (
 						<FormField
 							control={methods.control}
@@ -92,6 +96,28 @@ export function AthleteForm(props: AtheleFormProps) {
 						/>
 					)}
 				</div>
+				<FormField
+					control={methods.control}
+					name="email"
+					render={({ field }) => (
+						<FormItem className="w-full">
+							<FormLabel>E-mail</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="E-mail do atleta"
+									type="email"
+									required
+									disabled={isSubmitting}
+									{...field}
+								/>
+							</FormControl>
+							<FormDescription>
+								Preencha com o e-mail do atleta.
+							</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 				<div className="flex flex-col gap-2 sm:flex-row w-full">
 					<FormField
 						control={methods.control}
@@ -111,6 +137,29 @@ export function AthleteForm(props: AtheleFormProps) {
 								</FormControl>
 								<FormDescription>
 									Adicione o peso do atleta, em Kilograma (Kg).
+								</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={methods.control}
+						name="height"
+						render={({ field: { value, onChange, name } }) => (
+							<FormItem className="w-full">
+								<FormLabel>Altura do atleta</FormLabel>
+								<FormControl>
+									<Input
+										name={name}
+										disabled={isSubmitting}
+										required
+										onChange={(e) => onChange(Number.parseInt(e.target.value))}
+										value={value}
+										type="number"
+									/>
+								</FormControl>
+								<FormDescription>
+									Adicione o Altura do atleta, em Kilograma (Kg).
 								</FormDescription>
 								<FormMessage />
 							</FormItem>

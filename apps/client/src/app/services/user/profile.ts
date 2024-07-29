@@ -3,6 +3,7 @@ import { httpClient } from "../httpClient";
 type MeResponse = {
 	email: string;
 	name: string;
+	id: string;
 };
 
 export async function profile() {

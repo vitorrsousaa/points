@@ -1,4 +1,7 @@
 import { AthleteForm } from "@/components/athlete-form";
+import type { TAthleteFormSchema } from "@/components/athlete-form/athlete-form.schema";
+import { useCreateAthlete } from "@/hooks/athlete";
+import { useAuth } from "@/hooks/auth";
 import {
 	Button,
 	Card,
@@ -12,6 +15,18 @@ import { useNavigate } from "react-router-dom";
 
 export function NewAthlete() {
 	const navigate = useNavigate();
+	const { id } = useAuth();
+	const { createAthlete, isCreatingAthlete } = useCreateAthlete();
+
+	async function handleSubmit(data: TAthleteFormSchema) {
+		if (!id) return;
+
+		const newAthlete = { ...data, coachId: id };
+
+		const result = await createAthlete(newAthlete);
+
+		console.log(result);
+	}
 
 	return (
 		<div className="grid flex-1 items-start gap-4 md:gap-8">
@@ -24,8 +39,9 @@ export function NewAthlete() {
 				</CardHeader>
 				<CardContent>
 					<AthleteForm
-						onSubmit={async (data) => console.log(data)}
+						onSubmit={handleSubmit}
 						formId="new-athlete-form"
+						isSubmitting={isCreatingAthlete}
 					/>
 				</CardContent>
 				<CardFooter className="w-full gap-2 flex flex-row justify-end">
@@ -35,7 +51,7 @@ export function NewAthlete() {
 					<Button
 						type="submit"
 						form="new-athlete-form"
-						// isLoading={isCreatingProduct}
+						isLoading={isCreatingAthlete}
 					>
 						Salvar
 					</Button>

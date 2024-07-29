@@ -12,6 +12,7 @@ export interface AuthContextValue {
 	signout: () => void;
 	email?: string;
 	name?: string;
+	id?: string;
 }
 
 export const AuthContext = createContext<AuthContextValue>(
@@ -66,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 				signout,
 				email: data?.email as string,
 				name: data?.name ?? "",
+				id: data?.id ?? "",
 			}}
 		>
 			<PageLoader isLoading={isFetching} />
