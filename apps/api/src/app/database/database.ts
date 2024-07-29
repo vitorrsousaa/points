@@ -18,7 +18,7 @@ export interface IDatabaseClient {
 		tableName: string,
 		attributes: T,
 	): Promise<void>;
-	update<T>(
+	update(
 		tableName: string,
 		args: Omit<UpdateCommandInput, "TableName">,
 	): Promise<void>;
