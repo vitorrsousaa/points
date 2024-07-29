@@ -24,7 +24,7 @@ describe("Service:AccountConfirmation", () => {
 		accountConfirmation: false,
 		doctorId: null,
 		name: "name",
-		role: ["DOCTOR"] as TRole,
+		role: ["COACH"] as TRole,
 	};
 
 	beforeEach(() => {

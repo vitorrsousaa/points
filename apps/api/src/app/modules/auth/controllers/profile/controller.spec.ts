@@ -46,7 +46,6 @@ describe("Controller: Profile", () => {
 			id: "123",
 			name: "John",
 			email: "email@email.com",
-			doctorId: null,
 			role: ["ADMIN"],
 		});
 		mockRequest.userId = "c65c40a3-4455-4bc3-9bda-451abc54250b";

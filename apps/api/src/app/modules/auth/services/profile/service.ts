@@ -16,7 +16,6 @@ export interface IProfileOutput {
 	name: string;
 	email: string;
 	role: TRole;
-	doctorId: string | null;
 	id: string;
 }
 

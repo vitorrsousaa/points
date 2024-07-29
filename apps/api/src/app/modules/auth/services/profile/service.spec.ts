@@ -16,7 +16,6 @@ describe("Service:Profile", () => {
 
 	const defaultUser: UnwrapPromise<ReturnType<IUserRepository["getById"]>> = {
 		accountConfirmation: true,
-		doctorId: null,
 		email: "email",
 		id: "123",
 		name: "name",
