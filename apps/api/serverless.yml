@@ -184,3 +184,9 @@ functions:
           method: POST
           path: /auth/signin
           documentation: ${file(src/server/functions/auth/signin/handler.doc.yml):signin}
+  createAthlete:
+    handler: src/server/functions/athlete/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /athlete/create
