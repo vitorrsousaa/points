@@ -37,6 +37,7 @@ provider:
           Resource: 
             - !GetAtt TrainingUserTable.Arn
             - !Sub ${TrainingUserTable.Arn}/index/EmailIndex
+            - !Sub ${TrainingUserTable.Arn}/index/CoachIdIndex
   environment:
     COGNITO_POOL_ID: !Ref TrainingUserPool
     COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
@@ -117,6 +118,8 @@ resources:
             AttributeType: S
           - AttributeName: email
             AttributeType: S
+          - AttributeName: coachId
+            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -124,6 +127,12 @@ resources:
           - IndexName: EmailIndex
             KeySchema:
               - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          - IndexName: CoachIdIndex
+            KeySchema:
+              - AttributeName: coachId
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
@@ -189,4 +198,14 @@ functions:
     events:
       - httpApi:
           method: POST
-          path: /athlete/create
+          path: /athlete
+          authorizer:
+            name: CognitoAuthorizer
+  getAllByCoachId:
+    handler: src/server/functions/athlete/getAllByCoachId.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /athlete/{coachId}
+          authorizer:
+            name: CognitoAuthorizer

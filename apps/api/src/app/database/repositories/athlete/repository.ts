@@ -29,6 +29,18 @@ export class AthleteRepository implements IAthleteRepository {
 		return athlete;
 	}
 
+	async getAllByCoachId(coachId: string): Promise<Athlete[]> {
+		const athletes = await this.dbInstance.query<Athlete[]>(this.TABLE_NAME, {
+			IndexName: "CoachIdIndex",
+			KeyConditionExpression: "coachId = :coachId",
+			ExpressionAttributeValues: {
+				":coachId": coachId,
+			},
+		});
+
+		return athletes || [];
+	}
+
 	// private mapToDomain(Athlete: AthletePersistance): Athlete {
 	// 	return {
 	// 		id: Athlete.id,

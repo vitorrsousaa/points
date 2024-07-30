@@ -45,7 +45,7 @@ describe("Service:Create", () => {
 		} as unknown as Mocked<ISignupService>;
 		mockedAthleteRepository = {
 			update: vi.fn(),
-		};
+		} as unknown as Mocked<IAthleteRepository>;
 		service = new CreateService(
 			mockedSignupService,
 			mockedUserRepository,

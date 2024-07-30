@@ -12,4 +12,5 @@ import type { TRole } from "@core/domain/role";
 
 export interface IAthleteRepository {
 	update(athlete: Athlete): Promise<Athlete>;
+	getAllByCoachId(coachId: string): Promise<Athlete[]>;
 }
