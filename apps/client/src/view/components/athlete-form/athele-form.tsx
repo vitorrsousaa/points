@@ -79,7 +79,7 @@ export function AthleteForm(props: AtheleFormProps) {
 					{isUpdating && (
 						<FormField
 							control={methods.control}
-							name="status"
+							name="isActive"
 							render={({ field: { value, onChange, name } }) => (
 								<FormItem className="w-full items-center flex-row flex justify-between gap-4 min-[580px]:max-w-40">
 									<FormLabel>Status</FormLabel>

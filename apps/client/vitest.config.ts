@@ -21,6 +21,7 @@ export default mergeConfig(
 				"@/libs": path.resolve(__dirname, "./src/app/libs"),
 				"@/layouts": path.resolve(__dirname, "./src/view/layouts"),
 				"@/ui": path.resolve(__dirname, "./src/view/ui"),
+				"@/entities": path.resolve(__dirname, "./src/app/entities"),
 			},
 		},
 	}),

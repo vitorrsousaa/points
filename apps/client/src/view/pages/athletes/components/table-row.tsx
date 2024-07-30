@@ -28,7 +28,8 @@ export function TableRowAthlete({ children, status }: TableRowProps) {
 		<UITableRow
 			className={cn(
 				"h-12 align-middle",
-				status === "error" && "bg-destructive/10 hover:bg-destructive/20",
+				status === "error" &&
+					"bg-destructive/10 border-2 border-destructive/50 rounded-sm",
 			)}
 		>
 			{children}
@@ -62,7 +63,12 @@ export function TableActions({
 	return (
 		<TableCell className="hidden min-[540px]:flex text-center justify-center h-12 items-center">
 			{status === "error" ? (
-				<Icon name="crossCircled" className="text-destructive w-5 h-5" />
+				<Tooltip content="Erro ao carregar">
+					<Button aria-haspopup="true" size="icon" variant="ghost">
+						<Icon name="crossCircled" className="text-primary w-5 h-5" />
+						<span className="sr-only">Error</span>
+					</Button>
+				</Tooltip>
 			) : status === "pending" ? (
 				<Spinner className="w-5 h-5" />
 			) : (

@@ -34,7 +34,8 @@
 			"@/config/*": ["./src/app/config/*"],
 			"@/libs/*": ["./src/app/libs/*"],
 			"@/layouts/*": ["./src/view/layouts/*"],
-			"@/ui/*": ["./src/view/ui/*"]
+			"@/ui/*": ["./src/view/ui/*"],
+			"@/entitites/*": ["./src/app/entities/*"]
 		}
 	},
 	"include": ["src"]

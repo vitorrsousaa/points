@@ -1,5 +1,6 @@
 import { AthleteForm } from "@/components/athlete-form";
 import type { TAthleteFormSchema } from "@/components/athlete-form/athlete-form.schema";
+import { ROUTES } from "@/config/routes";
 import { useCreateAthlete } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import {
@@ -23,9 +24,9 @@ export function NewAthlete() {
 
 		const newAthlete = { ...data, coachId: id };
 
-		const result = await createAthlete(newAthlete);
+		createAthlete(newAthlete);
 
-		console.log(result);
+		navigate(ROUTES.ATHLETES);
 	}
 
 	return (
