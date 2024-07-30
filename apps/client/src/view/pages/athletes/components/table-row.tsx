@@ -1,6 +1,7 @@
 import { ROUTES } from "@/config/routes";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+import { useNavigate } from "@/hooks/navigate";
 import {
 	Badge,
 	Button,
@@ -37,13 +38,11 @@ export function TableRowAthlete({ children, status }: TableRowProps) {
 	);
 }
 
-export function TableAvailableAthlete({
-	isAvailable,
-}: { isAvailable: boolean }) {
+export function TableAvailableAthlete({ isActive }: { isActive: boolean }) {
 	return (
 		<TableCell className="hidden md:table-cell">
-			<Badge variant={isAvailable ? "default" : "secondary"}>
-				{isAvailable ? "Ativo" : "Inativo"}
+			<Badge variant={isActive ? "default" : "secondary"}>
+				{isActive ? "Ativo" : "Inativo"}
 			</Badge>
 		</TableCell>
 	);
@@ -51,14 +50,12 @@ export function TableAvailableAthlete({
 
 export function TableActions({
 	status,
-	productId,
+	athleteId,
 }: {
 	status?: "pending" | "error";
-	productId: string;
+	athleteId: string;
 }) {
-	console.log(productId);
-
-	const navigate = useNavigate();
+	const { navigate } = useNavigate();
 
 	return (
 		<TableCell className="hidden min-[540px]:flex text-center justify-center h-12 items-center">
@@ -78,7 +75,11 @@ export function TableActions({
 							aria-haspopup="true"
 							size="icon"
 							variant="ghost"
-							onClick={() => navigate(ROUTES.TRAINING)}
+							onClick={() =>
+								navigate("TRAINING", {
+									replace: { athleteId },
+								})
+							}
 						>
 							<Icon name="lightning" className="h-4 w-4" />
 							<span className="sr-only">Toggle menu</span>

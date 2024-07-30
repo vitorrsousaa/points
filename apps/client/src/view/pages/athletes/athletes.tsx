@@ -128,15 +128,15 @@ export function Athletes() {
 															<Badge variant="outline">Categoria</Badge>
 														</TableCell>
 
-														<TableAvailableAthlete isAvailable />
+														<TableAvailableAthlete isActive />
 
 														<TableCell className="hidden md:table-cell">
-															123
+															{athlete.weight}
 														</TableCell>
 
 														<TableActions
 															status={athlete.status}
-															productId={athlete.id}
+															athleteId={athlete.id}
 														/>
 													</TableRowAthlete>
 												))}
