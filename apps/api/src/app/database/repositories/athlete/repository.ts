@@ -4,7 +4,7 @@ import type { Athlete } from "@core/domain/athlete";
 import type { IAthleteRepository } from "./types";
 
 export class AthleteRepository implements IAthleteRepository {
-	private TABLE_NAME = DATABASE_TABLE.USERS;
+	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	private DEFAULT_USER_ID = "USER";
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}

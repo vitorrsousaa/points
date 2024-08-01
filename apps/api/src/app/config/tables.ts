@@ -2,13 +2,13 @@ import { makeConfigEnvironment } from "@factories/config/environment";
 import type { IConfig } from "./environment";
 
 export interface IDatabaseTables {
-	USERS: string;
+	TABLE_NAME: string;
 }
 
 export class DatabaseTables implements IDatabaseTables {
 	constructor(private readonly configuration: IConfig) {}
 
-	public get USERS(): string {
+	public get TABLE_NAME(): string {
 		const state = this.configuration.STAGE;
 
 		return `TrainingTable-${state}`;

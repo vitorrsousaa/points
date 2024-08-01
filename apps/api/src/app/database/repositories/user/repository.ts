@@ -5,7 +5,7 @@ import type { User } from "@core/domain/user";
 import type { IUserRepository, UserDynamoDB, UserPersistance } from "./types";
 
 export class UserRepository implements IUserRepository {
-	private TABLE_NAME = DATABASE_TABLE.USERS;
+	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	private DEFAULT_USER_ID = "USER";
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
@@ -45,7 +45,7 @@ export class UserRepository implements IUserRepository {
 
 	async update(
 		id: string,
-		updateInput: Omit<UserPersistance, "SK" | "PK">,
+		updateInput: Omit<UserPersistance, "id">,
 	): Promise<User> {
 		const { PK, SK } = this.getKeys(id);
 
