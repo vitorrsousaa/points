@@ -35,9 +35,9 @@ provider:
             - dynamodb:Scan
             - dynamodb:Query
           Resource: 
-            - !GetAtt TrainingUserTable.Arn
-            - !Sub ${TrainingUserTable.Arn}/index/EmailIndex
-            - !Sub ${TrainingUserTable.Arn}/index/CoachIdIndex
+            - !GetAtt TrainingTable.Arn
+            - !Sub ${TrainingTable.Arn}/index/EmailIndex
+            - !Sub ${TrainingTable.Arn}/index/CoachIdIndex
   environment:
     COGNITO_POOL_ID: !Ref TrainingUserPool
     COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
@@ -108,21 +108,25 @@ resources:
           RefreshToken: hours
         AccessTokenValidity: 4
         RefreshTokenValidity: 56
-    TrainingUserTable:
+    TrainingTable:
       Type: AWS::DynamoDB::Table
       Properties:
         BillingMode: PAY_PER_REQUEST
-        TableName: TrainingUsersTable-${self:provider.stage}
+        TableName: TrainingTable-${self:provider.stage}
         AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
           - AttributeName: email
             AttributeType: S
           - AttributeName: coachId
             AttributeType: S
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: PK
             KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
         GlobalSecondaryIndexes:
           - IndexName: EmailIndex
             KeySchema:

@@ -13,8 +13,13 @@ import {
 	type UpdateCommandInput,
 } from "@aws-sdk/lib-dynamodb";
 
+export type TBaseEntity = {
+	SK: string;
+	PK: string;
+};
+
 export interface IDatabaseClient {
-	create<T extends Record<string, unknown>>(
+	create<T extends TBaseEntity>(
 		tableName: string,
 		attributes: T,
 	): Promise<void>;
@@ -39,10 +44,7 @@ export interface IDatabaseClient {
 export class DatabaseClient implements IDatabaseClient {
 	constructor(private readonly dynamoClient: DynamoDBDocumentClient) {}
 
-	async create<T extends Record<string, unknown>>(
-		tableName: string,
-		attributes: T,
-	) {
+	async create<T extends TBaseEntity>(tableName: string, attributes: T) {
 		const command = new PutCommand({
 			TableName: tableName,
 			Item: {

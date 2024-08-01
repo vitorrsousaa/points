@@ -1,3 +1,4 @@
+import type { TBaseEntity } from "@application/database/database";
 import type { TRole } from "@core/domain/role";
 import type { User } from "@core/domain/user";
 
@@ -8,6 +9,18 @@ export type UserPersistance = {
 	role: TRole;
 	accountConfirmation: boolean;
 };
+
+/**
+ * This entity is used to send user for dynamoDB with SK and PK.
+ * PK - USER
+ * SK - USER|uuid
+ */
+export type UserDynamoDB = {
+	name: string;
+	email: string;
+	role: TRole;
+	accountConfirmation: boolean;
+} & TBaseEntity;
 
 export interface IUserRepository {
 	create(createInput: UserPersistance): Promise<User>;

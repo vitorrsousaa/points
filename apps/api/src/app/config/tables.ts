@@ -11,7 +11,7 @@ export class DatabaseTables implements IDatabaseTables {
 	public get USERS(): string {
 		const state = this.configuration.STAGE;
 
-		return `TrainingUsersTable-${state}`;
+		return `TrainingTable-${state}`;
 	}
 }
 
