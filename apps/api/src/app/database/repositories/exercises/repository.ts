@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
+import type { Exercise } from "@core/domain/exercise";
 import type {
 	ExerciseDynamoDB,
 	ExercisePersistance,
@@ -14,9 +15,7 @@ export class ExerciseRepository implements IExerciseRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 
-	async create(
-		exerciseInput: ExercisePersistance,
-	): Promise<ExercisePersistance> {
+	async create(exerciseInput: ExercisePersistance): Promise<Exercise> {
 		const exerciseId = randomUUID();
 
 		const { PK, SK } = this.getKeys({ exerciseId });
@@ -34,7 +33,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			...newExercise,
 		});
 
-		return newExercise;
+		return this.mapToExerciseDomain(newExercise);
 	}
 
 	private getKeys({
@@ -55,5 +54,19 @@ export class ExerciseRepository implements IExerciseRepository {
 
 	private setTrainingId(id: string): string {
 		return `${this.DEFAULT_TRAINING_ID}|${id}`;
+	}
+
+	private getExerciseId(SK: string): string {
+		return SK.split("|")[1];
+	}
+
+	private mapToExerciseDomain(exercise: ExerciseDynamoDB): Exercise {
+		return {
+			name: exercise.name,
+			equipment: exercise.equipment,
+			muscleGroup: exercise.muscleGroup,
+			target: exercise.target,
+			id: this.getExerciseId(exercise.SK),
+		};
 	}
 }

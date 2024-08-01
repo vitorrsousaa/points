@@ -1,11 +1,6 @@
 import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
-
-enum Equipment {
-	BARRA = "BARRA",
-	HALTERES = "HALTERES",
-	MAQUINA = "MAQUINA",
-}
+import type { Equipment, Exercise } from "@core/domain/exercise";
 
 export type ExercisePersistance = {
 	name: string;
@@ -24,5 +19,5 @@ export type ExerciseDynamoDB = Prettify<
 >;
 
 export interface IExerciseRepository {
-	create(exerciseInput: ExercisePersistance): Promise<ExercisePersistance>;
+	create(exerciseInput: ExercisePersistance): Promise<Exercise>;
 }

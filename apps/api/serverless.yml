@@ -213,3 +213,11 @@ functions:
           path: /athlete/{coachId}
           authorizer:
             name: CognitoAuthorizer
+  createExercise:
+    handler: src/server/functions/exercise/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /exercise
+          authorizer:
+            name: CognitoAuthorizer
