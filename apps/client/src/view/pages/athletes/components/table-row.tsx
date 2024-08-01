@@ -76,7 +76,7 @@ export function TableActions({
 							size="icon"
 							variant="ghost"
 							onClick={() =>
-								navigate("TRAINING", {
+								navigate("ATHLETE_MORE_INFO", {
 									replace: { athleteId },
 								})
 							}

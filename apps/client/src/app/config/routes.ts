@@ -7,5 +7,6 @@ export const ROUTES = {
 	NEW_ATHLETE: "/new-athlete",
 	SETTINGS: "/settings",
 	EXERCISES: "/exercises",
-	TRAINING: "/training/:athleteId",
+	ATHLETE_MORE_INFO: "/atleta/:athleteId",
+	NEW_TRAINING: "/atleta/:athleteId/new-training",
 } as const;
