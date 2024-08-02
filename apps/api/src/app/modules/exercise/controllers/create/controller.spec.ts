@@ -1,6 +1,7 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
+import type { ICreateService } from "../../services/create";
 import { CreateController } from "./controller";
 
 describe("Controller: Create", () => {
@@ -44,8 +45,19 @@ describe("Controller: Create", () => {
 
 	it("should return response with correct return of service when fields are ok", async () => {
 		// Arrange
-		mockedService.execute.mockResolvedValue({});
-		mockRequest.body = {};
+		mockedService.execute.mockResolvedValue({
+			id: "123",
+			name: "test",
+			target: null,
+			muscleGroup: "muscle",
+			equipment: "Barra",
+		});
+		mockRequest.body = {
+			name: "test",
+			target: null,
+			muscleGroup: "muscle",
+			equipment: "Barra",
+		};
 
 		// Act
 		const result = await controller.handle(mockRequest);
@@ -53,7 +65,13 @@ describe("Controller: Create", () => {
 		// Assert
 		expect(result).toMatchObject({
 			statusCode: 200,
-			body: {},
+			body: {
+				id: "123",
+				name: "test",
+				target: null,
+				muscleGroup: "muscle",
+				equipment: "Barra",
+			},
 		});
 	});
 });
