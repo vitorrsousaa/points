@@ -48,20 +48,6 @@ export class AthleteRepository implements IAthleteRepository {
 		return athletes ? athletes.map(this.mapToDomain) : [];
 	}
 
-	private mapToDomain(athlete: AthleteDynamoDB): Athlete {
-		return {
-			id: this.getUserId(athlete.SK),
-			name: athlete.name,
-			email: athlete.email,
-			role: athlete.role,
-			accountConfirmation: athlete.accountConfirmation,
-			age: athlete.age,
-			coachId: athlete.coachId,
-			height: athlete.height,
-			weight: athlete.weight,
-		};
-	}
-
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
 			PK: this.DEFAULT_USER_ID,
@@ -75,5 +61,19 @@ export class AthleteRepository implements IAthleteRepository {
 
 	private getUserId(userId: string): string {
 		return userId.split("|")[1];
+	}
+
+	private mapToDomain(athlete: AthleteDynamoDB): Athlete {
+		return {
+			id: athlete.SK.split("|")[1],
+			name: athlete.name,
+			email: athlete.email,
+			role: athlete.role,
+			accountConfirmation: athlete.accountConfirmation,
+			age: athlete.age,
+			coachId: athlete.coachId,
+			height: athlete.height,
+			weight: athlete.weight,
+		};
 	}
 }
