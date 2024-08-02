@@ -1,4 +1,5 @@
 import { ROUTES } from "@/config/routes";
+import { useAuth } from "@/hooks/auth";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import {
 	Breadcrumb,
@@ -24,6 +25,8 @@ import { MobSidebar, Sidebar } from "./components/sidebar";
 
 export function DashboardLayout() {
 	const { pathname } = useLocation();
+
+	const { signout } = useAuth();
 
 	const path = capitalizeFirstLetter(
 		`${pathname.split("/")[1]}${
@@ -81,7 +84,7 @@ export function DashboardLayout() {
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
 							<DropdownMenuItem
-								// onClick={signout}
+								onClick={signout}
 								className="hover:cursor-pointer"
 							>
 								Logout

@@ -55,7 +55,6 @@ export function Signin() {
 	const handleSubmit = hookFormSubmit(async (data) => {
 		try {
 			const { accessToken } = await apiSignin(data);
-			console.log({ accessToken });
 			signin(accessToken);
 			navigate(ROUTES.DASHBOARD);
 
