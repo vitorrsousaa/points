@@ -1,7 +1,7 @@
 import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import type { Athlete } from "@core/domain/athlete";
-import type { IAthleteRepository } from "./types";
+import type { AthleteDynamoDB, IAthleteRepository } from "./types";
 
 export class AthleteRepository implements IAthleteRepository {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
@@ -34,27 +34,33 @@ export class AthleteRepository implements IAthleteRepository {
 	}
 
 	async getAllByCoachId(coachId: string): Promise<Athlete[]> {
-		const athletes = await this.dbInstance.query<Athlete[]>(this.TABLE_NAME, {
-			IndexName: "CoachIdIndex",
-			KeyConditionExpression: "coachId = :coachId",
-			ExpressionAttributeValues: {
-				":coachId": coachId,
+		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>(
+			this.TABLE_NAME,
+			{
+				IndexName: "CoachIdIndex",
+				KeyConditionExpression: "coachId = :coachId",
+				ExpressionAttributeValues: {
+					":coachId": coachId,
+				},
 			},
-		});
+		);
 
-		return athletes || [];
+		return athletes ? athletes.map(this.mapToDomain) : [];
 	}
 
-	// private mapToDomain(Athlete: AthletePersistance): Athlete {
-	// 	return {
-	// 		id: Athlete.id,
-	// 		doctorId: Athlete.doctorId,
-	// 		name: Athlete.name,
-	// 		email: Athlete.email,
-	// 		role: Athlete.role,
-	// 		accountConfirmation: Athlete.accountConfirmation,
-	// 	};
-	// }
+	private mapToDomain(athlete: AthleteDynamoDB): Athlete {
+		return {
+			id: this.getUserId(athlete.SK),
+			name: athlete.name,
+			email: athlete.email,
+			role: athlete.role,
+			accountConfirmation: athlete.accountConfirmation,
+			age: athlete.age,
+			coachId: athlete.coachId,
+			height: athlete.height,
+			weight: athlete.weight,
+		};
+	}
 
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
@@ -65,5 +71,9 @@ export class AthleteRepository implements IAthleteRepository {
 
 	private setUserId(id: string): string {
 		return `${this.DEFAULT_USER_ID}|${id}`;
+	}
+
+	private getUserId(userId: string): string {
+		return userId.split("|")[1];
 	}
 }
