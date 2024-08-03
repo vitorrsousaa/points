@@ -1,24 +1,8 @@
-import type { Athlete } from "src/app/entities/athlete";
+import type { Exercise } from "@/entitites/exercise";
 import { httpClient } from "../httpClient";
 
-interface GetAllParams {
-	coachId: string;
-}
+export async function getAll() {
+	const { data } = await httpClient.get<Exercise[]>("/exercise");
 
-function mapToAthlete(data: Record<string, unknown>): Athlete {
-	return {
-		name: data.name as string,
-		id: data.id as string,
-		accountConfirmation: data.accountConfirmation as boolean,
-		age: data.age as number,
-		email: data.email as string,
-		height: data.height as number,
-		weight: data.weight as number,
-	};
-}
-
-export async function getAll({ coachId }: GetAllParams) {
-	const { data } = await httpClient.get<Athlete[]>(`/athlete/${coachId}`);
-
-	return data.map(mapToAthlete);
+	return data;
 }
