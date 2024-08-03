@@ -1,5 +1,6 @@
 import {
 	CaretSortIcon,
+	Cross1Icon,
 	CrossCircledIcon,
 	DotsHorizontalIcon,
 	FileIcon,
@@ -38,6 +39,7 @@ const icons = {
 	filter: ListFilter,
 	reader: ReaderIcon,
 	lightning: LightningBoltIcon,
+	close: Cross1Icon,
 } as const;
 
 export function Icon(props: IconProps) {
