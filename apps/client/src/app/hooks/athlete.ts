@@ -76,3 +76,17 @@ export function useGetAllAthletes(coachId: string | undefined) {
 		isErrorAthletes: isError,
 	};
 }
+
+export function useGetAthleteById({
+	coachId,
+	athleteId,
+}: { coachId?: string; athleteId?: string }) {
+	const { athletes, isErrorAthletes, isLoadingAthletes } =
+		useGetAllAthletes(coachId);
+
+	return {
+		athlete: athletes?.find((athlete) => athlete.id === athleteId),
+		isLoadingAthlete: isLoadingAthletes,
+		isErrorAthlete: isErrorAthletes,
+	};
+}
