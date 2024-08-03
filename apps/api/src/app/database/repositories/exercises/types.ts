@@ -20,4 +20,5 @@ export type ExerciseDynamoDB = Prettify<
 
 export interface IExerciseRepository {
 	create(exerciseInput: ExercisePersistance): Promise<Exercise>;
+	getAll(): Promise<Exercise[]>;
 }

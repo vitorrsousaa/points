@@ -221,3 +221,9 @@ functions:
           path: /exercise
           authorizer:
             name: CognitoAuthorizer
+  getAllExercises:
+    handler: src/server/functions/exercise/getAll.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /exercise
