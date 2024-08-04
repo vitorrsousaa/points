@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useMemo } from "react";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import type { TrainingFormProps } from "./training-form";
 import {
+	type TExerciseFormSchema,
 	TrainingFormSchema,
 	defaultInitialValues,
 } from "./training-form.schema";
@@ -17,11 +18,52 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		defaultValues: initialValues || defaultInitialValues,
 	});
 
-	const { handleSubmit: hookFormSubmit } = methods;
+	const { handleSubmit: hookFormSubmit, control } = methods;
+
+	const {
+		append: appendExercises,
+		remove: removeExercises,
+		fields: exercises,
+	} = useFieldArray({
+		control,
+		name: "exercises",
+	});
+
+	const watchExercises = useWatch({ control, name: "exercises" });
 
 	const handleSubmit = hookFormSubmit(async (data) => {
 		await onSubmit(data);
 	});
 
-	return { methods, isUpdating, handleSubmit };
+	const handleAddNewExercise = useCallback(
+		(param: TExerciseFormSchema) => {
+			const { name, target, notes, exerciseId, restTime, sets } = param;
+			appendExercises({
+				name,
+				target,
+				notes,
+				exerciseId,
+				restTime,
+				sets,
+			});
+		},
+		[appendExercises],
+	);
+
+	const handleRemoveExercise = useCallback(
+		(index: number) => {
+			removeExercises(index);
+		},
+		[removeExercises],
+	);
+
+	return {
+		methods,
+		isUpdating,
+		exercises,
+		control,
+		handleAddNewExercise,
+		handleRemoveExercise,
+		handleSubmit,
+	};
 }

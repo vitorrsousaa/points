@@ -1,3 +1,4 @@
+import { DevTool } from "@hookform/devtools";
 import {
 	Card,
 	CardContent,
@@ -10,7 +11,10 @@ import {
 	FormLabel,
 	FormMessage,
 	Input,
+	Separator,
 } from "@shared/ui";
+import { ExerciseDetail } from "./components/exercise-detail";
+import { ExerciseList } from "./components/exercise-list";
 import { useTrainingFormHook } from "./training-form.hook";
 import type { TTrainingFormSchema } from "./training-form.schema";
 
@@ -24,7 +28,14 @@ export interface TrainingFormProps {
 export function TrainingForm(props: TrainingFormProps) {
 	const { formId = "training-form", isSubmitting } = props;
 
-	const { methods, handleSubmit } = useTrainingFormHook(props);
+	const {
+		methods,
+		exercises,
+		control,
+		handleAddNewExercise,
+		handleRemoveExercise,
+		handleSubmit,
+	} = useTrainingFormHook(props);
 
 	return (
 		<Form {...methods}>
@@ -33,7 +44,7 @@ export function TrainingForm(props: TrainingFormProps) {
 				onSubmit={handleSubmit}
 				className="flex flex-row w-full gap-4"
 			>
-				<Card className="bg-red-500 w-full">
+				<Card className="w-full">
 					<CardHeader>
 						<FormField
 							control={methods.control}
@@ -58,12 +69,19 @@ export function TrainingForm(props: TrainingFormProps) {
 							)}
 						/>
 					</CardHeader>
-					<CardContent>content</CardContent>
+					<Separator className="mb-6" />
+					<CardContent className="space-y-3">
+						{exercises.map((exercise, index) => (
+							<ExerciseDetail
+								key={exercise.id}
+								index={index}
+								onRemoveExercise={handleRemoveExercise}
+							/>
+						))}
+					</CardContent>
 				</Card>
-				<Card className="bg-blue-300 w-1/3">
-					<CardHeader>exercicios</CardHeader>
-					<CardContent>content</CardContent>
-				</Card>
+				<ExerciseList onAddExercise={handleAddNewExercise} />
+				{/* <DevTool control={control} /> */}
 			</form>
 		</Form>
 	);
