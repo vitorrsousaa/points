@@ -13,10 +13,10 @@ documentation:
     - name: Auth
       description: 'Routes for authentication'
       x-displayName: Authentication
-    - name: Patients
-      description: 'Routes for patients'
-    - name: Doctors
-      description: 'Routes for doctors'
+    - name: Athletes
+      description: 'Routes for athletes'
+    - name: Exercises
+      description: 'Routes for exercises'
   models:
     - name: ValidationErrorResponse
       description: This is a schema for responses when occurs errors on validation schema.
@@ -45,11 +45,11 @@ documentation:
             type: string
             description: Not Authorized
             example: Not Authorized
-    - name: DoctorModel
-      description: Doctor model
+    - name: AthleteModel
+      description: Athlete model
       content: 
         application/json:
-          schema: &DoctorModel
+          schema: &AthleteModel
             type: object
             properties:
               id: 
@@ -59,10 +59,31 @@ documentation:
               name:
                 type: string
                 example: John Doe
-    - name: DoctorsResponse
-      description: Doctors response model
+    - name: AthletesResponse
+      description: Athletes response model
       content:
         application/json:
           schema:
             type: array
-            items: *DoctorModel
+            items: *AthleteModel
+    - name: ExerciseModel
+      description: Exercise model
+      content: 
+        application/json:
+          schema: &ExerciseModel
+            type: object
+            properties:
+              id: 
+                type: string
+                format: uuid
+                example: 123456
+              name:
+                type: string
+                example: John Doe
+    - name: ExercisesResponse
+      description: Exercises response model
+      content:
+        application/json:
+          schema:
+            type: array
+            items: *ExerciseModel

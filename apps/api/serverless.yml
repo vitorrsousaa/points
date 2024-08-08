@@ -211,6 +211,7 @@ functions:
       - httpApi:
           method: GET
           path: /athlete/{coachId}
+          documentation: ${file(src/server/functions/athlete/getAllByCoachId/handler.doc.yml):getAllByCoachId}
           authorizer:
             name: CognitoAuthorizer
   createExercise:
@@ -227,3 +228,6 @@ functions:
       - httpApi:
           method: GET
           path: /exercise
+          documentation: ${file(src/server/functions/exercise/getAll/handler.doc.yml):getAll}
+          authorizer:
+            name: CognitoAuthorizer

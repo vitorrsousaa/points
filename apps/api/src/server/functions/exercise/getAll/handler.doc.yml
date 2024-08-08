@@ -1,35 +1,17 @@
 getAll:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+  summary: exercises/getAll
+  description: Get all exercises
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Exercises
+  methodResponses:
     - statusCode: 200
       responseBody:
-        description: Return default response
+        description: Return all exercises
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+        application/json: ExercisesResponse
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
@@ -44,4 +26,3 @@ getAll:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						

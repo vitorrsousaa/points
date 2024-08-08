@@ -1,11 +1,11 @@
 signup:
   summary: auth/signup
-  description: Creates a user and sends a validation code to email. This route can be used to create a patient, doctor or admin.
+  description: Creates a user and sends a validation code to email. This route can be used to create a athlete, coach or admin.
   security: []
   tags: 
     - Auth
   requestBody:
-    description: A basic information about user. If the user is a patient, the doctorId is required.
+    description: A basic information about user. If the user is a athlete, the coachId is required.
     required: true
   requestModels:
     application/json: AuthSignupModel

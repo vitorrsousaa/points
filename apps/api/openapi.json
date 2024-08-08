@@ -1,0 +1,777 @@
+{
+  "openapi": "3.0.0",
+  "components": {
+    "schemas": {
+      "ValidationErrorResponse": {
+        "title": "Validation Error Response Schema",
+        "description": "Schema for validation error responses.",
+        "type": "object",
+        "required": [
+          "errors"
+        ],
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "The field that has a validation error."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "A message describing the validation error."
+                }
+              },
+              "required": [
+                "field",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "example": {
+          "errors": [
+            {
+              "field": "email",
+              "message": "Invalid email"
+            },
+            {
+              "field": "password",
+              "message": "Password must be at least 8 characters long"
+            }
+          ]
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "title": "Internal Server Error Response Schema",
+        "description": "Schema for internal server error responses.",
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "A message describing the error.",
+            "required": [
+              "status",
+              "message"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "example": {
+          "error": "Internal Server Error"
+        },
+        "additionalProperties": false
+      },
+      "PutDocumentResponse": {
+        "title": "Empty Schema",
+        "type": "object"
+      },
+      "AuthSignupModel": {
+        "title": "Signup Input Schema",
+        "description": "Schema for input data when signing up a user.",
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "role"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ATHLETE",
+                "COACH",
+                "ADMIN"
+              ]
+            },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NotAuthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not Authorized",
+            "example": "Not Authorized"
+          }
+        }
+      },
+      "AthleteModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": 123456
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          }
+        }
+      },
+      "AthletesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "example": 123456
+            },
+            "name": {
+              "type": "string",
+              "example": "John Doe"
+            }
+          }
+        }
+      },
+      "ExerciseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": 123456
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          }
+        }
+      },
+      "ExercisesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "example": 123456
+            },
+            "name": {
+              "type": "string",
+              "example": "John Doe"
+            }
+          }
+        }
+      },
+      "dd376e6c-b55b-4882-989a-dda533fa7f7f": {
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "470326e4-16f8-4038-b392-5dffb37ded73": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Invalid Password",
+            "example": "Invalid Password"
+          }
+        }
+      },
+      "74127d80-fa90-4a22-8df4-4a9675dd9c1c": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Username already exists",
+            "example": "Username already exists"
+          }
+        }
+      },
+      "cc3f6abb-6179-440d-8012-889cf67fa5a0": {
+        "title": "User Schema",
+        "description": "Schema for input data when signing up a user.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "user-uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@email.com"
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COACH",
+                "ATHLETE",
+                "ADMIN"
+              ]
+            },
+            "uniqueItems": true,
+            "example": [
+              "COACH"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "e68ce6fd-1bfd-4870-8577-14a438edfb78": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User not found",
+            "example": "User not found"
+          }
+        }
+      },
+      "ab386bac-44d4-4181-87af-bcb66bdd4ec5": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@email.com"
+          },
+          "code": {
+            "type": "string",
+            "example": 123456
+          }
+        },
+        "required": [
+          "email",
+          "code"
+        ]
+      },
+      "59e4dafa-6366-4452-9845-00257701dd9c": {
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "79fa7733-f230-4515-9472-9f7507ce2b1c": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Expired Code",
+            "example": "Expired Code"
+          }
+        }
+      },
+      "d365fb0d-b731-4903-a770-afe10f0d3a3f": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User not found",
+            "example": "User not found"
+          }
+        }
+      },
+      "45f1aac1-8144-4a3d-a5e3-c632dceaa144": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "008a1820-fcbb-4daf-ad32-20db8db108bd": {
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "eyJraWQiOiJYYnFtWEl4cnlwUlwvNFFRbVB2SGxSMmlc"
+          }
+        }
+      },
+      "coachId": {
+        "type": "string",
+        "example": "example-uuid"
+      }
+    },
+    "securitySchemes": {
+      "CognitoAuthorizer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "info": {
+    "title": "Training",
+    "description": "API documentation about api",
+    "version": "1.0.0"
+  },
+  "security": [
+    {
+      "CognitoAuthorizer": []
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "auth/signup",
+        "description": "Creates a user and sends a validation code to email. This route can be used to create a athlete, coach or admin.",
+        "operationId": "signup",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "description": "A basic information about user. If the user is a athlete, the coachId is required.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthSignupModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the userId create by the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dd376e6c-b55b-4882-989a-dda533fa7f7f"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Invalid Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/470326e4-16f8-4038-b392-5dffb37ded73"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Username already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/74127d80-fa90-4a22-8df4-4a9675dd9c1c"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/profile": {
+      "get": {
+        "summary": "auth/profile",
+        "description": "Retrieve the profile of the authenticated user",
+        "operationId": "profile",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cc3f6abb-6179-440d-8012-889cf67fa5a0"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not Authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "An error message when user not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/e68ce6fd-1bfd-4870-8577-14a438edfb78"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/account-confirmation": {
+      "post": {
+        "summary": "auth/account-confirmation",
+        "description": "Confirm user account",
+        "operationId": "accountConfirmation",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "description": "A basic information about user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ab386bac-44d4-4181-87af-bcb66bdd4ec5"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the userId create by the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/59e4dafa-6366-4452-9845-00257701dd9c"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Expired Code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/79fa7733-f230-4515-9472-9f7507ce2b1c"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/d365fb0d-b731-4903-a770-afe10f0d3a3f"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "auth/signin",
+        "description": "Signin user and return accessToken",
+        "operationId": "signin",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "description": "A basic information about user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/45f1aac1-8144-4a3d-a5e3-c632dceaa144"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the accessToken",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/008a1820-fcbb-4daf-ad32-20db8db108bd"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Invalid Credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/athlete/{coachId}": {
+      "get": {
+        "summary": "athletes/getAllByCoachId",
+        "description": "Get all athletes by coach id",
+        "operationId": "getAllByCoachId",
+        "parameters": [
+          {
+            "name": "coachId",
+            "in": "path",
+            "description": "The coachId to filter athletes",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/coachId"
+            }
+          }
+        ],
+        "tags": [
+          "Athletes"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all athletes of coach",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AthletesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/exercise": {
+      "get": {
+        "summary": "exercises/getAll",
+        "description": "Get all exercises",
+        "operationId": "getAllExercises",
+        "parameters": [],
+        "tags": [
+          "Exercises"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all exercises",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExercisesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Routes for authentication"
+    },
+    {
+      "name": "Athletes",
+      "description": "Routes for athletes"
+    },
+    {
+      "name": "Exercises",
+      "description": "Routes for exercises"
+    }
+  ]
+}

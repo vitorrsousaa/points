@@ -1,47 +1,29 @@
 getAllByCoachId:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+  summary: athletes/getAllByCoachId
+  description: Get all athletes by coach id
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Athletes
+  pathParams:
+    - name: "coachId"
+      description: "The coachId to filter athletes"
+      schema:
+        type: "string"
+        example: "example-uuid"
+  methodResponses:
     - statusCode: 200
       responseBody:
-        description: Return default response
+        description: Return all athletes of coach
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+        application/json: AthletesResponse
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
         application/json: NotAuthorizedResponse
-    - statusCode: 422
-      responseBody:
-        description: An error message when send invalid data
-      responseModels:
-        application/json: ValidationErrorResponse
     - statusCode: 500
       responseBody:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						

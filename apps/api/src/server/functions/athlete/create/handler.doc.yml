@@ -1,5 +1,5 @@
 create:
-	summary: Sample Lambda
+	summary: athlete/create
 	description: Sample Lambda
 	security:
 		- CognitoAuthorizer: []
@@ -44,4 +44,3 @@ create:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						

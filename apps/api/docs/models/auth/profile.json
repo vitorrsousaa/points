@@ -26,10 +26,10 @@
 			"type": "array",
 			"items": {
 				"type": "string",
-				"enum": ["PATIENT", "DOCTOR", "ADMIN"]
+				"enum": ["COACH", "ATHLETE", "ADMIN"]
 			},
 			"uniqueItems": true,
-			"example": ["PATIENT"]
+			"example": ["COACH"]
 		}
 	},
 	"additionalProperties": false
