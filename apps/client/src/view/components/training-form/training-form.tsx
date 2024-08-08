@@ -1,4 +1,4 @@
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import {
 	Card,
 	CardContent,
@@ -31,7 +31,6 @@ export function TrainingForm(props: TrainingFormProps) {
 	const {
 		methods,
 		exercises,
-		control,
 		handleAddNewExercise,
 		handleRemoveExercise,
 		handleSubmit,

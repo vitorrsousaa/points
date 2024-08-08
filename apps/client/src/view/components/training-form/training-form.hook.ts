@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useMemo } from "react";
-import { useFieldArray, useForm, useWatch } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import type { TrainingFormProps } from "./training-form";
 import {
 	type TExerciseFormSchema,
@@ -28,8 +28,6 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		control,
 		name: "exercises",
 	});
-
-	const watchExercises = useWatch({ control, name: "exercises" });
 
 	const handleSubmit = hookFormSubmit(async (data) => {
 		await onSubmit(data);
@@ -61,7 +59,6 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		methods,
 		isUpdating,
 		exercises,
-		control,
 		handleAddNewExercise,
 		handleRemoveExercise,
 		handleSubmit,

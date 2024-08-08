@@ -1,22 +1,11 @@
 import {
 	Button,
-	Card,
-	CardContent,
-	CardHeader,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
-	Form,
-	FormControl,
-	FormDescription,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
 	Icon,
-	Input,
 	Select,
 	SelectContent,
 	SelectItem,
@@ -26,7 +15,7 @@ import {
 	Textarea,
 } from "@shared/ui";
 import { Controller } from "react-hook-form";
-import { restTimer, typeOfSets } from "../../training.form.constants";
+import { restTimer } from "../../training.form.constants";
 import { SetRow } from "../set-row";
 import { useExerciseDetailHook } from "./exercise-detail.hook";
 
