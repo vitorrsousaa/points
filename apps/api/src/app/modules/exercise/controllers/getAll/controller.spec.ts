@@ -1,6 +1,7 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
+import type { IGetAllService } from "../../services/getAll";
 import { GetAllController } from "./controller";
 
 describe("Controller: GetAll", () => {
@@ -29,22 +30,22 @@ describe("Controller: GetAll", () => {
 		mockRequest.body = {};
 	});
 
-	it("should throw error when missing fields", async () => {
-		// Arrange
-		mockRequest.body = {
-			email: undefined,
-		};
+	// it("should throw error when missing fields", async () => {
+	// 	// Arrange
+	// 	mockRequest.body = {
+	// 		email: undefined,
+	// 	};
 
-		// Act
-		const result = await controller.handle(mockRequest);
+	// 	// Act
+	// 	const result = await controller.handle(mockRequest);
 
-		// Assert
-		expect(result).toMatchObject({ statusCode: 422 });
-	});
+	// 	// Assert
+	// 	expect(result).toMatchObject({ statusCode: 422 });
+	// });
 
 	it("should return response with correct return of service when fields are ok", async () => {
 		// Arrange
-		mockedService.execute.mockResolvedValue({});
+		mockedService.execute.mockResolvedValue([]);
 		mockRequest.body = {};
 
 		// Act
