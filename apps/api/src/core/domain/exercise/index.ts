@@ -4,6 +4,6 @@ export type Exercise = {
 	name: string;
 	equipment: Equipment;
 	muscleGroup: string;
-	target: string | null;
+	target: string | undefined;
 	id: string;
 };
