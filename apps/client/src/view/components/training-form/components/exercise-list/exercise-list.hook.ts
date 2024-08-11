@@ -19,6 +19,8 @@ export function useExerciseListHook(props: ExerciseListProps) {
 				notes: "",
 				exerciseId: exercise.id,
 				restTime: "Off",
+				equipment: exercise.equipment,
+				muscleGroup: exercise.muscleGroup,
 				sets: [
 					{
 						reps: 6,

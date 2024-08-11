@@ -40,7 +40,16 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 
 	const handleAddNewExercise = useCallback(
 		(param: TExerciseFormSchema) => {
-			const { name, target, notes, exerciseId, restTime, sets } = param;
+			const {
+				name,
+				target,
+				notes,
+				exerciseId,
+				restTime,
+				sets,
+				equipment,
+				muscleGroup,
+			} = param;
 			appendExercises({
 				name,
 				target,
@@ -48,6 +57,8 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 				exerciseId,
 				restTime,
 				sets,
+				equipment,
+				muscleGroup,
 			});
 		},
 		[appendExercises],
