@@ -44,10 +44,10 @@ export function TrainingForm(props: TrainingFormProps) {
 			<form
 				id={formId}
 				onSubmit={handleSubmit}
-				className="flex flex-row w-full gap-4 "
+				className="flex flex-row w-full gap-4 h-screen"
 			>
-				<Card className="w-full flex flex-col h-full">
-					<CardHeader>
+				<Card className="w-full flex flex-col h-full ">
+					<CardHeader className="p-4">
 						<FormField
 							control={methods.control}
 							name="name"
@@ -71,10 +71,10 @@ export function TrainingForm(props: TrainingFormProps) {
 							)}
 						/>
 					</CardHeader>
-					<Separator className="mb-6" />
+					<Separator className="mb-2" />
 
-					<ScrollArea className="h-60 ">
-						<CardContent className="space-y-3">
+					<ScrollArea>
+						<CardContent className="space-y-3 flex-grow flex flex-col p-4 ">
 							{exercises.map((exercise, index) => (
 								<ExerciseDetail
 									key={exercise.id}
@@ -85,9 +85,10 @@ export function TrainingForm(props: TrainingFormProps) {
 						</CardContent>
 					</ScrollArea>
 
-					<CardFooter className="flex flex-row gap-4">
-						{exercises.length > 0 && (
-							<>
+					{exercises.length > 0 && (
+						<>
+							<Separator className="mb-3" />
+							<CardFooter className="flex flex-row gap-4 p-4 pt-0">
 								<div className="flex flex-col">
 									<small className="font-medium">Volume sets:</small>
 									{Object.keys(volume).map((key) => (
@@ -104,9 +105,9 @@ export function TrainingForm(props: TrainingFormProps) {
 										</small>
 									))}
 								</div>
-							</>
-						)}
-					</CardFooter>
+							</CardFooter>
+						</>
+					)}
 				</Card>
 				<ExerciseList onAddExercise={handleAddNewExercise} />
 				{/* <DevTool control={control} /> */}
