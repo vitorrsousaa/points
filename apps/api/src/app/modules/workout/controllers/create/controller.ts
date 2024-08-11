@@ -2,14 +2,19 @@ import type { IController } from "@application/interfaces/controller";
 import type { IRequest, IResponse } from "@application/interfaces/http";
 import { errorHandler } from "@application/utils/error-handler";
 import { missingFields } from "@application/utils/missing-fields";
-import { Schema } from "zod";
-import type { ICreateService } from "../../services/create";
+import {
+	CreateInputServiceSchema,
+	type ICreateService,
+} from "../../services/create";
 
 export class CreateController implements IController {
 	constructor(private readonly createService: ICreateService) {}
 	async handle(request: IRequest): Promise<IResponse> {
 		try {
-			const [status, parsedBody] = missingFields(Schema, request.body);
+			const [status, parsedBody] = missingFields(CreateInputServiceSchema, {
+				...request.body,
+				coachId: request.userId,
+			});
 
 			if (!status) return parsedBody;
 

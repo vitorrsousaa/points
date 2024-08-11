@@ -231,3 +231,11 @@ functions:
           documentation: ${file(src/server/functions/exercise/getAll/handler.doc.yml):getAll}
           authorizer:
             name: CognitoAuthorizer
+  createWorkout:
+    handler: src/server/functions/workout/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /workout
+          authorizer:
+            name: CognitoAuthorizer
