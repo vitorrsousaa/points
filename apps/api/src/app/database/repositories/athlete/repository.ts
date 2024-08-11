@@ -48,6 +48,19 @@ export class AthleteRepository implements IAthleteRepository {
 		return athletes ? athletes.map(this.mapToDomain) : [];
 	}
 
+	async getById(id: string): Promise<Athlete | null> {
+		const { PK, SK } = this.getKeys(id);
+
+		const athlete = await this.dbInstance.get<AthleteDynamoDB>(
+			this.TABLE_NAME,
+			{
+				Key: { PK, SK },
+			},
+		);
+
+		return athlete ? this.mapToDomain(athlete) : null;
+	}
+
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
 			PK: this.DEFAULT_USER_ID,

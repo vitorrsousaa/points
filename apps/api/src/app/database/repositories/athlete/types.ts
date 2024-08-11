@@ -16,4 +16,5 @@ export type AthleteDynamoDB = Prettify<
 export interface IAthleteRepository {
 	update(athlete: Athlete): Promise<Athlete>;
 	getAllByCoachId(coachId: string): Promise<Athlete[]>;
+	getById(id: string): Promise<Athlete | null>;
 }
