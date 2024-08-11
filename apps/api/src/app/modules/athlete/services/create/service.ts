@@ -1,13 +1,12 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
 import type { IUserRepository } from "@application/database/repositories/user";
-import { AppError } from "@application/errors/app-error";
 import type { IService } from "@application/interfaces/service";
 import type { ISignupService } from "@application/modules/auth/services/signup";
+import { CoachNotFound } from "@application/shared/errors/coach-not-found";
 import { generateRandomPassword } from "@application/utils/generate-password";
 import type { TRole } from "@core/domain/role";
 import * as z from "zod";
 import { CoachIsRequired } from "../../errors/coach-is-required";
-import { CoachNotFound } from "../../errors/coach-not-found";
 
 export const CreateInputServiceSchema = z.object({
 	coachId: z.string().uuid(),
