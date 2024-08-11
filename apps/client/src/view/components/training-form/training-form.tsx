@@ -2,6 +2,7 @@
 import {
 	Card,
 	CardContent,
+	CardFooter,
 	CardHeader,
 	Form,
 	FormControl,
@@ -11,6 +12,7 @@ import {
 	FormLabel,
 	FormMessage,
 	Input,
+	ScrollArea,
 	Separator,
 } from "@shared/ui";
 import { ExerciseDetail } from "./components/exercise-detail";
@@ -31,6 +33,7 @@ export function TrainingForm(props: TrainingFormProps) {
 	const {
 		methods,
 		exercises,
+		volume,
 		handleAddNewExercise,
 		handleRemoveExercise,
 		handleSubmit,
@@ -41,9 +44,9 @@ export function TrainingForm(props: TrainingFormProps) {
 			<form
 				id={formId}
 				onSubmit={handleSubmit}
-				className="flex flex-row w-full gap-4"
+				className="flex flex-row w-full gap-4 "
 			>
-				<Card className="w-full">
+				<Card className="w-full flex flex-col h-full">
 					<CardHeader>
 						<FormField
 							control={methods.control}
@@ -69,15 +72,41 @@ export function TrainingForm(props: TrainingFormProps) {
 						/>
 					</CardHeader>
 					<Separator className="mb-6" />
-					<CardContent className="space-y-3">
-						{exercises.map((exercise, index) => (
-							<ExerciseDetail
-								key={exercise.id}
-								index={index}
-								onRemoveExercise={handleRemoveExercise}
-							/>
-						))}
-					</CardContent>
+
+					<ScrollArea className="h-60 ">
+						<CardContent className="space-y-3">
+							{exercises.map((exercise, index) => (
+								<ExerciseDetail
+									key={exercise.id}
+									index={index}
+									onRemoveExercise={handleRemoveExercise}
+								/>
+							))}
+						</CardContent>
+					</ScrollArea>
+
+					<CardFooter className="flex flex-row gap-4">
+						{exercises.length > 0 && (
+							<>
+								<div className="flex flex-col">
+									<small className="font-medium">Volume sets:</small>
+									{Object.keys(volume).map((key) => (
+										<small key={key}>
+											{key}: {volume[key].sets} séries
+										</small>
+									))}
+								</div>
+								<div className="flex flex-col">
+									<small className="font-medium">Volume load:</small>
+									{Object.keys(volume).map((key) => (
+										<small key={key}>
+											{key}: {volume[key as "S" | "B" | "D"].load} Kg
+										</small>
+									))}
+								</div>
+							</>
+						)}
+					</CardFooter>
 				</Card>
 				<ExerciseList onAddExercise={handleAddNewExercise} />
 				{/* <DevTool control={control} /> */}

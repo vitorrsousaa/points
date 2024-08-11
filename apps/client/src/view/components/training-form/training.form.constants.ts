@@ -16,14 +16,18 @@ export const restTimer = [
 	"07:00",
 ];
 
-export const typeOfSets = [
+export const typeOfSets: {
+	value: "W" | "T" | "F";
+	color: string;
+	label: string;
+}[] = [
 	{
 		value: "W",
 		color: "#eeaa00",
 		label: "Warm up",
 	},
 	{
-		value: "1",
+		value: "T",
 		color: "#35baff",
 		label: "Trabalho",
 	},
@@ -33,3 +37,9 @@ export const typeOfSets = [
 		label: "Falha",
 	},
 ];
+
+export const defaultVolume = {
+	B: { sets: 0, load: 0 },
+	S: { sets: 0, load: 0 },
+	D: { sets: 0, load: 0 },
+};

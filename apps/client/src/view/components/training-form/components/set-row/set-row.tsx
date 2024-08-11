@@ -21,7 +21,7 @@ export interface SetRowProps {
 export function SetRow(props: SetRowProps) {
 	const { setIndex, exerciseIndex, shouldDisplayRemoveButton, onRemoveSet } =
 		props;
-	const { control } = useSetRowHook(props);
+	const { control, typeOfSet, updateType } = useSetRowHook(props);
 
 	return (
 		<div className="flex flex-row items-center h-12 gap-4 bg-muted-foreground/5 rounded-md">
@@ -29,12 +29,15 @@ export function SetRow(props: SetRowProps) {
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button aria-haspopup="true" size="icon" variant="secondary">
-							<span>W</span>
+							<span>{typeOfSet}</span>
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" className="px-2 ">
 						{typeOfSets.map((type) => (
-							<DropdownMenuItem key={type.value}>
+							<DropdownMenuItem
+								key={type.value}
+								onClick={() => updateType(type.value)}
+							>
 								<div className="flex flex-row gap-2 items-center">
 									<span
 										className="flex items-center justify-center rounded-md border h-[30px] w-[30px] bg-muted/20"
@@ -53,6 +56,20 @@ export function SetRow(props: SetRowProps) {
 				<Controller
 					control={control}
 					name={`exercises.${exerciseIndex}.sets.${setIndex}.weight`}
+					render={({ field: { onChange, ...props } }) => (
+						<Input
+							type="number"
+							className="text-center"
+							onChange={(event) => onChange(Number(event.target.value))}
+							{...props}
+						/>
+					)}
+				/>
+			</div>
+			<div className="uppercase justify-center flex grow-[2] shrink basis-0">
+				<Controller
+					control={control}
+					name={`exercises.${exerciseIndex}.sets.${setIndex}.rpe`}
 					render={({ field: { onChange, ...props } }) => (
 						<Input
 							type="number"

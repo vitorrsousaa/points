@@ -23,6 +23,8 @@ export function useExerciseListHook(props: ExerciseListProps) {
 					{
 						reps: 6,
 						weight: 10,
+						rpe: 7,
+						type: "W",
 					},
 				],
 			});

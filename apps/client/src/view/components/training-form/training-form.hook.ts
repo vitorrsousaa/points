@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useMemo } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import type { TrainingFormProps } from "./training-form";
 import {
 	type TExerciseFormSchema,
 	TrainingFormSchema,
 	defaultInitialValues,
 } from "./training-form.schema";
+import { defaultVolume } from "./training.form.constants";
 
 export function useTrainingFormHook(props: TrainingFormProps) {
 	const { initialValues, onSubmit } = props;
@@ -27,6 +28,10 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 	} = useFieldArray({
 		control,
 		name: "exercises",
+	});
+
+	const { exercises: watchExercises } = useWatch({
+		control,
 	});
 
 	const handleSubmit = hookFormSubmit(async (data) => {
@@ -55,10 +60,45 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		[removeExercises],
 	);
 
+	const volume = useMemo<Record<string, { sets: number; load: number }>>(() => {
+		if (!watchExercises) return defaultVolume;
+
+		const sets = watchExercises.reduce((acc, exercise) => {
+			const { sets, target } = exercise;
+
+			if (!target || !sets) return acc;
+
+			const totalSets = sets.reduce(
+				(acc, set) => {
+					const { type, reps, weight } = set;
+
+					if (type === "W" || !reps || !weight) return acc;
+
+					const totalWeight = reps * weight;
+
+					return {
+						sets: type === "F" || type === "T" ? acc.sets + 1 : acc.sets,
+						load: acc.load + totalWeight,
+					};
+				},
+				{ sets: 0, load: 0 },
+			);
+
+			return {
+				// biome-ignore lint/performance/noAccumulatingSpread: <explanation>
+				...acc,
+				[target]: totalSets,
+			};
+		}, defaultVolume);
+
+		return sets;
+	}, [watchExercises]);
+
 	return {
 		methods,
 		isUpdating,
 		exercises,
+		volume,
 		handleAddNewExercise,
 		handleRemoveExercise,
 		handleSubmit,

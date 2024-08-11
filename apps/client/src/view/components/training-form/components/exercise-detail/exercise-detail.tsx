@@ -31,7 +31,7 @@ export function ExerciseDetail(props: ExerciseDetailProps) {
 		useExerciseDetailHook(props);
 
 	return (
-		<div className="border rounded-md p-3 flex flex-col gap-2">
+		<div className="border rounded-md p-3 flex flex-col gap-1">
 			<div className="flex justify-between">
 				<div className="flex flex-col">
 					<span>{name}</span>
@@ -104,6 +104,9 @@ export function ExerciseDetail(props: ExerciseDetailProps) {
 					<div className="uppercase justify-center flex w-12">set</div>
 					<div className="uppercase justify-center flex grow-[2] shrink basis-0">
 						kg
+					</div>
+					<div className="uppercase justify-center flex grow-[2] shrink basis-0">
+						rpe
 					</div>
 					<div className="uppercase justify-center flex grow-[2] shrink basis-0">
 						reps

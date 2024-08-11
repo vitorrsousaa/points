@@ -23,7 +23,7 @@ export function useExerciseDetailHook(props: ExerciseDetailProps) {
 	});
 
 	const handleAddNewSet = useCallback(() => {
-		addNewSet({ reps: 6, weight: 10 });
+		addNewSet({ reps: 6, weight: 10, rpe: 7, type: "W" });
 	}, [addNewSet]);
 
 	const handleRemoveSet = useCallback(

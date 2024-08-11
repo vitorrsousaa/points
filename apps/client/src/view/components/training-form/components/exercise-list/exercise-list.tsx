@@ -26,7 +26,7 @@ export function ExerciseList(props: ExerciseListProps) {
 	} = useExerciseListHook(props);
 
 	return (
-		<Card className="w-1/2 h-full">
+		<Card className="w-[350px] h-full">
 			<CardHeader>
 				<span>Exercicios</span>
 				{hasExercises && <Input placeholder="Pesquise o exercício" />}
@@ -34,7 +34,7 @@ export function ExerciseList(props: ExerciseListProps) {
 			<Separator className="mb-4" />
 			<CardContent>
 				{isLoadingExercises ? (
-					<div className="w-full flex justify-center">
+					<div className="w-full flex min-h-56 items-center justify-center">
 						<Spinner />
 					</div>
 				) : isErrorExercises ? (
@@ -45,9 +45,9 @@ export function ExerciseList(props: ExerciseListProps) {
 				) : (
 					<div className="space-y-4 px-1">
 						<ScrollArea className="h-80">
-							<div className="space-y-2">
+							<div className="space-y-2 w-full ">
 								{exercises?.map((exercise) => (
-									<div key={exercise.id} className="flex items-center">
+									<div key={exercise.id} className="flex items-center w-full">
 										<Button
 											size="icon"
 											variant="ghost"
@@ -59,8 +59,10 @@ export function ExerciseList(props: ExerciseListProps) {
 											/>
 											<span className="sr-only">Add exercise</span>
 										</Button>
-										<div className=" flex flex-col">
-											<small>{exercise.name}</small>
+										<div className=" flex flex-col flex-1  ">
+											<small className="truncate max-w-[200px]">
+												{exercise.name}
+											</small>
 											<small className="text-[12px] text-muted-foreground">
 												{exercise.muscleGroup}
 											</small>
