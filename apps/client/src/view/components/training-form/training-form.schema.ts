@@ -9,7 +9,7 @@ export const ExerciseSetSchema = z.object({
 
 export const ExerciseFormSchema = z.object({
 	name: z.string().min(1, "O nome é obrigatório"),
-	target: z.enum(["S", "B", "D"]),
+	target: z.enum(["S", "B", "D"]).or(z.undefined()),
 	notes: z.string(),
 	exerciseId: z.string(),
 	restTime: z.string(),

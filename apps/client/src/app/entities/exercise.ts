@@ -3,5 +3,5 @@ export type Exercise = {
 	name: string;
 	equipment: "Barra" | "Halter" | "Maquina";
 	muscleGroup: string;
-	target: "D" | "S" | "B" | null;
+	target: "D" | "S" | "B" | undefined;
 };
