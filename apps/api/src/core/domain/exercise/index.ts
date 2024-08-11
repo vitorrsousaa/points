@@ -1,9 +1,14 @@
-export type Equipment = "Barra" | "Halter" | "Maquina";
+import * as z from "zod";
 
-export type Exercise = {
-	name: string;
-	equipment: Equipment;
-	muscleGroup: string;
-	target: string | undefined;
-	id: string;
-};
+export const EquipmentEnumSchema = z.enum(["Barra", "Halter", "Maquina"]);
+
+export type Equipment = z.infer<typeof EquipmentEnumSchema>;
+
+export const CreateExerciseInputSchema = z.object({
+	name: z.string(),
+	equipment: EquipmentEnumSchema,
+	muscleGroup: z.string(),
+	target: z.enum(["B", "S", "D"]).optional(),
+});
+
+export type Exercise = z.infer<typeof CreateExerciseInputSchema>;
