@@ -1,4 +1,5 @@
 import { TrainingForm } from "@/components/training-form";
+import { useCreateWorkout } from "@/hooks/workout";
 import {
 	Button,
 	Card,
@@ -8,10 +9,14 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@shared/ui";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function NewTraining() {
 	const navigate = useNavigate();
+
+	const { athleteId } = useParams<{ athleteId: string }>();
+
+	const { createWorkout } = useCreateWorkout();
 
 	return (
 		<div>
@@ -25,7 +30,12 @@ export function NewTraining() {
 				</CardHeader>
 				<CardContent>
 					<TrainingForm
-						onSubmit={async (data) => console.log(data)}
+						onSubmit={async (data) => {
+							await createWorkout({
+								workout: data,
+								athleteId: athleteId || "",
+							});
+						}}
 						formId="new-training-form"
 						// isSubmitting={isCreatingAthlete}
 					/>
