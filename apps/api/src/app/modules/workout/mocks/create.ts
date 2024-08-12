@@ -10,6 +10,7 @@ export const createWorkoutInput: ICreateInput["workout"] = {
 			restTime: "Off",
 			exerciseId: "f734ceaf-aed9-4a34-a8b2-ee12b9f7da25",
 			notes: "Notes",
+			target: null,
 			sets: [{ type: "W", reps: 10, weight: 10 }],
 		},
 	],

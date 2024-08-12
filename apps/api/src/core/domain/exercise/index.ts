@@ -8,7 +8,7 @@ export const CreateExerciseInputSchema = z.object({
 	name: z.string(),
 	equipment: EquipmentEnumSchema,
 	muscleGroup: z.string(),
-	target: z.enum(["B", "S", "D"]).optional().nullable(),
+	target: z.enum(["B", "S", "D"]).nullable(),
 });
 
 export const ExerciseSchema = CreateExerciseInputSchema.extend({

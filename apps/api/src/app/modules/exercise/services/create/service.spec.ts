@@ -13,7 +13,7 @@ describe("Service:Create", () => {
 		name: "John Doe",
 		equipment: "Barra",
 		muscleGroup: "muscle",
-		target: undefined,
+		target: null,
 	};
 
 	beforeEach(() => {
