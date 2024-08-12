@@ -1,7 +1,7 @@
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IAuthProvider } from "@application/providers/auth";
-import type { TRole } from "@core/domain/role";
 import { type Mocked, vi } from "vitest";
+import { defaultUser } from "../../mocks/user";
 import {
 	AccountConfirmationService,
 	type IAccountConfirmationInput,
@@ -16,15 +16,6 @@ describe("Service:AccountConfirmation", () => {
 	const inputData: IAccountConfirmationInput = {
 		code: "123456",
 		email: "email@email.com",
-	};
-
-	const defaultUser = {
-		id: "123",
-		email: "email",
-		accountConfirmation: false,
-		doctorId: null,
-		name: "name",
-		role: ["COACH"] as TRole,
 	};
 
 	beforeEach(() => {

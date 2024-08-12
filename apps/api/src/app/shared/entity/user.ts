@@ -1,9 +1,9 @@
-import type { TRole } from "@core/domain/role";
+import type { Role } from "@core/domain/user";
 
 export type CreateUserDTO = {
 	email: string;
 	password: string;
 	firstName: string;
 	lastName: string;
-	role: TRole;
+	role: Role;
 };

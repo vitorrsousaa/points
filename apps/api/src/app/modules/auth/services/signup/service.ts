@@ -1,18 +1,15 @@
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IService } from "@application/interfaces/service";
 import type { IAuthProvider } from "@application/providers/auth";
-import type { TRole } from "@core/domain/role";
+import { RoleSchema } from "@core/domain/user/role";
 import * as z from "zod";
-import { DoctorIsRequired } from "../../errors/doctor-is-required";
 
 export const SignupInputSchema = z.object({
 	firstName: z.string(),
 	lastName: z.string(),
 	email: z.string().email({ message: "Invalid email" }),
 	password: z.string().min(8),
-	role: z.array(
-		z.union([z.literal("COACH"), z.literal("ATHLETE"), z.literal("ADMIN")]),
-	),
+	role: RoleSchema,
 });
 
 export type TCreateUserDTO = z.infer<typeof SignupInputSchema>;

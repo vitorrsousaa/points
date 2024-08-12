@@ -1,10 +1,10 @@
 import * as z from "zod";
 
-export const roleSchema = z.array(
+export const RoleSchema = z.array(
 	z.union([z.literal("COACH"), z.literal("ATHLETE"), z.literal("ADMIN")]),
 );
 
 /**
- * Role type
+ * Role domain model
  */
-export type TRole = z.infer<typeof roleSchema>;
+export type Role = z.infer<typeof RoleSchema>;

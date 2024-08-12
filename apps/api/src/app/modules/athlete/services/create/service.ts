@@ -4,7 +4,8 @@ import type { IService } from "@application/interfaces/service";
 import type { ISignupService } from "@application/modules/auth/services/signup";
 import { CoachNotFound } from "@application/shared/errors/coach-not-found";
 import { generateRandomPassword } from "@application/utils/generate-password";
-import type { TRole } from "@core/domain/role";
+import type { Athlete } from "@core/domain/athlete";
+import type { Role } from "@core/domain/user";
 import * as z from "zod";
 import { CoachIsRequired } from "../../errors/coach-is-required";
 
@@ -22,9 +23,7 @@ export type TCreate = z.infer<typeof CreateInputServiceSchema>;
 
 export type ICreateInput = TCreate;
 
-export interface ICreateOutput {
-	name: string;
-}
+export type ICreateOutput = Athlete;
 
 export type ICreateService = IService<ICreateInput, ICreateOutput>;
 
@@ -67,7 +66,7 @@ export class CreateService implements ICreateService {
 		return athlete;
 	}
 
-	private userIsCoach(role: TRole) {
+	private userIsCoach(role: Role) {
 		if (!role.includes("COACH")) {
 			throw new CoachIsRequired();
 		}

@@ -1,6 +1,6 @@
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IService } from "@application/interfaces/service";
-import type { TRole } from "@core/domain/role";
+import type { Role } from "@core/domain/user/role";
 import * as z from "zod";
 import { UserNotFound } from "../../errors/user-not-found";
 
@@ -15,7 +15,7 @@ export type IProfileInput = TProfile;
 export interface IProfileOutput {
 	name: string;
 	email: string;
-	role: TRole;
+	role: Role;
 	id: string;
 }
 

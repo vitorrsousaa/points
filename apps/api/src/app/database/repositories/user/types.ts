@@ -1,13 +1,12 @@
 import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
-import type { TRole } from "@core/domain/role";
-import type { User } from "@core/domain/user";
+import type { Role, User } from "@core/domain/user";
 
 export type UserPersistance = {
 	id: string;
 	name: string;
 	email: string;
-	role: TRole;
+	role: Role;
 	accountConfirmation: boolean;
 };
 
@@ -20,7 +19,7 @@ export type UserDynamoDB = Prettify<
 	{
 		name: string;
 		email: string;
-		role: TRole;
+		role: Role;
 		accountConfirmation: boolean;
 	} & TBaseEntity
 >;
