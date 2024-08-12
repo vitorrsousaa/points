@@ -48,13 +48,13 @@ describe("Controller: Create", () => {
 		mockedService.execute.mockResolvedValue({
 			id: "123",
 			name: "test",
-			target: null,
+			target: undefined,
 			muscleGroup: "muscle",
 			equipment: "Barra",
 		});
 		mockRequest.body = {
 			name: "test",
-			target: null,
+			target: undefined,
 			muscleGroup: "muscle",
 			equipment: "Barra",
 		};

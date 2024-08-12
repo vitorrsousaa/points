@@ -4,25 +4,25 @@ export const seedExercises: ExercisePersistance[] = [
 	{
 		equipment: "Barra",
 		muscleGroup: "Dorsal",
-		target: "Deadlift",
+		target: "D",
 		name: "Pendlay Row",
 	},
 	{
 		equipment: "Barra",
 		muscleGroup: "Peito",
-		target: "Supino",
+		target: "B",
 		name: "Supino Reto",
 	},
 	{
 		equipment: "Halter",
 		muscleGroup: "Peito",
-		target: "Supino",
+		target: "B",
 		name: "Supino Reto com Halteres",
 	},
 	{
 		equipment: "Barra",
 		muscleGroup: "Quadriceps",
-		target: "Agachamento",
+		target: "S",
 		name: "Front Squat",
 	},
 	{

@@ -83,7 +83,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			name: exercise.name,
 			equipment: exercise.equipment,
 			muscleGroup: exercise.muscleGroup,
-			target: exercise.target,
+			target: exercise.target || undefined,
 			id: this.getExerciseId(exercise.SK),
 		};
 	}

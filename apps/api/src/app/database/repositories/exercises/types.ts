@@ -6,7 +6,7 @@ export type ExercisePersistance = {
 	name: string;
 	equipment: Equipment;
 	muscleGroup: string;
-	target: string | null;
+	target?: "S" | "B" | "D" | undefined | null;
 };
 
 export type ExerciseDynamoDB = Prettify<
@@ -14,7 +14,7 @@ export type ExerciseDynamoDB = Prettify<
 		name: string;
 		equipment: Equipment;
 		muscleGroup: string;
-		target: string | null;
+		target: "S" | "B" | "D" | undefined | null;
 	} & TBaseEntity
 >;
 

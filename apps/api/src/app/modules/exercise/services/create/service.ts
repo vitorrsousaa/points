@@ -1,14 +1,12 @@
 import type { IExerciseRepository } from "@application/database/repositories/exercises";
 import type { IService } from "@application/interfaces/service";
-import type { Exercise } from "@core/domain/exercise";
-import * as z from "zod";
+import {
+	CreateExerciseInputSchema,
+	type Exercise,
+} from "@core/domain/exercise";
+import type * as z from "zod";
 
-export const CreateInputServiceSchema = z.object({
-	name: z.string(),
-	equipment: z.enum(["Barra", "Halter", "Maquina"]),
-	muscleGroup: z.string(),
-	target: z.string().nullable(),
-});
+export const CreateInputServiceSchema = CreateExerciseInputSchema;
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
 
