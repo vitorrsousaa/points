@@ -1,6 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
+import { createInput } from "../../mocks/create";
+import type { ICreateOutput, ICreateService } from "../../services/create";
 import { CreateController } from "./controller";
 
 describe("Controller: Create", () => {
@@ -44,8 +46,11 @@ describe("Controller: Create", () => {
 
 	it("should return response with correct return of service when fields are ok", async () => {
 		// Arrange
-		mockedService.execute.mockResolvedValue({});
-		mockRequest.body = {};
+		mockedService.execute.mockResolvedValue({
+			name: "Workout 1",
+		} as unknown as ICreateOutput);
+		mockRequest.body = { ...createInput };
+		mockRequest.userId = createInput.coachId;
 
 		// Act
 		const result = await controller.handle(mockRequest);
