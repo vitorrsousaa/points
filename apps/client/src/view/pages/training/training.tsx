@@ -1,11 +1,13 @@
 import { useGetAthleteById } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import { useNavigate } from "@/hooks/navigate";
+import { useGetAllWorkouts } from "@/hooks/workout";
 import {
 	Button,
 	Card,
 	CardContent,
 	CardDescription,
+	CardFooter,
 	CardHeader,
 	CardTitle,
 	Icon,
@@ -25,17 +27,19 @@ export function Training() {
 		coachId: id,
 	});
 
-	console.log(athlete);
+	const { workouts, isLoadingWorkouts, isErrorWorkouts } =
+		useGetAllWorkouts(athleteId);
 
-	const hasTraining = false;
+	const hasTraining = Boolean(workouts && workouts?.length > 0);
+
 	return (
 		<>
-			{isLoadingAthlete ? (
+			{isLoadingAthlete || isLoadingWorkouts ? (
 				<div className="w-full flex flex-col gap-4 items-center justify-center mt-14">
 					<small>Buscando os dados do atleta...</small>
 					<Spinner />
 				</div>
-			) : isErrorAthlete ? (
+			) : isErrorAthlete || isErrorWorkouts ? (
 				<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
 					<strong className="font-medium">
 						Tivemos um erro para buscar os dados do atleta.
@@ -84,7 +88,17 @@ export function Training() {
 							</CardHeader>
 							<CardContent>
 								{hasTraining ? (
-									<>tem treino</>
+									<div className="space-y-2">
+										{workouts?.map((workout) => (
+											<Card key={workout.id}>
+												<CardHeader className="p-2 flex flex-row justify-between">
+													{workout.name}
+													<Button>oie</Button>
+												</CardHeader>
+												<CardFooter className="p-2">Volume</CardFooter>
+											</Card>
+										))}
+									</div>
 								) : (
 									<div className="flex flex-col items-center mt-12 gap-2 mb-12">
 										<small>
