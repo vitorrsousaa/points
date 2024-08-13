@@ -48,7 +48,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 				restTime,
 				sets,
 				equipment,
-				muscleGroup,
+				primaryMuscle,
 			} = param;
 			appendExercises({
 				name,
@@ -58,7 +58,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 				restTime,
 				sets,
 				equipment,
-				muscleGroup,
+				primaryMuscle,
 			});
 		},
 		[appendExercises],

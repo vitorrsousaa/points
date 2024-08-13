@@ -20,7 +20,7 @@ export function useExerciseListHook(props: ExerciseListProps) {
 				exerciseId: exercise.id,
 				restTime: "Off",
 				equipment: exercise.equipment,
-				muscleGroup: exercise.muscleGroup,
+				primaryMuscle: exercise.primaryMuscle,
 				sets: [
 					{
 						reps: 6,

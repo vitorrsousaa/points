@@ -63,7 +63,7 @@ export function ExerciseList(props: ExerciseListProps) {
 											{exercise.name}
 										</small>
 										<small className="text-[12px] text-muted-foreground">
-											{exercise.muscleGroup}
+											{exercise.primaryMuscle}
 										</small>
 									</div>
 								</div>
