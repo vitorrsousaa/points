@@ -59,6 +59,22 @@ documentation:
               name:
                 type: string
                 example: John Doe
+              coachId:
+                type: string
+                format: uuid
+                example: 123456
+              weight:
+                type: number
+                example: 80
+              height:
+                type: number
+                example: 180
+              age:
+                type: number
+                example: 30
+              email:
+                type: string
+                example: email@email.com
     - name: AthletesResponse
       description: Athletes response model
       content:
@@ -79,7 +95,26 @@ documentation:
                 example: 123456
               name:
                 type: string
-                example: John Doe
+                example: Pendlay Row
+              primaryMuscle:
+                type: string
+                example: Biceps
+              secondaryMuscle:
+                oneOf:
+                  - type: string
+                  - type: "null"
+                example: Triceps
+              target:
+                oneOf:
+                  - type: string
+                    enum: ["S", "B", "D"]
+                    example: S
+                  - type: "null"
+                example: S
+              equipment:
+                type: string
+                enum: ["Barra", "Halter", "Máquina"]
+                example: Barra
     - name: ExercisesResponse
       description: Exercises response model
       content:
