@@ -17,6 +17,8 @@ documentation:
       description: 'Routes for athletes'
     - name: Exercises
       description: 'Routes for exercises'
+    - name: Workouts
+      description: 'Routes for workouts'
   models:
     - name: ValidationErrorResponse
       description: This is a schema for responses when occurs errors on validation schema.
@@ -122,3 +124,85 @@ documentation:
           schema:
             type: array
             items: *ExerciseModel
+    - name: WorkoutSetModel
+      description: Workout set model
+      content:
+        application/json:
+        schema: &WorkoutSetModel
+          type: object
+          properties:
+            reps:
+              type: number
+              example: 10
+            weight:
+              type: number
+              example: 50
+            type: 
+              type: string
+              enum: ["W", "T", "F"]
+            rpe:
+              type: number
+              minimum: 0
+              maximum: 10
+              example: 7
+              description: |
+                Rate of Perceived Exertion (RPE) for the workout set.
+                This field is optional and can be omitted or set to null.
+    - name: WorkoutExerciseModel
+      description: Workout exercise model
+      content:
+        application/json:
+        schema: &WorkoutExerciseModel
+          type: object
+          properties:
+            restTime:
+              type: string
+              example: '04:30'
+            exerciseId:
+              type: string
+              format: uuid
+              example: '123456'
+            notes:
+              type: string
+              example: 'Do it slowly'
+            sets:
+              type: array
+              items: *WorkoutSetModel
+    - name: WorkoutModel
+      description: Workout model
+      content: 
+        application/json:
+          schema: &WorkoutModel
+            type: object
+            properties:
+              id: 
+                type: string
+                format: uuid
+                example: '123456'
+              name:
+                type: string
+                example: Workout one
+              createdAt:
+                type: string
+                example: '2024-08-13T21:23:33.482Z'
+              updatedAt:
+                type: string
+                example: '2024-08-13T21:23:33.482Z'
+              athleteId: 
+                type: string
+                format: uuid
+                example: '123456'
+              coachId: 
+                type: string
+                format: uuid
+                example: '123456'
+              exercises:
+                type: array
+                items: *WorkoutExerciseModel
+    - name: WorkoutsResponse
+      description: Workouts response model
+      content:
+        application/json:
+          schema:
+            type: array
+            items: *WorkoutModel
