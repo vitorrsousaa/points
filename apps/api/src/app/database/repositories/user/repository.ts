@@ -2,7 +2,7 @@ import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import { AppError } from "@application/errors/app-error";
 import type { User } from "@core/domain/user";
-import type { IUserRepository, UserDynamoDB, UserPersistance } from "./types";
+import type { IUserRepository, UserDynamoDB } from "./types";
 
 export class UserRepository implements IUserRepository {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
@@ -10,14 +10,15 @@ export class UserRepository implements IUserRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 
-	async create(createInput: UserPersistance): Promise<User> {
+	async create(createInput: User): Promise<User> {
 		const { PK, SK } = this.getKeys(createInput.id);
 
 		const newUser: UserDynamoDB = {
-			accountConfirmation: createInput.accountConfirmation,
+			account_confirmation: createInput.accountConfirmation,
 			email: createInput.email,
 			name: createInput.name,
 			role: createInput.role,
+			id: createInput.id,
 			PK,
 			SK,
 		};
@@ -43,30 +44,33 @@ export class UserRepository implements IUserRepository {
 		return hasItem ? this.mapToDomain(hasItem) : undefined;
 	}
 
-	async update(
-		id: string,
-		updateInput: Omit<UserPersistance, "id">,
-	): Promise<User> {
+	async update(id: string, updateInput: Omit<User, "id">): Promise<User> {
 		const { PK, SK } = this.getKeys(id);
 
 		try {
 			await this.dbInstance.update(this.TABLE_NAME, {
 				Key: { PK, SK },
 				UpdateExpression:
-					"set #name = :name, #email = :email, #accountConfirmation = :accountConfirmation",
+					"set #name = :name, #email = :email, #account_confirmation = :account_confirmation",
 				ExpressionAttributeNames: {
 					"#name": "name",
 					"#email": "email",
-					"#accountConfirmation": "accountConfirmation",
+					"#account_confirmation": "account_confirmation",
 				},
 				ExpressionAttributeValues: {
 					":name": updateInput.name,
 					":email": updateInput.email,
-					":accountConfirmation": updateInput.accountConfirmation,
+					":account_confirmation": updateInput.accountConfirmation,
 				},
 			});
 
-			const user = { ...updateInput, PK, SK };
+			const user: UserDynamoDB = {
+				...updateInput,
+				account_confirmation: updateInput.accountConfirmation,
+				id,
+				PK,
+				SK,
+			};
 
 			return this.mapToDomain(user);
 		} catch {
@@ -90,7 +94,7 @@ export class UserRepository implements IUserRepository {
 			id: this.getUserId(item.SK),
 			name: item.name,
 			role: item.role,
-			accountConfirmation: item.accountConfirmation,
+			accountConfirmation: item.account_confirmation,
 		};
 	}
 

@@ -37,7 +37,7 @@ provider:
           Resource: 
             - !GetAtt TrainingTable.Arn
             - !Sub ${TrainingTable.Arn}/index/EmailIndex
-            - !Sub ${TrainingTable.Arn}/index/CoachIdIndex
+            - !Sub ${TrainingTable.Arn}/index/CoachIndex
   environment:
     COGNITO_POOL_ID: !Ref TrainingUserPool
     COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
@@ -116,7 +116,7 @@ resources:
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
-          - AttributeName: coachId
+          - AttributeName: coach_id
             AttributeType: S
           - AttributeName: PK
             AttributeType: S
@@ -134,9 +134,9 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
-          - IndexName: CoachIdIndex
+          - IndexName: CoachIndex
             KeySchema:
-              - AttributeName: coachId
+              - AttributeName: coach_id
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
@@ -220,8 +220,8 @@ functions:
       - httpApi:
           method: POST
           path: /exercise
-          authorizer:
-            name: CognitoAuthorizer
+          # authorizer:
+          #   name: CognitoAuthorizer
   getAllExercises:
     handler: src/server/functions/exercise/getAll.handler
     events:

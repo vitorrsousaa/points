@@ -49,14 +49,16 @@ describe("Controller: Create", () => {
 			id: "123",
 			name: "test",
 			target: null,
-			muscleGroup: "muscle",
+			primaryMuscle: "muscle",
+			secondaryMuscle: "muscle",
 			equipment: "Barra",
 		});
 		mockRequest.body = {
 			name: "test",
 			target: null,
-			muscleGroup: "muscle",
 			equipment: "Barra",
+			primaryMuscle: "muscle",
+			secondaryMuscle: "muscle",
 		};
 
 		// Act
@@ -69,7 +71,8 @@ describe("Controller: Create", () => {
 				id: "123",
 				name: "test",
 				target: null,
-				muscleGroup: "muscle",
+				primaryMuscle: "muscle",
+				secondaryMuscle: "muscle",
 				equipment: "Barra",
 			},
 		});

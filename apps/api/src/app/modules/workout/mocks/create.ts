@@ -5,7 +5,8 @@ export const createWorkoutInput: ICreateInput["workout"] = {
 	exercises: [
 		{
 			equipment: "Barra",
-			muscleGroup: "muscle",
+			primaryMuscle: "muscle",
+			secondaryMuscle: "muscle",
 			name: "Exercise 1",
 			restTime: "Off",
 			exerciseId: "f734ceaf-aed9-4a34-a8b2-ee12b9f7da25",

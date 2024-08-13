@@ -12,7 +12,8 @@ describe("Service:Create", () => {
 	const inputData: ICreateInput = {
 		name: "John Doe",
 		equipment: "Barra",
-		muscleGroup: "muscle",
+		primaryMuscle: "muscle",
+		secondaryMuscle: null,
 		target: null,
 	};
 

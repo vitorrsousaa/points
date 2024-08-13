@@ -2,11 +2,7 @@ import { randomUUID } from "node:crypto";
 import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import type { Exercise } from "@core/domain/exercise";
-import type {
-	ExerciseDynamoDB,
-	ExercisePersistance,
-	IExerciseRepository,
-} from "./types";
+import type { ExerciseDynamoDB, IExerciseRepository } from "./types";
 
 export class ExerciseRepository implements IExerciseRepository {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
@@ -15,7 +11,7 @@ export class ExerciseRepository implements IExerciseRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 
-	async create(exerciseInput: ExercisePersistance): Promise<Exercise> {
+	async create(exerciseInput: Omit<Exercise, "id">): Promise<Exercise> {
 		const exerciseId = randomUUID();
 
 		const { PK, SK } = this.getKeys({ exerciseId });
@@ -25,8 +21,10 @@ export class ExerciseRepository implements IExerciseRepository {
 			SK,
 			name: exerciseInput.name,
 			equipment: exerciseInput.equipment,
-			muscleGroup: exerciseInput.muscleGroup,
+			primary_muscle: exerciseInput.primaryMuscle,
+			secondary_muscle: exerciseInput.secondaryMuscle,
 			target: exerciseInput.target,
+			id: exerciseId,
 		};
 
 		await this.dbInstance.create(this.TABLE_NAME, {
@@ -82,7 +80,8 @@ export class ExerciseRepository implements IExerciseRepository {
 		return {
 			name: exercise.name,
 			equipment: exercise.equipment,
-			muscleGroup: exercise.muscleGroup,
+			primaryMuscle: exercise.primary_muscle,
+			secondaryMuscle: exercise.secondary_muscle,
 			target: exercise.target,
 			id: this.getExerciseId(exercise.SK),
 		};

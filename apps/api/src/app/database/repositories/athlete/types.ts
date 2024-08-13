@@ -1,16 +1,16 @@
 import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
 import type { Athlete } from "@core/domain/athlete";
-import type { User } from "@core/domain/user";
 
 export type AthleteDynamoDB = Prettify<
 	{
-		coachId: string;
 		weight: number;
 		height: number;
 		age: number;
+		account_confirmation: boolean;
+		coach_id: string;
 	} & TBaseEntity &
-		Omit<User, "id">
+		Omit<Athlete, "accountConfirmation" | "coachId">
 >;
 
 export interface IAthleteRepository {

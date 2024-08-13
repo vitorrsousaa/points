@@ -2,23 +2,18 @@ import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
 import type { Equipment, Exercise } from "@core/domain/exercise";
 
-export type ExercisePersistance = {
-	name: string;
-	equipment: Equipment;
-	muscleGroup: string;
-	target: "S" | "B" | "D" | null;
-};
-
 export type ExerciseDynamoDB = Prettify<
 	{
 		name: string;
 		equipment: Equipment;
-		muscleGroup: string;
 		target: "S" | "B" | "D" | null;
-	} & TBaseEntity
+		primary_muscle: string;
+		secondary_muscle: string | null;
+	} & TBaseEntity &
+		Omit<Exercise, "primaryMuscle" | "secondaryMuscle">
 >;
 
 export interface IExerciseRepository {
-	create(exerciseInput: ExercisePersistance): Promise<Exercise>;
+	create(exerciseInput: Omit<Exercise, "id">): Promise<Exercise>;
 	getAll(): Promise<Exercise[]>;
 }

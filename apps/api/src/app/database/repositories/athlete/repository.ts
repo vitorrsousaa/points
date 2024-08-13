@@ -15,15 +15,15 @@ export class AthleteRepository implements IAthleteRepository {
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #coachId = :coachId, #weight = :weight, #height = :height, #age = :age",
+				"set #coach_id = :coach_id, #weight = :weight, #height = :height, #age = :age",
 			ExpressionAttributeNames: {
-				"#coachId": "coachId",
+				"#coach_id": "coach_id",
 				"#weight": "weight",
 				"#height": "height",
 				"#age": "age",
 			},
 			ExpressionAttributeValues: {
-				":coachId": athlete.coachId,
+				":coach_id": athlete.coachId,
 				":weight": athlete.weight,
 				":height": athlete.height,
 				":age": athlete.age,
@@ -37,10 +37,10 @@ export class AthleteRepository implements IAthleteRepository {
 		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>(
 			this.TABLE_NAME,
 			{
-				IndexName: "CoachIdIndex",
-				KeyConditionExpression: "coachId = :coachId",
+				IndexName: "CoachIndex",
+				KeyConditionExpression: "coach_id = :coach_id",
 				ExpressionAttributeValues: {
-					":coachId": coachId,
+					":coach_id": coachId,
 				},
 			},
 		);
@@ -82,9 +82,9 @@ export class AthleteRepository implements IAthleteRepository {
 			name: athlete.name,
 			email: athlete.email,
 			role: athlete.role,
-			accountConfirmation: athlete.accountConfirmation,
+			accountConfirmation: athlete.account_confirmation,
 			age: athlete.age,
-			coachId: athlete.coachId,
+			coachId: athlete.coach_id,
 			height: athlete.height,
 			weight: athlete.weight,
 		};

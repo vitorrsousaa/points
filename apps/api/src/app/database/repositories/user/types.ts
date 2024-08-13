@@ -2,14 +2,6 @@ import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
 import type { Role, User } from "@core/domain/user";
 
-export type UserPersistance = {
-	id: string;
-	name: string;
-	email: string;
-	role: Role;
-	accountConfirmation: boolean;
-};
-
 /**
  * This entity is used to send user for dynamoDB with SK and PK.
  * PK - USER
@@ -20,13 +12,14 @@ export type UserDynamoDB = Prettify<
 		name: string;
 		email: string;
 		role: Role;
-		accountConfirmation: boolean;
-	} & TBaseEntity
+		account_confirmation: boolean;
+	} & TBaseEntity &
+		Omit<User, "accountConfirmation">
 >;
 
 export interface IUserRepository {
-	create(createInput: UserPersistance): Promise<User>;
-	update(id: string, updateInput: Omit<UserPersistance, "id">): Promise<User>;
+	create(createInput: User): Promise<User>;
+	update(id: string, updateInput: Omit<User, "id">): Promise<User>;
 	getByEmail(email: string): Promise<User | undefined>;
 	getById(id: string): Promise<User | undefined>;
 }

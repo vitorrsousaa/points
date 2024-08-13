@@ -7,7 +7,8 @@ export type Equipment = z.infer<typeof EquipmentEnumSchema>;
 export const CreateExerciseInputSchema = z.object({
 	name: z.string(),
 	equipment: EquipmentEnumSchema,
-	muscleGroup: z.string(),
+	primaryMuscle: z.string(),
+	secondaryMuscle: z.string().nullable(),
 	target: z.enum(["B", "S", "D"]).nullable(),
 });
 
