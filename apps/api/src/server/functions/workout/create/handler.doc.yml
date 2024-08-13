@@ -1,35 +1,34 @@
 create:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
+  summary: workout
+  description: Create workout
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Workouts
+  requestBody:
+    description: A basic information about workout
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
       properties:
-        email:
+        athleteId:
           type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+          format: uuid
+          example: '123456'
+        workout:
+          type: object
+          schema: $WorkoutInputModel
+      required:
+        - athleteId
+        - workout
+  methodResponses:
     - statusCode: 200
       responseBody:
-        description: Return default response
+        description: Return workout created
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+        application/json: WorkoutModel
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
@@ -44,4 +43,3 @@ create:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						

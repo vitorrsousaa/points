@@ -237,6 +237,7 @@ functions:
       - httpApi:
           method: POST
           path: /workout
+          documentation: ${file(src/server/functions/workout/create/handler.doc.yml):create}
           authorizer:
             name: CognitoAuthorizer
   getAllWorkoutByAthleteId:

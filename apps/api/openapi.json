@@ -362,10 +362,98 @@
                         "example": 7,
                         "description": "Rate of Perceived Exertion (RPE) for the workout set.\nThis field is optional and can be omitted or set to null.\n"
                       }
-                    }
+                    },
+                    "required": [
+                      "reps",
+                      "weight",
+                      "type"
+                    ]
                   }
                 }
-              }
+              },
+              "required": [
+                "restTime",
+                "exerciseId",
+                "sets",
+                "notes"
+              ]
+            }
+          }
+        }
+      },
+      "WorkoutInputModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Workout one"
+          },
+          "athleteId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "123456"
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "restTime": {
+                  "type": "string",
+                  "example": "04:30"
+                },
+                "exerciseId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "123456"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Do it slowly"
+                },
+                "sets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "reps": {
+                        "type": "number",
+                        "example": 10
+                      },
+                      "weight": {
+                        "type": "number",
+                        "example": 50
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "W",
+                          "T",
+                          "F"
+                        ]
+                      },
+                      "rpe": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 10,
+                        "example": 7,
+                        "description": "Rate of Perceived Exertion (RPE) for the workout set.\nThis field is optional and can be omitted or set to null.\n"
+                      }
+                    },
+                    "required": [
+                      "reps",
+                      "weight",
+                      "type"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "restTime",
+                "exerciseId",
+                "sets",
+                "notes"
+              ]
             }
           }
         }
@@ -375,29 +463,11 @@
         "items": {
           "type": "object",
           "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid",
-              "example": "123456"
-            },
             "name": {
               "type": "string",
               "example": "Workout one"
             },
-            "createdAt": {
-              "type": "string",
-              "example": "2024-08-13T21:23:33.482Z"
-            },
-            "updatedAt": {
-              "type": "string",
-              "example": "2024-08-13T21:23:33.482Z"
-            },
             "athleteId": {
-              "type": "string",
-              "format": "uuid",
-              "example": "123456"
-            },
-            "coachId": {
               "type": "string",
               "format": "uuid",
               "example": "123456"
@@ -448,23 +518,34 @@
                           "example": 7,
                           "description": "Rate of Perceived Exertion (RPE) for the workout set.\nThis field is optional and can be omitted or set to null.\n"
                         }
-                      }
+                      },
+                      "required": [
+                        "reps",
+                        "weight",
+                        "type"
+                      ]
                     }
                   }
-                }
+                },
+                "required": [
+                  "restTime",
+                  "exerciseId",
+                  "sets",
+                  "notes"
+                ]
               }
             }
           }
         }
       },
-      "c7695b17-4bc8-4c49-8565-1639e29aedca": {
+      "1fc73573-119a-4fce-b6fc-7092c482fc69": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "4546bacb-b3e7-4660-9484-9587ad63005f": {
+      "c65f1ddf-656d-4e7d-ac77-3d856bedb109": {
         "properties": {
           "message": {
             "type": "string",
@@ -473,7 +554,7 @@
           }
         }
       },
-      "5d45118c-f435-49ca-8e9e-d7d62b122cbc": {
+      "73954bdc-5969-40e4-aef2-ac3545dad8ff": {
         "properties": {
           "message": {
             "type": "string",
@@ -482,7 +563,7 @@
           }
         }
       },
-      "dd9622d2-deb8-490b-a827-46a9d4ce6646": {
+      "7b257a10-882c-4551-8d8c-bcbe58bb5ae9": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -523,7 +604,7 @@
         },
         "additionalProperties": false
       },
-      "27fba188-733c-466f-aa75-01868283752a": {
+      "98125f08-5f32-4177-8118-ebb3da96f09a": {
         "properties": {
           "message": {
             "type": "string",
@@ -532,7 +613,7 @@
           }
         }
       },
-      "1e644b6a-0cb0-4130-ac28-c7f7c2e261eb": {
+      "627962ef-cafa-4ee9-9984-90fcb3acce7f": {
         "properties": {
           "email": {
             "type": "string",
@@ -548,14 +629,14 @@
           "code"
         ]
       },
-      "e934033d-c321-4aab-a956-ea776beca92b": {
+      "33263d4b-a356-405a-9b23-7821c7181457": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "6c20483c-3fcc-49fb-879c-b082832b86f3": {
+      "351ba2be-4f8c-4e18-8157-dfd3d06b526c": {
         "properties": {
           "message": {
             "type": "string",
@@ -564,7 +645,7 @@
           }
         }
       },
-      "d8f247d7-cc56-4b95-a212-08b5972eabcf": {
+      "eefb2dcb-e4a0-4581-b5bf-27a42888f54b": {
         "properties": {
           "message": {
             "type": "string",
@@ -573,7 +654,7 @@
           }
         }
       },
-      "853e4bc4-776a-419d-abc3-c97cea5ae89c": {
+      "837da9e2-31c8-48ae-b396-53b598ce769e": {
         "properties": {
           "email": {
             "type": "string",
@@ -589,7 +670,7 @@
           "password"
         ]
       },
-      "0904cd1e-8b74-4044-99d6-640a185f4276": {
+      "4eb21119-66a8-40c9-8af0-4926a68a02df": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -600,6 +681,22 @@
       "coachId": {
         "type": "string",
         "example": "example-uuid"
+      },
+      "02189683-f879-4bdb-80e1-70f09bf58c85": {
+        "properties": {
+          "athleteId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "123456"
+          },
+          "workout": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "athleteId",
+          "workout"
+        ]
       },
       "athleteId": {
         "type": "string",
@@ -652,7 +749,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c7695b17-4bc8-4c49-8565-1639e29aedca"
+                  "$ref": "#/components/schemas/1fc73573-119a-4fce-b6fc-7092c482fc69"
                 }
               }
             },
@@ -663,7 +760,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/4546bacb-b3e7-4660-9484-9587ad63005f"
+                  "$ref": "#/components/schemas/c65f1ddf-656d-4e7d-ac77-3d856bedb109"
                 }
               }
             },
@@ -674,7 +771,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/5d45118c-f435-49ca-8e9e-d7d62b122cbc"
+                  "$ref": "#/components/schemas/73954bdc-5969-40e4-aef2-ac3545dad8ff"
                 }
               }
             },
@@ -720,7 +817,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/dd9622d2-deb8-490b-a827-46a9d4ce6646"
+                  "$ref": "#/components/schemas/7b257a10-882c-4551-8d8c-bcbe58bb5ae9"
                 }
               }
             },
@@ -742,7 +839,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/27fba188-733c-466f-aa75-01868283752a"
+                  "$ref": "#/components/schemas/98125f08-5f32-4177-8118-ebb3da96f09a"
                 }
               }
             },
@@ -778,7 +875,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/1e644b6a-0cb0-4130-ac28-c7f7c2e261eb"
+                "$ref": "#/components/schemas/627962ef-cafa-4ee9-9984-90fcb3acce7f"
               }
             }
           }
@@ -789,7 +886,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e934033d-c321-4aab-a956-ea776beca92b"
+                  "$ref": "#/components/schemas/33263d4b-a356-405a-9b23-7821c7181457"
                 }
               }
             },
@@ -800,7 +897,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/6c20483c-3fcc-49fb-879c-b082832b86f3"
+                  "$ref": "#/components/schemas/351ba2be-4f8c-4e18-8157-dfd3d06b526c"
                 }
               }
             },
@@ -811,7 +908,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d8f247d7-cc56-4b95-a212-08b5972eabcf"
+                  "$ref": "#/components/schemas/eefb2dcb-e4a0-4581-b5bf-27a42888f54b"
                 }
               }
             },
@@ -858,7 +955,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/853e4bc4-776a-419d-abc3-c97cea5ae89c"
+                "$ref": "#/components/schemas/837da9e2-31c8-48ae-b396-53b598ce769e"
               }
             }
           }
@@ -869,7 +966,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0904cd1e-8b74-4044-99d6-640a185f4276"
+                  "$ref": "#/components/schemas/4eb21119-66a8-40c9-8af0-4926a68a02df"
                 }
               }
             },
@@ -993,6 +1090,79 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ExercisesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/workout": {
+      "post": {
+        "summary": "workout",
+        "description": "Create workout",
+        "operationId": "createWorkout",
+        "parameters": [],
+        "tags": [
+          "Workouts"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "A basic information about workout",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/02189683-f879-4bdb-80e1-70f09bf58c85"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return workout created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutModel"
                 }
               }
             },

@@ -148,6 +148,10 @@ documentation:
               description: |
                 Rate of Perceived Exertion (RPE) for the workout set.
                 This field is optional and can be omitted or set to null.
+          required:
+            - reps
+            - weight
+            - type
     - name: WorkoutExerciseModel
       description: Workout exercise model
       content:
@@ -168,6 +172,11 @@ documentation:
             sets:
               type: array
               items: *WorkoutSetModel
+          required:
+            - restTime
+            - exerciseId
+            - sets
+            - notes
     - name: WorkoutModel
       description: Workout model
       content: 
@@ -193,6 +202,23 @@ documentation:
                 format: uuid
                 example: '123456'
               coachId: 
+                type: string
+                format: uuid
+                example: '123456'
+              exercises:
+                type: array
+                items: *WorkoutExerciseModel
+    - name: WorkoutInputModel
+      description: Workout input model
+      content: 
+        application/json:
+          schema: &WorkoutModel
+            type: object
+            properties:
+              name:
+                type: string
+                example: Workout one
+              athleteId: 
                 type: string
                 format: uuid
                 example: '123456'
