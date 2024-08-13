@@ -39,8 +39,10 @@ export class AthleteRepository implements IAthleteRepository {
 			{
 				IndexName: "CoachIndex",
 				KeyConditionExpression: "coach_id = :coach_id",
+				FilterExpression: "PK = :PK",
 				ExpressionAttributeValues: {
 					":coach_id": coachId,
+					":PK": this.DEFAULT_USER_ID,
 				},
 			},
 		);
