@@ -239,3 +239,12 @@ functions:
           path: /workout
           authorizer:
             name: CognitoAuthorizer
+  getAllByCoachId:
+    handler: src/server/functions/workout/getAllByAthleteId.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /workout/{athleteId}
+          documentation: ${file(src/server/functions/workout/getAllByAthleteId/handler.doc.yml):getAllByAthleteId}
+          authorizer:
+            name: CognitoAuthorizer

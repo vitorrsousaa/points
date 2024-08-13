@@ -46,8 +46,20 @@ export class WorkoutRepository implements IWorkoutRepository {
 	update(workout: Workout): Promise<Workout> {
 		throw new Error("Method not implemented.");
 	}
-	getAllByAthleteId(athleteId: string): Promise<Workout[]> {
-		throw new Error("Method not implemented.");
+	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
+		const { PK } = this.getKeys(athleteId);
+
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
+			this.TABLE_NAME,
+			{
+				KeyConditionExpression: "PK = :PK",
+				ExpressionAttributeValues: {
+					":PK": PK,
+				},
+			},
+		);
+
+		return result ? result.map(this.mapToDomain) : [];
 	}
 	getById(id: string): Promise<Workout | null> {
 		throw new Error("Method not implemented.");
@@ -61,6 +73,18 @@ export class WorkoutRepository implements IWorkoutRepository {
 		return {
 			PK: `WORKOUT|ATHLETE|${athleteId}`,
 			SK: `WORKOUT|${now}`,
+		};
+	}
+
+	private mapToDomain(workout: WorkoutDynamoDB): Workout {
+		return {
+			athleteId: workout.athlete_id,
+			coachId: workout.coach_id,
+			createdAt: workout.created_at,
+			updatedAt: workout.updated_at,
+			exercises: workout.exercises,
+			id: workout.id,
+			name: workout.name,
 		};
 	}
 }
