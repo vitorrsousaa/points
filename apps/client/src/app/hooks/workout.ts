@@ -13,15 +13,21 @@ export function useCreateWorkout() {
 	};
 }
 
-export function useGetAllExercises() {
+export function useGetAllWorkouts(athleteId: string | undefined) {
 	const { data, isLoading, isError } = useQuery({
-		queryKey: QUERY_KEYS.EXERCISES,
-		queryFn: workoutServices.getAll,
+		queryKey: QUERY_KEYS.WORKOUTS,
+		queryFn: async () => {
+			const workouts = await workoutServices.getAll({
+				athleteId: athleteId || "",
+			});
+
+			return workouts;
+		},
 	});
 
 	return {
-		exercises: data,
-		isLoadingExercises: isLoading,
-		isErrorExercises: isError,
+		workouts: data,
+		isLoadingWorkouts: isLoading,
+		isErrorWorkouts: isError,
 	};
 }
