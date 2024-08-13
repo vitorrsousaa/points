@@ -22,14 +22,22 @@ export function ExerciseList(props: ExerciseListProps) {
 		isLoadingExercises,
 		isErrorExercises,
 		hasExercises,
+		filterExercise,
 		handleAddNewExercise,
+		onChangeFilterExercise,
 	} = useExerciseListHook(props);
 
 	return (
 		<Card className="w-[350px] h-full flex flex-col">
 			<CardHeader className="p-4">
 				<span>Exercicios</span>
-				{hasExercises && <Input placeholder="Pesquise o exercício" />}
+				{hasExercises && (
+					<Input
+						placeholder="Pesquise o exercício"
+						value={filterExercise}
+						onChange={onChangeFilterExercise}
+					/>
+				)}
 			</CardHeader>
 			<Separator className="mb-2" />
 			<ScrollArea>

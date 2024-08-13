@@ -1,6 +1,6 @@
 import type { Exercise } from "@/entitites/exercise";
 import { useGetAllExercises } from "@/hooks/exercise";
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { ExerciseListProps } from "./exercise-list";
 
 export function useExerciseListHook(props: ExerciseListProps) {
@@ -10,6 +10,8 @@ export function useExerciseListHook(props: ExerciseListProps) {
 		useGetAllExercises();
 
 	const hasExercises = Boolean(exercises && exercises?.length > 0);
+
+	const [filterExercise, setFilterExercise] = useState<string>("");
 
 	const handleAddNewExercise = useCallback(
 		(exercise: Exercise) => {
@@ -21,6 +23,7 @@ export function useExerciseListHook(props: ExerciseListProps) {
 				restTime: "Off",
 				equipment: exercise.equipment,
 				primaryMuscle: exercise.primaryMuscle,
+				secondaryMuscle: exercise.secondaryMuscle,
 				sets: [
 					{
 						reps: 6,
@@ -34,11 +37,30 @@ export function useExerciseListHook(props: ExerciseListProps) {
 		[onAddExercise],
 	);
 
+	const onChangeFilterExercise = useCallback<
+		React.ChangeEventHandler<HTMLInputElement>
+	>((event) => {
+		console.log(event);
+		setFilterExercise(event.target.value);
+	}, []);
+
+	const filteredExercises = useMemo(() => {
+		return exercises
+			? exercises.filter((exercise) => {
+					return exercise.name
+						.toLowerCase()
+						.includes(filterExercise.toLowerCase());
+				})
+			: [];
+	}, [exercises, filterExercise]);
+
 	return {
-		exercises,
+		exercises: filteredExercises,
 		isLoadingExercises,
 		isErrorExercises,
 		hasExercises,
+		filterExercise,
+		onChangeFilterExercise,
 		handleAddNewExercise,
 	};
 }

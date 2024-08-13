@@ -49,6 +49,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 				sets,
 				equipment,
 				primaryMuscle,
+				secondaryMuscle,
 			} = param;
 			appendExercises({
 				name,
@@ -59,6 +60,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 				sets,
 				equipment,
 				primaryMuscle,
+				secondaryMuscle,
 			});
 		},
 		[appendExercises],

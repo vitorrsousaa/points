@@ -1,4 +1,5 @@
 import { TrainingForm } from "@/components/training-form";
+import type { TTrainingFormSchema } from "@/components/training-form/training-form.schema";
 import { useCreateWorkout } from "@/hooks/workout";
 import {
 	Button,
@@ -9,6 +10,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@shared/ui";
+import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export function NewTraining() {
@@ -16,7 +18,18 @@ export function NewTraining() {
 
 	const { athleteId } = useParams<{ athleteId: string }>();
 
-	const { createWorkout } = useCreateWorkout();
+	const { createWorkout, isCreatingWorkout } = useCreateWorkout();
+
+	const handleCreateWorkout = useCallback(
+		async (data: TTrainingFormSchema) => {
+			navigate(-1);
+			await createWorkout({
+				workout: data,
+				athleteId: athleteId || "",
+			});
+		},
+		[athleteId, createWorkout, navigate],
+	);
 
 	return (
 		<div>
@@ -30,23 +43,24 @@ export function NewTraining() {
 				</CardHeader>
 				<CardContent>
 					<TrainingForm
-						onSubmit={async (data) => {
-							await createWorkout({
-								workout: data,
-								athleteId: athleteId || "",
-							});
-						}}
+						isSubmitting={isCreatingWorkout}
+						onSubmit={handleCreateWorkout}
 						formId="new-training-form"
 						// isSubmitting={isCreatingAthlete}
 					/>
 				</CardContent>
 				<CardFooter className="w-full gap-2 flex flex-row justify-end">
-					<Button variant={"secondary"} onClick={() => navigate(-1)}>
+					<Button
+						variant={"secondary"}
+						onClick={() => navigate(-1)}
+						disabled={isCreatingWorkout}
+					>
 						Cancelar
 					</Button>
 					<Button
 						type="submit"
 						form="new-training-form"
+						isLoading={isCreatingWorkout}
 						// isLoading={isCreatingAthlete}
 					>
 						Salvar

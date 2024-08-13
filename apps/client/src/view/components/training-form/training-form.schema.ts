@@ -15,6 +15,7 @@ export const ExerciseFormSchema = z.object({
 	restTime: z.string(),
 	equipment: z.string(),
 	primaryMuscle: z.string(),
+	secondaryMuscle: z.string().nullable(),
 	sets: z.array(ExerciseSetSchema).min(1, "Adicione pelo menos uma série"),
 });
 
