@@ -2,7 +2,6 @@ import { ROUTES } from "@/config/routes";
 import { useGetAllAthletes } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import {
-	Badge,
 	Button,
 	Card,
 	CardContent,
@@ -105,10 +104,10 @@ export function Athletes() {
 											<TableHeader>
 												<TableRow>
 													<TableHead>Nome</TableHead>
-													<TableHead>Categoria</TableHead>
 													<TableHead className="hidden md:table-cell">
 														Status
 													</TableHead>
+													<TableHead>Altura(cm)</TableHead>
 													<TableHead>Peso (kg)</TableHead>
 
 													<TableHead className="hidden min-[540px]:table-cell">
@@ -124,11 +123,9 @@ export function Athletes() {
 													>
 														<TableCell>{athlete.name}</TableCell>
 
-														<TableCell>
-															<Badge variant="outline">Categoria</Badge>
-														</TableCell>
-
 														<TableAvailableAthlete isActive />
+
+														<TableCell>{athlete.height}</TableCell>
 
 														<TableCell className="hidden md:table-cell">
 															{athlete.weight}
