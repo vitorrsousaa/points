@@ -39,7 +39,7 @@ export class DeleteService implements IDeleteService {
 			throw new CoachNotAuthorized();
 		}
 
-		await this.workoutRepository.delete(athleteId, workoutId);
+		await this.workoutRepository.delete(athleteId, workout.createdAt);
 
 		return null;
 	}

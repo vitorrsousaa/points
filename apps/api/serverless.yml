@@ -255,3 +255,5 @@ functions:
       - httpApi:
           method: DELETE
           path: /workout
+          authorizer:
+            name: CognitoAuthorizer

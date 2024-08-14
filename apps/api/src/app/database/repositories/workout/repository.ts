@@ -63,7 +63,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 	}
 	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
 		const { PK } = this.getKeys(athleteId);
-		const result = await this.dbInstance.query<WorkoutDynamoDB>(
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
 			this.TABLE_NAME,
 			{
 				KeyConditionExpression: "PK = :PK",
@@ -75,17 +75,15 @@ export class WorkoutRepository implements IWorkoutRepository {
 			},
 		);
 
-		return result ? this.mapToDomain(result) : null;
+		return result ? this.mapToDomain(result[0]) : null;
 	}
-	async delete(athleteId: string, workoutId: string): Promise<void> {
+	async delete(athleteId: string, createdAt: string): Promise<void> {
 		const { PK } = this.getKeys(athleteId);
+		const SK = `WORKOUT|${createdAt}`;
 		await this.dbInstance.delete(this.TABLE_NAME, {
 			Key: {
 				PK: PK,
-			},
-			ConditionExpression: "id = :id",
-			ExpressionAttributeValues: {
-				":id": workoutId,
+				SK: SK,
 			},
 		});
 	}
