@@ -17,7 +17,7 @@ export const restTimer = [
 ];
 
 export const typeOfSets: {
-	value: "W" | "T" | "F";
+	value: "W" | "T";
 	color: string;
 	label: string;
 }[] = [
@@ -30,11 +30,6 @@ export const typeOfSets: {
 		value: "T",
 		color: "#35baff",
 		label: "Trabalho",
-	},
-	{
-		value: "F",
-		color: "#ff0000",
-		label: "Falha",
 	},
 ];
 

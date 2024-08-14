@@ -13,7 +13,7 @@ export function useSetRowHook(props: SetRowProps) {
 	});
 
 	const updateType = React.useCallback(
-		(type: "W" | "F" | "T") => {
+		(type: "W" | "T") => {
 			const oldSet = fields[setIndex];
 
 			if (!oldSet) return;

@@ -7,7 +7,7 @@ export const WorkoutSetSchema = z.object({
 	reps: z.number().min(0),
 	weight: z.number().min(0),
 	rpe: z.number().min(0).max(10).optional(),
-	type: z.enum(["W", "T", "F"]),
+	type: z.enum(["W", "T"]),
 });
 
 export const WorkoutExerciseSchema = CreateExerciseInputSchema.extend({

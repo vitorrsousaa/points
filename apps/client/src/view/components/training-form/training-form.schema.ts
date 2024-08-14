@@ -4,7 +4,7 @@ export const ExerciseSetSchema = z.object({
 	reps: z.number().int().min(1, "Mínimo de 1 repetição"),
 	weight: z.number().int().min(0, "Mínimo de 0 kg"),
 	rpe: z.number().int().min(0, "Mínimo de 0 rpe").max(10, "Máximo de 10 rpe"),
-	type: z.enum(["W", "F", "T"]),
+	type: z.enum(["W", "T"]),
 });
 
 export const ExerciseFormSchema = z.object({
