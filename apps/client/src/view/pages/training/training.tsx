@@ -97,6 +97,7 @@ export function Training() {
 												key={workout.id}
 												id={workout.id}
 												status={workout.status}
+												workout={workout}
 											>
 												<WorkoutCardHeader>{workout.name}</WorkoutCardHeader>
 												<WorkoutCardContent exercises={workout.exercises} />

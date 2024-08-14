@@ -1,3 +1,4 @@
+import { useNavigate } from "@/hooks/navigate";
 import { useRemoveWorkout } from "@/hooks/workout";
 import {
 	Button,
@@ -11,6 +12,7 @@ import {
 	Spinner,
 } from "@shared/ui";
 import { useCallback, useReducer } from "react";
+import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { DeleteWorkoutModal } from "../../modals/delete-workout-modal";
 import { useWorkoutCardContext } from "../workout-card/workout-card";
@@ -22,7 +24,7 @@ interface WorkoutCardHeaderProps {
 export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 	const { children } = props;
 
-	const { id, status } = useWorkoutCardContext();
+	const { id, status, workout } = useWorkoutCardContext();
 
 	const { athleteId } = useParams<{ athleteId: string }>();
 
@@ -33,12 +35,27 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 
 	const { removeWorkout } = useRemoveWorkout();
 
-	const handleDeleteWorkout = useCallback(() => {
-		console.log("deleting workout");
-		console.log(id);
-		removeWorkout({ athleteId: athleteId || "", workoutId: id });
+	const handleDeleteWorkout = useCallback(async () => {
+		// removeWorkout({ athleteId: athleteId || "", workoutId: id });
+		toast.promise(
+			removeWorkout({ athleteId: athleteId || "", workoutId: id }),
+			{
+				loading: "Removendo treino...",
+				success: "Treino removido com sucesso",
+				error: "Tivemos um erro!",
+			},
+		);
 		toggleDeleteWorkoutModal();
 	}, [id, athleteId, removeWorkout]);
+
+	const { navigate } = useNavigate();
+
+	const handleDuplicateWorkout = useCallback(() => {
+		navigate("NEW_TRAINING", {
+			replace: { athleteId: athleteId || "" },
+			state: { workout },
+		});
+	}, [navigate, athleteId, workout]);
 
 	return (
 		<CardHeader className="p-2 flex flex-row justify-between items-center">
@@ -62,7 +79,7 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 							<Icon name="archive" className="h-4 w-4 mr-2" />
 							Desativar treino
 						</DropdownMenuItem>
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={handleDuplicateWorkout}>
 							<Icon name="clipboard" className="h-4 w-4 mr-2" />
 							Duplicar treino
 						</DropdownMenuItem>

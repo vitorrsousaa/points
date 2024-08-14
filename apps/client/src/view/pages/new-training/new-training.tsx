@@ -11,10 +11,12 @@ import {
 	CardTitle,
 } from "@shared/ui";
 import { useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function NewTraining() {
 	const navigate = useNavigate();
+
+	const { state } = useLocation();
 
 	const { athleteId } = useParams<{ athleteId: string }>();
 
@@ -46,6 +48,7 @@ export function NewTraining() {
 						isSubmitting={isCreatingWorkout}
 						onSubmit={handleCreateWorkout}
 						formId="new-training-form"
+						initialValues={state?.workout || undefined}
 						// isSubmitting={isCreatingAthlete}
 					/>
 				</CardContent>

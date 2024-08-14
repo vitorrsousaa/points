@@ -1,3 +1,4 @@
+import type { Workout } from "@/entitites/workout";
 import type { Status } from "@/utils/types";
 import { Card, cn } from "@shared/ui";
 import { createContext, useContext } from "react";
@@ -6,11 +7,13 @@ interface WorkoutCardProps {
 	id: string;
 	children: React.ReactNode;
 	status?: Status;
+	workout: Workout;
 }
 
 interface WorkoutCardContextValue {
 	id: string;
 	status?: Status;
+	workout: Workout;
 }
 
 const WorkoutCardContext = createContext<WorkoutCardContextValue>(
@@ -18,10 +21,10 @@ const WorkoutCardContext = createContext<WorkoutCardContextValue>(
 );
 
 function WorkoutCardContextProvider(props: WorkoutCardProps) {
-	const { id, children, status } = props;
+	const { id, children, status, workout } = props;
 
 	return (
-		<WorkoutCardContext.Provider value={{ id, status }}>
+		<WorkoutCardContext.Provider value={{ id, status, workout }}>
 			{children}
 		</WorkoutCardContext.Provider>
 	);
@@ -40,7 +43,7 @@ export function useWorkoutCardContext() {
 }
 
 export function WorkoutCard(props: WorkoutCardProps) {
-	const { id, children, status } = props;
+	const { id, children, status, workout } = props;
 
 	return (
 		<Card
@@ -49,7 +52,7 @@ export function WorkoutCard(props: WorkoutCardProps) {
 				status === "error" && "border-destructive/50 bg-destructive/5",
 			)}
 		>
-			<WorkoutCardContextProvider id={id} status={status}>
+			<WorkoutCardContextProvider id={id} status={status} workout={workout}>
 				{children}
 			</WorkoutCardContextProvider>
 		</Card>

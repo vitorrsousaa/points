@@ -84,7 +84,7 @@ export function TrainingForm(props: TrainingFormProps) {
 									/>
 								))
 							) : (
-								<div className="flex items-center flex-col justify-center">
+								<div className="flex items-center flex-col justify-center text-center">
 									<small className="text-lg">
 										Você ainda não adicionou nenhum exercício.
 									</small>
