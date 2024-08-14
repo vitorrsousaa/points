@@ -75,13 +75,24 @@ export function TrainingForm(props: TrainingFormProps) {
 
 					<ScrollArea>
 						<CardContent className="space-y-3 flex-grow flex flex-col p-4 ">
-							{exercises.map((exercise, index) => (
-								<ExerciseDetail
-									key={exercise.id}
-									index={index}
-									onRemoveExercise={handleRemoveExercise}
-								/>
-							))}
+							{exercises.length > 1 ? (
+								exercises.map((exercise, index) => (
+									<ExerciseDetail
+										key={exercise.id}
+										index={index}
+										onRemoveExercise={handleRemoveExercise}
+									/>
+								))
+							) : (
+								<div className="flex items-center flex-col justify-center">
+									<small className="text-lg">
+										Você ainda não adicionou nenhum exercício.
+									</small>
+									<small className="text-muted-foreground">
+										Acesse o menu ao lado para iniciar o protocolo de treino.
+									</small>
+								</div>
+							)}
 						</CardContent>
 					</ScrollArea>
 

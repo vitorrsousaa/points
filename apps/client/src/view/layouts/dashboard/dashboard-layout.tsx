@@ -28,11 +28,7 @@ export function DashboardLayout() {
 
 	const { signout } = useAuth();
 
-	const path = capitalizeFirstLetter(
-		`${pathname.split("/")[1]}${
-			pathname.split("/")[2] ? `/${pathname.split("/")[2]}` : ""
-		}`,
-	);
+	const path = capitalizeFirstLetter(`${pathname.split("/")[1]}`);
 
 	return (
 		<div>

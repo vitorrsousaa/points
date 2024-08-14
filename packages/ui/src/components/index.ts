@@ -21,3 +21,4 @@ export * from "./theme-provider";
 export * from "./mode-toggle";
 export * from "./select";
 export * from "./scroll-area";
+export * from "./modal";

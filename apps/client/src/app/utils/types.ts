@@ -1,1 +1,3 @@
-export type WithStatus<T> = T & { status?: "pending" | "error" };
+export type WithStatus<T> = T & { status?: Status };
+
+export type Status = "pending" | "error";
