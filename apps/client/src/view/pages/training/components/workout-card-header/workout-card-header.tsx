@@ -1,3 +1,4 @@
+import { useRemoveWorkout } from "@/hooks/workout";
 import {
 	Button,
 	CardHeader,
@@ -10,6 +11,7 @@ import {
 	Spinner,
 } from "@shared/ui";
 import { useCallback, useReducer } from "react";
+import { useParams } from "react-router-dom";
 import { DeleteWorkoutModal } from "../../modals/delete-workout-modal";
 import { useWorkoutCardContext } from "../workout-card/workout-card";
 
@@ -22,16 +24,21 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 
 	const { id, status } = useWorkoutCardContext();
 
+	const { athleteId } = useParams<{ athleteId: string }>();
+
 	const [deleteWorkoutModalIsOpen, toggleDeleteWorkoutModal] = useReducer(
 		(state) => !state,
 		false,
 	);
 
+	const { removeWorkout } = useRemoveWorkout();
+
 	const handleDeleteWorkout = useCallback(() => {
 		console.log("deleting workout");
 		console.log(id);
+		removeWorkout({ athleteId: athleteId || "", workoutId: id });
 		toggleDeleteWorkoutModal();
-	}, [id]);
+	}, [id, athleteId, removeWorkout]);
 
 	return (
 		<CardHeader className="p-2 flex flex-row justify-between items-center">
