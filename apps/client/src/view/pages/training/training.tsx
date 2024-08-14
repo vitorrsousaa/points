@@ -14,6 +14,7 @@ import {
 } from "@shared/ui";
 import { useParams } from "react-router-dom";
 import { WorkoutCard } from "./components/workout-card";
+import { WorkoutCardContent } from "./components/workout-card-content";
 import { WorkoutCardFooter } from "./components/workout-card-footer/workout-card-footer";
 import { WorkoutCardHeader } from "./components/workout-card-header";
 
@@ -98,6 +99,7 @@ export function Training() {
 												status={workout.status}
 											>
 												<WorkoutCardHeader>{workout.name}</WorkoutCardHeader>
+												<WorkoutCardContent exercises={workout.exercises} />
 												<WorkoutCardFooter />
 											</WorkoutCard>
 										))}

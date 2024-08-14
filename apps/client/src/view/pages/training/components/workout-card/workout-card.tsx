@@ -45,6 +45,7 @@ export function WorkoutCard(props: WorkoutCardProps) {
 	return (
 		<Card
 			className={cn(
+				"flex flex-col",
 				status === "error" && "border-destructive/50 bg-destructive/5",
 			)}
 		>

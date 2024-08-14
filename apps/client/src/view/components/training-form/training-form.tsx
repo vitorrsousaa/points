@@ -75,7 +75,7 @@ export function TrainingForm(props: TrainingFormProps) {
 
 					<ScrollArea>
 						<CardContent className="space-y-3 flex-grow flex flex-col p-4 ">
-							{exercises.length > 1 ? (
+							{exercises.length > 0 ? (
 								exercises.map((exercise, index) => (
 									<ExerciseDetail
 										key={exercise.id}
