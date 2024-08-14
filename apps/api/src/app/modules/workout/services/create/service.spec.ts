@@ -4,11 +4,7 @@ import type { IWorkoutRepository } from "@application/database/repositories/work
 import type { UnwrapPromise } from "@application/utils/types";
 import { type Mocked, vi } from "vitest";
 import { createInput } from "../../mocks/create";
-import {
-	CreateService,
-	type ICreateInput,
-	type ICreateService,
-} from "./service";
+import { CreateService, type ICreateService } from "./service";
 
 describe("Service:Create", () => {
 	let service: ICreateService;

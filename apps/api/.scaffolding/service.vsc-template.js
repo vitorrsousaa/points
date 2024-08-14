@@ -34,7 +34,7 @@ import * as z from 'zod';
 
 export const ${toPascalCase(inputs.name)}InputServiceSchema = z.object({
   userId: z.string().uuid(),
-  patientId: z.string().uuid(),
+  athleteId: z.string().uuid(),
 });
 
 export type T${toPascalCase(inputs.name)} = z.infer<typeof ${toPascalCase(
