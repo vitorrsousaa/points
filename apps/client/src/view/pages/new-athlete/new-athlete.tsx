@@ -4,13 +4,24 @@ import { ROUTES } from "@/config/routes";
 import { useCreateAthlete } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
 	Button,
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+	Icon,
 } from "@shared/ui";
 import { useNavigate } from "react-router-dom";
 
@@ -30,34 +41,76 @@ export function NewAthlete() {
 	}
 
 	return (
-		<div className="grid flex-1 items-start gap-4 md:gap-8">
-			<Card>
-				<CardHeader>
-					<CardTitle>Adicionando um novo atleta</CardTitle>
-					<CardDescription>
-						Adicione todas as informações necessárias para criar um novo atleta.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<AthleteForm
-						onSubmit={handleSubmit}
-						formId="new-athlete-form"
-						isSubmitting={isCreatingAthlete}
-					/>
-				</CardContent>
-				<CardFooter className="w-full gap-2 flex flex-row justify-end">
-					<Button variant={"secondary"} onClick={() => navigate(-1)}>
-						Cancelar
-					</Button>
+		<div className="grid flex-1 items-start gap-4 md:gap-8 max-w-2xl m-auto">
+			<div className="flex items-center gap-8">
+				<div className="flex gap-4 items-center">
+					<h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
+						Novo atleta
+					</h1>
+
+					<Dialog>
+						<DialogTrigger asChild>
+							<Button style={{ all: "unset", cursor: "pointer" }}>
+								<Icon name="questionMark" className="h-6 w-6" />
+							</Button>
+						</DialogTrigger>
+
+						<DialogContent className="sm:max-w-[425px]">
+							<DialogHeader className="gap-2">
+								<DialogTitle>Como funciona?</DialogTitle>
+								<DialogDescription>
+									Após o cadastro, o atleta poderá acessar o aplicativo e
+									definir uma senha. Você poderá acompanhar o progresso dele e
+									adicionar novos treinos.
+								</DialogDescription>
+							</DialogHeader>
+
+							<DialogFooter>
+								<Button type="submit">Entendi</Button>
+							</DialogFooter>
+						</DialogContent>
+					</Dialog>
+				</div>
+
+				<div className="items-center gap-4 md:ml-auto md:flex">
+					<AlertDialog>
+						<AlertDialogTrigger asChild>
+							<Button variant="secondary">Descartar</Button>
+						</AlertDialogTrigger>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								<AlertDialogTitle>
+									Você tem certeza que deseja descartar as informações?
+								</AlertDialogTitle>
+								<AlertDialogDescription>
+									As informações preenchidas não serão salvas e você perderá o
+									progresso.
+								</AlertDialogDescription>
+							</AlertDialogHeader>
+							<AlertDialogFooter>
+								<AlertDialogCancel>Cancelar</AlertDialogCancel>
+								<AlertDialogAction onClick={() => navigate(-1)}>
+									Confirmar
+								</AlertDialogAction>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialog>
+
 					<Button
 						type="submit"
 						form="new-athlete-form"
 						isLoading={isCreatingAthlete}
 					>
-						Salvar
+						Adicionar
 					</Button>
-				</CardFooter>
-			</Card>
+				</div>
+			</div>
+
+			<AthleteForm
+				onSubmit={handleSubmit}
+				formId="new-athlete-form"
+				isSubmitting={isCreatingAthlete}
+			/>
 		</div>
 	);
 }

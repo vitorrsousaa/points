@@ -24,6 +24,7 @@
 		"check": "biome check --apply ./src"
 	},
 	"devDependencies": {
+		"@radix-ui/react-alert-dialog": "^1.1.1",
 		"@shared/typescript-config": "*",
 		"@shared/vitest-presets": "*",
 		"@types/node": "^20.11.24",
