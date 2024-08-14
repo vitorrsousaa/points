@@ -15,8 +15,8 @@ export type WorkoutDynamoDB = Prettify<
 export interface IWorkoutRepository {
 	update(workout: Workout): Promise<Workout>;
 	getAllByAthleteId(athleteId: string): Promise<Workout[]>;
-	getById(id: string): Promise<Workout | null>;
-	delete(id: string): Promise<void>;
+	getById(athleteId: string, workoutId: string): Promise<Workout | null>;
+	delete(athleteId: string, workoutId: string): Promise<void>;
 	create(
 		workout: Omit<Workout, "createdAt" | "updatedAt" | "id">,
 	): Promise<Workout>;

@@ -23,7 +23,9 @@ export class DeleteService implements IDeleteService {
 
 	async execute(deleteInput: IDeleteInput): Promise<IDeleteOutput> {
 		const { workoutId, coachId, athleteId } = deleteInput;
-		const workout = await this.workoutRepository.getById(workoutId);
+		const workout = await this.workoutRepository.getById(athleteId, workoutId);
+
+		console.log(workout);
 
 		if (!workout) {
 			throw new WorkoutNotFound();
@@ -37,7 +39,7 @@ export class DeleteService implements IDeleteService {
 			throw new CoachNotAuthorized();
 		}
 
-		await this.workoutRepository.delete(workoutId);
+		await this.workoutRepository.delete(athleteId, workoutId);
 
 		return null;
 	}

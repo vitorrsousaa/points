@@ -39,6 +39,10 @@ export interface IDatabaseClient {
 		tableName: string,
 		args: Omit<GetCommandInput, "TableName">,
 	): Promise<T | undefined>;
+	delete(
+		tableName: string,
+		args: Omit<DeleteCommandInput, "TableName">,
+	): Promise<void>;
 }
 
 export class DatabaseClient implements IDatabaseClient {
@@ -50,6 +54,15 @@ export class DatabaseClient implements IDatabaseClient {
 			Item: {
 				...attributes,
 			},
+		});
+
+		await this.dynamoClient.send(command);
+	}
+
+	async delete(tableName: string, args: Omit<DeleteCommandInput, "TableName">) {
+		const command = new DeleteCommand({
+			TableName: tableName,
+			...args,
 		});
 
 		await this.dynamoClient.send(command);

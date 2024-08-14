@@ -61,11 +61,33 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 		return result ? result.map(this.mapToDomain) : [];
 	}
-	getById(id: string): Promise<Workout | null> {
-		throw new Error("Method not implemented.");
+	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
+		const { PK } = this.getKeys(athleteId);
+		const result = await this.dbInstance.query<WorkoutDynamoDB>(
+			this.TABLE_NAME,
+			{
+				KeyConditionExpression: "PK = :PK",
+				FilterExpression: "id = :id",
+				ExpressionAttributeValues: {
+					":PK": PK,
+					":id": workoutId,
+				},
+			},
+		);
+
+		return result ? this.mapToDomain(result) : null;
 	}
-	delete(id: string): Promise<void> {
-		throw new Error("Method not implemented.");
+	async delete(athleteId: string, workoutId: string): Promise<void> {
+		const { PK } = this.getKeys(athleteId);
+		await this.dbInstance.delete(this.TABLE_NAME, {
+			Key: {
+				PK: PK,
+			},
+			ConditionExpression: "id = :id",
+			ExpressionAttributeValues: {
+				":id": workoutId,
+			},
+		});
 	}
 
 	private getKeys(athleteId: string): TBaseEntity {

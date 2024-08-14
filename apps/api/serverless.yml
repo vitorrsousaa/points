@@ -220,8 +220,8 @@ functions:
       - httpApi:
           method: POST
           path: /exercise
-          # authorizer:
-          #   name: CognitoAuthorizer
+          authorizer:
+            name: CognitoAuthorizer
   getAllExercises:
     handler: src/server/functions/exercise/getAll.handler
     events:
@@ -249,3 +249,9 @@ functions:
           documentation: ${file(src/server/functions/workout/getAllByAthleteId/handler.doc.yml):getAllByAthleteId}
           authorizer:
             name: CognitoAuthorizer
+  deleteWorkout:
+    handler: src/server/functions/workout/delete.handler
+    events:
+      - httpApi:
+          method: DELETE
+          path: /workout
