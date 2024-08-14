@@ -13,7 +13,7 @@ export const ExerciseFormSchema = z.object({
 	notes: z.string(),
 	exerciseId: z.string(),
 	restTime: z.string(),
-	equipment: z.string(),
+	equipment: z.enum(["Barra", "Halter", "Maquina"]),
 	primaryMuscle: z.string(),
 	secondaryMuscle: z.string().nullable(),
 	sets: z.array(ExerciseSetSchema).min(1, "Adicione pelo menos uma série"),

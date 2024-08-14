@@ -1,5 +1,7 @@
 import {
+	ArchiveIcon,
 	CaretSortIcon,
+	ClipboardIcon,
 	Cross1Icon,
 	CrossCircledIcon,
 	DotsHorizontalIcon,
@@ -11,6 +13,7 @@ import {
 	InstagramLogoIcon,
 	LayersIcon,
 	LightningBoltIcon,
+	Pencil1Icon,
 	PersonIcon,
 	PlusCircledIcon,
 	ReaderIcon,
@@ -40,6 +43,9 @@ const icons = {
 	reader: ReaderIcon,
 	lightning: LightningBoltIcon,
 	close: Cross1Icon,
+	clipboard: ClipboardIcon,
+	pencil: Pencil1Icon,
+	archive: ArchiveIcon,
 } as const;
 
 export function Icon(props: IconProps) {

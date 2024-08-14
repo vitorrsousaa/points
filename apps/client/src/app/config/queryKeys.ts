@@ -1,7 +1,7 @@
 const DATABASE_NAME = "@training";
 
 export const QUERY_KEYS = {
-	ATHLETES: [`${DATABASE_NAME}:athletes`],
+	ATHLETES: [`${DATABASE_NAME}:ATHLETES`],
 	EXERCISES: [`${DATABASE_NAME}:EXERCISES`],
-	WORKOUTS: [`${DATABASE_NAME}:WORKOUTS`],
+	WORKOUTS: (athleteId: string) => [`${DATABASE_NAME}:WORKOUTS`, athleteId],
 };

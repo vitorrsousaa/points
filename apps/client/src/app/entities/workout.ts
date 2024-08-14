@@ -2,6 +2,6 @@ import type { Exercise } from "./exercise";
 
 export type Workout = {
 	name: string;
-	exercises: Exercise[];
+	exercises: Omit<Exercise, "id">[];
 	id: string;
 };

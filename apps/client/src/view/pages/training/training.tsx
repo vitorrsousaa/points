@@ -10,8 +10,14 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuTrigger,
 	Icon,
 	Spinner,
+	cn,
 } from "@shared/ui";
 import { useParams } from "react-router-dom";
 
@@ -48,7 +54,7 @@ export function Training() {
 				</div>
 			) : (
 				<>
-					<div className="grid flex-1 items-start gap-4 md:gap-8">
+					<div className="grid flex-1 items-start gap-4">
 						<Card>
 							<CardHeader>
 								<CardTitle>Atleta</CardTitle>
@@ -68,7 +74,7 @@ export function Training() {
 								<div>
 									<CardTitle>Treinos</CardTitle>
 									<CardDescription>
-										Acompanhe o desempenho do atleta.
+										Acompanhe os treinos do atleta.
 									</CardDescription>
 								</div>
 								<Button
@@ -88,12 +94,70 @@ export function Training() {
 							</CardHeader>
 							<CardContent>
 								{hasTraining ? (
-									<div className="space-y-2">
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 										{workouts?.map((workout) => (
-											<Card key={workout.id}>
-												<CardHeader className="p-2 flex flex-row justify-between">
+											<Card
+												key={workout.id}
+												className={cn(
+													workout.status === "error" &&
+														"border-destructive/50 bg-destructive/5",
+												)}
+											>
+												<CardHeader className="p-2 flex flex-row justify-between items-center">
 													{workout.name}
-													<Button>oie</Button>
+													{workout.status === "pending" ? (
+														<Spinner className="h-5 w-5 mr-1" />
+													) : workout.status === "error" ? (
+														<Icon
+															name="crossCircled"
+															className="text-destructive h-5 w-5 mr-1"
+														/>
+													) : (
+														<DropdownMenu>
+															<DropdownMenuTrigger asChild>
+																<Button
+																	aria-haspopup="true"
+																	size="icon"
+																	variant="ghost"
+																>
+																	<Icon
+																		name="dots"
+																		className="h-4 w-4 rotate-90"
+																	/>
+																	<span className="sr-only">Toggle menu</span>
+																</Button>
+															</DropdownMenuTrigger>
+															<DropdownMenuContent align="end">
+																<DropdownMenuLabel>Ações</DropdownMenuLabel>
+
+																<DropdownMenuItem>
+																	<Icon
+																		name="archive"
+																		className="h-4 w-4 mr-2"
+																	/>
+																	Desativar treino
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	<Icon
+																		name="clipboard"
+																		className="h-4 w-4 mr-2"
+																	/>
+																	Duplicar treino
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	<Icon
+																		name="pencil"
+																		className="h-4 w-4 mr-2"
+																	/>
+																	Editar treino
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	<Icon name="trash" className="h-4 w-4 mr-2" />
+																	Deletar treino
+																</DropdownMenuItem>
+															</DropdownMenuContent>
+														</DropdownMenu>
+													)}
 												</CardHeader>
 												<CardFooter className="p-2">Volume</CardFooter>
 											</Card>
