@@ -135,3 +135,58 @@ export function useRemoveWorkout() {
 		removeWorkout: mutateAsync,
 	};
 }
+
+export function useUpdateWorkout() {
+	const queryClient = useQueryClient();
+
+	const { mutateAsync, isPending } = useMutation({
+		mutationFn: workoutServices.update,
+		onMutate: (variables) => {
+			const { athleteId, workout } = variables;
+
+			const oldWorkouts = queryClient.getQueryData<WithStatus<Workout>[]>(
+				QUERY_KEYS.WORKOUTS(athleteId),
+			);
+
+			queryClient.setQueryData<WithStatus<Workout>[]>(
+				QUERY_KEYS.WORKOUTS(athleteId),
+				oldWorkouts?.map((w) =>
+					w.id === workout.id ? { ...workout, status: "pending" } : w,
+				),
+			);
+
+			return { oldWorkouts };
+		},
+		onSuccess: async (_, variables) => {
+			const { athleteId, workout } = variables;
+
+			await queryClient.cancelQueries({
+				queryKey: QUERY_KEYS.WORKOUTS(athleteId),
+			});
+
+			queryClient.setQueryData<WithStatus<Workout>[]>(
+				QUERY_KEYS.WORKOUTS(athleteId),
+				(old) => old?.map((w) => (w.id === workout.id ? workout : w)),
+			);
+		},
+		onError: async (_, variables, context) => {
+			const { athleteId, workout } = variables;
+
+			await queryClient.cancelQueries({
+				queryKey: QUERY_KEYS.WORKOUTS(athleteId),
+			});
+
+			queryClient.setQueryData<WithStatus<Workout>[]>(
+				QUERY_KEYS.WORKOUTS(athleteId),
+				context?.oldWorkouts?.map((w) =>
+					w.id === workout.id ? { ...w, status: "error" } : w,
+				),
+			);
+		},
+	});
+
+	return {
+		updateWorkout: mutateAsync,
+		isUpdatingWorkout: isPending,
+	};
+}

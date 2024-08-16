@@ -1,5 +1,5 @@
 import { TrainingForm } from "@/components/training-form";
-import type { TTrainingFormSchema } from "@/components/training-form/training-form.schema";
+
 import {
 	Button,
 	Card,
@@ -9,31 +9,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@shared/ui";
-import { useCallback } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useUpdateWorkoutHook } from "./update-workout.hook";
 
 export function UpdateWorkout() {
-	const navigate = useNavigate();
-	const { state } = useLocation();
-
-	const { athleteId, workoutId } = useParams<{
-		athleteId: string;
-		workoutId: string;
-	}>();
-
-	console.log(athleteId, workoutId, state);
-
-	const handleCreateWorkout = useCallback(
-		async (data: TTrainingFormSchema) => {
-			// navigate(-1);
-			console.log(data);
-			// await createWorkout({
-			// 	workout: data,
-			// 	athleteId: athleteId || "",
-			// });
-		},
-		[athleteId, navigate],
-	);
+	const {
+		isUpdatingWorkout,
+		hasWorkout,
+		workout,
+		handleCreateWorkout,
+		navigate,
+	} = useUpdateWorkoutHook();
 
 	return (
 		<div>
@@ -47,26 +32,24 @@ export function UpdateWorkout() {
 				</CardHeader>
 				<CardContent>
 					<TrainingForm
-						// isSubmitting={isCreatingWorkout}
+						isSubmitting={isUpdatingWorkout}
 						onSubmit={handleCreateWorkout}
 						formId="update-training-form"
-						initialValues={state?.workout || undefined}
-						// isSubmitting={isCreatingAthlete}
+						initialValues={hasWorkout && workout}
 					/>
 				</CardContent>
 				<CardFooter className="w-full gap-2 flex flex-row justify-end">
 					<Button
 						variant={"secondary"}
 						onClick={() => navigate(-1)}
-						// disabled={isCreatingWorkout}
+						disabled={isUpdatingWorkout}
 					>
 						Cancelar
 					</Button>
 					<Button
 						type="submit"
 						form="update-training-form"
-						// isLoading={isCreatingWorkout}
-						// isLoading={isCreatingAthlete}
+						isLoading={isUpdatingWorkout}
 					>
 						Salvar
 					</Button>
