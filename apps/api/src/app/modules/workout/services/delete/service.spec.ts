@@ -76,12 +76,16 @@ describe("Service:Delete", () => {
 		mockedWorkoutRepository.getById.mockResolvedValue({
 			coachId: inputData.coachId,
 			athleteId: inputData.athleteId,
+			createdAt: "2021-09-01T00:00:00Z",
 		} as UnwrapPromise<ReturnType<IWorkoutRepository["getById"]>>);
 
 		// Act
 		await service.execute(inputData);
 
 		// Assert
-		expect(mockedWorkoutRepository.delete).toBeCalledWith(inputData.workoutId);
+		expect(mockedWorkoutRepository.delete).toBeCalledWith(
+			inputData.workoutId,
+			"2021-09-01T00:00:00Z",
+		);
 	});
 });
