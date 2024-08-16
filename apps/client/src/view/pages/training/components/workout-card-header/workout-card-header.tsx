@@ -36,7 +36,6 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 	const { removeWorkout } = useRemoveWorkout();
 
 	const handleDeleteWorkout = useCallback(async () => {
-		// removeWorkout({ athleteId: athleteId || "", workoutId: id });
 		toast.promise(
 			removeWorkout({ athleteId: athleteId || "", workoutId: id }),
 			{
@@ -56,6 +55,13 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 			state: { workout },
 		});
 	}, [navigate, athleteId, workout]);
+
+	const navigateToUpdateWorkout = useCallback(() => {
+		navigate("UPDATE_WORKOUT", {
+			replace: { athleteId: athleteId || "", workoutId: id },
+			state: { workout },
+		});
+	}, [athleteId, id, navigate, workout]);
 
 	return (
 		<CardHeader className="p-2 flex flex-row justify-between items-center">
@@ -83,7 +89,7 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 							<Icon name="clipboard" className="h-4 w-4 mr-2" />
 							Duplicar treino
 						</DropdownMenuItem>
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={navigateToUpdateWorkout}>
 							<Icon name="pencil" className="h-4 w-4 mr-2" />
 							Editar treino
 						</DropdownMenuItem>

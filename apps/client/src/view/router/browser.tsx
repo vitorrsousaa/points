@@ -9,6 +9,7 @@ import { Settings } from "@/pages/settings";
 import { Signin } from "@/pages/signin";
 import { Signup } from "@/pages/signup";
 import { Training } from "@/pages/training";
+import { UpdateWorkout } from "@/pages/update-workout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../layouts/dashboard";
 import { AuthGuard } from "./auth-guard";
@@ -35,6 +36,7 @@ export function Router() {
 						<Route path={ROUTES.EXERCISES} element={<Exercises />} />
 						<Route path={ROUTES.ATHLETE_MORE_INFO} element={<Training />} />
 						<Route path={ROUTES.NEW_TRAINING} element={<NewTraining />} />
+						<Route path={ROUTES.UPDATE_WORKOUT} element={<UpdateWorkout />} />
 					</Route>
 				</Route>
 			</Routes>

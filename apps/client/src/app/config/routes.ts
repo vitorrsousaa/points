@@ -9,4 +9,5 @@ export const ROUTES = {
 	EXERCISES: "/exercises",
 	ATHLETE_MORE_INFO: "/atleta/:athleteId",
 	NEW_TRAINING: "/atleta/:athleteId/new-training",
+	UPDATE_WORKOUT: "/atleta/:athleteId/update-training/:workoutId",
 } as const;
