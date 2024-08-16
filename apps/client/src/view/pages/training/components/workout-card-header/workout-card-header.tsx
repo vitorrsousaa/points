@@ -1,5 +1,3 @@
-import { useNavigate } from "@/hooks/navigate";
-import { useRemoveWorkout } from "@/hooks/workout";
 import {
 	Button,
 	CardHeader,
@@ -11,11 +9,10 @@ import {
 	Icon,
 	Spinner,
 } from "@shared/ui";
-import { useCallback, useReducer } from "react";
-import { toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+
+import { ArchiveWorkoutModal } from "../../modals/archive-workout-modal";
 import { DeleteWorkoutModal } from "../../modals/delete-workout-modal";
-import { useWorkoutCardContext } from "../workout-card/workout-card";
+import { useWorkoutCardHeaderHook } from "./workout-card-header.hook";
 
 interface WorkoutCardHeaderProps {
 	children: React.ReactNode;
@@ -24,44 +21,17 @@ interface WorkoutCardHeaderProps {
 export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 	const { children } = props;
 
-	const { id, status, workout } = useWorkoutCardContext();
-
-	const { athleteId } = useParams<{ athleteId: string }>();
-
-	const [deleteWorkoutModalIsOpen, toggleDeleteWorkoutModal] = useReducer(
-		(state) => !state,
-		false,
-	);
-
-	const { removeWorkout } = useRemoveWorkout();
-
-	const handleDeleteWorkout = useCallback(async () => {
-		toast.promise(
-			removeWorkout({ athleteId: athleteId || "", workoutId: id }),
-			{
-				loading: "Removendo treino...",
-				success: "Treino removido com sucesso",
-				error: "Tivemos um erro!",
-			},
-		);
-		toggleDeleteWorkoutModal();
-	}, [id, athleteId, removeWorkout]);
-
-	const { navigate } = useNavigate();
-
-	const handleDuplicateWorkout = useCallback(() => {
-		navigate("NEW_TRAINING", {
-			replace: { athleteId: athleteId || "" },
-			state: { workout },
-		});
-	}, [navigate, athleteId, workout]);
-
-	const navigateToUpdateWorkout = useCallback(() => {
-		navigate("UPDATE_WORKOUT", {
-			replace: { athleteId: athleteId || "", workoutId: id },
-			state: { workout },
-		});
-	}, [athleteId, id, navigate, workout]);
+	const {
+		status,
+		archiveWorkoutModalIsOpen,
+		deleteWorkoutModalIsOpen,
+		handleDuplicateWorkout,
+		navigateToUpdateWorkout,
+		toggleDeleteWorkoutModal,
+		handleArchiveWorkout,
+		handleDeleteWorkout,
+		toggleArchiveWorkoutModal,
+	} = useWorkoutCardHeaderHook();
 
 	return (
 		<CardHeader className="p-2 flex flex-row justify-between items-center">
@@ -81,9 +51,9 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Ações</DropdownMenuLabel>
 
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={toggleArchiveWorkoutModal}>
 							<Icon name="archive" className="h-4 w-4 mr-2" />
-							Desativar treino
+							Arquivar treino
 						</DropdownMenuItem>
 						<DropdownMenuItem onClick={handleDuplicateWorkout}>
 							<Icon name="clipboard" className="h-4 w-4 mr-2" />
@@ -100,6 +70,12 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 					</DropdownMenuContent>
 				</DropdownMenu>
 			)}
+
+			<ArchiveWorkoutModal
+				isOpen={archiveWorkoutModalIsOpen}
+				onClose={toggleArchiveWorkoutModal}
+				onArchiveWorkout={handleArchiveWorkout}
+			/>
 
 			<DeleteWorkoutModal
 				isOpen={deleteWorkoutModalIsOpen}
