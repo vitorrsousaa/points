@@ -8,6 +8,7 @@ import { WorkoutIsNotOwned } from "../../errors/workout-not-owned";
 export const UpdateInputServiceSchema = CreateWorkoutInputSchema.extend({
 	coachId: z.string().uuid(),
 	athleteId: z.string().uuid(),
+	visibility: z.boolean(),
 	id: z.string().uuid(),
 });
 
@@ -38,6 +39,7 @@ export class UpdateService implements IUpdateService {
 
 		const updatedWorkout = await this.workoutRepository.update({
 			...workout,
+			visibility: updateInput.visibility,
 			name: updateInput.name,
 			exercises: updateInput.exercises,
 		});
