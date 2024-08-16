@@ -90,7 +90,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 					const totalWeight = reps * weight;
 
 					return {
-						sets: type === "F" || type === "T" ? acc.sets + 1 : acc.sets,
+						sets: type === "T" ? acc.sets + 1 : acc.sets,
 						load: acc.load + totalWeight,
 					};
 				},
