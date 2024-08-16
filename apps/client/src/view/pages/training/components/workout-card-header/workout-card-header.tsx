@@ -25,6 +25,7 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 		status,
 		archiveWorkoutModalIsOpen,
 		deleteWorkoutModalIsOpen,
+		visibility,
 		handleDuplicateWorkout,
 		navigateToUpdateWorkout,
 		toggleDeleteWorkoutModal,
@@ -75,6 +76,7 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 				isOpen={archiveWorkoutModalIsOpen}
 				onClose={toggleArchiveWorkoutModal}
 				onArchiveWorkout={handleArchiveWorkout}
+				visibility={visibility}
 			/>
 
 			<DeleteWorkoutModal

@@ -16,7 +16,7 @@ export function UpdateWorkout() {
 		isUpdatingWorkout,
 		hasWorkout,
 		workout,
-		handleCreateWorkout,
+		handleUpdateWorkout,
 		navigate,
 	} = useUpdateWorkoutHook();
 
@@ -33,7 +33,7 @@ export function UpdateWorkout() {
 				<CardContent>
 					<TrainingForm
 						isSubmitting={isUpdatingWorkout}
-						onSubmit={handleCreateWorkout}
+						onSubmit={handleUpdateWorkout}
 						formId="update-training-form"
 						initialValues={hasWorkout && workout}
 					/>

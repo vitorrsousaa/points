@@ -8,5 +8,6 @@ type Sets = {
 export type Workout = {
 	name: string;
 	exercises: Array<Omit<Exercise, "id"> & { sets: Sets[] }>;
+	visibility: boolean;
 	id: string;
 };

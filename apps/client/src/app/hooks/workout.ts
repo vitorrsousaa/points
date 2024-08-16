@@ -22,6 +22,7 @@ export function useCreateWorkout() {
 						status: "pending",
 						name,
 						exercises,
+						visibility: true,
 					}),
 			);
 

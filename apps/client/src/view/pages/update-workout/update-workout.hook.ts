@@ -17,19 +17,23 @@ export function useUpdateWorkoutHook() {
 
 	const { updateWorkout, isUpdatingWorkout } = useUpdateWorkout();
 
-	const handleCreateWorkout = useCallback(
+	const handleUpdateWorkout = useCallback(
 		async (data: TTrainingFormSchema) => {
 			if (!athleteId || !id || !workoutId) return;
 
 			navigate(-1);
 
 			updateWorkout({
-				workout: { ...data, id: workoutId },
+				workout: {
+					...data,
+					id: workoutId,
+					visibility: state?.workout?.visibility,
+				},
 				athleteId,
 				coachId: id,
 			});
 		},
-		[athleteId, navigate, updateWorkout, id, workoutId],
+		[athleteId, navigate, updateWorkout, id, state, workoutId],
 	);
 
 	const hasWorkout = useMemo(() => Boolean(state?.workout), [state]);
@@ -38,7 +42,7 @@ export function useUpdateWorkoutHook() {
 		isUpdatingWorkout,
 		hasWorkout,
 		workout: state?.workout,
-		handleCreateWorkout,
+		handleUpdateWorkout,
 		navigate,
 	};
 }
