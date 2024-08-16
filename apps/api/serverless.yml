@@ -257,3 +257,11 @@ functions:
           path: /workout
           authorizer:
             name: CognitoAuthorizer
+  updateWorkout:
+    handler: src/server/functions/workout/update.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /workout
+          authorizer:
+            name: CognitoAuthorizer

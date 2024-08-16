@@ -43,8 +43,28 @@ export class WorkoutRepository implements IWorkoutRepository {
 			updatedAt: now,
 		};
 	}
-	update(workout: Workout): Promise<Workout> {
-		throw new Error("Method not implemented.");
+	async update(workout: Workout): Promise<Workout> {
+		const { PK } = this.getKeys(workout.athleteId);
+		const SK = `WORKOUT|${workout.createdAt}`;
+		const now = new Date().toISOString();
+
+		await this.dbInstance.update(this.TABLE_NAME, {
+			Key: { PK, SK },
+			UpdateExpression:
+				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at",
+			ExpressionAttributeNames: {
+				"#name": "name",
+				"#exercises": "exercises",
+				"#updated_at": "updated_at",
+			},
+			ExpressionAttributeValues: {
+				":name": workout.name,
+				":exercises": workout.exercises,
+				":updated_at": now,
+			},
+		});
+
+		return { ...workout, updatedAt: now };
 	}
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
 		const { PK } = this.getKeys(athleteId);
