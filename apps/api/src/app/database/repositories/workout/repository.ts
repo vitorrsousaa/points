@@ -29,6 +29,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			id: workoutId,
 			name,
 			exercises,
+			visibility: false,
 		};
 
 		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
@@ -41,6 +42,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			coachId,
 			createdAt: now,
 			updatedAt: now,
+			visibility: true,
 		};
 	}
 	async update(workout: Workout): Promise<Workout> {
@@ -51,16 +53,18 @@ export class WorkoutRepository implements IWorkoutRepository {
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at",
+				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #visibility = :visibility",
 			ExpressionAttributeNames: {
 				"#name": "name",
 				"#exercises": "exercises",
 				"#updated_at": "updated_at",
+				"#visibility": "visibility",
 			},
 			ExpressionAttributeValues: {
 				":name": workout.name,
 				":exercises": workout.exercises,
 				":updated_at": now,
+				":visibility": workout.visibility,
 			},
 		});
 
@@ -125,6 +129,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			exercises: workout.exercises,
 			id: workout.id,
 			name: workout.name,
+			visibility: workout.visibility,
 		};
 	}
 }

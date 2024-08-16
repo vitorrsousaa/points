@@ -31,5 +31,6 @@ export type Workout = Prettify<
 		updatedAt: string;
 		coachId: string;
 		athleteId: string;
+		visibility: boolean;
 	}
 >;

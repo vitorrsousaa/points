@@ -18,6 +18,6 @@ export interface IWorkoutRepository {
 	getById(athleteId: string, workoutId: string): Promise<Workout | null>;
 	delete(athleteId: string, workoutId: string): Promise<void>;
 	create(
-		workout: Omit<Workout, "createdAt" | "updatedAt" | "id">,
+		workout: Omit<Workout, "createdAt" | "updatedAt" | "id" | "visibility">,
 	): Promise<Workout>;
 }
