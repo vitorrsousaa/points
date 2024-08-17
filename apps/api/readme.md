@@ -4,14 +4,17 @@ This document outlines the table design for a DynamoDB single-table pattern base
 
 ## Table Design: Primary Key and Sort Key Structure
 
-| **Entity**         | **Primary Key (PK)**            | **Sort Key (SK)**                      | **Additional Notes**                                |
-|--------------------|---------------------------------|----------------------------------------|----------------------------------------------------|
-| **Coach**          | `USER#COACH#<coachId>`          | `COACH#PROFILE`                        | Stores basic profile info for the coach.           |
-| **Athlete**        | `USER#COACH#<coachId>`          | `ATHLETE#<athleteId>`                  | All athletes under a coach, query by coach ID.     |
-| **Default Exercise** | `EXERCISE#DEFAULT`            | `EXERCISE#<exerciseId>`                | Predefined exercises available to all coaches.     |
-| **Custom Exercise**  | `EXERCISE#COACH#<coachId>`    | `EXERCISE#<exerciseId>`                | Custom exercises created by a specific coach.      |
-| **Workout**        | `WORKOUT#ATHLETE#<athleteId>`   | `WORKOUT#<date>`                       | Store workouts by athlete ID, sorted by date.      |
-| **Exercise History** | `HISTORY#ATHLETE#<athleteId>` | `EXERCISE#<exerciseId>#DATE#<date>`    | Track exercise performance over time per athlete.  |
+| **Entity**           | **Primary Key (PK)**           | **Sort Key (SK)**                      | **Additional Notes**                               |
+|----------------------|--------------------------------|----------------------------------------|----------------------------------------------------|
+| **Coach**            | `USER#COACH#<coachId>`         | `COACH#PROFILE`                        | Stores basic profile info for the coach.           |
+| **Athlete**          | `USER#COACH#<coachId>`         | `ATHLETE#<athleteId>`                  | All athletes under a coach, query by coach ID.     |
+| **Default Exercise** | `EXERCISE#DEFAULT`             | `EXERCISE#<exerciseId>`                | Predefined exercises available to all coaches.     |
+| **Custom Exercise**  | `EXERCISE#COACH#<coachId>`     | `EXERCISE#<exerciseId>`                | Custom exercises created by a specific coach.      |
+| **Exercise History** | `HISTORY#ATHLETE#<athleteId>`  | `EXERCISE#<exerciseId>#DATE#<date>`    | Track exercise performance over time per athlete.  |
+| **Workout**          | `WORKOUT#ATHLETE#<athleteId>`  | `WORKOUT#<date>`                       | Store workouts by athlete ID, sorted by date.      |
+| **Workout Result**   | `RESULT#ATHLETE#<athleteId>`   | `WORKOUT#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
+| **Workout Feedback** | `FEEDBACK#ATHLETE#<athleteId>` | `WORKOUT#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
+
 
 ## Access Patterns and Queries
 
@@ -48,3 +51,29 @@ Query:
 PK = HISTORY#ATHLETE#<athleteId> AND begins_with(SK, 'EXERCISE#<exerciseId>#DATE#')
 ```
 Explanation: Returns the performance history of a specific exercise for the athlete, sorted by date.
+
+### 6. Athlete starts a workout ang log perfomance
+Query:
+```sql
+PK = RESULT#ATHLETE#<athleteId> AND SK = WORKOUT#<workoutId>
+```
+
+### 7. Coach reviews the workout
+Query:
+```sql
+PK = RESULT#ATHLETE#<athleteId> AND SK = WORKOUT#<workoutId>
+```
+Explanation: Query to get Workout result for specific athlete
+
+### 8. Coach send feedback for athlete
+Query:
+```sql
+PK = FEEDBACK#ATHLETE#<athleteId> AND SK = WORKOUT#<workoutId>#DATE<date>
+```
+Explanation: Query to create Workout feedback for specific athlete
+
+### 8. List all feedbacks for athlete
+Query:
+```sql
+PK = FEEDBACK#ATHLETE#<athleteId>
+```
