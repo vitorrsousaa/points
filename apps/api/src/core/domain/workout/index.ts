@@ -20,6 +20,7 @@ export const WorkoutExerciseSchema = CreateExerciseInputSchema.extend({
 export const CreateWorkoutInputSchema = z.object({
 	name: z.string(),
 	exercises: z.array(WorkoutExerciseSchema),
+	description: z.string().optional(),
 });
 
 export type CreateWorkoutSchema = z.infer<typeof CreateWorkoutInputSchema>;

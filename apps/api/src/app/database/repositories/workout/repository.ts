@@ -14,7 +14,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async create(
 		workout: Omit<Workout, "createdAt" | "updatedAt">,
 	): Promise<Workout> {
-		const { athleteId, coachId, name, exercises } = workout;
+		const { athleteId, coachId, name, exercises, description } = workout;
 		const { PK, SK } = this.getKeys(athleteId);
 		const workoutId = randomUUID();
 		const now = new Date().toISOString();
@@ -30,6 +30,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			name,
 			exercises,
 			visibility: false,
+			description,
 		};
 
 		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
@@ -43,6 +44,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			createdAt: now,
 			updatedAt: now,
 			visibility: true,
+			description,
 		};
 	}
 	async update(workout: Workout): Promise<Workout> {
@@ -53,18 +55,20 @@ export class WorkoutRepository implements IWorkoutRepository {
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #visibility = :visibility",
+				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #visibility = :visibility, #description = :description",
 			ExpressionAttributeNames: {
 				"#name": "name",
 				"#exercises": "exercises",
 				"#updated_at": "updated_at",
 				"#visibility": "visibility",
+				"#description": "description",
 			},
 			ExpressionAttributeValues: {
 				":name": workout.name,
 				":exercises": workout.exercises,
 				":updated_at": now,
 				":visibility": workout.visibility,
+				":description": workout.description,
 			},
 		});
 
@@ -130,6 +134,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			id: workout.id,
 			name: workout.name,
 			visibility: workout.visibility,
+			description: workout.description,
 		};
 	}
 }
