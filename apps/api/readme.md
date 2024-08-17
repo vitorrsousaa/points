@@ -12,7 +12,7 @@ This document outlines the table design for a DynamoDB single-table pattern base
 | **Custom Exercise**  | `EXERCISE#COACH#<coachId>`     | `EXERCISE#<exerciseId>`                | Custom exercises created by a specific coach.      |
 | **Exercise History** | `HISTORY#ATHLETE#<athleteId>`  | `EXERCISE#<exerciseId>#DATE#<date>`    | Track exercise performance over time per athlete.  |
 | **Workout**          | `WORKOUT#ATHLETE#<athleteId>`  | `WORKOUT#<date>`                       | Store workouts by athlete ID, sorted by date.      |
-| **Workout Result**   | `RESULT#ATHLETE#<athleteId>`   | `WORKOUT#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
+| **Workout Result**   | `RESULT`   | `STATUS#PENDING#ATHLETE#<athleteId>#DATE<date>`       | Track exercise performance over time per athlete.  |
 | **Workout Feedback** | `FEEDBACK#ATHLETE#<athleteId>` | `WORKOUT#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
 
 
@@ -61,9 +61,10 @@ PK = RESULT#ATHLETE#<athleteId> AND SK = WORKOUT#<workoutId>
 ### 7. Coach reviews the workout
 Query:
 ```sql
-PK = RESULT#ATHLETE#<athleteId> AND SK = WORKOUT#<workoutId>
+PK = RESULT AND begins_with(SK, 'STATUS#PENDING') AND GSI(coach_id)
 ```
-Explanation: Query to get Workout result for specific athlete
+Explanation: Query to get Workout result with status pending by coach_id
+Explanation: When the coach send feedback, we will delete result and create other with 'STATUS#DONE'
 
 ### 8. Coach send feedback for athlete
 Query:
