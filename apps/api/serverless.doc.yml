@@ -139,7 +139,7 @@ documentation:
               example: 50
             type: 
               type: string
-              enum: ["W", "T", "F"]
+              enum: ["W", "T"]
             rpe:
               type: number
               minimum: 0
@@ -188,15 +188,18 @@ documentation:
                 type: string
                 format: uuid
                 example: '123456'
-              name:
-                type: string
-                example: Workout one
               createdAt:
                 type: string
                 example: '2024-08-13T21:23:33.482Z'
+              name:
+                type: string
+                example: Workout start
               updatedAt:
                 type: string
                 example: '2024-08-13T21:23:33.482Z'
+              visibility:
+                type: boolean
+                example: true
               athleteId: 
                 type: string
                 format: uuid

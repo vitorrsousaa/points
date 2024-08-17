@@ -294,17 +294,21 @@
             "format": "uuid",
             "example": "123456"
           },
-          "name": {
-            "type": "string",
-            "example": "Workout one"
-          },
           "createdAt": {
             "type": "string",
             "example": "2024-08-13T21:23:33.482Z"
           },
+          "name": {
+            "type": "string",
+            "example": "Workout start"
+          },
           "updatedAt": {
             "type": "string",
             "example": "2024-08-13T21:23:33.482Z"
+          },
+          "visibility": {
+            "type": "boolean",
+            "example": true
           },
           "athleteId": {
             "type": "string",
@@ -351,8 +355,7 @@
                         "type": "string",
                         "enum": [
                           "W",
-                          "T",
-                          "F"
+                          "T"
                         ]
                       },
                       "rpe": {
@@ -428,8 +431,7 @@
                         "type": "string",
                         "enum": [
                           "W",
-                          "T",
-                          "F"
+                          "T"
                         ]
                       },
                       "rpe": {
@@ -507,8 +509,7 @@
                           "type": "string",
                           "enum": [
                             "W",
-                            "T",
-                            "F"
+                            "T"
                           ]
                         },
                         "rpe": {
@@ -538,14 +539,14 @@
           }
         }
       },
-      "1fc73573-119a-4fce-b6fc-7092c482fc69": {
+      "669fc643-959d-4c3b-b349-9077dddd6ac5": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "c65f1ddf-656d-4e7d-ac77-3d856bedb109": {
+      "c7732593-b2c2-41b8-a8dc-5c46e8cfbf6d": {
         "properties": {
           "message": {
             "type": "string",
@@ -554,7 +555,7 @@
           }
         }
       },
-      "73954bdc-5969-40e4-aef2-ac3545dad8ff": {
+      "002267a6-9a35-467d-b36f-54e5e242c881": {
         "properties": {
           "message": {
             "type": "string",
@@ -563,7 +564,7 @@
           }
         }
       },
-      "7b257a10-882c-4551-8d8c-bcbe58bb5ae9": {
+      "ac2814f7-503a-49f3-a491-7d326124ef85": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -604,7 +605,7 @@
         },
         "additionalProperties": false
       },
-      "98125f08-5f32-4177-8118-ebb3da96f09a": {
+      "340a479b-6aba-459c-82cd-f91f0882848a": {
         "properties": {
           "message": {
             "type": "string",
@@ -613,7 +614,7 @@
           }
         }
       },
-      "627962ef-cafa-4ee9-9984-90fcb3acce7f": {
+      "c985e8d9-78ef-4281-b335-ed1407ae921b": {
         "properties": {
           "email": {
             "type": "string",
@@ -629,14 +630,14 @@
           "code"
         ]
       },
-      "33263d4b-a356-405a-9b23-7821c7181457": {
+      "ccfd3e90-4616-4f50-8efa-6e9efff265d6": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "351ba2be-4f8c-4e18-8157-dfd3d06b526c": {
+      "3c97a60d-4ede-480e-8790-8b847716bcba": {
         "properties": {
           "message": {
             "type": "string",
@@ -645,7 +646,7 @@
           }
         }
       },
-      "eefb2dcb-e4a0-4581-b5bf-27a42888f54b": {
+      "05b2132e-c1e2-4047-8608-97b92bfc1ba0": {
         "properties": {
           "message": {
             "type": "string",
@@ -654,7 +655,7 @@
           }
         }
       },
-      "837da9e2-31c8-48ae-b396-53b598ce769e": {
+      "950df44a-af9c-4d99-9f43-fbd7cfbbe9f2": {
         "properties": {
           "email": {
             "type": "string",
@@ -670,7 +671,7 @@
           "password"
         ]
       },
-      "4eb21119-66a8-40c9-8af0-4926a68a02df": {
+      "319dd994-6dfc-4322-beba-782351130ffa": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -682,7 +683,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "02189683-f879-4bdb-80e1-70f09bf58c85": {
+      "1d46660d-8230-42d2-bc38-28ed5b7bcbba": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -749,7 +750,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/1fc73573-119a-4fce-b6fc-7092c482fc69"
+                  "$ref": "#/components/schemas/669fc643-959d-4c3b-b349-9077dddd6ac5"
                 }
               }
             },
@@ -760,7 +761,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c65f1ddf-656d-4e7d-ac77-3d856bedb109"
+                  "$ref": "#/components/schemas/c7732593-b2c2-41b8-a8dc-5c46e8cfbf6d"
                 }
               }
             },
@@ -771,7 +772,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/73954bdc-5969-40e4-aef2-ac3545dad8ff"
+                  "$ref": "#/components/schemas/002267a6-9a35-467d-b36f-54e5e242c881"
                 }
               }
             },
@@ -817,7 +818,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/7b257a10-882c-4551-8d8c-bcbe58bb5ae9"
+                  "$ref": "#/components/schemas/ac2814f7-503a-49f3-a491-7d326124ef85"
                 }
               }
             },
@@ -839,7 +840,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/98125f08-5f32-4177-8118-ebb3da96f09a"
+                  "$ref": "#/components/schemas/340a479b-6aba-459c-82cd-f91f0882848a"
                 }
               }
             },
@@ -875,7 +876,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/627962ef-cafa-4ee9-9984-90fcb3acce7f"
+                "$ref": "#/components/schemas/c985e8d9-78ef-4281-b335-ed1407ae921b"
               }
             }
           }
@@ -886,7 +887,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/33263d4b-a356-405a-9b23-7821c7181457"
+                  "$ref": "#/components/schemas/ccfd3e90-4616-4f50-8efa-6e9efff265d6"
                 }
               }
             },
@@ -897,7 +898,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/351ba2be-4f8c-4e18-8157-dfd3d06b526c"
+                  "$ref": "#/components/schemas/3c97a60d-4ede-480e-8790-8b847716bcba"
                 }
               }
             },
@@ -908,7 +909,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/eefb2dcb-e4a0-4581-b5bf-27a42888f54b"
+                  "$ref": "#/components/schemas/05b2132e-c1e2-4047-8608-97b92bfc1ba0"
                 }
               }
             },
@@ -955,7 +956,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/837da9e2-31c8-48ae-b396-53b598ce769e"
+                "$ref": "#/components/schemas/950df44a-af9c-4d99-9f43-fbd7cfbbe9f2"
               }
             }
           }
@@ -966,7 +967,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/4eb21119-66a8-40c9-8af0-4926a68a02df"
+                  "$ref": "#/components/schemas/319dd994-6dfc-4322-beba-782351130ffa"
                 }
               }
             },
@@ -1151,7 +1152,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/02189683-f879-4bdb-80e1-70f09bf58c85"
+                "$ref": "#/components/schemas/1d46660d-8230-42d2-bc38-28ed5b7bcbba"
               }
             }
           }
