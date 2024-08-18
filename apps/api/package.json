@@ -5,7 +5,6 @@
 	"scripts": {
 		"deploy:dev": "serverless deploy --stage dev --verbose",
 		"deploy:prod": "serverless deploy --stage prod --verbose",
-		"build": "tsup",
 		"clean": "rm -rf dist",
 		"typecheck": "tsc --noEmit",
 		"lint": "biome lint --apply ./src",
