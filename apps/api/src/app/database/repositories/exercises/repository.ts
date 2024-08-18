@@ -16,6 +16,8 @@ export class ExerciseRepository implements IExerciseRepository {
 
 		const { PK, SK } = this.getKeys({ exerciseId });
 
+		const now = new Date().toISOString();
+
 		const newExercise: ExerciseDynamoDB = {
 			PK,
 			SK,
@@ -24,6 +26,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			primary_muscle: exerciseInput.primaryMuscle,
 			secondary_muscle: exerciseInput.secondaryMuscle,
 			target: exerciseInput.target,
+			created_at: now,
 			id: exerciseId,
 		};
 
