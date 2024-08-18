@@ -20,15 +20,6 @@ jobs:
           node-version: 18
           cache: 'yarn'
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-            **/yarn.lock
-            **/.production
-          key: node_modules-${{ hashFiles('**/package.json') }}
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
         shell: bash
