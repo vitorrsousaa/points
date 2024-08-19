@@ -42,6 +42,7 @@ export class UpdateService implements IUpdateService {
 			visibility: updateInput.visibility,
 			name: updateInput.name,
 			exercises: updateInput.exercises,
+			description: updateInput.description,
 		});
 
 		return updatedWorkout;
