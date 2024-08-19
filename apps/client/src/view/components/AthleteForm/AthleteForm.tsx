@@ -45,7 +45,7 @@ export function AthleteForm(props: AtheleFormProps) {
 					</CardHeader>
 
 					<CardContent className="flex flex-col gap-4">
-						<div className="flex flex-row gap-4">
+						<div className="flex flex-col gap-4 sm:flex-row">
 							<FormField
 								control={methods.control}
 								name="firstName"
@@ -64,6 +64,29 @@ export function AthleteForm(props: AtheleFormProps) {
 										</FormControl>
 										<FormDescription>
 											Preencha com o nome do atleta.
+										</FormDescription>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={methods.control}
+								name="lastName"
+								render={({ field }) => (
+									<FormItem className="w-full">
+										<FormLabel>Sobrenome</FormLabel>
+										<FormControl>
+											<Input
+												placeholder="Jhon Doe"
+												type="text"
+												required
+												disabled={isSubmitting}
+												{...field}
+												className="w-full"
+											/>
+										</FormControl>
+										<FormDescription>
+											Preencha com o sobrenome do atleta.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
