@@ -1,4 +1,4 @@
-import type { TTrainingFormSchema } from "@/components/training-form/training-form.schema";
+import type { TTrainingFormSchema } from "@/components/TrainingForm/TrainingFormSchema";
 import { useAuth } from "@/hooks/auth";
 import { useUpdateWorkout } from "@/hooks/workout";
 import { useCallback, useMemo } from "react";

@@ -23,10 +23,10 @@ import {
 	Separator,
 	Textarea,
 } from "@shared/ui";
+import type { TTrainingFormSchema } from "./TrainingFormSchema";
 import { ExerciseDetail } from "./components/ExerciseDetails";
 import { ExerciseList } from "./components/ExerciseList";
 import { useTrainingFormHook } from "./useTrainingForm";
-import type { TTrainingFormSchema } from "./TrainingFormSchema";
 
 export interface TrainingFormProps {
 	formId?: string;
@@ -51,7 +51,7 @@ export function TrainingForm(props: TrainingFormProps) {
 		return (
 			<>
 				<ScrollArea>
-					<CardContent className="space-y-3 flex-grow flex flex-col p-4 ">
+					<CardContent className="space-y-3 flex-grow flex flex-col p-4">
 						{exercises.map((exercise, index) => (
 							<ExerciseDetail
 								key={exercise.id}

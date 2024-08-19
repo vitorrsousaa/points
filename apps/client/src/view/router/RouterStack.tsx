@@ -11,6 +11,7 @@ import {
 	SignInScreen,
 	SignUpScreen,
 	TrainingScreen,
+	UpdateTrainingScreen,
 } from "@/screens/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../layouts/dashboard";
@@ -39,6 +40,10 @@ export function RouterStack() {
 						<Route
 							path={ROUTES.ATHLETE_MORE_INFO}
 							element={<TrainingScreen />}
+						/>
+						<Route
+							path={ROUTES.UPDATE_WORKOUT}
+							element={<UpdateTrainingScreen />}
 						/>
 						<Route path={ROUTES.NEW_TRAINING} element={<NewTrainingScreen />} />
 					</Route>

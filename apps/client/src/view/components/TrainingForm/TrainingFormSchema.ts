@@ -13,7 +13,7 @@ export const ExerciseFormSchema = z.object({
 	notes: z.string(),
 	exerciseId: z.string(),
 	restTime: z.string(),
-	equipment: z.string(),
+	equipment: z.enum(["Barra", "Halter", "Maquina"]),
 	primaryMuscle: z.string(),
 	secondaryMuscle: z.string().nullable(),
 	sets: z.array(ExerciseSetSchema).min(1, "Adicione pelo menos uma série"),
@@ -22,7 +22,7 @@ export const ExerciseFormSchema = z.object({
 export const TrainingFormSchema = z.object({
 	name: z.string().min(1, "O nome é obrigatório"),
 	isActive: z.boolean().default(false).optional(),
-	description: z.string().optional(),
+	description: z.string(),
 	exercises: z
 		.array(ExerciseFormSchema)
 		.min(1, "Adicione pelo menos um exercício"),
@@ -35,4 +35,5 @@ export type TExerciseFormSchema = z.infer<typeof ExerciseFormSchema>;
 export const defaultInitialValues: TTrainingFormSchema = {
 	name: "",
 	exercises: [],
+	description: "",
 };

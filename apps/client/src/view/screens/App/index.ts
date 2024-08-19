@@ -5,3 +5,4 @@ export * from "./NewAthleteScreen/NewAthleteScreen";
 export * from "./NewTrainingScreen/NewTrainingScreen";
 export * from "./SettingsScreen/SettingsScreen";
 export * from "./TrainingScreen/TrainingScreen";
+export * from "./UpdateTrainingScreen";

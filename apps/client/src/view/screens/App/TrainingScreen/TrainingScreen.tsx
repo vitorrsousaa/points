@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import { WorkoutCard } from "./components/WorkoutCard";
 import { WorkoutCardContent } from "./components/WorkoutCardContent";
 import { WorkoutCardFooter } from "./components/WorkoutCardFooter";
-import { WorkoutCardHeader } from "./components/WorkoutCardHeader/WorkoutCardHeader";
+import { WorkoutCardHeader } from "./components/WorkoutCardHeader";
 
 export function TrainingScreen() {
 	const { athleteId } = useParams<{ athleteId: string }>();
@@ -48,7 +48,7 @@ export function TrainingScreen() {
 			<RenderIf
 				condition={isLoadingAthlete}
 				render={
-					<div className="w-full flex flex-col gap-4 items-center justify-center mt-14">
+					<div className="w-full flex flex-col gap-4 items-center justify-center mt-14 mb-14">
 						<Skeleton className="w-full h-20" />
 					</div>
 				}
