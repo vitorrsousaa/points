@@ -21,6 +21,32 @@ export function WorkoutCardContent(props: WorkoutCardContentProps) {
 					</Badge>
 				</div>
 			))}
+
+			{/* 
+									 <CardContent>
+												 <Table>
+													<TableHeader>
+														<TableRow>
+															<TableHead>Nome</TableHead>
+															<TableHead>Equipamento</TableHead>
+
+															<TableHead className="hidden min-[540px]:table-cell">
+																<span className="sr-only">Ações</span>
+															</TableHead>
+														</TableRow>
+													</TableHeader>
+
+													<TableBody>
+														<TableCell>
+															{workout.exercises[0].name}
+														</TableCell>
+
+														<TableCell>
+															{workout.exercises[0].equipment}
+														</TableCell>
+													</TableBody>
+												</Table> 
+											</CardContent>  */}
 		</CardContent>
 	);
 }

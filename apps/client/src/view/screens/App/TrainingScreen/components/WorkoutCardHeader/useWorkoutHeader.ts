@@ -4,7 +4,7 @@ import { useRemoveWorkout, useUpdateWorkout } from "@/hooks/workout";
 import { useCallback, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { useWorkoutCardContext } from "../workout-card/workout-card";
+import { useWorkoutCardContext } from "../WorkoutCard";
 
 export function useWorkoutCardHeaderHook() {
 	const { id, status, workout } = useWorkoutCardContext();

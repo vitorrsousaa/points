@@ -8,7 +8,9 @@ export function HeaderScreen({ title, description }: HeaderScreenProps) {
 		<div className="flex flex-col gap-1 mb-5">
 			<h2 className="text-2xl font-bold tracking-tight">{title}</h2>
 			{description && (
-				<span className="text-muted-foreground">{description}</span>
+				<span className="text-muted-foreground text-sm sm:text-md">
+					{description}
+				</span>
 			)}
 		</div>
 	);

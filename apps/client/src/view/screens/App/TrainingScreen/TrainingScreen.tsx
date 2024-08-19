@@ -1,28 +1,23 @@
-import { ROUTES } from "@/config/routes";
 import { useGetAthleteById } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
+import { useNavigate } from "@/hooks/navigate";
 import { useGetAllWorkouts } from "@/hooks/workout";
 import {
 	Badge,
 	Button,
 	Card,
 	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuTrigger,
 	HeaderScreen,
 	Icon,
 	RenderIf,
 	RenderIfElse,
 	Skeleton,
-	Tooltip,
 } from "@shared/ui";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { WorkoutCard } from "./components/WorkoutCard";
+import { WorkoutCardContent } from "./components/WorkoutCardContent";
+import { WorkoutCardFooter } from "./components/WorkoutCardFooter";
+import { WorkoutCardHeader } from "./components/WorkoutCardHeader/WorkoutCardHeader";
 
 export function TrainingScreen() {
 	const { athleteId } = useParams<{ athleteId: string }>();
@@ -41,6 +36,8 @@ export function TrainingScreen() {
 		workouts && workouts?.length > 0 && !isLoadingWorkouts,
 	);
 
+	const { navigate } = useNavigate();
+
 	return (
 		<>
 			<HeaderScreen
@@ -49,7 +46,7 @@ export function TrainingScreen() {
 			/>
 
 			<RenderIf
-				condition={isLoadingAthlete || isLoadingWorkouts}
+				condition={isLoadingAthlete}
 				render={
 					<div className="w-full flex flex-col gap-4 items-center justify-center mt-14">
 						<Skeleton className="w-full h-20" />
@@ -72,13 +69,11 @@ export function TrainingScreen() {
 			<>
 				<div className="grid flex-1 items-start gap-4 md:gap-8">
 					<RenderIf
-						condition={Boolean(
-							athlete && !isLoadingAthlete && !isLoadingWorkouts,
-						)}
+						condition={Boolean(athlete && !isLoadingAthlete)}
 						render={
 							<Card>
 								<CardContent className="py-4 flex ">
-									<div className="w-full grid gap-10 flex flex-wrapgrid lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
+									<div className="w-full grid gap-6 lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
 										<div className="flex flex-col gap-1">
 											<strong>Nome: </strong>
 											<small className="flex items-center gap-2">
@@ -121,12 +116,28 @@ export function TrainingScreen() {
 						}
 					/>
 
-					<div className="flex flex-col gap-1">
-						<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
+					<div className="flex flex-row justify-between">
+						<div className="flex flex-col gap-1">
+							<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
 
-						<span className="text-muted-foreground">
-							Acompanhe o desempenho do atleta.
-						</span>
+							<span className="text-muted-foreground">
+								Acompanhe os treinos do atleta.
+							</span>
+						</div>
+						<Button
+							size="sm"
+							className="h-9 gap-1"
+							onClick={() =>
+								navigate("NEW_TRAINING", {
+									replace: { athleteId: athleteId || "" },
+								})
+							}
+						>
+							<Icon name="plusCircle" className="h-3.5 w-3.5" />
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+								Adicionar treino
+							</span>
+						</Button>
 					</div>
 
 					<RenderIfElse
@@ -134,86 +145,36 @@ export function TrainingScreen() {
 						ifRender={
 							<div className="gap-4 grid flex-wrapgrid lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
 								{workouts?.map((workout) => (
-									<Card key={workout.id} className="h-full">
-										<CardHeader className="flex flex-col justify-between items-center gap-4">
-											<div className="flex gap-2 justify-between items-center w-full">
-												<CardTitle className="text-xl flex items-center gap-4">
-													{workout.name}
-
-													<Badge>Regenerativo</Badge>
-												</CardTitle>
-
-												<DropdownMenu>
-													<Tooltip content="Ações">
-														<DropdownMenuTrigger asChild>
-															<Button
-																aria-haspopup="true"
-																size="icon"
-																variant="ghost"
-															>
-																<Icon name="dots" className="h-4 w-4" />
-																<span className="sr-only">Toggle menu</span>
-															</Button>
-														</DropdownMenuTrigger>
-													</Tooltip>
-													<DropdownMenuContent align="end">
-														<DropdownMenuLabel>Ações</DropdownMenuLabel>
-
-														<Link to={ROUTES.ATHLETES}>
-															<DropdownMenuItem>Editar</DropdownMenuItem>
-														</Link>
-
-														<DropdownMenuItem>Duplicar</DropdownMenuItem>
-														<DropdownMenuItem>Deletar</DropdownMenuItem>
-													</DropdownMenuContent>
-												</DropdownMenu>
-											</div>
-
-											<CardDescription className="text-pretty line-clamp-2">
-												Esse treino tem como objetivo facilitar a execução de
-												exercícios para o atleta. Para isto, é necessário seguir
-												as instruções e realizar os exercícios conforme a
-												orientação do treinador.
-											</CardDescription>
-										</CardHeader>
-
-										{/* <CardContent>
-													{/* <Table>
-													<TableHeader>
-														<TableRow>
-															<TableHead>Nome</TableHead>
-															<TableHead>Equipamento</TableHead>
-
-															<TableHead className="hidden min-[540px]:table-cell">
-																<span className="sr-only">Ações</span>
-															</TableHead>
-														</TableRow>
-													</TableHeader>
-
-													<TableBody>
-														<TableCell>
-															{workout.exercises[0].name}
-														</TableCell>
-
-														<TableCell>
-															{workout.exercises[0].equipment}
-														</TableCell>
-													</TableBody>
-												</Table> 
-											</CardContent> */}
-									</Card>
+									<WorkoutCard
+										key={workout.id}
+										id={workout.id}
+										workout={workout}
+										status={workout.status}
+									>
+										<WorkoutCardHeader>{workout.name}</WorkoutCardHeader>
+										<WorkoutCardContent exercises={workout.exercises} />
+										<WorkoutCardFooter />
+									</WorkoutCard>
 								))}
 							</div>
 						}
 						elseRender={
-							<div className="flex flex-col items-center mt-12 gap-2 mb-12">
-								<small>
-									Este atleta ainda não possui um treinamento cadastrado
-								</small>
-								<small>
-									Clique no botão acima para adicionar um novo treino.
-								</small>
-							</div>
+							<>
+								{isLoadingWorkouts ? (
+									<div className="w-full flex items-center justify-center ">
+										<Skeleton className="w-full h-20" />
+									</div>
+								) : (
+									<div className="flex flex-col items-center mt-12 gap-2 mb-12">
+										<small>
+											Este atleta ainda não possui um treinamento cadastrado
+										</small>
+										<small>
+											Clique no botão acima para adicionar um novo treino.
+										</small>
+									</div>
+								)}
+							</>
 						}
 					/>
 				</div>
