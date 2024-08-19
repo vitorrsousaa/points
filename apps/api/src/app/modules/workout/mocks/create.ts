@@ -2,6 +2,8 @@ import type { ICreateInput } from "../services/create";
 
 export const createWorkoutInput: ICreateInput["workout"] = {
 	name: "Workout 1",
+	description: "Description",
+	isActive: false,
 	exercises: [
 		{
 			equipment: "Barra",
