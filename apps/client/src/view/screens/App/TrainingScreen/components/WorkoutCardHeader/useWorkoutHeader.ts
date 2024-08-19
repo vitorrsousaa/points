@@ -1,6 +1,5 @@
-import { useAuth } from "@/hooks/auth";
 import { useNavigate } from "@/hooks/navigate";
-import { useRemoveWorkout, useUpdateWorkout } from "@/hooks/workout";
+import { useRemoveWorkout } from "@/hooks/workout";
 import { useCallback, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
@@ -46,38 +45,12 @@ export function useWorkoutCardHeaderHook() {
 		});
 	}, [athleteId, id, navigate, workout]);
 
-	const [archiveWorkoutModalIsOpen, toggleArchiveWorkoutModal] = useReducer(
-		(state) => !state,
-		false,
-	);
-
-	const { updateWorkout } = useUpdateWorkout();
-
-	const { id: coachId } = useAuth();
-
-	const handleArchiveWorkout = useCallback(() => {
-		if (!athleteId || !coachId) return;
-		updateWorkout({
-			athleteId,
-			coachId,
-			workout: {
-				...workout,
-				visibility: !workout.visibility,
-			},
-		});
-		toggleArchiveWorkoutModal();
-	}, [athleteId, coachId, updateWorkout, workout]);
-
 	return {
 		status,
-		archiveWorkoutModalIsOpen,
 		deleteWorkoutModalIsOpen,
-		visibility: workout.visibility,
 		handleDuplicateWorkout,
 		navigateToUpdateWorkout,
 		toggleDeleteWorkoutModal,
-		handleArchiveWorkout,
 		handleDeleteWorkout,
-		toggleArchiveWorkoutModal,
 	};
 }

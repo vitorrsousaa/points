@@ -14,7 +14,8 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async create(
 		workout: Omit<Workout, "createdAt" | "updatedAt">,
 	): Promise<Workout> {
-		const { athleteId, coachId, name, exercises, description } = workout;
+		const { athleteId, coachId, name, exercises, description, isActive } =
+			workout;
 		const { PK, SK } = this.getKeys(athleteId);
 		const workoutId = randomUUID();
 		const now = new Date().toISOString();
@@ -29,8 +30,8 @@ export class WorkoutRepository implements IWorkoutRepository {
 			id: workoutId,
 			name,
 			exercises,
-			visibility: false,
 			description,
+			is_active: isActive,
 		};
 
 		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
@@ -43,8 +44,8 @@ export class WorkoutRepository implements IWorkoutRepository {
 			coachId,
 			createdAt: now,
 			updatedAt: now,
-			visibility: true,
 			description,
+			isActive,
 		};
 	}
 	async update(workout: Workout): Promise<Workout> {
@@ -55,19 +56,19 @@ export class WorkoutRepository implements IWorkoutRepository {
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #visibility = :visibility, #description = :description",
+				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description",
 			ExpressionAttributeNames: {
 				"#name": "name",
 				"#exercises": "exercises",
 				"#updated_at": "updated_at",
-				"#visibility": "visibility",
+				"#is_active": "is_active",
 				"#description": "description",
 			},
 			ExpressionAttributeValues: {
 				":name": workout.name,
 				":exercises": workout.exercises,
 				":updated_at": now,
-				":visibility": workout.visibility,
+				":is_active": workout.isActive,
 				":description": workout.description,
 			},
 		});
@@ -133,7 +134,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			exercises: workout.exercises,
 			id: workout.id,
 			name: workout.name,
-			visibility: workout.visibility,
+			isActive: workout.is_active,
 			description: workout.description,
 		};
 	}

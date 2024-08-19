@@ -1,10 +1,17 @@
 // import { DevTool } from "@hookform/devtools";
 import {
+	Button,
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 	CardTitle,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 	Form,
 	FormControl,
 	FormDescription,
@@ -12,6 +19,7 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
+	Icon,
 	Input,
 	RenderIfElse,
 	ScrollArea,
@@ -142,13 +150,40 @@ export function TrainingForm(props: TrainingFormProps) {
 						/>
 
 						<FormField
-							name="email"
+							name="isActive"
+							control={methods.control}
 							render={({ field }) => (
 								<FormItem className="w-full">
-									<FormLabel>Status</FormLabel>
+									<FormLabel className="flex flex-row items-center gap-1">
+										Status{" "}
+										<Dialog>
+											<DialogTrigger asChild>
+												<Button
+													style={{ all: "unset", cursor: "pointer" }}
+													size={"icon"}
+												>
+													<Icon name="questionMark" className="h-4 w-4" />
+												</Button>
+											</DialogTrigger>
+
+											<DialogContent className="sm:max-w-[425px]">
+												<DialogHeader className="gap-2">
+													<DialogTitle>Como funciona?</DialogTitle>
+													<DialogDescription>
+														Quando o status é selecionado como ativo, o treino
+														pode ser visualizado pelo atleta. Quando o status é
+														selecionado como inativo, o treino não pode ser
+														visualizado pelo atleta.
+													</DialogDescription>
+												</DialogHeader>
+											</DialogContent>
+										</Dialog>
+									</FormLabel>
 									<Select
-										onValueChange={field.onChange}
-										defaultValue={field.value}
+										onValueChange={(value) =>
+											field.onChange(value === "active")
+										}
+										defaultValue={field.value ? "active" : "inactive"}
 									>
 										<FormControl>
 											<SelectTrigger>

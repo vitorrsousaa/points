@@ -12,7 +12,6 @@ import {
 	Spinner,
 } from "@shared/ui";
 
-import { ArchiveWorkoutModal } from "../../modals/archive-workout-modal";
 import { DeleteWorkoutModal } from "../../modals/delete-workout-modal";
 import { useWorkoutCardHeaderHook } from "./useWorkoutHeader";
 
@@ -25,15 +24,11 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 
 	const {
 		status,
-		archiveWorkoutModalIsOpen,
 		deleteWorkoutModalIsOpen,
-		visibility,
 		handleDuplicateWorkout,
 		navigateToUpdateWorkout,
 		toggleDeleteWorkoutModal,
-		handleArchiveWorkout,
 		handleDeleteWorkout,
-		toggleArchiveWorkoutModal,
 	} = useWorkoutCardHeaderHook();
 
 	return (
@@ -56,10 +51,6 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 						<DropdownMenuContent align="end">
 							<DropdownMenuLabel>Ações</DropdownMenuLabel>
 
-							<DropdownMenuItem onClick={toggleArchiveWorkoutModal}>
-								<Icon name="archive" className="h-4 w-4 mr-2" />
-								Arquivar treino
-							</DropdownMenuItem>
 							<DropdownMenuItem onClick={handleDuplicateWorkout}>
 								<Icon name="clipboard" className="h-4 w-4 mr-2" />
 								Duplicar treino
@@ -82,13 +73,6 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 				atleta. Para isto, é necessário seguir as instruções e realizar os
 				exercícios conforme a orientação do treinador.
 			</CardDescription>
-
-			<ArchiveWorkoutModal
-				isOpen={archiveWorkoutModalIsOpen}
-				onClose={toggleArchiveWorkoutModal}
-				onArchiveWorkout={handleArchiveWorkout}
-				visibility={visibility}
-			/>
 
 			<DeleteWorkoutModal
 				isOpen={deleteWorkoutModalIsOpen}

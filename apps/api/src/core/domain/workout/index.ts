@@ -20,6 +20,7 @@ export const WorkoutExerciseSchema = CreateExerciseInputSchema.extend({
 export const CreateWorkoutInputSchema = z.object({
 	name: z.string(),
 	exercises: z.array(WorkoutExerciseSchema),
+	isActive: z.boolean().default(false),
 	description: z.string(),
 });
 
@@ -32,6 +33,5 @@ export type Workout = Prettify<
 		updatedAt: string;
 		coachId: string;
 		athleteId: string;
-		visibility: boolean;
 	}
 >;
