@@ -15,10 +15,12 @@ import {
 	HeaderScreen,
 } from "@shared/ui";
 import { useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function NewTrainingScreen() {
 	const navigate = useNavigate();
+
+	const { state } = useLocation();
 
 	const { athleteId } = useParams<{ athleteId: string }>();
 
@@ -26,7 +28,7 @@ export function NewTrainingScreen() {
 
 	const handleCreateWorkout = useCallback(
 		async (data: TTrainingFormSchema) => {
-			await createWorkout({
+			createWorkout({
 				workout: data,
 				athleteId: athleteId || "",
 			});
@@ -85,6 +87,7 @@ export function NewTrainingScreen() {
 				isSubmitting={isCreatingWorkout}
 				onSubmit={handleCreateWorkout}
 				formId="new-training-form"
+				initialValues={state?.workout || undefined}
 				// isSubmitting={isCreatingAthlete}
 			/>
 		</div>
