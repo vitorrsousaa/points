@@ -1,7 +1,7 @@
 import type { Exercise } from "@/entitites/exercise";
 import { useGetAllExercises } from "@/hooks/exercise";
 import { useCallback, useMemo, useState } from "react";
-import type { ExerciseListProps } from "./exercise-list";
+import type { ExerciseListProps } from "./ExerciseList";
 
 export function useExerciseListHook(props: ExerciseListProps) {
 	const { onAddExercise } = props;
