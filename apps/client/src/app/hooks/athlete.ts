@@ -62,7 +62,7 @@ export function useCreateAthlete() {
 
 export function useGetAllAthletes(coachId = "") {
 	const { data, isLoading, isPending, isFetching, isError } = useQuery({
-		queryKey: [QUERY_KEYS.ATHLETES],
+		queryKey: QUERY_KEYS.ATHLETES,
 		queryFn: async () => {
 			const response = await athleteServices.getAll({ coachId });
 
