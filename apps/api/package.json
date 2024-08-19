@@ -2,10 +2,10 @@
 	"name": "api",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"deploy:dev": "serverless deploy --stage dev --verbose",
 		"deploy:prod": "serverless deploy --stage prod --verbose",
-		"build": "tsup",
 		"clean": "rm -rf dist",
 		"typecheck": "tsc --noEmit",
 		"lint": "biome lint --apply ./src",
@@ -15,7 +15,8 @@
 		"check": "biome check --apply ./src",
 		"format": "biome format --write ./src",
 		"generate:docs": "serverless openapi generate -f json",
-		"build:docs": "npx redocly build-docs openapi.json -o ../api-docs/index.html"
+		"build:docs": "npx redocly build-docs openapi.json -o ../api-docs/index.html",
+		"seed": "node ./src/app/database/seed/index.js"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cognito-identity-provider": "^3.620.0",
@@ -33,6 +34,7 @@
 		"@types/aws-lambda": "^8.10.142",
 		"@types/node": "^20.11.24",
 		"@types/supertest": "^6.0.2",
+		"node-fetch": "^3.3.2",
 		"serverless-esbuild": "^1.52.1",
 		"supertest": "^6.3.4",
 		"tsup": "^8.0.2",

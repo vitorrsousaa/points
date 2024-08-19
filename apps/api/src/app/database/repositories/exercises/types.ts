@@ -9,6 +9,7 @@ export type ExerciseDynamoDB = Prettify<
 		target: "S" | "B" | "D" | null;
 		primary_muscle: string;
 		secondary_muscle: string | null;
+		created_at: string;
 	} & TBaseEntity &
 		Omit<Exercise, "primaryMuscle" | "secondaryMuscle">
 >;

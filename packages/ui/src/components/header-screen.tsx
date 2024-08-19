@@ -1,0 +1,15 @@
+interface HeaderScreenProps {
+	title: string;
+	description?: string;
+}
+
+export function HeaderScreen({ title, description }: HeaderScreenProps) {
+	return (
+		<div className="flex flex-col gap-1 mb-5">
+			<h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+			{description && (
+				<span className="text-muted-foreground">{description}</span>
+			)}
+		</div>
+	);
+}

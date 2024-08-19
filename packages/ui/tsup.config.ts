@@ -8,5 +8,8 @@ export default defineConfig((options: Options) => ({
   banner: {
     js: "'use client'",
   },
+  esbuildOptions(options) {
+    options.external = ['@radix-ui/*']
+  },
   ...options,
 }));

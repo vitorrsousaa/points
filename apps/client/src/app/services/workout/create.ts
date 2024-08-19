@@ -1,4 +1,4 @@
-import type { TTrainingFormSchema } from "@/components/training-form/training-form.schema";
+import type { TTrainingFormSchema } from "@/components/TrainingForm/TrainingFormSchema";
 import type { Workout } from "@/entitites/workout";
 import { httpClient } from "../httpClient";
 

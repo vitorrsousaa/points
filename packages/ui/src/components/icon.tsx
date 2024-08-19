@@ -16,6 +16,7 @@ import {
 	Pencil1Icon,
 	PersonIcon,
 	PlusCircledIcon,
+	QuestionMarkCircledIcon,
 	ReaderIcon,
 	TrashIcon,
 } from "@radix-ui/react-icons";
@@ -43,6 +44,7 @@ const icons = {
 	reader: ReaderIcon,
 	lightning: LightningBoltIcon,
 	close: Cross1Icon,
+	questionMark: QuestionMarkCircledIcon,
 	clipboard: ClipboardIcon,
 	pencil: Pencil1Icon,
 	archive: ArchiveIcon,

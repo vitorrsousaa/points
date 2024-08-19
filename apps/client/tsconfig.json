@@ -25,7 +25,7 @@
 		/* Aliases */
 		"baseUrl": ".",
 		"paths": {
-			"@/pages/*": ["./src/view/pages/*"],
+			"@/screens/*": ["./src/view/screens/*"],
 			"@/components/*": ["./src/view/components/*"],
 			"@/utils/*": ["./src/app/utils/*"],
 			"@/services/*": ["./src/app/services/*"],

@@ -1,0 +1,7 @@
+export * from "./AthletesScreen/AthletesScreen";
+export * from "./DashboardScreen/DashboardScreen";
+export * from "./ExercisesScreen/ExercisesScreen";
+export * from "./NewAthleteScreen/NewAthleteScreen";
+export * from "./NewTrainingScreen/NewTrainingScreen";
+export * from "./SettingsScreen/SettingsScreen";
+export * from "./TrainingScreen/TrainingScreen";

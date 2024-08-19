@@ -1,0 +1,186 @@
+import { ROUTES } from "@/config/routes";
+import { useGetAllAthletes } from "@/hooks/athlete";
+import { useAuth } from "@/hooks/auth";
+import {
+	Badge,
+	Button,
+	Card,
+	CardContent,
+	DropdownMenu,
+	DropdownMenuCheckboxItem,
+	DropdownMenuContent,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+	HeaderScreen,
+	Icon,
+	Input,
+	RenderIf,
+	Skeleton,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@shared/ui";
+import { Link } from "react-router-dom";
+import { AthletesAnalytics } from "./components/athletes-analytics";
+import {
+	TableActions,
+	TableAvailableAthlete,
+	TableRowAthlete,
+} from "./components/table-row";
+
+export function AthletesScreen() {
+	const { id } = useAuth();
+
+	const { athletes, isLoadingAthletes, isErrorAthletes } =
+		useGetAllAthletes(id);
+
+	const hasAthletes = Boolean(athletes && athletes?.length > 0);
+
+	return (
+		<div className="flex flex-col gap-4 w-full">
+			<HeaderScreen
+				title="Meus atletas"
+				description="Gerencie seus atletas, veja suas informações e acesse suas fichas de treino."
+			/>
+
+			<div className="flex gap-4 mb-4">
+				<AthletesAnalytics isLoading={isLoadingAthletes} athletes={athletes} />
+			</div>
+
+			<Card className="p-4 rounded-xl border flex items-center">
+				<CardContent className="p-0 w-full flex items-center justify-between gap-2">
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Button variant="outline" size="sm" className="h-9 gap-1">
+								<Icon name="filter" />
+								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+									Filtro
+								</span>
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end">
+							<DropdownMenuLabel>Filtrar por</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuCheckboxItem checked>
+								Status
+							</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem>Categoria</DropdownMenuCheckboxItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+
+					<div className="flex items-center gap-4">
+						<Input
+							className="h-9 w-72"
+							placeholder="Pesquise pelo nome do atleta"
+							type="text"
+						/>
+
+						<Link to={ROUTES.NEW_ATHLETE}>
+							<Button size="sm" className="h-9 gap-1">
+								<Icon name="plusCircle" className="h-5 w-5" />
+								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+									Adicionar atleta
+								</span>
+							</Button>
+						</Link>
+					</div>
+				</CardContent>
+			</Card>
+
+			<div className="p-4 border rounded-xl bg-card">
+				<RenderIf
+					condition={isLoadingAthletes}
+					render={
+						<div className="flex flex-col gap-2">
+							{Array.from({ length: 5 }).map((item) => (
+								<Skeleton key={Number(item)} className="h-20 w-full" />
+							))}
+						</div>
+					}
+				/>
+
+				<RenderIf
+					condition={isErrorAthletes}
+					render={
+						<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
+							<strong className="font-medium">
+								Tivemos um erro para buscar os atletas.
+							</strong>
+							<span className="text-muted-foreground">Tente novamente!</span>
+						</div>
+					}
+				/>
+
+				<RenderIf
+					condition={hasAthletes && !isLoadingAthletes && !isErrorAthletes}
+					render={
+						<Table>
+							<TableHeader>
+								<TableRow>
+									<TableHead>Nome</TableHead>
+									<TableHead>Categoria</TableHead>
+									<TableHead>Peso (kg)</TableHead>
+
+									<TableHead className="hidden min-[540px]:table-cell">
+										<span className="sr-only">Actions</span>
+									</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{athletes?.map((athlete) => (
+									<TableRowAthlete status={athlete.status} key={athlete.id}>
+										<TableCell>
+											<div className="flex flex-col gap-2">
+												<span className="font-medium flex gap-4">
+													{athlete.name}
+													<TableAvailableAthlete
+														isActive={Boolean(athlete.status)}
+													/>
+												</span>
+
+												<span className="text-sm text-muted-foreground md:inline">
+													{athlete.email}
+												</span>
+											</div>
+										</TableCell>
+
+										<TableCell>
+											<Badge variant="outline">Categoria</Badge>
+										</TableCell>
+
+										<TableCell className="hidden md:table-cell">
+											{athlete.weight}
+										</TableCell>
+
+										<TableActions
+											status={athlete.status}
+											athleteId={athlete.id}
+										/>
+									</TableRowAthlete>
+								))}
+							</TableBody>
+						</Table>
+					}
+				/>
+
+				<RenderIf
+					condition={!hasAthletes && !isLoadingAthletes && !isErrorAthletes}
+					render={
+						<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
+							<strong className="font-medium">
+								Você ainda não possui atletas cadastrados.
+							</strong>
+							<Link to={ROUTES.NEW_ATHLETE}>
+								<Button>Adicionar atleta</Button>
+							</Link>
+						</div>
+					}
+				/>
+			</div>
+		</div>
+	);
+}
