@@ -21,7 +21,7 @@ export const ExerciseFormSchema = z.object({
 
 export const TrainingFormSchema = z.object({
 	name: z.string().min(1, "O nome é obrigatório"),
-	isActive: z.boolean().default(false).optional(),
+	isActive: z.boolean().default(false),
 	description: z.string(),
 	exercises: z
 		.array(ExerciseFormSchema)
@@ -35,5 +35,6 @@ export type TExerciseFormSchema = z.infer<typeof ExerciseFormSchema>;
 export const defaultInitialValues: TTrainingFormSchema = {
 	name: "",
 	exercises: [],
+	isActive: false,
 	description: "",
 };

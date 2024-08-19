@@ -27,13 +27,12 @@ export function useUpdateWorkoutHook() {
 				workout: {
 					...data,
 					id: workoutId,
-					visibility: state?.workout?.visibility,
 				},
 				athleteId,
 				coachId: id,
 			});
 		},
-		[athleteId, navigate, updateWorkout, id, state, workoutId],
+		[athleteId, navigate, updateWorkout, id, workoutId],
 	);
 
 	const hasWorkout = useMemo(() => Boolean(state?.workout), [state]);
