@@ -3,14 +3,14 @@ import { AuthProvider } from "@/contexts/auth";
 import { QueryClientProvider } from "@/libs/query";
 import { ThemeProvider } from "@shared/ui";
 import { Toaster } from "react-hot-toast";
-import { Router } from "./router/browser";
+import { RouterStack } from "./router/RouterStack";
 
 function App() {
 	return (
 		<ThemeProvider defaultTheme="system" storageKey={STORAGE_KEYS.THEME}>
 			<QueryClientProvider>
 				<AuthProvider>
-					<Router />
+					<RouterStack />
 
 					<Toaster
 						position="bottom-right"

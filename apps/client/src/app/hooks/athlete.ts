@@ -60,11 +60,11 @@ export function useCreateAthlete() {
 	};
 }
 
-export function useGetAllAthletes(coachId: string | undefined) {
-	const { data, isLoading, isError } = useQuery({
-		queryKey: QUERY_KEYS.ATHLETES,
+export function useGetAllAthletes(coachId = "") {
+	const { data, isLoading, isPending, isFetching, isError } = useQuery({
+		queryKey: [QUERY_KEYS.ATHLETES],
 		queryFn: async () => {
-			const response = await athleteServices.getAll({ coachId: coachId || "" });
+			const response = await athleteServices.getAll({ coachId });
 
 			return response as WithStatus<Athlete>[];
 		},
@@ -72,7 +72,7 @@ export function useGetAllAthletes(coachId: string | undefined) {
 
 	return {
 		athletes: data,
-		isLoadingAthletes: isLoading,
+		isLoadingAthletes: isLoading || isPending || isFetching,
 		isErrorAthletes: isError,
 	};
 }
