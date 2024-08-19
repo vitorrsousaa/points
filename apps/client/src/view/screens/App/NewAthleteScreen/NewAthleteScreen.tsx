@@ -52,8 +52,8 @@ export function NewAthleteScreen() {
 
 					<Dialog>
 						<DialogTrigger asChild>
-							<Button style={{ all: "unset", cursor: "pointer" }}>
-								<Icon name="questionMark" className="h-6 w-6" />
+							<Button style={{ all: "unset", cursor: "pointer" }} size={"icon"}>
+								<Icon name="questionMark" className="h-5 w-5" />
 							</Button>
 						</DialogTrigger>
 
@@ -68,13 +68,13 @@ export function NewAthleteScreen() {
 							</DialogHeader>
 
 							<DialogFooter>
-								<Button type="submit">Entendi</Button>
+								<Button>Entendi</Button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
 				</div>
 
-				<div className="items-center gap-4 md:ml-auto md:flex">
+				<div className="flex flex-col items-center gap-4 md:ml-auto md:flex-row">
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
 							<Button variant="secondary">Descartar</Button>
