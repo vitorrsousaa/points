@@ -20,7 +20,7 @@ export type UserDynamoDB = Prettify<
 >;
 
 export interface IUserRepository {
-	create(createInput: User): Promise<User>;
+	create(createInput: Omit<User, "createdAt" | "updatedAt">): Promise<User>;
 	update(id: string, updateInput: Omit<User, "id">): Promise<User>;
 	getByEmail(email: string): Promise<User | undefined>;
 	getById(id: string): Promise<User | undefined>;

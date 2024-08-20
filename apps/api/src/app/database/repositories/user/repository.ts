@@ -10,7 +10,9 @@ export class UserRepository implements IUserRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 
-	async create(createInput: User): Promise<User> {
+	async create(
+		createInput: Omit<User, "createdAt" | "updatedAt">,
+	): Promise<User> {
 		const { PK, SK } = this.getKeys(createInput.id);
 		const now = new Date().toISOString();
 

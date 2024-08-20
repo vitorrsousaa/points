@@ -43,6 +43,8 @@ export class CreateService implements ICreateService {
 
 		this.userIsCoach(coach.role);
 
+		const now = new Date().toISOString();
+
 		const { userId } = await this.signupService.execute({
 			firstName: createInput.firstName,
 			lastName: createInput.lastName,
@@ -61,6 +63,8 @@ export class CreateService implements ICreateService {
 			email: createInput.email,
 			name: `${createInput.firstName} ${createInput.lastName}`,
 			role: ["ATHLETE"],
+			createdAt: now,
+			updatedAt: now,
 		});
 
 		return athlete;
