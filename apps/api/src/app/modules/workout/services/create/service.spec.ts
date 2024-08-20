@@ -54,7 +54,7 @@ describe("Service:Create", () => {
 			id: "123",
 			name: "name",
 			role: ["ADMIN"],
-		});
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 
 		// Act
 		// await service.execute(inputData);
@@ -72,7 +72,7 @@ describe("Service:Create", () => {
 			id: "123",
 			name: "name",
 			role: ["COACH"],
-		});
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 		mockedAthleteRepository.getById.mockResolvedValue(null);
 
 		// Act

@@ -124,6 +124,72 @@
           }
         }
       },
+      "SettingsModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+          },
+          "enable": {
+            "type": "boolean",
+            "example": true
+          },
+          "steps": {
+            "type": "object",
+            "properties": {
+              "stepOne": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "completed"
+                    ],
+                    "example": "pending"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "stepTwo": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "completed"
+                    ],
+                    "example": "completed"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            },
+            "required": [
+              "stepOne",
+              "stepTwo"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "enable",
+          "steps"
+        ]
+      },
       "AthleteModel": {
         "type": "object",
         "properties": {
@@ -539,14 +605,14 @@
           }
         }
       },
-      "669fc643-959d-4c3b-b349-9077dddd6ac5": {
+      "c17a97c9-5f42-4849-8505-7fda2a7dbc0c": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "c7732593-b2c2-41b8-a8dc-5c46e8cfbf6d": {
+      "37d8de85-b1f7-4b40-999b-80a7032ec4b0": {
         "properties": {
           "message": {
             "type": "string",
@@ -555,7 +621,7 @@
           }
         }
       },
-      "002267a6-9a35-467d-b36f-54e5e242c881": {
+      "0dd5b7cc-a9d0-44e9-bbfa-d501421e5739": {
         "properties": {
           "message": {
             "type": "string",
@@ -564,7 +630,7 @@
           }
         }
       },
-      "ac2814f7-503a-49f3-a491-7d326124ef85": {
+      "b139c2a6-4d87-49af-a9e0-92d5eb37b532": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -605,7 +671,7 @@
         },
         "additionalProperties": false
       },
-      "340a479b-6aba-459c-82cd-f91f0882848a": {
+      "b0b58f28-bf78-4a46-b887-62137d120056": {
         "properties": {
           "message": {
             "type": "string",
@@ -614,7 +680,7 @@
           }
         }
       },
-      "c985e8d9-78ef-4281-b335-ed1407ae921b": {
+      "f80a74ce-4cec-4310-8dce-efc2f3553166": {
         "properties": {
           "email": {
             "type": "string",
@@ -630,14 +696,14 @@
           "code"
         ]
       },
-      "ccfd3e90-4616-4f50-8efa-6e9efff265d6": {
+      "63b6328a-f1f3-48fc-a5d7-675d859c0691": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "3c97a60d-4ede-480e-8790-8b847716bcba": {
+      "2025a644-315e-4224-9d2e-6fd1e3f88b7e": {
         "properties": {
           "message": {
             "type": "string",
@@ -646,7 +712,7 @@
           }
         }
       },
-      "05b2132e-c1e2-4047-8608-97b92bfc1ba0": {
+      "130fd89b-c02c-4a0c-96f1-3e46f61c6397": {
         "properties": {
           "message": {
             "type": "string",
@@ -655,7 +721,7 @@
           }
         }
       },
-      "950df44a-af9c-4d99-9f43-fbd7cfbbe9f2": {
+      "5f6a03a2-fa18-494f-ae54-32e9ef08f4df": {
         "properties": {
           "email": {
             "type": "string",
@@ -671,7 +737,7 @@
           "password"
         ]
       },
-      "319dd994-6dfc-4322-beba-782351130ffa": {
+      "e35b59af-45f3-4f95-a80d-5267b4bb5127": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -683,7 +749,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "1d46660d-8230-42d2-bc38-28ed5b7bcbba": {
+      "4676cffa-7120-4d30-b3e6-affe6ce2ac45": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -702,6 +768,38 @@
       "athleteId": {
         "type": "string",
         "example": "example-uuid"
+      },
+      "82b9ebda-12c1-41ff-8b5d-5f7682de71b6": {
+        "properties": {
+          "workoutId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+          },
+          "coachId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+          },
+          "athleteId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+          }
+        },
+        "required": [
+          "workoutId",
+          "coachId",
+          "athleteId"
+        ]
+      },
+      "ed460192-583f-4fbe-b668-9192e9d77566": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Settings not found"
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -750,7 +848,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/669fc643-959d-4c3b-b349-9077dddd6ac5"
+                  "$ref": "#/components/schemas/c17a97c9-5f42-4849-8505-7fda2a7dbc0c"
                 }
               }
             },
@@ -761,7 +859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c7732593-b2c2-41b8-a8dc-5c46e8cfbf6d"
+                  "$ref": "#/components/schemas/37d8de85-b1f7-4b40-999b-80a7032ec4b0"
                 }
               }
             },
@@ -772,7 +870,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/002267a6-9a35-467d-b36f-54e5e242c881"
+                  "$ref": "#/components/schemas/0dd5b7cc-a9d0-44e9-bbfa-d501421e5739"
                 }
               }
             },
@@ -818,7 +916,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ac2814f7-503a-49f3-a491-7d326124ef85"
+                  "$ref": "#/components/schemas/b139c2a6-4d87-49af-a9e0-92d5eb37b532"
                 }
               }
             },
@@ -840,7 +938,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/340a479b-6aba-459c-82cd-f91f0882848a"
+                  "$ref": "#/components/schemas/b0b58f28-bf78-4a46-b887-62137d120056"
                 }
               }
             },
@@ -876,7 +974,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/c985e8d9-78ef-4281-b335-ed1407ae921b"
+                "$ref": "#/components/schemas/f80a74ce-4cec-4310-8dce-efc2f3553166"
               }
             }
           }
@@ -887,7 +985,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ccfd3e90-4616-4f50-8efa-6e9efff265d6"
+                  "$ref": "#/components/schemas/63b6328a-f1f3-48fc-a5d7-675d859c0691"
                 }
               }
             },
@@ -898,7 +996,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/3c97a60d-4ede-480e-8790-8b847716bcba"
+                  "$ref": "#/components/schemas/2025a644-315e-4224-9d2e-6fd1e3f88b7e"
                 }
               }
             },
@@ -909,7 +1007,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/05b2132e-c1e2-4047-8608-97b92bfc1ba0"
+                  "$ref": "#/components/schemas/130fd89b-c02c-4a0c-96f1-3e46f61c6397"
                 }
               }
             },
@@ -956,7 +1054,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/950df44a-af9c-4d99-9f43-fbd7cfbbe9f2"
+                "$ref": "#/components/schemas/5f6a03a2-fa18-494f-ae54-32e9ef08f4df"
               }
             }
           }
@@ -967,7 +1065,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/319dd994-6dfc-4322-beba-782351130ffa"
+                  "$ref": "#/components/schemas/e35b59af-45f3-4f95-a80d-5267b4bb5127"
                 }
               }
             },
@@ -1152,7 +1250,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/1d46660d-8230-42d2-bc38-28ed5b7bcbba"
+                "$ref": "#/components/schemas/4676cffa-7120-4d30-b3e6-affe6ce2ac45"
               }
             }
           }
@@ -1171,6 +1269,78 @@
           },
           "401": {
             "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "summary": "/workout",
+        "description": "Route to delete a workout",
+        "operationId": "deleteWorkout",
+        "parameters": [],
+        "tags": [
+          "Workouts"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/82b9ebda-12c1-41ff-8b5d-5f7682de71b6"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Return default response",
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "headers": {}
+          },
+          "403": {
+            "description": "Coach not authorized to delete this workout",
+            "headers": {}
+          },
+          "404": {
+            "description": "Workout not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1276,6 +1446,139 @@
           }
         }
       }
+    },
+    "/settings": {
+      "put": {
+        "summary": "/settings",
+        "description": "Route for update settings. When you update settings, is necessary to send object with all information.",
+        "operationId": "updateSettings",
+        "parameters": [],
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettingsModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Settings not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ed460192-583f-4fbe-b668-9192e9d77566"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "summary": "/settings",
+        "description": "Route to get user settings",
+        "operationId": "getSettingsByUser",
+        "parameters": [],
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -1294,6 +1597,10 @@
     {
       "name": "Workouts",
       "description": "Routes for workouts"
+    },
+    {
+      "name": "Settings",
+      "description": "Routes for Settings"
     }
   ]
 }

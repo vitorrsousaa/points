@@ -14,13 +14,13 @@ describe("Service:Profile", () => {
 		userId: "123",
 	};
 
-	const defaultUser: UnwrapPromise<ReturnType<IUserRepository["getById"]>> = {
+	const defaultUser = {
 		accountConfirmation: true,
 		email: "email",
 		id: "123",
 		name: "name",
 		role: ["ADMIN"],
-	};
+	} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>;
 
 	beforeEach(() => {
 		mockedUserRepository = {

@@ -1,5 +1,6 @@
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IService } from "@application/interfaces/service";
+import type { ICreateSettingsService } from "@application/modules/settings/services/create";
 import type { IAuthProvider } from "@application/providers/auth";
 import { RoleSchema } from "@core/domain/user/role";
 import * as z from "zod";
@@ -26,6 +27,7 @@ export class SignupService implements ISignupService {
 	constructor(
 		private readonly authProvider: IAuthProvider,
 		private readonly userRepository: IUserRepository,
+		private readonly createSettingsService: ICreateSettingsService,
 	) {}
 	async execute(data: ISignupInput): Promise<ISignupOutput> {
 		// this.verifyRoles(data.role, data);
@@ -39,6 +41,8 @@ export class SignupService implements ISignupService {
 			name: `${data.firstName} ${data.lastName}`,
 			role: data.role,
 		});
+
+		await this.createSettingsService.execute({ userId });
 
 		return { userId };
 	}

@@ -13,12 +13,14 @@ export type UserDynamoDB = Prettify<
 		email: string;
 		role: Role;
 		account_confirmation: boolean;
+		created_at: string;
+		updated_at: string;
 	} & TBaseEntity &
-		Omit<User, "accountConfirmation">
+		Omit<User, "accountConfirmation" | "updatedAt" | "createdAt">
 >;
 
 export interface IUserRepository {
-	create(createInput: User): Promise<User>;
+	create(createInput: Omit<User, "createdAt" | "updatedAt">): Promise<User>;
 	update(id: string, updateInput: Omit<User, "id">): Promise<User>;
 	getByEmail(email: string): Promise<User | undefined>;
 	getById(id: string): Promise<User | undefined>;
