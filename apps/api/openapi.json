@@ -605,14 +605,14 @@
           }
         }
       },
-      "c17a97c9-5f42-4849-8505-7fda2a7dbc0c": {
+      "71732c76-0da6-447d-b39c-99c4a1bae101": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "37d8de85-b1f7-4b40-999b-80a7032ec4b0": {
+      "ba7e9923-8ee3-4c53-a488-080f2ef4b3a3": {
         "properties": {
           "message": {
             "type": "string",
@@ -621,7 +621,7 @@
           }
         }
       },
-      "0dd5b7cc-a9d0-44e9-bbfa-d501421e5739": {
+      "0dbb1670-aa12-46d7-a311-f9c9c0f48669": {
         "properties": {
           "message": {
             "type": "string",
@@ -630,7 +630,7 @@
           }
         }
       },
-      "b139c2a6-4d87-49af-a9e0-92d5eb37b532": {
+      "22b709cf-3cc8-4dab-9898-06f5bcb10ae3": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -671,7 +671,7 @@
         },
         "additionalProperties": false
       },
-      "b0b58f28-bf78-4a46-b887-62137d120056": {
+      "96c3d540-9dfb-4c3b-aa12-fc1bb76e7e06": {
         "properties": {
           "message": {
             "type": "string",
@@ -680,7 +680,7 @@
           }
         }
       },
-      "f80a74ce-4cec-4310-8dce-efc2f3553166": {
+      "3a4f3f88-edef-4895-acc2-fa3752fcb84f": {
         "properties": {
           "email": {
             "type": "string",
@@ -696,14 +696,14 @@
           "code"
         ]
       },
-      "63b6328a-f1f3-48fc-a5d7-675d859c0691": {
+      "48576be2-b9f8-45b3-93f9-08e55665c77c": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "2025a644-315e-4224-9d2e-6fd1e3f88b7e": {
+      "9067cf10-13aa-4028-baea-28c9a367cae9": {
         "properties": {
           "message": {
             "type": "string",
@@ -712,7 +712,7 @@
           }
         }
       },
-      "130fd89b-c02c-4a0c-96f1-3e46f61c6397": {
+      "6e6479f6-d01e-4b95-b031-f0a46e5107ad": {
         "properties": {
           "message": {
             "type": "string",
@@ -721,7 +721,7 @@
           }
         }
       },
-      "5f6a03a2-fa18-494f-ae54-32e9ef08f4df": {
+      "eb05111e-4059-4e70-a949-dbd643314113": {
         "properties": {
           "email": {
             "type": "string",
@@ -737,7 +737,7 @@
           "password"
         ]
       },
-      "e35b59af-45f3-4f95-a80d-5267b4bb5127": {
+      "d67c6a64-646c-47dd-ba9f-39770db043a1": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -749,7 +749,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "4676cffa-7120-4d30-b3e6-affe6ce2ac45": {
+      "1141a5d7-280b-46f6-a75f-40775cb5c388": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -769,7 +769,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "82b9ebda-12c1-41ff-8b5d-5f7682de71b6": {
+      "eb8b2168-3a63-4972-ad39-feccf69c8aaf": {
         "properties": {
           "workoutId": {
             "type": "string",
@@ -793,7 +793,7 @@
           "athleteId"
         ]
       },
-      "ed460192-583f-4fbe-b668-9192e9d77566": {
+      "338cbae8-d17d-4d9c-a831-d87502e3b0c0": {
         "properties": {
           "message": {
             "type": "string",
@@ -811,7 +811,7 @@
     }
   },
   "info": {
-    "title": "Training",
+    "title": "Grypp-API docs",
     "description": "API documentation about api",
     "version": "1.0.0"
   },
@@ -848,7 +848,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c17a97c9-5f42-4849-8505-7fda2a7dbc0c"
+                  "$ref": "#/components/schemas/71732c76-0da6-447d-b39c-99c4a1bae101"
                 }
               }
             },
@@ -859,7 +859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/37d8de85-b1f7-4b40-999b-80a7032ec4b0"
+                  "$ref": "#/components/schemas/ba7e9923-8ee3-4c53-a488-080f2ef4b3a3"
                 }
               }
             },
@@ -870,7 +870,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0dd5b7cc-a9d0-44e9-bbfa-d501421e5739"
+                  "$ref": "#/components/schemas/0dbb1670-aa12-46d7-a311-f9c9c0f48669"
                 }
               }
             },
@@ -916,7 +916,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b139c2a6-4d87-49af-a9e0-92d5eb37b532"
+                  "$ref": "#/components/schemas/22b709cf-3cc8-4dab-9898-06f5bcb10ae3"
                 }
               }
             },
@@ -938,7 +938,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b0b58f28-bf78-4a46-b887-62137d120056"
+                  "$ref": "#/components/schemas/96c3d540-9dfb-4c3b-aa12-fc1bb76e7e06"
                 }
               }
             },
@@ -974,7 +974,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/f80a74ce-4cec-4310-8dce-efc2f3553166"
+                "$ref": "#/components/schemas/3a4f3f88-edef-4895-acc2-fa3752fcb84f"
               }
             }
           }
@@ -985,7 +985,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/63b6328a-f1f3-48fc-a5d7-675d859c0691"
+                  "$ref": "#/components/schemas/48576be2-b9f8-45b3-93f9-08e55665c77c"
                 }
               }
             },
@@ -996,7 +996,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/2025a644-315e-4224-9d2e-6fd1e3f88b7e"
+                  "$ref": "#/components/schemas/9067cf10-13aa-4028-baea-28c9a367cae9"
                 }
               }
             },
@@ -1007,7 +1007,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/130fd89b-c02c-4a0c-96f1-3e46f61c6397"
+                  "$ref": "#/components/schemas/6e6479f6-d01e-4b95-b031-f0a46e5107ad"
                 }
               }
             },
@@ -1054,7 +1054,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/5f6a03a2-fa18-494f-ae54-32e9ef08f4df"
+                "$ref": "#/components/schemas/eb05111e-4059-4e70-a949-dbd643314113"
               }
             }
           }
@@ -1065,7 +1065,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e35b59af-45f3-4f95-a80d-5267b4bb5127"
+                  "$ref": "#/components/schemas/d67c6a64-646c-47dd-ba9f-39770db043a1"
                 }
               }
             },
@@ -1250,7 +1250,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/4676cffa-7120-4d30-b3e6-affe6ce2ac45"
+                "$ref": "#/components/schemas/1141a5d7-280b-46f6-a75f-40775cb5c388"
               }
             }
           }
@@ -1321,7 +1321,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/82b9ebda-12c1-41ff-8b5d-5f7682de71b6"
+                "$ref": "#/components/schemas/eb8b2168-3a63-4972-ad39-feccf69c8aaf"
               }
             }
           }
@@ -1500,7 +1500,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ed460192-583f-4fbe-b668-9192e9d77566"
+                  "$ref": "#/components/schemas/338cbae8-d17d-4d9c-a831-d87502e3b0c0"
                 }
               }
             },

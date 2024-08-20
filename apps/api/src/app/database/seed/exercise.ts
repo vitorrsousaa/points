@@ -1,4 +1,6 @@
-export const seedExercises = [
+import type { Exercise } from "@core/domain/exercise";
+
+export const seedExercises: Omit<Exercise, "id">[] = [
 	{
 		equipment: "Barra",
 		primaryMuscle: "Quadriceps",
