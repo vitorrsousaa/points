@@ -11,67 +11,73 @@ import { OnboardingList } from "./components/OnboardingList";
 
 export function DashboardScreen() {
 	return (
-		<div className="w-full flex flex-col">
-			<main>
-				<div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-					<div className="space-y-4">
-						<OnboardingList />
+		<main className="space-y-4 w-full flex flex-col">
+			<OnboardingList />
 
-						<h2>Visão geral</h2>
+			<h2 className="font-semibold text-lg md:text-xl">Visão geral</h2>
 
-						<Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
-							<CardHeader className="pb-3">
-								<CardTitle>Seus atletas</CardTitle>
-								<CardDescription className="text-balance leading-relaxed w-full">
-									Você possui 3 treinos pendentes para analisar e aprovar. Click
-									no botão abaixo para visualizar.
-								</CardDescription>
-							</CardHeader>
-							<CardFooter>
-								<Button>Visualizar treinos</Button>
-							</CardFooter>
-						</Card>
+			<Card className="w-full md:col-span-2" x-chunk="dashboard-05-chunk-0">
+				<CardHeader className="pb-3">
+					<CardTitle className="text-lg">Meus atletas</CardTitle>
+					<CardDescription className="text-balance leading-relaxed w-full">
+						Você possui 3 treinos pendentes para analisar e aprovar. Clique no
+						botão abaixo para visualizar.
+					</CardDescription>
+				</CardHeader>
+				<CardFooter>
+					<Button>Visualizar treinos</Button>
+				</CardFooter>
+			</Card>
 
-						<div className="grid gap-4 grid-cols-3">
-							<Card>
-								<CardHeader className="pb-2">
-									<CardDescription>Treinos desta semana</CardDescription>
-									<CardTitle className="text-4xl">3</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<div className="text-xs text-muted-foreground">
-										+25% a mais que a semana passada
-									</div>
-								</CardContent>
-							</Card>
-
-							<Card>
-								<CardHeader className="pb-2">
-									<CardDescription>This Month</CardDescription>
-									<CardTitle className="text-4xl">$5,329</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<div className="text-xs text-muted-foreground">
-										+10% from last month
-									</div>
-								</CardContent>
-							</Card>
-
-							<Card>
-								<CardHeader className="pb-2">
-									<CardDescription>Plano</CardDescription>
-									<CardTitle className="text-4xl">Gratuito</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<div className="text-xs text-muted-foreground">
-										Escolha um plano
-									</div>
-								</CardContent>
-							</Card>
+			<div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+				<Card>
+					<CardHeader className="pb-2">
+						<CardDescription className="text-sm md:text-base">
+							Meus atletas
+						</CardDescription>
+						<CardTitle className="text-2xl md:text-4xl font-semibold tracking-tight">
+							34
+						</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<div className="text-xs md:text-sm text-muted-foreground">
+							Parabéns, o número de atletas está crescendo.
 						</div>
-					</div>
-				</div>
-			</main>
-		</div>
+					</CardContent>
+				</Card>
+
+				<Card>
+					<CardHeader className="pb-2">
+						<CardDescription className="text-sm md:text-base">
+							Treinos desta semana
+						</CardDescription>
+						<CardTitle className="text-2xl md:text-4xl font-semibold tracking-tight">
+							3
+						</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<div className="text-xs md:text-sm text-muted-foreground">
+							+25% a mais que a semana passada
+						</div>
+					</CardContent>
+				</Card>
+
+				<Card>
+					<CardHeader className="pb-2">
+						<CardDescription className="text-sm md:text-base">
+							Plano
+						</CardDescription>
+						<CardTitle className="text-2xl md:text-4xl font-semibold tracking-tight">
+							Gratuito
+						</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<div className="text-xs md:text-sm text-muted-foreground">
+							Escolha um plano
+						</div>
+					</CardContent>
+				</Card>
+			</div>
+		</main>
 	);
 }

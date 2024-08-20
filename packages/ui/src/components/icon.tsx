@@ -19,6 +19,7 @@ import {
 	QuestionMarkCircledIcon,
 	ReaderIcon,
 	TrashIcon,
+	CheckCircledIcon,
 } from "@radix-ui/react-icons";
 
 interface IconProps {
@@ -48,6 +49,7 @@ const icons = {
 	clipboard: ClipboardIcon,
 	pencil: Pencil1Icon,
 	archive: ArchiveIcon,
+	check: CheckCircledIcon,
 } as const;
 
 export function Icon(props: IconProps) {
