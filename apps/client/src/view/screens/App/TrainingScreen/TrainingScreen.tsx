@@ -116,7 +116,7 @@ export function TrainingScreen() {
 						}
 					/>
 
-					<div className="flex flex-row justify-between">
+					<div className="flex flex-row justify-between items-center">
 						<div className="flex flex-col gap-1">
 							<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
 
@@ -159,22 +159,24 @@ export function TrainingScreen() {
 							</div>
 						}
 						elseRender={
-							<>
-								{isLoadingWorkouts ? (
+							<RenderIfElse
+								condition={isLoadingWorkouts}
+								ifRender={
 									<div className="w-full flex items-center justify-center ">
 										<Skeleton className="w-full h-20" />
 									</div>
-								) : (
+								}
+								elseRender={
 									<div className="flex flex-col items-center mt-12 gap-2 mb-12">
-										<small>
+										<span>
 											Este atleta ainda não possui um treinamento cadastrado
-										</small>
+										</span>
 										<small>
 											Clique no botão acima para adicionar um novo treino.
 										</small>
 									</div>
-								)}
-							</>
+								}
+							/>
 						}
 					/>
 				</div>
