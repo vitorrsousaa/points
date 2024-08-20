@@ -2,6 +2,7 @@ import type { ISettingsRepository } from "@application/database/repositories/set
 import type { IService } from "@application/interfaces/service";
 import * as z from "zod";
 import { defaultSettings } from "../../constants/default-settings";
+import { SettingsAlreadyExists } from "../../errors/settings-already-exists";
 
 export const CreateInputServiceSchema = z.object({
 	userId: z.string().uuid(),
@@ -24,7 +25,7 @@ export class CreateSettingsService implements ICreateSettingsService {
 		);
 
 		if (alreadyExists) {
-			throw new Error("Settings already exists");
+			throw new SettingsAlreadyExists();
 		}
 
 		await this.settingsRepository.create({

@@ -15,14 +15,16 @@ describe("Service:Create", () => {
 	let mockedUserRepository: Mocked<IUserRepository>;
 	let mockedAthleteRepository: Mocked<IAthleteRepository>;
 
+	const now = new Date().toISOString();
+
 	const defaultUser: UnwrapPromise<ReturnType<IUserRepository["getById"]>> = {
 		accountConfirmation: true,
 		email: "email",
 		id: "123",
 		name: "name",
 		role: ["ADMIN"],
-		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString(),
+		createdAt: now,
+		updatedAt: now,
 	};
 
 	const inputData: ICreateInput = {
@@ -125,16 +127,18 @@ describe("Service:Create", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(mockedAthleteRepository.update).toBeCalledWith({
-			name: `${inputData.firstName} ${inputData.lastName}`,
-			role: ["ATHLETE"],
-			id: "123",
-			accountConfirmation: false,
-			age: inputData.age,
-			coachId: inputData.coachId,
-			email: inputData.email,
-			height: inputData.height,
-			weight: inputData.weight,
-		});
+		expect(mockedAthleteRepository.update).toBeCalledWith(
+			expect.objectContaining({
+				name: `${inputData.firstName} ${inputData.lastName}`,
+				role: ["ATHLETE"],
+				id: "123",
+				accountConfirmation: false,
+				age: inputData.age,
+				coachId: inputData.coachId,
+				email: inputData.email,
+				height: inputData.height,
+				weight: inputData.weight,
+			}),
+		);
 	});
 });

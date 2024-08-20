@@ -1,4 +1,5 @@
 import type { IUserRepository } from "@application/database/repositories/user";
+import type { ICreateSettingsService } from "@application/modules/settings/services/create";
 import type { IAuthProvider } from "@application/providers/auth";
 import { type Mocked, vi } from "vitest";
 import { signupData } from "../../mocks/signup";
@@ -8,6 +9,7 @@ describe("Service: Signup", () => {
 	let service: ISignupService;
 	let mockedAuthProvider: Mocked<IAuthProvider>;
 	let mockedUserRepository: Mocked<IUserRepository>;
+	let mockedCreateSettingsService: Mocked<ICreateSettingsService>;
 
 	beforeEach(() => {
 		mockedAuthProvider = {
@@ -18,7 +20,15 @@ describe("Service: Signup", () => {
 			create: vi.fn(),
 		} as unknown as Mocked<IUserRepository>;
 
-		service = new SignupService(mockedAuthProvider, mockedUserRepository);
+		mockedCreateSettingsService = {
+			execute: vi.fn(),
+		} as unknown as Mocked<ICreateSettingsService>;
+
+		service = new SignupService(
+			mockedAuthProvider,
+			mockedUserRepository,
+			mockedCreateSettingsService,
+		);
 	});
 
 	afterEach(() => {
