@@ -13,8 +13,10 @@ export type UserDynamoDB = Prettify<
 		email: string;
 		role: Role;
 		account_confirmation: boolean;
+		created_at: string;
+		updated_at: string;
 	} & TBaseEntity &
-		Omit<User, "accountConfirmation">
+		Omit<User, "accountConfirmation" | "updatedAt" | "createdAt">
 >;
 
 export interface IUserRepository {

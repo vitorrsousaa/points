@@ -12,6 +12,7 @@ export class UserRepository implements IUserRepository {
 
 	async create(createInput: User): Promise<User> {
 		const { PK, SK } = this.getKeys(createInput.id);
+		const now = new Date().toISOString();
 
 		const newUser: UserDynamoDB = {
 			account_confirmation: createInput.accountConfirmation,
@@ -19,6 +20,8 @@ export class UserRepository implements IUserRepository {
 			name: createInput.name,
 			role: createInput.role,
 			id: createInput.id,
+			created_at: now,
+			updated_at: now,
 			PK,
 			SK,
 		};
@@ -47,25 +50,31 @@ export class UserRepository implements IUserRepository {
 	async update(id: string, updateInput: Omit<User, "id">): Promise<User> {
 		const { PK, SK } = this.getKeys(id);
 
+		const now = new Date().toISOString();
+
 		try {
 			await this.dbInstance.update(this.TABLE_NAME, {
 				Key: { PK, SK },
 				UpdateExpression:
-					"set #name = :name, #email = :email, #account_confirmation = :account_confirmation",
+					"set #name = :name, #email = :email, #account_confirmation = :account_confirmation, #updated_at = :updated_at",
 				ExpressionAttributeNames: {
 					"#name": "name",
 					"#email": "email",
 					"#account_confirmation": "account_confirmation",
+					"#updated_at": "updated_at",
 				},
 				ExpressionAttributeValues: {
 					":name": updateInput.name,
 					":email": updateInput.email,
 					":account_confirmation": updateInput.accountConfirmation,
+					":updated_at": now,
 				},
 			});
 
 			const user: UserDynamoDB = {
 				...updateInput,
+				created_at: updateInput.createdAt,
+				updated_at: now,
 				account_confirmation: updateInput.accountConfirmation,
 				id,
 				PK,
@@ -91,22 +100,20 @@ export class UserRepository implements IUserRepository {
 	private mapToDomain(item: UserDynamoDB): User {
 		return {
 			email: item.email,
-			id: this.getUserId(item.SK),
+			id: item.id,
 			name: item.name,
 			role: item.role,
 			accountConfirmation: item.account_confirmation,
+			createdAt: item.created_at,
+			updatedAt: item.updated_at,
 		};
 	}
 
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
-			PK: this.DEFAULT_USER_ID,
-			SK: this.setUserId(id),
+			SK: "PROFILE",
+			PK: this.setUserId(id),
 		};
-	}
-
-	private getUserId(userId: string): string {
-		return userId.split("|")[1];
 	}
 
 	private setUserId(id: string): string {

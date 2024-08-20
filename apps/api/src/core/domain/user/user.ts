@@ -9,4 +9,6 @@ export type User = {
 	name: string;
 	role: Role;
 	accountConfirmation: boolean;
+	createdAt: string;
+	updatedAt: string;
 };
