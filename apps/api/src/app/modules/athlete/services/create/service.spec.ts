@@ -21,6 +21,8 @@ describe("Service:Create", () => {
 		id: "123",
 		name: "name",
 		role: ["ADMIN"],
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString(),
 	};
 
 	const inputData: ICreateInput = {
@@ -90,7 +92,7 @@ describe("Service:Create", () => {
 			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		});
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
 
 		// Act
 		const result = await service.execute(inputData);
@@ -109,7 +111,7 @@ describe("Service:Create", () => {
 		mockedUserRepository.getById.mockResolvedValue({
 			...defaultUser,
 			role: ["COACH"],
-		});
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 		mockedSignupService.execute.mockResolvedValue({ userId: "123" });
 		mockedAthleteRepository.update.mockResolvedValue({
 			...inputData,
@@ -117,7 +119,7 @@ describe("Service:Create", () => {
 			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		});
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
 
 		// Act
 		const result = await service.execute(inputData);
