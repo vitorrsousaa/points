@@ -1,37 +1,46 @@
 delete:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
+  summary: /workout
+  description: Route to delete a workout
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Workouts
+  requestBody:
+    description: Sample request body
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
       properties:
-        email:
+        workoutId:
           type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
-    - statusCode: 200
+          format: uuid
+          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
+        coachId:
+          type: string
+          format: uuid
+          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
+        athleteId:
+          type: string
+          format: uuid
+          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
+      required:
+        - workoutId
+        - coachId
+        - athleteId
+  methodResponses:
+    - statusCode: 201
       responseBody:
         description: Return default response
-      responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+    - statusCode: 401
       responseBody:
         description: Not authorized
+    - statusCode: 403
+      responseBody:
+        description: Coach not authorized to delete this workout
+    - statusCode: 404
+      responseBody:
+        description: Workout not found
       responseModels:
         application/json: NotAuthorizedResponse
     - statusCode: 422
@@ -44,4 +53,3 @@ delete:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						

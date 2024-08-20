@@ -255,6 +255,7 @@ functions:
       - httpApi:
           method: DELETE
           path: /workout
+          documentation: ${file(src/server/functions/workout/delete/handler.doc.yml):delete}
           authorizer:
             name: CognitoAuthorizer
   updateWorkout:
