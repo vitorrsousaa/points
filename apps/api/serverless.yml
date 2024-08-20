@@ -266,3 +266,12 @@ functions:
           path: /workout
           authorizer:
             name: CognitoAuthorizer
+  updateSettings:
+    handler: src/server/functions/settings/update.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /settings
+          documentation: ${file(src/server/functions/settings/update/handler.doc.yml):update}
+          authorizer:
+            name: CognitoAuthorizer

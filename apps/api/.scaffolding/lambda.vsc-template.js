@@ -64,7 +64,7 @@ export async function handler(event: APIGatewayProxyEventV2) {
           example: user@email.com
       required:
         - email
-	methodResponses:
+  methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
@@ -76,7 +76,7 @@ export async function handler(event: APIGatewayProxyEventV2) {
               message:
                 type: string
                 example: ok
-		- statusCode: 401
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:

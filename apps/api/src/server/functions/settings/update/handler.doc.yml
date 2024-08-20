@@ -1,0 +1,44 @@
+update:
+  summary: /settings
+  description: Route for update settings. When you update settings, is necessary to send object with all information.
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Settings
+  requestBody:
+    description: Sample request body
+    required: true
+  requestModels:
+    application/json: SettingsModel
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return default response
+      responseModels:
+        application/json: SettingsModel
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 404
+      responseBody:
+        description: Settings not found
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                example: Settings not found
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse
