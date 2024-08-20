@@ -16,5 +16,5 @@ export interface ISettingsRepository {
 		createInput: Omit<Settings, "id" | "createdAt" | "updatedAt">,
 	): Promise<Settings>;
 	update(userId: string, updateInput: Omit<Settings, "id">): Promise<Settings>;
-	getByUserId(userId: string): Promise<Settings | undefined>;
+	getByUserId(userId: string): Promise<Settings | null>;
 }

@@ -37,7 +37,7 @@ describe("Service:Update", () => {
 
 	it("Should throw error when settings not exists for this user", async () => {
 		// Arrange
-		mockedSettingsRepository.getByUserId.mockResolvedValue(undefined);
+		mockedSettingsRepository.getByUserId.mockResolvedValue(null);
 
 		// Act
 		// await service.execute(inputData);

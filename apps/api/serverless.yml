@@ -275,3 +275,12 @@ functions:
           documentation: ${file(src/server/functions/settings/update/handler.doc.yml):update}
           authorizer:
             name: CognitoAuthorizer
+  getSettingsByUser:
+    handler: src/server/functions/settings/getByUser.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /settings
+          documentation: ${file(src/server/functions/settings/getByUser/handler.doc.yml):getByUser}
+          authorizer:
+            name: CognitoAuthorizer

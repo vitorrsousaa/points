@@ -47,7 +47,7 @@ describe("Service:Create", () => {
 	});
 	it("Should call settingsRepository with correct userId", async () => {
 		// Arrange
-		mockedSettingsRepository.getByUserId.mockResolvedValue(undefined);
+		mockedSettingsRepository.getByUserId.mockResolvedValue(null);
 
 		// Act
 		await service.execute(inputData);

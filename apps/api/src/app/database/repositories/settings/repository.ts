@@ -75,14 +75,14 @@ export class SettingsRepository implements ISettingsRepository {
 		}
 	}
 
-	async getByUserId(userId: string): Promise<Settings | undefined> {
+	async getByUserId(userId: string): Promise<Settings | null> {
 		const { PK, SK } = this.getKeys(userId);
 
 		const item = await this.dbInstance.get<SettingsDynamoDB>(this.TABLE_NAME, {
 			Key: { PK, SK },
 		});
 
-		return item ? this.mapToDomain(item) : undefined;
+		return item ? this.mapToDomain(item) : null;
 	}
 
 	private mapToDomain(item: SettingsDynamoDB): Settings {
