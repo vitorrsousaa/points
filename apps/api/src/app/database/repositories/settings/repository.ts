@@ -75,7 +75,7 @@ export class SettingsRepository implements ISettingsRepository {
 		}
 	}
 
-	async getById(userId: string): Promise<Settings | undefined> {
+	async getByUserId(userId: string): Promise<Settings | undefined> {
 		const { PK, SK } = this.getKeys(userId);
 
 		const item = await this.dbInstance.get<SettingsDynamoDB>(this.TABLE_NAME, {
