@@ -7,12 +7,12 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@shared/ui";
-import { OnboardingList } from "./components/OnboardingList";
+import { Onboarding } from "./components";
 
 export function DashboardScreen() {
 	return (
 		<main className="space-y-4 w-full flex flex-col">
-			<OnboardingList />
+			<Onboarding />
 
 			<h2 className="font-semibold text-lg md:text-xl">Visão geral</h2>
 
