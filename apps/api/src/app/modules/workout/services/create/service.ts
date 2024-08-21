@@ -8,11 +8,12 @@ import * as z from "zod";
 import { AthleteNotFound } from "../../errors/athlete-not-found";
 import { CoachNotAuthorized } from "../../errors/coach-not-authorized";
 import { UserShouldBeCoach } from "../../errors/user-not-coach";
+import { getWorkoutVolume } from "../../functions/get-workout-volume";
 
 export const CreateInputServiceSchema = z.object({
 	coachId: z.string().uuid(),
 	athleteId: z.string().uuid(),
-	workout: CreateWorkoutInputSchema,
+	workout: CreateWorkoutInputSchema.omit({ volume: true }),
 });
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
@@ -49,10 +50,13 @@ export class CreateService implements ICreateService {
 
 		if (!athleteIsOwnByCoach) throw new CoachNotAuthorized();
 
+		const volume = getWorkoutVolume(workout.exercises);
+
 		const result = await this.workoutRepository.create({
 			coachId,
 			athleteId,
 			...workout,
+			volume,
 		});
 
 		return result;

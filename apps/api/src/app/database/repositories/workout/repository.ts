@@ -4,7 +4,8 @@ import type {
 	IDatabaseClient,
 	TBaseEntity,
 } from "@application/database/database";
-import type { Workout } from "@core/domain/workout";
+import { defaultVolume } from "@application/modules/workout/functions/get-workout-volume";
+import type { Workout, WorkoutVolume } from "@core/domain/workout";
 import type { IWorkoutRepository, WorkoutDynamoDB } from "./types";
 
 export class WorkoutRepository implements IWorkoutRepository {
@@ -12,10 +13,19 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 	async create(
-		workout: Omit<Workout, "createdAt" | "updatedAt">,
+		workout: Omit<Workout, "createdAt" | "updatedAt"> & {
+			volume?: WorkoutVolume;
+		},
 	): Promise<Workout> {
-		const { athleteId, coachId, name, exercises, description, isActive } =
-			workout;
+		const {
+			athleteId,
+			coachId,
+			name,
+			exercises,
+			description,
+			isActive,
+			volume,
+		} = workout;
 		const { PK, SK } = this.getKeys(athleteId);
 		const workoutId = randomUUID();
 		const now = new Date().toISOString();
@@ -32,6 +42,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			exercises,
 			description,
 			is_active: isActive,
+			volume,
 		};
 
 		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
@@ -46,6 +57,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			updatedAt: now,
 			description,
 			isActive,
+			volume,
 		};
 	}
 	async update(workout: Workout): Promise<Workout> {
@@ -56,13 +68,14 @@ export class WorkoutRepository implements IWorkoutRepository {
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description",
+				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description, #volume = :volume",
 			ExpressionAttributeNames: {
 				"#name": "name",
 				"#exercises": "exercises",
 				"#updated_at": "updated_at",
 				"#is_active": "is_active",
 				"#description": "description",
+				"#volume": "volume",
 			},
 			ExpressionAttributeValues: {
 				":name": workout.name,
@@ -70,6 +83,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 				":updated_at": now,
 				":is_active": workout.isActive,
 				":description": workout.description,
+				":volume": workout.volume,
 			},
 		});
 
@@ -136,6 +150,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			name: workout.name,
 			isActive: workout.is_active,
 			description: workout.description,
+			volume: workout.volume || defaultVolume,
 		};
 	}
 }
