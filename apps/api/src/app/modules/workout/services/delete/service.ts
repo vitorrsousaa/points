@@ -25,8 +25,6 @@ export class DeleteService implements IDeleteService {
 		const { workoutId, coachId, athleteId } = deleteInput;
 		const workout = await this.workoutRepository.getById(athleteId, workoutId);
 
-		console.log(workout);
-
 		if (!workout) {
 			throw new WorkoutNotFound();
 		}

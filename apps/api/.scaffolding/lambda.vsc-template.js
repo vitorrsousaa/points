@@ -46,25 +46,25 @@ export async function handler(event: APIGatewayProxyEventV2) {
 						type: "file",
 						name: (inputs) => "handler.doc.yml",
 						content: (inputs) => `${toCamelCase(inputs.name)}:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
+  summary: Sample Lambda
+  description: Sample Lambda
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Sample
+  requestBody:
+    description: Sample request body
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
       properties:
         email:
           type: string
           example: user@email.com
-			required:
-				- email
-	methodResponses:
+      required:
+        - email
+  methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
@@ -76,7 +76,7 @@ export async function handler(event: APIGatewayProxyEventV2) {
               message:
                 type: string
                 example: ok
-		- statusCode: 401
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
@@ -91,7 +91,7 @@ export async function handler(event: APIGatewayProxyEventV2) {
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						`,
+`,
 					},
 				],
 			},

@@ -6,6 +6,8 @@ This document outlines the table design for a DynamoDB single-table pattern base
 
 | **Entity**           | **Primary Key (PK)**           | **Sort Key (SK)**                      | **Additional Notes**                               |
 |----------------------|--------------------------------|----------------------------------------|----------------------------------------------------|
+| **User**             | `USER#<userId>`                | `PROFILE`                              | Stores basic profile info for the user.           |
+| **Settings**         | `USER#<userId>`                | `SETTINGS`                             | Stores basic settings info for the user.           |
 | **Coach**            | `USER#COACH#<coachId>`         | `COACH#PROFILE`                        | Stores basic profile info for the coach.           |
 | **Athlete**          | `USER#COACH#<coachId>`         | `ATHLETE#<athleteId>`                  | All athletes under a coach, query by coach ID.     |
 | **Default Exercise** | `EXERCISE#DEFAULT`             | `EXERCISE#<exerciseId>`                | Predefined exercises available to all coaches.     |

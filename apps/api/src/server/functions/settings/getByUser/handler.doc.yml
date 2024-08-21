@@ -1,0 +1,23 @@
+getByUser:
+  summary: /settings
+  description: Route to get user settings
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Settings
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return default response
+      responseModels:
+        application/json: SettingsModel
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse
