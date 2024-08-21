@@ -3,6 +3,14 @@ import { CreateExerciseInputSchema, type Exercise } from "../exercise";
 
 import * as z from "zod";
 
+export const WorkoutVolumeSchema = z.object({
+	S: z.object({ sets: z.number(), load: z.number() }),
+	B: z.object({ sets: z.number(), load: z.number() }),
+	D: z.object({ sets: z.number(), load: z.number() }),
+});
+
+export type WorkoutVolume = z.infer<typeof WorkoutVolumeSchema>;
+
 export const WorkoutSetSchema = z.object({
 	reps: z.number().min(0),
 	weight: z.number().min(0),
@@ -22,6 +30,7 @@ export const CreateWorkoutInputSchema = z.object({
 	exercises: z.array(WorkoutExerciseSchema),
 	isActive: z.boolean().default(false),
 	description: z.string(),
+	volume: WorkoutVolumeSchema,
 });
 
 export type CreateWorkoutSchema = z.infer<typeof CreateWorkoutInputSchema>;

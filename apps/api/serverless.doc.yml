@@ -1,6 +1,6 @@
 documentation:
   version: '1.0.0'
-  title: 'Training'
+  title: Grypp-API docs
   description: 'API documentation about api'
   security:
     - CognitoAuthorizer: []
