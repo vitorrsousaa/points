@@ -21,6 +21,9 @@
 	"engines": {
 		"node": ">=18"
 	},
+	"resolutions": {
+		"vitest": "^latest-version"
+	},
 	"packageManager": "yarn@1.22.17",
 	"workspaces": ["apps/*", "packages/*"]
 }

@@ -11,7 +11,7 @@ export function useExerciseFormHook(props: ExerciseFormProps) {
 		defaultValues: defaultInitialValues,
 	});
 
-	const { handleSubmit: hookFormSubmit, reset } = methods;
+	const { handleSubmit: hookFormSubmit } = methods;
 
 	const handleSubmit = hookFormSubmit(async (data) => {
 		await onSubmit(data);
