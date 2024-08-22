@@ -1,6 +1,4 @@
 import { ROUTES } from "@/config/routes";
-import { useGetAllAthletes } from "@/hooks/athlete";
-import { useAuth } from "@/hooks/auth";
 import {
 	Badge,
 	Button,
@@ -17,21 +15,25 @@ import {
 	TableRow,
 } from "@shared/ui";
 import { Link } from "react-router-dom";
-import { AthletesAnalytics } from "./components/athletes-analytics";
-import { AthleteTableHeader } from "./components/table-header";
+
 import {
+	AthletesAnalytics,
+	AthleteTableHeader,
 	TableActions,
 	TableAvailableAthlete,
 	TableRowAthlete,
-} from "./components/table-row";
+} from "./components";
+import { useAthletesScreen } from "./useAthletesScreen";
 
 export function AthletesScreen() {
-	const { id } = useAuth();
-
-	const { athletes, isLoadingAthletes, isErrorAthletes } =
-		useGetAllAthletes(id);
-
-	const hasAthletes = Boolean(athletes && athletes?.length > 0);
+	const {
+		athletes,
+		filteredAthletes,
+		hasAthletes,
+		isErrorAthletes,
+		isLoadingAthletes,
+		searchControl,
+	} = useAthletesScreen();
 
 	return (
 		<div className="flex flex-col gap-4 w-full">
@@ -46,7 +48,7 @@ export function AthletesScreen() {
 
 			<Card className="p-4 rounded-xl border flex items-center">
 				<CardContent className="p-0 w-full flex items-center justify-between gap-2">
-					<AthleteTableHeader />
+					<AthleteTableHeader searchControl={searchControl} />
 				</CardContent>
 			</Card>
 
@@ -90,7 +92,7 @@ export function AthletesScreen() {
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								{athletes?.map((athlete) => (
+								{filteredAthletes?.map((athlete) => (
 									<TableRowAthlete status={athlete.status} key={athlete.id}>
 										<TableCell>
 											<div className="flex flex-col gap-2">
