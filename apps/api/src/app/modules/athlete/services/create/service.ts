@@ -17,6 +17,7 @@ export const CreateInputServiceSchema = z.object({
 	weight: z.number().min(1),
 	height: z.number().min(1),
 	age: z.number().min(1),
+	athleteId: z.string().optional(),
 });
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
@@ -54,7 +55,7 @@ export class CreateService implements ICreateService {
 		});
 
 		const athlete = await this.athleteRepository.update({
-			id: userId,
+			id: createInput.athleteId || userId,
 			coachId: createInput.coachId,
 			weight: createInput.weight,
 			height: createInput.height,

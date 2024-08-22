@@ -4,9 +4,11 @@ import { makeUserRepository } from "@factories/repositories/user";
 import { makeSignupService } from "../auth/signup";
 
 export function makeCreateAthleteService() {
-	return new CreateService(
+	const service = new CreateService(
 		makeSignupService(),
 		makeUserRepository(),
 		makeAthleteRepository(),
 	);
+
+	return service;
 }

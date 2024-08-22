@@ -284,3 +284,10 @@ functions:
           documentation: ${file(src/server/functions/settings/getByUser/handler.doc.yml):getByUser}
           authorizer:
             name: CognitoAuthorizer
+  createCoach:
+    handler: src/server/functions/coach/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /coach
+          
