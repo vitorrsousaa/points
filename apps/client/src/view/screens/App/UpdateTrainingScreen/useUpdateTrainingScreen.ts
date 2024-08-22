@@ -1,4 +1,5 @@
 import type { TTrainingFormSchema } from "@/components/TrainingForm/TrainingFormSchema";
+import type { Workout } from "@/entitites/workout";
 import { useAuth } from "@/hooks/auth";
 import { useUpdateWorkout } from "@/hooks/workout";
 import { useCallback, useMemo } from "react";
@@ -25,7 +26,7 @@ export function useUpdateWorkoutHook() {
 
 			updateWorkout({
 				workout: {
-					...data,
+					...(data as unknown as Workout),
 					id: workoutId,
 				},
 				athleteId,
