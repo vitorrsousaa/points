@@ -42,14 +42,12 @@ describe("Service:Create", () => {
 			getById: vi.fn(),
 		} as unknown as Mocked<IUserRepository>;
 		mockedAthleteRepository = {
-			update: vi.fn(),
+			create: vi.fn(),
 		} as unknown as Mocked<IAthleteRepository>;
 		mockedSignupService = {
 			execute: vi.fn(),
 		} as unknown as Mocked<ISignupService>;
-		mockedAthleteRepository = {
-			update: vi.fn(),
-		} as unknown as Mocked<IAthleteRepository>;
+
 		service = new CreateService(
 			mockedSignupService,
 			mockedUserRepository,
@@ -88,13 +86,13 @@ describe("Service:Create", () => {
 			role: ["COACH"],
 		});
 		mockedSignupService.execute.mockResolvedValue({ userId: "123" });
-		mockedAthleteRepository.update.mockResolvedValue({
+		mockedAthleteRepository.create.mockResolvedValue({
 			...inputData,
 			role: ["ATHLETE"],
 			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["create"]>>);
 
 		// Act
 		const result = await service.execute(inputData);
@@ -115,24 +113,20 @@ describe("Service:Create", () => {
 			role: ["COACH"],
 		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 		mockedSignupService.execute.mockResolvedValue({ userId: "123" });
-		mockedAthleteRepository.update.mockResolvedValue({
+		mockedAthleteRepository.create.mockResolvedValue({
 			...inputData,
-			role: ["ATHLETE"],
-			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["create"]>>);
 
 		// Act
-		const result = await service.execute(inputData);
+		await service.execute(inputData);
 
 		// Assert
-		expect(mockedAthleteRepository.update).toBeCalledWith(
+		expect(mockedAthleteRepository.create).toBeCalledWith(
 			expect.objectContaining({
 				name: `${inputData.firstName} ${inputData.lastName}`,
-				role: ["ATHLETE"],
 				id: "123",
-				accountConfirmation: false,
 				age: inputData.age,
 				coachId: inputData.coachId,
 				email: inputData.email,

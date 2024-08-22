@@ -44,8 +44,6 @@ export class CreateService implements ICreateService {
 
 		this.userIsCoach(coach.role);
 
-		const now = new Date().toISOString();
-
 		const { userId } = await this.signupService.execute({
 			firstName: createInput.firstName,
 			lastName: createInput.lastName,
@@ -54,18 +52,13 @@ export class CreateService implements ICreateService {
 			role: ["ATHLETE"],
 		});
 
-		const athlete = await this.athleteRepository.update({
+		const athlete = await this.athleteRepository.create({
 			id: createInput.athleteId || userId,
 			coachId: createInput.coachId,
 			weight: createInput.weight,
 			height: createInput.height,
 			age: createInput.age,
-			accountConfirmation: false,
-			email: createInput.email,
 			name: `${createInput.firstName} ${createInput.lastName}`,
-			role: ["ATHLETE"],
-			createdAt: now,
-			updatedAt: now,
 		});
 
 		return athlete;

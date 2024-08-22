@@ -37,7 +37,7 @@ provider:
           Resource: 
             - !GetAtt TrainingTable.Arn
             - !Sub ${TrainingTable.Arn}/index/EmailIndex
-            - !Sub ${TrainingTable.Arn}/index/CoachIndex
+            - !Sub ${TrainingTable.Arn}/index/GSI1Index
   environment:
     COGNITO_POOL_ID: !Ref TrainingUserPool
     COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
@@ -116,7 +116,9 @@ resources:
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
-          - AttributeName: coach_id
+          - AttributeName: gsi1pk
+            AttributeType: S
+          - AttributeName: gsi1sk
             AttributeType: S
           - AttributeName: PK
             AttributeType: S
@@ -134,10 +136,12 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
-          - IndexName: CoachIndex
+          - IndexName: GSI1Index
             KeySchema:
-              - AttributeName: coach_id
+              - AttributeName: gsi1pk
                 KeyType: HASH
+              - AttributeName: gsi1sk
+                KeyType: RANGE
             Projection:
               ProjectionType: ALL
         

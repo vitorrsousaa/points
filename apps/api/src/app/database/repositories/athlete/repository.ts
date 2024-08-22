@@ -5,27 +5,51 @@ import type { AthleteDynamoDB, IAthleteRepository } from "./types";
 
 export class AthleteRepository implements IAthleteRepository {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
-	private DEFAULT_USER_ID = "USER";
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
+	async create(
+		athlete: Omit<Athlete, "createdAt" | "updatedAt"> & { id?: string },
+	): Promise<Athlete> {
+		const { PK, SK } = this.getKeys(athlete.coachId, athlete.id);
+		const { gsi1pk, gsi1sk } = this.getGSIKeys(athlete.id, athlete.coachId);
+
+		const now = new Date().toISOString();
+
+		const newAthlete: AthleteDynamoDB = {
+			PK,
+			SK,
+			gsi1pk,
+			gsi1sk,
+			age: athlete.age,
+			coach_id: athlete.coachId,
+			created_at: now,
+			updated_at: now,
+			height: athlete.height,
+			id: athlete.id,
+			name: athlete.name,
+			weight: athlete.weight,
+		};
+
+		await this.dbInstance.create(this.TABLE_NAME, { ...newAthlete });
+
+		return this.mapToDomain(newAthlete);
+	}
 
 	async update(athlete: Athlete): Promise<Athlete> {
-		const { PK, SK } = this.getKeys(athlete.id);
+		const { PK, SK } = this.getKeys(athlete.coachId, athlete.id);
 		const now = new Date().toISOString();
 
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #coach_id = :coach_id, #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at",
+				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at",
 			ExpressionAttributeNames: {
-				"#coach_id": "coach_id",
 				"#weight": "weight",
 				"#height": "height",
 				"#age": "age",
 				"#updated_at": "updated_at",
 			},
 			ExpressionAttributeValues: {
-				":coach_id": athlete.coachId,
 				":weight": athlete.weight,
 				":height": athlete.height,
 				":age": athlete.age,
@@ -37,25 +61,26 @@ export class AthleteRepository implements IAthleteRepository {
 			...athlete,
 			updated_at: now,
 			created_at: athlete.createdAt,
-			account_confirmation: athlete.accountConfirmation,
 			coach_id: athlete.coachId,
 			PK,
 			SK,
+			gsi1pk: "",
+			gsi1sk: "",
 		};
 
 		return this.mapToDomain(updatedAthlete);
 	}
 
 	async getAllByCoachId(coachId: string): Promise<Athlete[]> {
+		const { PK, SK } = this.getKeys(coachId, "athleteId");
+
 		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>(
 			this.TABLE_NAME,
 			{
-				IndexName: "CoachIndex",
-				KeyConditionExpression: "coach_id = :coach_id",
-				FilterExpression: "SK = :SK",
+				KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
 				ExpressionAttributeValues: {
-					":coach_id": coachId,
-					":SK": "PROFILE",
+					":PK": PK,
+					":SK": "ATHLETE|",
 				},
 			},
 		);
@@ -63,37 +88,47 @@ export class AthleteRepository implements IAthleteRepository {
 		return athletes ? athletes.map(this.mapToDomain) : [];
 	}
 
-	async getById(id: string): Promise<Athlete | null> {
-		const { PK, SK } = this.getKeys(id);
+	async getById(athleteId: string): Promise<Athlete | null> {
+		const { gsi1pk } = this.getGSIKeys(athleteId, "coachId");
 
-		const athlete = await this.dbInstance.get<AthleteDynamoDB>(
+		const athlete = await this.dbInstance.query<AthleteDynamoDB>(
 			this.TABLE_NAME,
 			{
-				Key: { PK, SK },
+				IndexName: "GSI1Index",
+				KeyConditionExpression: "gsi1pk = :gsi1pk",
+				ExpressionAttributeValues: {
+					":gsi1pk": gsi1pk,
+				},
 			},
 		);
 
 		return athlete ? this.mapToDomain(athlete) : null;
 	}
 
-	private getKeys(id: string): { PK: string; SK: string } {
+	private getGSIKeys(
+		athleteId: string,
+		coachId: string,
+	): { gsi1pk: string; gsi1sk: string } {
 		return {
-			SK: "PROFILE",
-			PK: this.setUserId(id),
+			gsi1pk: `ATHLETE|${athleteId}`,
+			gsi1sk: `COACH|${coachId}`,
 		};
 	}
 
-	private setUserId(id: string): string {
-		return `${this.DEFAULT_USER_ID}|${id}`;
+	private getKeys(
+		coachId: string,
+		athleteId: string,
+	): { PK: string; SK: string } {
+		return {
+			SK: `ATHLETE|${athleteId}`,
+			PK: `USER|COACH|${coachId}`,
+		};
 	}
 
 	private mapToDomain(athlete: AthleteDynamoDB): Athlete {
 		return {
 			id: athlete.id,
 			name: athlete.name,
-			email: athlete.email,
-			role: athlete.role,
-			accountConfirmation: athlete.account_confirmation,
 			age: athlete.age,
 			coachId: athlete.coach_id,
 			height: athlete.height,
