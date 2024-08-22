@@ -1,14 +1,16 @@
 import {
 	Button,
-	CardDescription,
 	CardHeader,
 	CardTitle,
+	Dialog,
+	DialogTrigger,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 	Icon,
+	RenderIf,
 	Spinner,
 } from "@shared/ui";
 
@@ -31,48 +33,64 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 		handleDeleteWorkout,
 	} = useWorkoutCardHeaderHook();
 
+	function renderWorkoutActions() {
+		return (
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button aria-haspopup="true" size="icon" variant="ghost">
+						<Icon name="dots" className="h-4 w-4 rotate-90" />
+						<span className="sr-only">Toggle menu</span>
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent align="end">
+					<DropdownMenuLabel>Ações</DropdownMenuLabel>
+
+					<DropdownMenuItem onClick={handleDuplicateWorkout}>
+						<Icon name="clipboard" className="h-4 w-4 mr-2" />
+						Duplicar treino
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={navigateToUpdateWorkout}>
+						<Icon name="pencil" className="h-4 w-4 mr-2" />
+						Editar treino
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						onClick={(e) => {
+							e.stopPropagation();
+							toggleDeleteWorkoutModal();
+						}}
+					>
+						<Icon name="trash" className="h-4 w-4 mr-2" />
+						Deletar treino
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		);
+	}
+
 	return (
-		<CardHeader className="p-2 flex flex-col gap-2">
+		<CardHeader className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between items-center">
 				<CardTitle>{children}</CardTitle>
+				<RenderIf
+					condition={status === "pending"}
+					render={<Spinner className="h-5 w-5 mr-1" />}
+				/>
 
-				{status === "pending" ? (
-					<Spinner className="h-5 w-5 mr-1" />
-				) : status === "error" ? (
-					<Icon name="crossCircled" className="text-destructive h-5 w-5 mr-1" />
-				) : (
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button aria-haspopup="true" size="icon" variant="ghost">
-								<Icon name="dots" className="h-4 w-4 rotate-90" />
-								<span className="sr-only">Toggle menu</span>
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuLabel>Ações</DropdownMenuLabel>
+				<RenderIf
+					condition={status === "error"}
+					render={
+						<Icon
+							name="crossCircled"
+							className="text-destructive h-5 w-5 mr-1"
+						/>
+					}
+				/>
 
-							<DropdownMenuItem onClick={handleDuplicateWorkout}>
-								<Icon name="clipboard" className="h-4 w-4 mr-2" />
-								Duplicar treino
-							</DropdownMenuItem>
-							<DropdownMenuItem onClick={navigateToUpdateWorkout}>
-								<Icon name="pencil" className="h-4 w-4 mr-2" />
-								Editar treino
-							</DropdownMenuItem>
-							<DropdownMenuItem onClick={toggleDeleteWorkoutModal}>
-								<Icon name="trash" className="h-4 w-4 mr-2" />
-								Deletar treino
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				)}
+				<RenderIf
+					condition={status !== "pending" && status !== "error"}
+					render={renderWorkoutActions()}
+				/>
 			</div>
-
-			<CardDescription className="text-pretty line-clamp-2">
-				Esse treino tem como objetivo facilitar a execução de exercícios para o
-				atleta. Para isto, é necessário seguir as instruções e realizar os
-				exercícios conforme a orientação do treinador.
-			</CardDescription>
 
 			<DeleteWorkoutModal
 				isOpen={deleteWorkoutModalIsOpen}

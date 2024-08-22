@@ -39,14 +39,14 @@ export function NewTrainingScreen() {
 	);
 
 	return (
-		<div>
+		<div className="h-full">
 			<div className="w-full gap-2 flex flex-row items-center justify-between">
 				<HeaderScreen
 					title="Novo treino"
 					description="Adicione um novo treino para o atleta."
 				/>
 
-				<div className="gap-2 flex flex-row justify-end">
+				<div className="gap-4 flex flex-row justify-end">
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
 							<Button variant="secondary" disabled={isCreatingWorkout}>

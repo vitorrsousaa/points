@@ -32,3 +32,4 @@ export * from "./mode-toggle";
 export * from "./select";
 export * from "./scroll-area";
 export * from "./modal";
+export * from "./collapsible";

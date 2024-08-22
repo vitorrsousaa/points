@@ -21,7 +21,7 @@ import {
 	SheetTrigger,
 } from "@shared/ui";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { MobSidebar, Sidebar } from "./components/sidebar";
+import { MobSidebar, Sidebar } from "./components/Sidebar";
 
 export function DashboardLayout() {
 	const { pathname } = useLocation();
