@@ -2,7 +2,7 @@ import { useGetAllAthletes } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import { useDebounce } from "@/hooks/useDebounce";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createContext, useMemo } from "react";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import {
 	SearchForm,

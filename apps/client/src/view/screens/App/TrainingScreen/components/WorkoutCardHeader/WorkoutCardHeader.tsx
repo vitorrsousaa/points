@@ -2,8 +2,6 @@ import {
 	Button,
 	CardHeader,
 	CardTitle,
-	Dialog,
-	DialogTrigger,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
