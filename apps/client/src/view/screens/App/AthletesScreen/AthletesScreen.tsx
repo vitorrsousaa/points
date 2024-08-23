@@ -1,20 +1,10 @@
 import { ROUTES } from "@/config/routes";
-import { useGetAllAthletes } from "@/hooks/athlete";
-import { useAuth } from "@/hooks/auth";
 import {
 	Badge,
 	Button,
 	Card,
 	CardContent,
-	DropdownMenu,
-	DropdownMenuCheckboxItem,
-	DropdownMenuContent,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
 	HeaderScreen,
-	Icon,
-	Input,
 	RenderIf,
 	Skeleton,
 	Table,
@@ -25,20 +15,25 @@ import {
 	TableRow,
 } from "@shared/ui";
 import { Link } from "react-router-dom";
-import { AthletesAnalytics } from "./components/athletes-analytics";
+
 import {
+	AthletesAnalytics,
+	AthleteTableHeader,
 	TableActions,
 	TableAvailableAthlete,
 	TableRowAthlete,
-} from "./components/table-row";
+} from "./components";
+import { useAthletesScreen } from "./useAthletesScreen";
 
 export function AthletesScreen() {
-	const { id } = useAuth();
-
-	const { athletes, isLoadingAthletes, isErrorAthletes } =
-		useGetAllAthletes(id);
-
-	const hasAthletes = Boolean(athletes && athletes?.length > 0);
+	const {
+		athletes,
+		filteredAthletes,
+		hasAthletes,
+		isErrorAthletes,
+		isLoadingAthletes,
+		searchControl,
+	} = useAthletesScreen();
 
 	return (
 		<div className="flex flex-col gap-4 w-full">
@@ -53,41 +48,7 @@ export function AthletesScreen() {
 
 			<Card className="p-4 rounded-xl border flex items-center">
 				<CardContent className="p-0 w-full flex items-center justify-between gap-2">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button variant="outline" size="sm" className="h-9 gap-1">
-								<Icon name="filter" />
-								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-									Filtro
-								</span>
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuLabel>Filtrar por</DropdownMenuLabel>
-							<DropdownMenuSeparator />
-							<DropdownMenuCheckboxItem checked>
-								Status
-							</DropdownMenuCheckboxItem>
-							<DropdownMenuCheckboxItem>Categoria</DropdownMenuCheckboxItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-
-					<div className="flex items-center gap-4">
-						<Input
-							className="h-9 w-72"
-							placeholder="Pesquise pelo nome do atleta"
-							type="text"
-						/>
-
-						<Link to={ROUTES.NEW_ATHLETE}>
-							<Button size="sm" className="h-9 gap-1">
-								<Icon name="plusCircle" className="h-5 w-5" />
-								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-									Adicionar atleta
-								</span>
-							</Button>
-						</Link>
-					</div>
+					<AthleteTableHeader searchControl={searchControl} />
 				</CardContent>
 			</Card>
 
@@ -131,7 +92,7 @@ export function AthletesScreen() {
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								{athletes?.map((athlete) => (
+								{filteredAthletes?.map((athlete) => (
 									<TableRowAthlete status={athlete.status} key={athlete.id}>
 										<TableCell>
 											<div className="flex flex-col gap-2">

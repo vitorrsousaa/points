@@ -1,4 +1,5 @@
 import type { TTrainingFormSchema } from "@/components/TrainingForm/TrainingFormSchema";
+import type { Workout } from "@/entitites/workout";
 import { useAuth } from "@/hooks/auth";
 import { useUpdateWorkout } from "@/hooks/workout";
 import { useCallback, useMemo } from "react";
@@ -23,16 +24,26 @@ export function useUpdateWorkoutHook() {
 
 			navigate(-1);
 
+			const workout: Workout = {
+				...data,
+				description: data.description,
+				name: data.name,
+				isActive: data.isActive,
+				exercises: data.exercises,
+				category: data.category,
+				createdAt: state?.workout?.createdAt || new Date().toISOString(),
+				updatedAt: state?.workout?.updatedAt || new Date().toISOString(),
+				id: workoutId,
+				volume: state?.workout?.volume,
+			};
+
 			updateWorkout({
-				workout: {
-					...data,
-					id: workoutId,
-				},
+				workout,
 				athleteId,
 				coachId: id,
 			});
 		},
-		[athleteId, navigate, updateWorkout, id, workoutId],
+		[athleteId, navigate, updateWorkout, id, workoutId, state],
 	);
 
 	const hasWorkout = useMemo(() => Boolean(state?.workout), [state]);

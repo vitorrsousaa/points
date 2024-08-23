@@ -1,4 +1,12 @@
-import { Button, Modal } from "@shared/ui";
+import {
+	Button,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@shared/ui";
 
 interface DeleteWorkoutModalProps {
 	onClose: () => void;
@@ -8,23 +16,47 @@ interface DeleteWorkoutModalProps {
 
 export function DeleteWorkoutModal(props: DeleteWorkoutModalProps) {
 	const { isOpen, onDeleteWorkout, onClose } = props;
+
 	return (
-		<Modal.Root isOpen={isOpen} onClose={() => {}}>
-			<Modal.Header>
-				<Modal.Title>Deletar treino</Modal.Title>
-				<Modal.Description>
-					Tem certeza que deseja deletar esse treino?
-				</Modal.Description>
-				<small className="text-md mt-4 mb-4">
-					Essa ação não pode ser desfeita!
-				</small>
-				<Modal.Footer>
-					<Button onClick={onClose} variant={"destructive"}>
+		<Dialog open={isOpen}>
+			<DialogContent
+				onClick={(e) => {
+					e.preventDefault();
+				}}
+			>
+				<DialogHeader onClick={(e) => e.preventDefault()}>
+					<DialogTitle>Deletar treino</DialogTitle>
+
+					<DialogDescription>
+						Tem certeza que deseja deletar esse treino? Essa ação não poderá ser
+						revertida.
+					</DialogDescription>
+				</DialogHeader>
+
+				<DialogFooter
+					onClick={(e) => e.preventDefault()}
+					className="flex items-center gap-2"
+				>
+					<Button
+						onClick={(e) => {
+							e.preventDefault();
+							onClose();
+						}}
+						variant="secondary"
+					>
 						Cancelar
 					</Button>
-					<Button onClick={onDeleteWorkout}>Deletar</Button>
-				</Modal.Footer>
-			</Modal.Header>
-		</Modal.Root>
+
+					<Button
+						onClick={(e) => {
+							e.preventDefault();
+							onDeleteWorkout();
+						}}
+					>
+						Deletar
+					</Button>
+				</DialogFooter>
+			</DialogContent>
+		</Dialog>
 	);
 }

@@ -30,7 +30,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		name: "exercises",
 	});
 
-	const { exercises: watchExercises } = useWatch({
+	const { exercises: watchExercises, name: watchName } = useWatch({
 		control,
 	});
 
@@ -112,6 +112,7 @@ export function useTrainingFormHook(props: TrainingFormProps) {
 		isUpdating,
 		exercises,
 		volume,
+		watchName,
 		handleAddNewExercise,
 		handleRemoveExercise,
 		handleSubmit,

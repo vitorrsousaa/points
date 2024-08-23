@@ -26,6 +26,7 @@ export const TrainingFormSchema = z.object({
 	exercises: z
 		.array(ExerciseFormSchema)
 		.min(1, "Adicione pelo menos um exercício"),
+	category: z.string({ message: "A categoria é obrigatório" }),
 });
 
 export type TTrainingFormSchema = z.infer<typeof TrainingFormSchema>;
@@ -37,4 +38,5 @@ export const defaultInitialValues: TTrainingFormSchema = {
 	exercises: [],
 	isActive: false,
 	description: "",
+	category: "",
 };

@@ -16,7 +16,6 @@ import {
 import { useParams } from "react-router-dom";
 import { WorkoutCard } from "./components/WorkoutCard";
 import { WorkoutCardContent } from "./components/WorkoutCardContent";
-import { WorkoutCardFooter } from "./components/WorkoutCardFooter";
 import { WorkoutCardHeader } from "./components/WorkoutCardHeader";
 
 export function TrainingScreen() {
@@ -121,7 +120,7 @@ export function TrainingScreen() {
 							<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
 
 							<span className="text-muted-foreground">
-								Acompanhe os treinos do atleta.
+								Clique em um treino e saiba mais informações sobre.
 							</span>
 						</div>
 						<Button
@@ -133,7 +132,7 @@ export function TrainingScreen() {
 								})
 							}
 						>
-							<Icon name="plusCircle" className="h-3.5 w-3.5" />
+							<Icon name="plusCircle" className="h-5 w-5" />
 							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
 								Adicionar treino
 							</span>
@@ -151,9 +150,18 @@ export function TrainingScreen() {
 										workout={workout}
 										status={workout.status}
 									>
-										<WorkoutCardHeader>{workout.name}</WorkoutCardHeader>
-										<WorkoutCardContent exercises={workout.exercises} />
-										<WorkoutCardFooter />
+										<WorkoutCardHeader>
+											{workout.name}
+
+											<Badge
+												className="ml-2"
+												variant={workout.isActive ? "default" : "secondary"}
+											>
+												{workout.isActive ? "Ativo" : "Inativo"}
+											</Badge>
+										</WorkoutCardHeader>
+
+										<WorkoutCardContent />
 									</WorkoutCard>
 								))}
 							</div>
