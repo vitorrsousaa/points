@@ -149,7 +149,8 @@ export function TrainingForm(props: TrainingFormProps) {
 
 							<div className="flex items-center gap-4 space-between">
 								<FormField
-									name="email"
+									name="category"
+									control={methods.control}
 									render={({ field }) => (
 										<FormItem className="w-full">
 											<FormLabel>Categoria</FormLabel>
