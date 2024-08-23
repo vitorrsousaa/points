@@ -2,7 +2,7 @@ import path from "node:path";
 // @ts-ignore
 import configShared from "@shared/vitest-presets/node/vitest.config";
 import tsConfigPaths from "vite-tsconfig-paths";
-import { defineConfig, mergeConfig } from "vitest/config";
+import { Plugin,defineConfig, mergeConfig } from "vitest/config";
 
 export default defineConfig(() =>
 	mergeConfig(
@@ -18,7 +18,7 @@ export default defineConfig(() =>
 				},
 				exclude: ["**/*.test.ts", "**/src/server/tests/**"],
 			},
-			plugins: [tsConfigPaths() ],
+			plugins: [tsConfigPaths() as unknown as Plugin ],
 		}),
 	),
 );
