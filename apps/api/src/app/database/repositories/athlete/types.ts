@@ -9,8 +9,10 @@ export type AthleteDynamoDB = Prettify<
 		age: number;
 		account_confirmation: boolean;
 		coach_id: string;
+		created_at: string;
+		updated_at: string;
 	} & TBaseEntity &
-		Omit<Athlete, "accountConfirmation" | "coachId">
+		Omit<Athlete, "accountConfirmation" | "coachId" | "createdAt" | "updatedAt">
 >;
 
 export interface IAthleteRepository {

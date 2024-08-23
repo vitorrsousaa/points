@@ -2,12 +2,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useMemo } from "react";
 import { useFieldArray, useForm, useWatch } from "react-hook-form";
 import type { TrainingFormProps } from "./TrainingForm";
+import { defaultVolume } from "./TrainingFormConstants";
 import {
 	type TExerciseFormSchema,
 	TrainingFormSchema,
 	defaultInitialValues,
 } from "./TrainingFormSchema";
-import { defaultVolume } from "./TrainingFormConstants";
 
 export function useTrainingFormHook(props: TrainingFormProps) {
 	const { initialValues, onSubmit } = props;

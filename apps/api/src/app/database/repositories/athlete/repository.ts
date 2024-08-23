@@ -11,26 +11,39 @@ export class AthleteRepository implements IAthleteRepository {
 
 	async update(athlete: Athlete): Promise<Athlete> {
 		const { PK, SK } = this.getKeys(athlete.id);
+		const now = new Date().toISOString();
 
 		await this.dbInstance.update(this.TABLE_NAME, {
 			Key: { PK, SK },
 			UpdateExpression:
-				"set #coach_id = :coach_id, #weight = :weight, #height = :height, #age = :age",
+				"set #coach_id = :coach_id, #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at",
 			ExpressionAttributeNames: {
 				"#coach_id": "coach_id",
 				"#weight": "weight",
 				"#height": "height",
 				"#age": "age",
+				"#updated_at": "updated_at",
 			},
 			ExpressionAttributeValues: {
 				":coach_id": athlete.coachId,
 				":weight": athlete.weight,
 				":height": athlete.height,
 				":age": athlete.age,
+				":updated_at": now,
 			},
 		});
 
-		return athlete;
+		const updatedAthlete: AthleteDynamoDB = {
+			...athlete,
+			updated_at: now,
+			created_at: athlete.createdAt,
+			account_confirmation: athlete.accountConfirmation,
+			coach_id: athlete.coachId,
+			PK,
+			SK,
+		};
+
+		return this.mapToDomain(updatedAthlete);
 	}
 
 	async getAllByCoachId(coachId: string): Promise<Athlete[]> {
@@ -39,10 +52,10 @@ export class AthleteRepository implements IAthleteRepository {
 			{
 				IndexName: "CoachIndex",
 				KeyConditionExpression: "coach_id = :coach_id",
-				FilterExpression: "PK = :PK",
+				FilterExpression: "SK = :SK",
 				ExpressionAttributeValues: {
 					":coach_id": coachId,
-					":PK": this.DEFAULT_USER_ID,
+					":SK": "PROFILE",
 				},
 			},
 		);
@@ -65,8 +78,8 @@ export class AthleteRepository implements IAthleteRepository {
 
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
-			PK: this.DEFAULT_USER_ID,
-			SK: this.setUserId(id),
+			SK: "PROFILE",
+			PK: this.setUserId(id),
 		};
 	}
 
@@ -74,13 +87,9 @@ export class AthleteRepository implements IAthleteRepository {
 		return `${this.DEFAULT_USER_ID}|${id}`;
 	}
 
-	private getUserId(userId: string): string {
-		return userId.split("|")[1];
-	}
-
 	private mapToDomain(athlete: AthleteDynamoDB): Athlete {
 		return {
-			id: athlete.SK.split("|")[1],
+			id: athlete.id,
 			name: athlete.name,
 			email: athlete.email,
 			role: athlete.role,
@@ -89,6 +98,8 @@ export class AthleteRepository implements IAthleteRepository {
 			coachId: athlete.coach_id,
 			height: athlete.height,
 			weight: athlete.weight,
+			createdAt: athlete.created_at,
+			updatedAt: athlete.updated_at,
 		};
 	}
 }

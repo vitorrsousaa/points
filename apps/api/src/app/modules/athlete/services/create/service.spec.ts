@@ -15,12 +15,16 @@ describe("Service:Create", () => {
 	let mockedUserRepository: Mocked<IUserRepository>;
 	let mockedAthleteRepository: Mocked<IAthleteRepository>;
 
+	const now = new Date().toISOString();
+
 	const defaultUser: UnwrapPromise<ReturnType<IUserRepository["getById"]>> = {
 		accountConfirmation: true,
 		email: "email",
 		id: "123",
 		name: "name",
 		role: ["ADMIN"],
+		createdAt: now,
+		updatedAt: now,
 	};
 
 	const inputData: ICreateInput = {
@@ -90,7 +94,7 @@ describe("Service:Create", () => {
 			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		});
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
 
 		// Act
 		const result = await service.execute(inputData);
@@ -109,7 +113,7 @@ describe("Service:Create", () => {
 		mockedUserRepository.getById.mockResolvedValue({
 			...defaultUser,
 			role: ["COACH"],
-		});
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 		mockedSignupService.execute.mockResolvedValue({ userId: "123" });
 		mockedAthleteRepository.update.mockResolvedValue({
 			...inputData,
@@ -117,22 +121,24 @@ describe("Service:Create", () => {
 			accountConfirmation: false,
 			id: "123",
 			name: `${inputData.firstName} ${inputData.lastName}`,
-		});
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["update"]>>);
 
 		// Act
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(mockedAthleteRepository.update).toBeCalledWith({
-			name: `${inputData.firstName} ${inputData.lastName}`,
-			role: ["ATHLETE"],
-			id: "123",
-			accountConfirmation: false,
-			age: inputData.age,
-			coachId: inputData.coachId,
-			email: inputData.email,
-			height: inputData.height,
-			weight: inputData.weight,
-		});
+		expect(mockedAthleteRepository.update).toBeCalledWith(
+			expect.objectContaining({
+				name: `${inputData.firstName} ${inputData.lastName}`,
+				role: ["ATHLETE"],
+				id: "123",
+				accountConfirmation: false,
+				age: inputData.age,
+				coachId: inputData.coachId,
+				email: inputData.email,
+				height: inputData.height,
+				weight: inputData.weight,
+			}),
+		);
 	});
 });

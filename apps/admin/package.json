@@ -1,0 +1,42 @@
+{
+	"name": "admin",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"lint": "biome lint --apply ./src",
+		"preview": "vite preview",
+		"typecheck": "tsc --noEmit",
+		"check": "biome check --apply ./src",
+		"format": "biome format --write ./src",
+		"test": "vitest run",
+		"test:watch": "vitest run --watch"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^3.9.0",
+		"@shared/config-css": "*",
+		"@shared/ui": "*",
+		"@tanstack/react-query": "^5.40.0",
+		"@tanstack/react-query-devtools": "^5.40.0",
+		"autoprefixer": "^10.4.19",
+		"axios": "^1.7.2",
+		"postcss": "^8.4.38",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-hot-toast": "^2.4.1",
+		"react-router-dom": "^6.23.1",
+		"tailwindcss": "^3.4.3"
+	},
+	"devDependencies": {
+		"@hookform/devtools": "^4.3.1",
+		"@shared/vitest-presets": "*",
+		"@testing-library/react": "^15.0.7",
+		"@types/node": "^20.12.13",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react-swc": "^3.7.0",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.12"
+	}
+}
