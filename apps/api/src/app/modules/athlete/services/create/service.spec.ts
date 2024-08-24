@@ -106,7 +106,7 @@ describe("Service:Create", () => {
 			name: `${inputData.firstName} ${inputData.lastName}`,
 		});
 	});
-	it("Should call athleteRepository with ATHLETE role", async () => {
+	it("Should call athleteRepository with athleteId when service is called with athleteId", async () => {
 		// Arrange
 		mockedUserRepository.getById.mockResolvedValue({
 			...defaultUser,
@@ -120,7 +120,35 @@ describe("Service:Create", () => {
 		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["create"]>>);
 
 		// Act
-		await service.execute(inputData);
+		await service.execute({ ...inputData, athleteId: "athleteId" });
+
+		// Assert
+		expect(mockedAthleteRepository.create).toBeCalledWith(
+			expect.objectContaining({
+				name: `${inputData.firstName} ${inputData.lastName}`,
+				id: "athleteId",
+				age: inputData.age,
+				coachId: inputData.coachId,
+				height: inputData.height,
+				weight: inputData.weight,
+			}),
+		);
+	});
+	it("Should call athleteRepository with userId returned of signupService when athleteId is not defined", async () => {
+		// Arrange
+		mockedUserRepository.getById.mockResolvedValue({
+			...defaultUser,
+			role: ["COACH"],
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
+		mockedSignupService.execute.mockResolvedValue({ userId: "123" });
+		mockedAthleteRepository.create.mockResolvedValue({
+			...inputData,
+			id: "123",
+			name: `${inputData.firstName} ${inputData.lastName}`,
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["create"]>>);
+
+		// Act
+		await service.execute({ ...inputData, athleteId: undefined });
 
 		// Assert
 		expect(mockedAthleteRepository.create).toBeCalledWith(
@@ -129,7 +157,6 @@ describe("Service:Create", () => {
 				id: "123",
 				age: inputData.age,
 				coachId: inputData.coachId,
-				email: inputData.email,
 				height: inputData.height,
 				weight: inputData.weight,
 			}),
