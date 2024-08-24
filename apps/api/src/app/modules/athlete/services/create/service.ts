@@ -17,6 +17,7 @@ export const CreateInputServiceSchema = z.object({
 	weight: z.number().min(1),
 	height: z.number().min(1),
 	age: z.number().min(1),
+	athleteId: z.string().optional(),
 });
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
@@ -43,28 +44,30 @@ export class CreateService implements ICreateService {
 
 		this.userIsCoach(coach.role);
 
-		const now = new Date().toISOString();
+		let athleteId = "";
 
-		const { userId } = await this.signupService.execute({
-			firstName: createInput.firstName,
-			lastName: createInput.lastName,
-			email: createInput.email,
-			password: generateRandomPassword(),
-			role: ["ATHLETE"],
-		});
+		const isDefaultAthlete = Boolean(createInput.athleteId);
 
-		const athlete = await this.athleteRepository.update({
-			id: userId,
+		if (!isDefaultAthlete) {
+			const { userId } = await this.signupService.execute({
+				firstName: createInput.firstName,
+				lastName: createInput.lastName,
+				email: createInput.email,
+				password: generateRandomPassword(),
+				role: ["ATHLETE"],
+			});
+
+			athleteId = userId;
+		}
+
+		const athlete = await this.athleteRepository.create({
+			id: isDefaultAthlete ? createInput.athleteId || "" : athleteId,
 			coachId: createInput.coachId,
 			weight: createInput.weight,
 			height: createInput.height,
 			age: createInput.age,
-			accountConfirmation: false,
-			email: createInput.email,
 			name: `${createInput.firstName} ${createInput.lastName}`,
-			role: ["ATHLETE"],
-			createdAt: now,
-			updatedAt: now,
+			email: createInput.email,
 		});
 
 		return athlete;

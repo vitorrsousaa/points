@@ -30,7 +30,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			id: exerciseId,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, {
+		await this.dbInstance.create({
 			...newExercise,
 		});
 
@@ -38,17 +38,13 @@ export class ExerciseRepository implements IExerciseRepository {
 	}
 
 	async getAll(): Promise<Exercise[]> {
-		const exercises = await this.dbInstance.query<ExerciseDynamoDB[]>(
-			this.TABLE_NAME,
-			{
-				KeyConditionExpression:
-					"PK = :primaryKey and begins_with(SK, :sortKey)",
-				ExpressionAttributeValues: {
-					":sortKey": this.DEFAULT_EXERCISE_ID,
-					":primaryKey": this.DEFAULT_EXERCISE_ID,
-				},
+		const exercises = await this.dbInstance.query<ExerciseDynamoDB[]>({
+			KeyConditionExpression: "PK = :primaryKey and begins_with(SK, :sortKey)",
+			ExpressionAttributeValues: {
+				":sortKey": this.DEFAULT_EXERCISE_ID,
+				":primaryKey": this.DEFAULT_EXERCISE_ID,
 			},
-		);
+		});
 
 		return exercises
 			? exercises.map((exercise) => this.mapToExerciseDomain(exercise))

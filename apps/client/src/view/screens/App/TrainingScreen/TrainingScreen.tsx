@@ -54,7 +54,7 @@ export function TrainingScreen() {
 			/>
 
 			<RenderIf
-				condition={isErrorAthlete || isErrorWorkouts}
+				condition={isErrorAthlete}
 				render={
 					<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
 						<strong className="font-medium">
@@ -68,7 +68,7 @@ export function TrainingScreen() {
 			<>
 				<div className="grid flex-1 items-start gap-4 md:gap-8">
 					<RenderIf
-						condition={Boolean(athlete && !isLoadingAthlete)}
+						condition={Boolean(athlete && !isLoadingAthlete && !isErrorAthlete)}
 						render={
 							<Card>
 								<CardContent className="py-4 flex ">
@@ -115,7 +115,7 @@ export function TrainingScreen() {
 						}
 					/>
 
-					<div className="flex flex-row justify-between">
+					<div className="flex flex-row justify-between items-center">
 						<div className="flex flex-col gap-1">
 							<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
 
@@ -123,20 +123,22 @@ export function TrainingScreen() {
 								Clique em um treino e saiba mais informações sobre.
 							</span>
 						</div>
-						<Button
-							size="sm"
-							className="h-9 gap-1"
-							onClick={() =>
-								navigate("NEW_TRAINING", {
-									replace: { athleteId: athleteId || "" },
-								})
-							}
-						>
-							<Icon name="plusCircle" className="h-5 w-5" />
-							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-								Adicionar treino
-							</span>
-						</Button>
+						{!isErrorWorkouts && !isLoadingWorkouts && (
+							<Button
+								size="sm"
+								className="h-9 gap-1"
+								onClick={() =>
+									navigate("NEW_TRAINING", {
+										replace: { athleteId: athleteId || "" },
+									})
+								}
+							>
+								<Icon name="plusCircle" className="h-5 w-5" />
+								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+									Adicionar treino
+								</span>
+							</Button>
+						)}
 					</div>
 
 					<RenderIfElse
@@ -167,22 +169,35 @@ export function TrainingScreen() {
 							</div>
 						}
 						elseRender={
-							<>
-								{isLoadingWorkouts ? (
+							<RenderIfElse
+								condition={isLoadingWorkouts}
+								ifRender={
 									<div className="w-full flex items-center justify-center ">
 										<Skeleton className="w-full h-20" />
 									</div>
-								) : (
+								}
+								elseRender={
 									<div className="flex flex-col items-center mt-12 gap-2 mb-12">
-										<small>
-											Este atleta ainda não possui um treinamento cadastrado
-										</small>
-										<small>
-											Clique no botão acima para adicionar um novo treino.
-										</small>
+										{isErrorWorkouts ? (
+											<>
+												<span>
+													Tivemos um erro para buscar os treinos do atleta.
+												</span>
+												<small>Tente novamente.</small>
+											</>
+										) : (
+											<>
+												<span>
+													Este atleta ainda não possui um treinamento cadastrado
+												</span>
+												<small>
+													Clique no botão acima para adicionar um novo treino.
+												</small>
+											</>
+										)}
 									</div>
-								)}
-							</>
+								}
+							/>
 						}
 					/>
 				</div>

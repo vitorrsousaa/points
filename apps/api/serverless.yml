@@ -1,4 +1,4 @@
-service: Training
+service: Grypp
 useDotenv: true
 frameworkVersion: '3'
 
@@ -25,7 +25,7 @@ provider:
         - Effect: "Allow"
           Action:
             - "cognito-idp:AdminGetUser"
-          Resource: !GetAtt TrainingUserPool.Arn
+          Resource: !GetAtt GryppUserPool.Arn
         - Effect: "Allow"
           Action:
             - dynamodb:PutItem
@@ -35,21 +35,21 @@ provider:
             - dynamodb:Scan
             - dynamodb:Query
           Resource: 
-            - !GetAtt TrainingTable.Arn
-            - !Sub ${TrainingTable.Arn}/index/EmailIndex
-            - !Sub ${TrainingTable.Arn}/index/CoachIndex
+            - !GetAtt GryppTable.Arn
+            - !Sub ${GryppTable.Arn}/index/EmailIndex
+            - !Sub ${GryppTable.Arn}/index/GSI1Index
   environment:
-    COGNITO_POOL_ID: !Ref TrainingUserPool
-    COGNITO_POOL_CLIENT_ID: !Ref TrainingUserPoolClient
+    COGNITO_POOL_ID: !Ref GryppUserPool
+    COGNITO_POOL_CLIENT_ID: !Ref GryppUserPoolClient
     STAGE: ${self:provider.stage}
   httpApi:
     authorizers:
       CognitoAuthorizer:
         type: jwt
         identitySource: $request.header.Authorization
-        issuerUrl: !GetAtt TrainingUserPool.ProviderURL
+        issuerUrl: !GetAtt GryppUserPool.ProviderURL
         audience:
-          - !Ref TrainingUserPoolClient
+          - !Ref GryppUserPoolClient
     cors:
       allowedOrigins:
         - '*'
@@ -64,10 +64,10 @@ provider:
           
 resources:
   Resources:
-    TrainingUserPool:
+    GryppUserPool:
       Type: AWS::Cognito::UserPool
       Properties:
-        UserPoolName: TrainingUserPool-${self:provider.stage}
+        UserPoolName: GryppUserPool-${self:provider.stage}
         MfaConfiguration: OFF
         AutoVerifiedAttributes:
           - email
@@ -95,11 +95,11 @@ resources:
             Required: true
             Mutable: true
             AttributeDataType: String
-    TrainingUserPoolClient:
+    GryppUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
       Properties: 
-        ClientName: TrainingUserPoolClient-${self:provider.stage}
-        UserPoolId: !Ref TrainingUserPool
+        ClientName: GryppUserPoolClient-${self:provider.stage}
+        UserPoolId: !Ref GryppUserPool
         ExplicitAuthFlows:
           - ALLOW_USER_PASSWORD_AUTH
           - ALLOW_REFRESH_TOKEN_AUTH
@@ -108,15 +108,17 @@ resources:
           RefreshToken: hours
         AccessTokenValidity: 4
         RefreshTokenValidity: 56
-    TrainingTable:
+    GryppTable:
       Type: AWS::DynamoDB::Table
       Properties:
         BillingMode: PAY_PER_REQUEST
-        TableName: TrainingTable-${self:provider.stage}
+        TableName: GryppTable-${self:provider.stage}
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
-          - AttributeName: coach_id
+          - AttributeName: gsi1pk
+            AttributeType: S
+          - AttributeName: gsi1sk
             AttributeType: S
           - AttributeName: PK
             AttributeType: S
@@ -134,10 +136,12 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: ALL
-          - IndexName: CoachIndex
+          - IndexName: GSI1Index
             KeySchema:
-              - AttributeName: coach_id
+              - AttributeName: gsi1pk
                 KeyType: HASH
+              - AttributeName: gsi1sk
+                KeyType: RANGE
             Projection:
               ProjectionType: ALL
         
@@ -163,17 +167,10 @@ functions:
     handler: src/server/functions/auth/cognitoCustomMessage.handler
     events:
       - cognitoUserPool:
-          pool: TrainingUserPool-${self:provider.stage}
+          pool: GryppUserPool-${self:provider.stage}
           trigger: CustomMessage
           existing: true
           forceDeploy: true
-  signup:
-    handler: src/server/functions/auth/signup.handler
-    events:
-      - httpApi:
-          method: POST
-          path: /auth/signup
-          documentation: ${file(src/server/functions/auth/signup/handler.doc.yml):signup}
   profile:
     handler: src/server/functions/auth/profile.handler
     events:
@@ -284,3 +281,10 @@ functions:
           documentation: ${file(src/server/functions/settings/getByUser/handler.doc.yml):getByUser}
           authorizer:
             name: CognitoAuthorizer
+  createCoach:
+    handler: src/server/functions/coach/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /coach
+          

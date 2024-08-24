@@ -21,6 +21,7 @@ import {
 	QuestionMarkCircledIcon,
 	ReaderIcon,
 	TrashIcon,
+	CheckCircledIcon,
 } from "@radix-ui/react-icons";
 
 interface IconProps {
@@ -52,6 +53,7 @@ const icons = {
 	archive: ArchiveIcon,
 	cursor: CursorArrowIcon,
 	eyeOpen: EyeOpenIcon,
+	check: CheckCircledIcon,
 } as const;
 
 export function Icon(props: IconProps) {

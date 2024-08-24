@@ -60,7 +60,7 @@ export function AthleteForm(props: AtheleFormProps) {
 										<FormLabel>Nome</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="Jhon Doe"
+												placeholder="Jhon"
 												type="text"
 												required
 												disabled={isSubmitting}
@@ -83,7 +83,7 @@ export function AthleteForm(props: AtheleFormProps) {
 										<FormLabel>Sobrenome</FormLabel>
 										<FormControl>
 											<Input
-												placeholder="Jhon Doe"
+												placeholder="Doe"
 												type="text"
 												required
 												disabled={isSubmitting}
@@ -268,7 +268,6 @@ export function AthleteForm(props: AtheleFormProps) {
 						/>
 
 						<FormField
-							control={methods.control}
 							name="email"
 							render={({ field: { value, onChange, name } }) => (
 								<FormItem className="w-full">

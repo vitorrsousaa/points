@@ -1,13 +1,15 @@
 import type { Prettify } from "@application/utils/types";
-import type { User } from "../user";
+import type { BaseEntity } from "../base";
 /**
  * Athlete domain model
  */
 export type Athlete = Prettify<
-	User & {
+	BaseEntity & {
 		coachId: string;
 		weight: number;
 		height: number;
 		age: number;
+		name: string;
+		email: string;
 	}
 >;

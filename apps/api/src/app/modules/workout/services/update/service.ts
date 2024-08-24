@@ -8,7 +8,7 @@ import { getWorkoutVolume } from "../../functions/get-workout-volume";
 
 export const UpdateInputServiceSchema = CreateWorkoutInputSchema.extend({
 	coachId: z.string().uuid(),
-	athleteId: z.string().uuid(),
+	athleteId: z.string(),
 	id: z.string().uuid(),
 });
 

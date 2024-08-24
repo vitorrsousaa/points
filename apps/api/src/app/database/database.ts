@@ -1,3 +1,4 @@
+import { DATABASE_TABLE } from "@application/config/tables";
 import {
 	DeleteCommand,
 	type DeleteCommandInput,
@@ -18,39 +19,32 @@ export type TBaseEntity = {
 	PK: string;
 };
 
+export type TIndexes = "GSI1Index" | "EmailIndex";
+
 export interface IDatabaseClient {
-	create<T extends TBaseEntity>(
-		tableName: string,
-		attributes: T,
-	): Promise<void>;
-	update(
-		tableName: string,
-		args: Omit<UpdateCommandInput, "TableName">,
-	): Promise<void>;
+	create<T extends TBaseEntity>(attributes: T): Promise<void>;
+	update(args: Omit<UpdateCommandInput, "TableName">): Promise<void>;
 	query<T>(
-		tableName: string,
-		args: Omit<QueryCommandInput, "TableName">,
+		args: Omit<QueryCommandInput, "TableName" | "IndexName"> & {
+			IndexName?: TIndexes;
+		},
 	): Promise<T | undefined>;
 	scan<T>(
-		tableName: string,
-		args: Omit<ScanCommandInput, "TableName">,
+		args: Omit<ScanCommandInput, "TableName" | "IndexName"> & {
+			IndexName?: TIndexes;
+		},
 	): Promise<T | undefined>;
-	get<T>(
-		tableName: string,
-		args: Omit<GetCommandInput, "TableName">,
-	): Promise<T | undefined>;
-	delete(
-		tableName: string,
-		args: Omit<DeleteCommandInput, "TableName">,
-	): Promise<void>;
+	get<T>(args: Omit<GetCommandInput, "TableName">): Promise<T | undefined>;
+	delete(args: Omit<DeleteCommandInput, "TableName">): Promise<void>;
 }
 
 export class DatabaseClient implements IDatabaseClient {
+	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	constructor(private readonly dynamoClient: DynamoDBDocumentClient) {}
 
-	async create<T extends TBaseEntity>(tableName: string, attributes: T) {
+	async create<T extends TBaseEntity>(attributes: T) {
 		const command = new PutCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			Item: {
 				...attributes,
 			},
@@ -59,18 +53,18 @@ export class DatabaseClient implements IDatabaseClient {
 		await this.dynamoClient.send(command);
 	}
 
-	async delete(tableName: string, args: Omit<DeleteCommandInput, "TableName">) {
+	async delete(args: Omit<DeleteCommandInput, "TableName">) {
 		const command = new DeleteCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			...args,
 		});
 
 		await this.dynamoClient.send(command);
 	}
 
-	async update(tableName: string, args: Omit<UpdateCommandInput, "TableName">) {
+	async update(args: Omit<UpdateCommandInput, "TableName">) {
 		const updateCommand = new UpdateCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			...args,
 		});
 
@@ -78,11 +72,10 @@ export class DatabaseClient implements IDatabaseClient {
 	}
 
 	async query<T>(
-		tableName: string,
 		args: Omit<QueryCommandInput, "TableName">,
 	): Promise<T | undefined> {
 		const command = new QueryCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			...args,
 		});
 
@@ -92,11 +85,10 @@ export class DatabaseClient implements IDatabaseClient {
 	}
 
 	async scan<T>(
-		tableName: string,
 		args: Omit<ScanCommandInput, "TableName">,
 	): Promise<T | undefined> {
 		const command = new ScanCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			...args,
 		});
 
@@ -106,11 +98,10 @@ export class DatabaseClient implements IDatabaseClient {
 	}
 
 	async get<T>(
-		tableName: string,
 		args: Omit<GetCommandInput, "TableName">,
 	): Promise<T | undefined> {
 		const command = new GetCommand({
-			TableName: tableName,
+			TableName: this.TABLE_NAME,
 			...args,
 		});
 

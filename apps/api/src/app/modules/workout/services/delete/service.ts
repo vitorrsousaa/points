@@ -6,7 +6,7 @@ import { WorkoutNotFound } from "../../errors/workout-not-found";
 
 export const DeleteInputServiceSchema = z.object({
 	coachId: z.string().uuid(),
-	athleteId: z.string().uuid(),
+	athleteId: z.string(),
 	workoutId: z.string().uuid(),
 });
 

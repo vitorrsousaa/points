@@ -1,10 +1,8 @@
-import { randomUUID } from "node:crypto";
 import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import { AppError } from "@application/errors/app-error";
 import type { Settings } from "@core/domain/settings";
-import type { User } from "@core/domain/user";
-import type { UserDynamoDB } from "../user";
+import { randomUUID } from "node:crypto";
 import type { ISettingsRepository, SettingsDynamoDB } from "./types";
 
 export class SettingsRepository implements ISettingsRepository {
@@ -30,7 +28,7 @@ export class SettingsRepository implements ISettingsRepository {
 			SK,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, {
+		await this.dbInstance.create({
 			...newSettings,
 		});
 
@@ -45,7 +43,7 @@ export class SettingsRepository implements ISettingsRepository {
 		const now = new Date().toISOString();
 
 		try {
-			await this.dbInstance.update(this.TABLE_NAME, {
+			await this.dbInstance.update({
 				Key: { PK, SK },
 				UpdateExpression:
 					"set #onboarding = :onboarding, #updated_at = :updated_at",
@@ -78,7 +76,7 @@ export class SettingsRepository implements ISettingsRepository {
 	async getByUserId(userId: string): Promise<Settings | null> {
 		const { PK, SK } = this.getKeys(userId);
 
-		const item = await this.dbInstance.get<SettingsDynamoDB>(this.TABLE_NAME, {
+		const item = await this.dbInstance.get<SettingsDynamoDB>({
 			Key: { PK, SK },
 		});
 

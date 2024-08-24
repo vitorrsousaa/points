@@ -1,0 +1,8 @@
+const DATABASE_NAME = "@training";
+
+export const MUTATION_KEYS = {
+	SETTINGS: [`${DATABASE_NAME}:SETTINGS`],
+	ATHLETES: [`${DATABASE_NAME}:ATHLETES`],
+	EXERCISES: [`${DATABASE_NAME}:EXERCISES`],
+	WORKOUTS: (athleteId: string) => [`${DATABASE_NAME}:WORKOUTS`, athleteId],
+};

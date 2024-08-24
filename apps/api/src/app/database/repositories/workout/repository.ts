@@ -45,7 +45,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			volume,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
+		await this.dbInstance.create({ ...newWorkout });
 
 		return {
 			exercises,
@@ -65,7 +65,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 		const SK = `WORKOUT|${workout.createdAt}`;
 		const now = new Date().toISOString();
 
-		await this.dbInstance.update(this.TABLE_NAME, {
+		await this.dbInstance.update({
 			Key: { PK, SK },
 			UpdateExpression:
 				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description, #volume = :volume",
@@ -92,38 +92,32 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
 		const { PK } = this.getKeys(athleteId);
 
-		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			this.TABLE_NAME,
-			{
-				KeyConditionExpression: "PK = :PK",
-				ExpressionAttributeValues: {
-					":PK": PK,
-				},
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK",
+			ExpressionAttributeValues: {
+				":PK": PK,
 			},
-		);
+		});
 
 		return result ? result.map(this.mapToDomain) : [];
 	}
 	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
 		const { PK } = this.getKeys(athleteId);
-		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			this.TABLE_NAME,
-			{
-				KeyConditionExpression: "PK = :PK",
-				FilterExpression: "id = :id",
-				ExpressionAttributeValues: {
-					":PK": PK,
-					":id": workoutId,
-				},
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK",
+			FilterExpression: "id = :id",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":id": workoutId,
 			},
-		);
+		});
 
 		return result ? this.mapToDomain(result[0]) : null;
 	}
 	async delete(athleteId: string, createdAt: string): Promise<void> {
 		const { PK } = this.getKeys(athleteId);
 		const SK = `WORKOUT|${createdAt}`;
-		await this.dbInstance.delete(this.TABLE_NAME, {
+		await this.dbInstance.delete({
 			Key: {
 				PK: PK,
 				SK: SK,
