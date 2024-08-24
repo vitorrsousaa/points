@@ -28,6 +28,7 @@ export class AthleteRepository implements IAthleteRepository {
 			id: athlete.id,
 			name: athlete.name,
 			weight: athlete.weight,
+			email: athlete.email,
 		};
 
 		await this.dbInstance.create({ ...newAthlete });
@@ -128,6 +129,7 @@ export class AthleteRepository implements IAthleteRepository {
 			weight: athlete.weight,
 			createdAt: athlete.created_at,
 			updatedAt: athlete.updated_at,
+			email: athlete.email,
 		};
 	}
 }

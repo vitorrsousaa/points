@@ -67,6 +67,7 @@ export class CreateService implements ICreateService {
 			height: createInput.height,
 			age: createInput.age,
 			name: `${createInput.firstName} ${createInput.lastName}`,
+			email: createInput.email,
 		});
 
 		return athlete;

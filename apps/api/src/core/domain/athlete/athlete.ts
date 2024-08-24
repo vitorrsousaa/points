@@ -10,5 +10,6 @@ export type Athlete = Prettify<
 		height: number;
 		age: number;
 		name: string;
+		email: string;
 	}
 >;

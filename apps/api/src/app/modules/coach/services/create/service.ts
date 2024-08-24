@@ -20,13 +20,14 @@ export type ICreateOutput = { userId: string };
 
 export type ICreateService = IService<ICreateInput, ICreateOutput>;
 
-const defaultAthlete: Omit<ICreateAthleteInput, "coachId" | "email"> = {
+const defaultAthlete: Omit<ICreateAthleteInput, "coachId"> = {
 	age: 20,
 	lastName: "Doe",
 	firstName: "John",
 	height: 180,
 	weight: 80,
 	athleteId: "1",
+	email: "john@email.com",
 };
 
 export class CreateService implements ICreateService {
