@@ -124,10 +124,7 @@ export function AthletesScreen() {
 									<TableHead>Nome</TableHead>
 									<TableHead>Categoria</TableHead>
 									<TableHead>Peso (kg)</TableHead>
-
-									<TableHead className="hidden min-[540px]:table-cell">
-										<span className="sr-only">Actions</span>
-									</TableHead>
+									<TableHead>Ações</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>

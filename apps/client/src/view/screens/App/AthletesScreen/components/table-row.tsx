@@ -57,7 +57,7 @@ export function TableActions({
 	const { navigate } = useNavigate();
 
 	return (
-		<TableCell className="hidden min-[540px]:flex text-center justify-center items-center h-20">
+		<TableCell className="hidden min-[540px]:flex text-center items-center h-20">
 			<RenderIf
 				condition={status === "error"}
 				render={

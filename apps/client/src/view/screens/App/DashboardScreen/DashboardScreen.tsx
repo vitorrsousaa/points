@@ -6,11 +6,14 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
+	HeaderScreen,
 } from "@shared/ui";
 
 export function DashboardScreen() {
 	return (
 		<div className="w-full flex flex-col">
+			<HeaderScreen title="Visão geral" />
+
 			<main>
 				<div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
 					<div className="space-y-4">

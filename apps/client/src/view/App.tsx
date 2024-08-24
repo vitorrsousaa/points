@@ -7,18 +7,24 @@ import { RouterStack } from "./router/RouterStack";
 
 function App() {
 	return (
+		<AppProviders>
+			<RouterStack />
+
+			<Toaster
+				position="bottom-right"
+				toastOptions={{
+					duration: 3000,
+				}}
+			/>
+		</AppProviders>
+	);
+}
+
+function AppProviders({ children }: { children: React.ReactNode }) {
+	return (
 		<ThemeProvider defaultTheme="system" storageKey={STORAGE_KEYS.THEME}>
 			<QueryClientProvider>
-				<AuthProvider>
-					<RouterStack />
-
-					<Toaster
-						position="bottom-right"
-						toastOptions={{
-							duration: 3000,
-						}}
-					/>
-				</AuthProvider>
+				<AuthProvider>{children}</AuthProvider>
 			</QueryClientProvider>
 		</ThemeProvider>
 	);

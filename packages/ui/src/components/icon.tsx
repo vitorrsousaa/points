@@ -21,7 +21,7 @@ import {
 	TrashIcon,
 } from "@radix-ui/react-icons";
 
-interface IconProps {
+export interface IconProps {
 	name: keyof typeof icons;
 	className?: string;
 }
