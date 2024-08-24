@@ -92,29 +92,25 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
 		const { PK } = this.getKeys(athleteId);
 
-		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			{
-				KeyConditionExpression: "PK = :PK",
-				ExpressionAttributeValues: {
-					":PK": PK,
-				},
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK",
+			ExpressionAttributeValues: {
+				":PK": PK,
 			},
-		);
+		});
 
 		return result ? result.map(this.mapToDomain) : [];
 	}
 	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
 		const { PK } = this.getKeys(athleteId);
-		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			{
-				KeyConditionExpression: "PK = :PK",
-				FilterExpression: "id = :id",
-				ExpressionAttributeValues: {
-					":PK": PK,
-					":id": workoutId,
-				},
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK",
+			FilterExpression: "id = :id",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":id": workoutId,
 			},
-		);
+		});
 
 		return result ? this.mapToDomain(result[0]) : null;
 	}

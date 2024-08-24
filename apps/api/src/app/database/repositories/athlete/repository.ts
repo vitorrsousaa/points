@@ -74,15 +74,13 @@ export class AthleteRepository implements IAthleteRepository {
 	async getAllByCoachId(coachId: string): Promise<Athlete[]> {
 		const { PK, SK } = this.getKeys(coachId, "athleteId");
 
-		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>(
-			{
-				KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
-				ExpressionAttributeValues: {
-					":PK": PK,
-					":SK": "ATHLETE|",
-				},
+		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": "ATHLETE|",
 			},
-		);
+		});
 
 		return athletes ? athletes.map(this.mapToDomain) : [];
 	}
@@ -90,17 +88,14 @@ export class AthleteRepository implements IAthleteRepository {
 	async getById(athleteId: string): Promise<Athlete | null> {
 		const { gsi1pk } = this.getGSIKeys(athleteId, "coachId");
 
-		const athlete = await this.dbInstance.query<AthleteDynamoDB>(
-			{
-				IndexName: "GSI1Index",
-				KeyConditionExpression: "gsi1pk = :gsi1pk",
-				ExpressionAttributeValues: {
-					":gsi1pk": gsi1pk,
-				},
+		const athlete = await this.dbInstance.query<AthleteDynamoDB[]>({
+			IndexName: "GSI1Index",
+			KeyConditionExpression: "gsi1pk = :gsi1pk",
+			ExpressionAttributeValues: {
+				":gsi1pk": gsi1pk,
 			},
-		);
-
-		return athlete ? this.mapToDomain(athlete) : null;
+		});
+		return athlete ? this.mapToDomain(athlete[0]) : null;
 	}
 
 	private getGSIKeys(

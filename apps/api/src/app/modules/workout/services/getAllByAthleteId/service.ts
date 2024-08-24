@@ -4,7 +4,7 @@ import type { Workout } from "@core/domain/workout";
 import * as z from "zod";
 
 export const GetAllByAthleteIdInputServiceSchema = z.object({
-	athleteId: z.string().uuid(),
+	athleteId: z.string(),
 });
 
 export type TGetAllByAthleteId = z.infer<

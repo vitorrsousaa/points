@@ -12,7 +12,7 @@ import { getWorkoutVolume } from "../../functions/get-workout-volume";
 
 export const CreateInputServiceSchema = z.object({
 	coachId: z.string().uuid(),
-	athleteId: z.string().uuid(),
+	athleteId: z.string(),
 	workout: CreateWorkoutInputSchema.omit({ volume: true }),
 });
 
@@ -45,6 +45,8 @@ export class CreateService implements ICreateService {
 		const athlete = await this.athleteRepository.getById(athleteId);
 
 		if (!athlete) throw new AthleteNotFound();
+
+		console.log("athlete", athlete);
 
 		const athleteIsOwnByCoach = Boolean(athlete.coachId === coachId);
 
