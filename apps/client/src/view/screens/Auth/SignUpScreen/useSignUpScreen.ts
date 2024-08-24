@@ -25,7 +25,6 @@ export function useSignUpScreen() {
 	const handleSubmit = hookFormSubmit(async (data) => {
 		const ROLE = ["COACH"];
 		const newUser = { ...data, role: ROLE };
-		console.log(newUser);
 		await toast.promise(signup(newUser), {
 			loading: "Criando conta...",
 			success: "Confirme sua conta no email informado!",
