@@ -14,7 +14,7 @@ export function useCreateWorkout() {
 			const { exercises, name } = workout;
 			const tempId = Math.random().toString(36).substr(2, 9);
 
-			queryClient.setQueryData<WithStatus<Workout>[]>(
+			queryClient.setQueryData<WithStatus<Partial<Workout>>[]>(
 				QUERY_KEYS.WORKOUTS(athleteId),
 				(oldData) =>
 					oldData?.concat({

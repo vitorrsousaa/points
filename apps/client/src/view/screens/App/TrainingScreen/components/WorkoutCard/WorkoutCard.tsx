@@ -2,6 +2,7 @@ import type { Workout } from "@/entitites/workout";
 import type { Status } from "@/utils/types";
 import { Card, cn } from "@shared/ui";
 import { createContext, useContext } from "react";
+import { WorkoutDialog } from "../WorkoutDialog";
 
 interface WorkoutCardProps {
 	id: string;
@@ -53,7 +54,7 @@ export function WorkoutCard(props: WorkoutCardProps) {
 			)}
 		>
 			<WorkoutCardContextProvider id={id} status={status} workout={workout}>
-				{children}
+				<WorkoutDialog workout={workout}>{children}</WorkoutDialog>
 			</WorkoutCardContextProvider>
 		</Card>
 	);

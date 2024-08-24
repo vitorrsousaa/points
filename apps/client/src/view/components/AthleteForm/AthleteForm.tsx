@@ -12,7 +12,13 @@ import {
 	FormLabel,
 	FormMessage,
 	Input,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 	Switch,
+	Textarea,
 } from "@shared/ui";
 import type { TAthleteFormSchema } from "./AthleteFormSchema";
 import { useAthleteForm } from "./useAthleteForm";
@@ -197,6 +203,7 @@ export function AthleteForm(props: AtheleFormProps) {
 								</FormItem>
 							)}
 						/>
+
 						<FormField
 							control={methods.control}
 							name="height"
@@ -215,6 +222,59 @@ export function AthleteForm(props: AtheleFormProps) {
 											type="number"
 											min={0}
 										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</CardContent>
+				</Card>
+
+				<Card>
+					<CardHeader>
+						<CardTitle>Treinamento</CardTitle>
+
+						<CardDescription>
+							Adicione os objetivos que o seu atleta busca durante o
+							treinamento.
+						</CardDescription>
+					</CardHeader>
+
+					<CardContent className="space-y-4">
+						<FormField
+							name="email"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel>Categoria</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Selecione a categoria" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											<SelectItem value="powerlifiting">
+												Powerlifiting
+											</SelectItem>
+										</SelectContent>
+									</Select>
+									<FormDescription>Categoria do treino</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<FormField
+							control={methods.control}
+							name="email"
+							render={({ field: { value, onChange, name } }) => (
+								<FormItem className="w-full">
+									<FormLabel>Objetivos</FormLabel>
+									<FormControl>
+										<Textarea value={value} onChange={onChange} name={name} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>

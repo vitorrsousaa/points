@@ -1,4 +1,4 @@
-export type Athlete = {
+export interface Athlete {
 	name: string;
 	id: string;
 	accountConfirmation: boolean;
@@ -6,4 +6,4 @@ export type Athlete = {
 	weight: number;
 	height: number;
 	email: string;
-};
+}

@@ -31,7 +31,7 @@ export function UpdateTrainingScreen() {
 					description="Atualize o treino do atleta."
 				/>
 
-				<div className="gap-2 flex flex-row justify-end">
+				<div className="gap-4 flex flex-row justify-end">
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
 							<Button variant="secondary" disabled={isUpdatingWorkout}>

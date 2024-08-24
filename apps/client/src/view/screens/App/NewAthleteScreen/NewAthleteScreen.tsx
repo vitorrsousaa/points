@@ -59,7 +59,7 @@ export function NewAthleteScreen() {
 
 						<DialogContent className="sm:max-w-[425px]">
 							<DialogHeader className="gap-2">
-								<DialogTitle>Como funciona?</DialogTitle>
+								<DialogTitle>Como funciona ?</DialogTitle>
 								<DialogDescription>
 									Após o cadastro, o atleta poderá acessar o aplicativo e
 									definir uma senha. Você poderá acompanhar o progresso dele e

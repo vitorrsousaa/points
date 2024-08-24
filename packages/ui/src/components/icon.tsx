@@ -4,7 +4,9 @@ import {
 	ClipboardIcon,
 	Cross1Icon,
 	CrossCircledIcon,
+	CursorArrowIcon,
 	DotsHorizontalIcon,
+	EyeOpenIcon,
 	FileIcon,
 	GearIcon,
 	GroupIcon,
@@ -49,6 +51,8 @@ const icons = {
 	clipboard: ClipboardIcon,
 	pencil: Pencil1Icon,
 	archive: ArchiveIcon,
+	cursor: CursorArrowIcon,
+	eyeOpen: EyeOpenIcon,
 	check: CheckCircledIcon,
 } as const;
 
