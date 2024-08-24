@@ -39,7 +39,7 @@ export class CoachRepository implements ICoachRepository {
 
 	private getKeys(coachId: string): { PK: string; SK: string } {
 		return {
-			SK: `COACH|PROFILE`,
+			SK: "COACH|PROFILE",
 			PK: `USER|COACH|${coachId}`,
 		};
 	}

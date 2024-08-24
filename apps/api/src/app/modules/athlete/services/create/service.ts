@@ -44,16 +44,24 @@ export class CreateService implements ICreateService {
 
 		this.userIsCoach(coach.role);
 
-		const { userId } = await this.signupService.execute({
-			firstName: createInput.firstName,
-			lastName: createInput.lastName,
-			email: createInput.email,
-			password: generateRandomPassword(),
-			role: ["ATHLETE"],
-		});
+		let athleteId = "";
+
+		const isDefaultAthlete = Boolean(createInput.athleteId);
+
+		if (!isDefaultAthlete) {
+			const { userId } = await this.signupService.execute({
+				firstName: createInput.firstName,
+				lastName: createInput.lastName,
+				email: createInput.email,
+				password: generateRandomPassword(),
+				role: ["ATHLETE"],
+			});
+
+			athleteId = userId;
+		}
 
 		const athlete = await this.athleteRepository.create({
-			id: createInput.athleteId || userId,
+			id: isDefaultAthlete ? createInput.athleteId || "" : athleteId,
 			coachId: createInput.coachId,
 			weight: createInput.weight,
 			height: createInput.height,

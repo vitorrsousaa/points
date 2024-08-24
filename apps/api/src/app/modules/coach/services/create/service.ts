@@ -42,7 +42,7 @@ export class CreateService implements ICreateService {
 			role: ["COACH"],
 		});
 
-		const name = createInput.firstName + " " + createInput.lastName;
+		const name = `${createInput.firstName} ${createInput.lastName}`;
 
 		await this.coachRepository.create({
 			id: userId,
