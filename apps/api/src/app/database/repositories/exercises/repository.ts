@@ -30,7 +30,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			id: exerciseId,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, {
+		await this.dbInstance.create({
 			...newExercise,
 		});
 
@@ -39,7 +39,6 @@ export class ExerciseRepository implements IExerciseRepository {
 
 	async getAll(): Promise<Exercise[]> {
 		const exercises = await this.dbInstance.query<ExerciseDynamoDB[]>(
-			this.TABLE_NAME,
 			{
 				KeyConditionExpression:
 					"PK = :primaryKey and begins_with(SK, :sortKey)",

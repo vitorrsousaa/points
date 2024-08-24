@@ -11,7 +11,7 @@ export class DatabaseTables implements IDatabaseTables {
 	public get TABLE_NAME(): string {
 		const state = this.configuration.STAGE;
 
-		return `TrainingTable-${state}`;
+		return `GryppTable-${state}`;
 	}
 }
 

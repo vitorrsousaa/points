@@ -28,7 +28,7 @@ export class UserRepository implements IUserRepository {
 			SK,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, {
+		await this.dbInstance.create({
 			...newUser,
 		});
 
@@ -36,7 +36,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	async getByEmail(email: string): Promise<User | undefined> {
-		const items = await this.dbInstance.query<UserDynamoDB[]>(this.TABLE_NAME, {
+		const items = await this.dbInstance.query<UserDynamoDB[]>({
 			IndexName: "EmailIndex",
 			KeyConditionExpression: "email = :email",
 			ExpressionAttributeValues: {
@@ -55,7 +55,7 @@ export class UserRepository implements IUserRepository {
 		const now = new Date().toISOString();
 
 		try {
-			await this.dbInstance.update(this.TABLE_NAME, {
+			await this.dbInstance.update({
 				Key: { PK, SK },
 				UpdateExpression:
 					"set #name = :name, #email = :email, #account_confirmation = :account_confirmation, #updated_at = :updated_at",
@@ -92,7 +92,7 @@ export class UserRepository implements IUserRepository {
 	async getById(id: string): Promise<User | undefined> {
 		const { PK, SK } = this.getKeys(id);
 
-		const item = await this.dbInstance.get<UserDynamoDB>(this.TABLE_NAME, {
+		const item = await this.dbInstance.get<UserDynamoDB>({
 			Key: { PK, SK },
 		});
 

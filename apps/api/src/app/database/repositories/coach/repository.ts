@@ -22,7 +22,7 @@ export class CoachRepository implements ICoachRepository {
 			name: coach.name,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, { ...newCoach });
+		await this.dbInstance.create({ ...newCoach });
 
 		return this.mapToDomain(newCoach);
 	}
@@ -30,7 +30,7 @@ export class CoachRepository implements ICoachRepository {
 	async getById(coachId: string): Promise<Coach | null> {
 		const { PK, SK } = this.getKeys(coachId);
 
-		const coach = await this.dbInstance.get<CoachDynamoDB>(this.TABLE_NAME, {
+		const coach = await this.dbInstance.get<CoachDynamoDB>({
 			Key: { PK, SK },
 		});
 

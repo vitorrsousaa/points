@@ -30,7 +30,7 @@ export class AthleteRepository implements IAthleteRepository {
 			weight: athlete.weight,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, { ...newAthlete });
+		await this.dbInstance.create({ ...newAthlete });
 
 		return this.mapToDomain(newAthlete);
 	}
@@ -39,7 +39,7 @@ export class AthleteRepository implements IAthleteRepository {
 		const { PK, SK } = this.getKeys(athlete.coachId, athlete.id);
 		const now = new Date().toISOString();
 
-		await this.dbInstance.update(this.TABLE_NAME, {
+		await this.dbInstance.update({
 			Key: { PK, SK },
 			UpdateExpression:
 				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at",
@@ -75,7 +75,6 @@ export class AthleteRepository implements IAthleteRepository {
 		const { PK, SK } = this.getKeys(coachId, "athleteId");
 
 		const athletes = await this.dbInstance.query<AthleteDynamoDB[]>(
-			this.TABLE_NAME,
 			{
 				KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
 				ExpressionAttributeValues: {
@@ -92,7 +91,6 @@ export class AthleteRepository implements IAthleteRepository {
 		const { gsi1pk } = this.getGSIKeys(athleteId, "coachId");
 
 		const athlete = await this.dbInstance.query<AthleteDynamoDB>(
-			this.TABLE_NAME,
 			{
 				IndexName: "GSI1Index",
 				KeyConditionExpression: "gsi1pk = :gsi1pk",

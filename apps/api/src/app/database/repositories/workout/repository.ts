@@ -45,7 +45,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			volume,
 		};
 
-		await this.dbInstance.create(this.TABLE_NAME, { ...newWorkout });
+		await this.dbInstance.create({ ...newWorkout });
 
 		return {
 			exercises,
@@ -65,7 +65,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 		const SK = `WORKOUT|${workout.createdAt}`;
 		const now = new Date().toISOString();
 
-		await this.dbInstance.update(this.TABLE_NAME, {
+		await this.dbInstance.update({
 			Key: { PK, SK },
 			UpdateExpression:
 				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description, #volume = :volume",
@@ -93,7 +93,6 @@ export class WorkoutRepository implements IWorkoutRepository {
 		const { PK } = this.getKeys(athleteId);
 
 		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			this.TABLE_NAME,
 			{
 				KeyConditionExpression: "PK = :PK",
 				ExpressionAttributeValues: {
@@ -107,7 +106,6 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
 		const { PK } = this.getKeys(athleteId);
 		const result = await this.dbInstance.query<WorkoutDynamoDB[]>(
-			this.TABLE_NAME,
 			{
 				KeyConditionExpression: "PK = :PK",
 				FilterExpression: "id = :id",
@@ -123,7 +121,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 	async delete(athleteId: string, createdAt: string): Promise<void> {
 		const { PK } = this.getKeys(athleteId);
 		const SK = `WORKOUT|${createdAt}`;
-		await this.dbInstance.delete(this.TABLE_NAME, {
+		await this.dbInstance.delete({
 			Key: {
 				PK: PK,
 				SK: SK,
