@@ -18,6 +18,7 @@ import {
 } from "@shared/ui";
 import { Link } from "react-router-dom";
 import { useOnboarding } from "./useOnboarding";
+import { useNavigate } from "@/hooks/navigate";
 
 const COMPLETED_CARD_STYLES = {
 	container: "border-green-700 bg-green-100",
@@ -182,7 +183,14 @@ function SecondStep({ completedStep }: StepProps) {
 function ThirthStep({ completedStep }: StepProps) {
 	const { execute } = useUpdateSettings();
 
+	const { navigate } = useNavigate();
+
+	const DEFAULT_ATHLETE_ID = "1";
+
 	async function handleClickCompleteStep() {
+		navigate("NEW_TRAINING", {
+			replace: { athleteId: DEFAULT_ATHLETE_ID },
+		});
 		execute({
 			onboarding: {
 				enable: true,
@@ -216,13 +224,9 @@ function ThirthStep({ completedStep }: StepProps) {
 				ifRender={<CompletedCardStepFooter />}
 				elseRender={
 					<CardFooter>
-						<Link
-							to={ROUTES.NEW_TRAINING}
-							onClick={handleClickCompleteStep}
-							className="w-full"
-						>
-							<Button className="w-full h-8">Criar</Button>
-						</Link>
+						<Button className="w-full h-8" onClick={handleClickCompleteStep}>
+							Criar
+						</Button>
 					</CardFooter>
 				}
 			/>
