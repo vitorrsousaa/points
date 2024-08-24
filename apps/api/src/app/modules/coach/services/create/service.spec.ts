@@ -3,11 +3,13 @@ import { type ICreateService, CreateService } from "./service";
 import type { ICreateService as ICreateAthleteService } from "@application/modules/athlete/services/create";
 import type { ISignupService } from "@application/modules/auth/services/signup";
 import { inputData } from "../../mocks/coach";
+import type { ICoachRepository } from "@application/database/repositories/coach";
 
 describe("Service:Create", () => {
 	let service: ICreateService;
 	let mockedSignupService: Mocked<ISignupService>;
 	let mockedCreateAthleteService: Mocked<ICreateAthleteService>;
+	let mockedCoachRepository: Mocked<ICoachRepository>;
 
 	beforeEach(() => {
 		mockedSignupService = {
@@ -18,9 +20,14 @@ describe("Service:Create", () => {
 			execute: vi.fn(),
 		} as unknown as Mocked<ICreateAthleteService>;
 
+		mockedCoachRepository = {
+			create: vi.fn(),
+		} as unknown as Mocked<ICoachRepository>;
+
 		service = new CreateService(
 			mockedSignupService,
 			mockedCreateAthleteService,
+			mockedCoachRepository,
 		);
 	});
 

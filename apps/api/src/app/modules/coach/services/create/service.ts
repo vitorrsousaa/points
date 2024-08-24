@@ -8,6 +8,7 @@ import type {
 	ICreateInput as ICreateAthleteInput,
 } from "@application/modules/athlete/services/create";
 import type * as z from "zod";
+import type { ICoachRepository } from "@application/database/repositories/coach";
 
 export const CreateInputServiceSchema = SignupInputSchema.omit({ role: true });
 
@@ -32,12 +33,20 @@ export class CreateService implements ICreateService {
 	constructor(
 		private readonly authSignup: ISignupService,
 		private readonly createAthleteService: ICreateAthleteService,
+		private readonly coachRepository: ICoachRepository,
 	) {}
 
 	async execute(createInput: ICreateInput): Promise<ICreateOutput> {
 		const { userId } = await this.authSignup.execute({
 			...createInput,
 			role: ["COACH"],
+		});
+
+		const name = createInput.firstName + " " + createInput.lastName;
+
+		await this.coachRepository.create({
+			id: userId,
+			name,
 		});
 
 		await this.createAthleteService.execute({

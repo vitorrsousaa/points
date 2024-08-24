@@ -8,7 +8,7 @@ export class AthleteRepository implements IAthleteRepository {
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 	async create(
-		athlete: Omit<Athlete, "createdAt" | "updatedAt"> & { id?: string },
+		athlete: Omit<Athlete, "createdAt" | "updatedAt">,
 	): Promise<Athlete> {
 		const { PK, SK } = this.getKeys(athlete.coachId, athlete.id);
 		const { gsi1pk, gsi1sk } = this.getGSIKeys(athlete.id, athlete.coachId);
