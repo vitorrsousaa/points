@@ -9,9 +9,23 @@ import type { Workout, WorkoutVolume } from "@core/domain/workout";
 import type { IWorkoutRepository, WorkoutDynamoDB } from "./types";
 
 export class WorkoutRepository implements IWorkoutRepository {
-	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
-
 	constructor(private readonly dbInstance: IDatabaseClient) {}
+	async getAllActiveByAthleteId(athleteId: string): Promise<Workout[]> {
+		const { PK } = this.getKeys(athleteId);
+
+		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK",
+			FilterExpression: "#is_active = :is_active",
+			ExpressionAttributeNames: { "#is_active": "is_active" },
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":is_active": true,
+			},
+		});
+
+		return result ? result.map(this.mapToDomain) : [];
+	}
+
 	async create(
 		workout: Omit<Workout, "createdAt" | "updatedAt"> & {
 			volume?: WorkoutVolume;
@@ -60,6 +74,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 			volume,
 		};
 	}
+
 	async update(workout: Workout): Promise<Workout> {
 		const { PK } = this.getKeys(workout.athleteId);
 		const SK = `WORKOUT|${workout.createdAt}`;
@@ -89,6 +104,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 		return { ...workout, updatedAt: now };
 	}
+
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
 		const { PK } = this.getKeys(athleteId);
 
@@ -114,6 +130,7 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 		return result ? this.mapToDomain(result[0]) : null;
 	}
+
 	async delete(athleteId: string, createdAt: string): Promise<void> {
 		const { PK } = this.getKeys(athleteId);
 		const SK = `WORKOUT|${createdAt}`;
