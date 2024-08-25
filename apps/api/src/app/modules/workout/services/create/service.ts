@@ -5,10 +5,10 @@ import type { IService } from "@application/interfaces/service";
 import { CoachNotFound } from "@application/shared/errors/coach-not-found";
 import { CreateWorkoutInputSchema, type Workout } from "@core/domain/workout";
 import * as z from "zod";
-import { AthleteNotFound } from "../../errors/athlete-not-found";
 import { CoachNotAuthorized } from "../../errors/coach-not-authorized";
 import { UserShouldBeCoach } from "../../errors/user-not-coach";
 import { getWorkoutVolume } from "../../functions/get-workout-volume";
+import { AthleteNotFound } from "@application/shared/errors/athlete-not-found";
 
 export const CreateInputServiceSchema = z.object({
 	coachId: z.string().uuid(),
@@ -45,8 +45,6 @@ export class CreateService implements ICreateService {
 		const athlete = await this.athleteRepository.getById(athleteId);
 
 		if (!athlete) throw new AthleteNotFound();
-
-		console.log("athlete", athlete);
 
 		const athleteIsOwnByCoach = Boolean(athlete.coachId === coachId);
 

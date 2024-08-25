@@ -12,8 +12,9 @@ export type AthleteDynamoDB = Prettify<
 		updated_at: string;
 		gsi1pk: string;
 		gsi1sk: string;
+		workout_count: number;
 	} & TBaseEntity &
-		Omit<Athlete, "coachId" | "createdAt" | "updatedAt">
+		Omit<Athlete, "coachId" | "createdAt" | "updatedAt" | "workoutCount">
 >;
 
 export interface IAthleteRepository {

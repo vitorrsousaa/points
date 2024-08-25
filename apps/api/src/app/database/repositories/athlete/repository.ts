@@ -1,11 +1,8 @@
-import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import type { Athlete } from "@core/domain/athlete";
 import type { AthleteDynamoDB, IAthleteRepository } from "./types";
 
 export class AthleteRepository implements IAthleteRepository {
-	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
-
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 	async create(
 		athlete: Omit<Athlete, "createdAt" | "updatedAt">,
@@ -14,6 +11,7 @@ export class AthleteRepository implements IAthleteRepository {
 		const { gsi1pk, gsi1sk } = this.getGSIKeys(athlete.id, athlete.coachId);
 
 		const now = new Date().toISOString();
+		const DEFAULT_WORKOUT_COUNT = 0;
 
 		const newAthlete: AthleteDynamoDB = {
 			PK,
@@ -29,6 +27,7 @@ export class AthleteRepository implements IAthleteRepository {
 			name: athlete.name,
 			weight: athlete.weight,
 			email: athlete.email,
+			workout_count: DEFAULT_WORKOUT_COUNT,
 		};
 
 		await this.dbInstance.create({ ...newAthlete });
@@ -43,17 +42,19 @@ export class AthleteRepository implements IAthleteRepository {
 		await this.dbInstance.update({
 			Key: { PK, SK },
 			UpdateExpression:
-				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at",
+				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at, #workout_count = :workout_count",
 			ExpressionAttributeNames: {
 				"#weight": "weight",
 				"#height": "height",
 				"#age": "age",
 				"#updated_at": "updated_at",
+				"#workout_count": "workout_count",
 			},
 			ExpressionAttributeValues: {
 				":weight": athlete.weight,
 				":height": athlete.height,
 				":age": athlete.age,
+				":workout_count": athlete.workoutCount,
 				":updated_at": now,
 			},
 		});
@@ -67,6 +68,7 @@ export class AthleteRepository implements IAthleteRepository {
 			SK,
 			gsi1pk: "",
 			gsi1sk: "",
+			workout_count: athlete.workoutCount,
 		};
 
 		return this.mapToDomain(updatedAthlete);
@@ -130,6 +132,7 @@ export class AthleteRepository implements IAthleteRepository {
 			createdAt: athlete.created_at,
 			updatedAt: athlete.updated_at,
 			email: athlete.email,
+			workoutCount: athlete.workout_count,
 		};
 	}
 }
