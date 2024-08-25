@@ -24,4 +24,5 @@ export interface IWorkoutRepository {
 	create(
 		workout: Omit<Workout, "createdAt" | "updatedAt" | "id" | "visibility">,
 	): Promise<Workout>;
+	getAllActiveByAthleteId(athleteId: string): Promise<Workout[]>;
 }
