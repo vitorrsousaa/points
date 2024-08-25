@@ -683,7 +683,7 @@
           }
         }
       },
-      "30fd5852-6fe3-4868-aaff-267635595747": {
+      "a6b1320d-a031-4959-b75e-7287f6216c28": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -724,7 +724,7 @@
         },
         "additionalProperties": false
       },
-      "bb0f9592-556c-45ff-a106-7529275c59b4": {
+      "8efcbcf3-e1bb-4d80-ad29-6e9611740172": {
         "properties": {
           "message": {
             "type": "string",
@@ -733,7 +733,7 @@
           }
         }
       },
-      "bb091b5e-4b27-4634-9937-085b20ae1fc7": {
+      "a28fea0e-2b0e-439e-8a0a-c62a784d43c6": {
         "properties": {
           "email": {
             "type": "string",
@@ -749,14 +749,14 @@
           "code"
         ]
       },
-      "b57f3462-eff7-4f16-804b-dbb5ce5dd981": {
+      "822403ce-df63-4008-8f13-4d936c484a67": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "e004351e-d7da-4c6c-8b20-cf7e67c1e065": {
+      "262d79d6-6025-43fd-9b5c-29b7abaa44b3": {
         "properties": {
           "message": {
             "type": "string",
@@ -765,7 +765,7 @@
           }
         }
       },
-      "80ad8b14-b5e1-4cb1-8351-12271201f02a": {
+      "d4fd8b2a-65b2-4124-8ad4-3714236fe0b4": {
         "properties": {
           "message": {
             "type": "string",
@@ -774,7 +774,7 @@
           }
         }
       },
-      "ccb4fdff-c9f3-4ae0-b9e1-feb8f43c44a6": {
+      "24865d90-c10e-4b95-82ae-700c05ff5445": {
         "properties": {
           "email": {
             "type": "string",
@@ -790,7 +790,7 @@
           "password"
         ]
       },
-      "e85b575d-4c98-46eb-94ac-78f8912d5946": {
+      "a2a8ce3f-eaf7-44b3-8fd5-09a673c84514": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -802,7 +802,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "ea585a3b-527d-47b6-b207-a9a527045838": {
+      "89b6de31-92ed-471c-a054-e4edb07a8b2a": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -822,31 +822,20 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "10bef31d-3918-4435-a9e1-0eaaa510c49d": {
-        "properties": {
-          "workoutId": {
-            "type": "string",
-            "format": "uuid",
-            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
-          },
-          "coachId": {
-            "type": "string",
-            "format": "uuid",
-            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
-          },
-          "athleteId": {
-            "type": "string",
-            "format": "uuid",
-            "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
-          }
-        },
-        "required": [
-          "workoutId",
-          "coachId",
-          "athleteId"
-        ]
+      "status": {
+        "type": "string",
+        "format": "enum",
+        "example": "active"
       },
-      "16082466-a320-4f2e-97f7-1a41974325c5": {
+      "workoutId": {
+        "type": "string",
+        "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+      },
+      "athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3": {
+        "type": "string",
+        "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
+      },
+      "05069667-a646-485a-84ff-6703e67c5004": {
         "properties": {
           "message": {
             "type": "string",
@@ -854,14 +843,14 @@
           }
         }
       },
-      "7f9bd2a2-d61a-4d0f-876e-0d5acb6057d6": {
+      "a597fb67-cc0d-47bb-bea9-425ccf5011d6": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "3d130b55-2a5f-4450-b359-216d8d047472": {
+      "d044574f-cc09-4548-a427-fd73c54a24b3": {
         "properties": {
           "userId": {
             "type": "string",
@@ -904,7 +893,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/30fd5852-6fe3-4868-aaff-267635595747"
+                  "$ref": "#/components/schemas/a6b1320d-a031-4959-b75e-7287f6216c28"
                 }
               }
             },
@@ -926,7 +915,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/bb0f9592-556c-45ff-a106-7529275c59b4"
+                  "$ref": "#/components/schemas/8efcbcf3-e1bb-4d80-ad29-6e9611740172"
                 }
               }
             },
@@ -962,7 +951,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/bb091b5e-4b27-4634-9937-085b20ae1fc7"
+                "$ref": "#/components/schemas/a28fea0e-2b0e-439e-8a0a-c62a784d43c6"
               }
             }
           }
@@ -973,7 +962,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b57f3462-eff7-4f16-804b-dbb5ce5dd981"
+                  "$ref": "#/components/schemas/822403ce-df63-4008-8f13-4d936c484a67"
                 }
               }
             },
@@ -984,7 +973,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e004351e-d7da-4c6c-8b20-cf7e67c1e065"
+                  "$ref": "#/components/schemas/262d79d6-6025-43fd-9b5c-29b7abaa44b3"
                 }
               }
             },
@@ -995,7 +984,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/80ad8b14-b5e1-4cb1-8351-12271201f02a"
+                  "$ref": "#/components/schemas/d4fd8b2a-65b2-4124-8ad4-3714236fe0b4"
                 }
               }
             },
@@ -1042,7 +1031,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ccb4fdff-c9f3-4ae0-b9e1-feb8f43c44a6"
+                "$ref": "#/components/schemas/24865d90-c10e-4b95-82ae-700c05ff5445"
               }
             }
           }
@@ -1053,7 +1042,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e85b575d-4c98-46eb-94ac-78f8912d5946"
+                  "$ref": "#/components/schemas/a2a8ce3f-eaf7-44b3-8fd5-09a673c84514"
                 }
               }
             },
@@ -1306,7 +1295,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ea585a3b-527d-47b6-b207-a9a527045838"
+                "$ref": "#/components/schemas/89b6de31-92ed-471c-a054-e4edb07a8b2a"
               }
             }
           }
@@ -1362,7 +1351,26 @@
         "summary": "/workout",
         "description": "Route to delete a workout",
         "operationId": "deleteWorkout",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "workoutId",
+            "in": "query",
+            "description": "The workoutId to delete",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/workoutId"
+            }
+          },
+          {
+            "name": "athleteId",
+            "in": "query",
+            "description": "The athlete who owns the workout",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3"
+            }
+          }
+        ],
         "tags": [
           "Workouts"
         ],
@@ -1371,17 +1379,6 @@
             "CognitoAuthorizer": []
           }
         ],
-        "requestBody": {
-          "description": "Sample request body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/10bef31d-3918-4435-a9e1-0eaaa510c49d"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "Return default response",
@@ -1444,6 +1441,15 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/athleteId"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the workout",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/status"
             }
           }
         ],
@@ -1556,7 +1562,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/16082466-a320-4f2e-97f7-1a41974325c5"
+                  "$ref": "#/components/schemas/05069667-a646-485a-84ff-6703e67c5004"
                 }
               }
             },
@@ -1662,7 +1668,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/3d130b55-2a5f-4450-b359-216d8d047472"
+                  "$ref": "#/components/schemas/d044574f-cc09-4548-a427-fd73c54a24b3"
                 }
               }
             },

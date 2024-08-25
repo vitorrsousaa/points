@@ -1,5 +1,4 @@
 import { randomUUID } from "node:crypto";
-import { DATABASE_TABLE } from "@application/config/tables";
 import type {
 	IDatabaseClient,
 	TBaseEntity,

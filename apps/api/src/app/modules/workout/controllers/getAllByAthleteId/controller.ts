@@ -15,7 +15,7 @@ export class GetAllByAthleteIdController implements IController {
 
 			const [status, parsedBody] = missingFields(
 				GetAllByAthleteIdInputServiceSchema,
-				{ athleteId },
+				{ athleteId, status: request.queryParams.status },
 			);
 
 			if (!status) return parsedBody;

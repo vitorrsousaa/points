@@ -11,6 +11,14 @@ getAllByAthleteId:
       schema:
         type: "string"
         example: "example-uuid"
+  queryParams:
+    - name: "status"
+      description: "The status of the workout"
+      required: true
+      schema:
+        type: "string"
+        format: "enum"
+        example: "active"
   methodResponses:
     - statusCode: 200
       responseBody:
