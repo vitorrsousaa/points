@@ -27,8 +27,11 @@ export class WorkoutRepository implements IWorkoutRepository {
 	}
 
 	async create(
-		workout: Omit<Workout, "createdAt" | "updatedAt"> & {
+		workout: Omit<Workout, "createdAt" | "updatedAt" | "id"> & {
 			volume?: WorkoutVolume;
+			createdAt?: string;
+			updatedAt?: string;
+			id?: string;
 		},
 	): Promise<Workout> {
 		const {
@@ -39,8 +42,11 @@ export class WorkoutRepository implements IWorkoutRepository {
 			description,
 			isActive,
 			volume,
+			createdAt,
+			id,
+			updatedAt,
 		} = workout;
-		const workoutId = randomUUID();
+		const workoutId = id || randomUUID();
 		const { PK, SK } = this.getKeys(athleteId, workoutId);
 		const now = new Date().toISOString();
 
@@ -51,8 +57,8 @@ export class WorkoutRepository implements IWorkoutRepository {
 			SK,
 			athlete_id: athleteId,
 			coach_id: coachId,
-			created_at: now,
-			updated_at: now,
+			created_at: createdAt || now,
+			updated_at: updatedAt || now,
 			id: workoutId,
 			name,
 			exercises,
@@ -65,53 +71,70 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 		await this.dbInstance.create({ ...newWorkout });
 
-		return {
-			exercises,
-			name,
-			id: workoutId,
-			athleteId,
-			coachId,
-			createdAt: now,
-			updatedAt: now,
-			description,
-			isActive,
-			volume,
-		};
+		return this.mapToDomain(newWorkout);
 	}
 
-	// FALTA CORRIGIR
 	async update(workout: Workout): Promise<Workout> {
-		const { PK } = this.getKeys(workout.athleteId, "nao precisa");
-		const SK = `WORKOUT|${workout.id}|${workout.createdAt}`;
-		const now = new Date().toISOString();
+		await this.delete(workout.athleteId, workout.id, workout.createdAt);
 
-		await this.dbInstance.update({
-			Key: { PK, SK },
-			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description, #volume = :volume",
-			ExpressionAttributeNames: {
-				"#name": "name",
-				"#exercises": "exercises",
-				"#updated_at": "updated_at",
-				"#is_active": "is_active",
-				"#description": "description",
-				"#volume": "volume",
-			},
-			ExpressionAttributeValues: {
-				":name": workout.name,
-				":exercises": workout.exercises,
-				":updated_at": now,
-				":is_active": workout.isActive,
-				":description": workout.description,
-				":volume": workout.volume,
-			},
+		const result = await this.create({
+			...workout,
+			updatedAt: new Date().toISOString(),
 		});
 
-		return { ...workout, updatedAt: now };
+		// const newWorkout: WorkoutDynamoDB = {
+		// 	PK:newPK,
+		// 	SK:newSK,
+		// 	athlete_id: workout.athleteId,
+		// 	coach_id: workout.coachId,
+		// 	created_at: workout.createdAt,
+		// 	updated_at: now,
+		// 	id: workout.id,
+		// 	name: workout.name,
+		// 	exercises: workout.exercises,
+		// 	description: workout.description,
+		// 	is_active: workout.isActive,
+		// 	volume: workout.volume,
+		// 	gsi1pk,
+		// 	gsi1sk,
+		// };
+
+		// await this.dbInstance.transactWrite({
+		// 	TransactItems: [
+		// 		{
+		// 			ConditionCheck: {
+		// 				TableName: DATABASE_TABLE.TABLE_NAME,
+		// 				Key: {
+		// 					PK: PK,
+		// 					SK: SK,
+		// 				},
+		// 				ConditionExpression: "attribute_exists(PK) and attribute_exists(SK)"
+		// 			}
+		// 		},
+		// 		{
+		// 			Delete:{
+		// 				Key: {
+		// 					PK: PK,
+		// 					SK: SK,
+		// 				},
+		// 				TableName: DATABASE_TABLE.TABLE_NAME
+		// 			},
+
+		// 		},
+		// 		{
+		// 			Put:{
+		// 				TableName: DATABASE_TABLE.TABLE_NAME,
+		// 				Item:newWorkout
+		// 			}
+		// 		}
+		// 	]
+		// })
+
+		return result;
 	}
 
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
-		const { PK } = this.getKeys(athleteId, "nao precisa");
+		const { PK } = this.getKeys(athleteId);
 
 		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
 			KeyConditionExpression: "PK = :PK",

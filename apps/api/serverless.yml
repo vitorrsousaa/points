@@ -34,6 +34,7 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:Scan
             - dynamodb:Query
+            - dynamodb:ConditionCheckItem
           Resource: 
             - !GetAtt GryppTable.Arn
             - !Sub ${GryppTable.Arn}/index/EmailIndex
