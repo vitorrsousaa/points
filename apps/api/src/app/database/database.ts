@@ -12,7 +12,13 @@ import {
 	type ScanCommandInput,
 	UpdateCommand,
 	type UpdateCommandInput,
+	// TransactionWriteCommand
 } from "@aws-sdk/lib-dynamodb";
+
+export type TBaseIndexes = {
+	gsi1pk: string;
+	gsi1sk: string;
+};
 
 export type TBaseEntity = {
 	SK: string;

@@ -1,4 +1,4 @@
-import type { TBaseEntity } from "@application/database/database";
+import type { TBaseEntity, TBaseIndexes } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
 import type { Athlete } from "@core/domain/athlete";
 
@@ -10,10 +10,9 @@ export type AthleteDynamoDB = Prettify<
 		coach_id: string;
 		created_at: string;
 		updated_at: string;
-		gsi1pk: string;
-		gsi1sk: string;
 		workout_count: number;
 	} & TBaseEntity &
+		TBaseIndexes &
 		Omit<Athlete, "coachId" | "createdAt" | "updatedAt" | "workoutCount">
 >;
 
