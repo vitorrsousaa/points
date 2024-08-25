@@ -15,6 +15,8 @@ documentation:
       x-displayName: Authentication
     - name: Athletes
       description: 'Routes for athletes'
+    - name: Coaches
+      description: 'Routes for coaches'
     - name: Exercises
       description: 'Routes for exercises'
     - name: Workouts
@@ -38,6 +40,14 @@ documentation:
       description: Auth signup model
       contentType: application/json
       schema: ${file(docs/models/auth/signup.json)}
+    - name: CoachSignupModel
+      description: Coach signup model
+      contentType: application/json
+      schema: ${file(docs/models/coach/create.json)}
+    - name: AthleteSignupModel
+      description: Athlete signup model
+      contentType: application/json
+      schema: ${file(docs/models/athlete/create.json)}
     - name: NotAuthorizedResponse
       description: Not Authorized response model
       contentType: application/json
@@ -106,14 +116,14 @@ documentation:
               id: 
                 type: string
                 format: uuid
-                example: 123456
+                example: b70f0460-ca06-4769-bb01-ea5b6f0a0245
               name:
                 type: string
                 example: John Doe
               coachId:
                 type: string
                 format: uuid
-                example: 123456
+                example: b70f0460-ca06-4769-bb01-ea5b6f0a0245
               weight:
                 type: number
                 example: 80

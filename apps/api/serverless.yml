@@ -200,6 +200,7 @@ functions:
       - httpApi:
           method: POST
           path: /athlete
+          documentation: ${file(src/server/functions/athlete/create/handler.doc.yml):createAthlete}
           authorizer:
             name: CognitoAuthorizer
   getAllByCoachId:
@@ -287,4 +288,5 @@ functions:
       - httpApi:
           method: POST
           path: /coach
+          documentation: ${file(src/server/functions/coach/create/handler.doc.yml):createCoach}
           

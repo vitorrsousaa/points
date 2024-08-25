@@ -1,35 +1,20 @@
-create:
-	summary: athlete/create
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+createAthlete:
+  summary: create
+  description: Route to create athlete
+  tags:
+    - Athletes
+  requestBody:
+    description: A basic information about user.
+    required: true
+  requestModels:
+    application/json: AthleteSignupModel
+  methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+        application/json: AthleteModel
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:

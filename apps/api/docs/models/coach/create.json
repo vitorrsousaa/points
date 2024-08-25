@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Coach Signup Input Schema",
+	"description": "Schema for input data when signing up a user.",
+	"type": "object",
+	"required": ["firstName", "lastName", "email", "password"],
+	"properties": {
+		"firstName": {
+			"type": "string","example"	: "John"
+		},
+		"lastName": {
+			"type": "string", "example": "Doe"
+		},
+		"email": {
+			"type": "string",
+			"format": "email"
+		},
+		"password": {
+			"type": "string",
+			"minLength": 8
+		}
+	},
+	"additionalProperties": false
+}

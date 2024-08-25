@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Athlete Signup Input Schema",
+	"description": "Schema for input data when signing up a user.",
+	"type": "object",
+	"required": ["firstName", "lastName", "email", "password", "weight", "height", "age", "coachId"],
+	"properties": {
+		"firstName": {
+			"type": "string",
+      "example": "John"
+		},
+		"lastName": {
+			"type": "string"
+      ,"example": "Doe"
+		},
+		"email": {
+			"type": "string",
+			"format": "email",
+      "example": "user@email.com"
+		},
+		"coachId": {
+			"type": "string",
+			"format": "uuid",
+      "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
+		},
+		"weight": {
+			"type": "number",
+      "example": 80
+		},
+    "height": {
+      "type": "number",
+      "example": 180
+    },
+    "age":{ 
+      "type": "number",
+      "example": 25
+    }
+	},
+	"additionalProperties": false
+}

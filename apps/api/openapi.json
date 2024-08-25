@@ -114,6 +114,84 @@
         },
         "additionalProperties": false
       },
+      "CoachSignupModel": {
+        "title": "Coach Signup Input Schema",
+        "description": "Schema for input data when signing up a user.",
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          }
+        },
+        "additionalProperties": false
+      },
+      "AthleteSignupModel": {
+        "title": "Athlete Signup Input Schema",
+        "description": "Schema for input data when signing up a user.",
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "weight",
+          "height",
+          "age",
+          "coachId"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "user@email.com"
+          },
+          "coachId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
+          },
+          "weight": {
+            "type": "number",
+            "example": 80
+          },
+          "height": {
+            "type": "number",
+            "example": 180
+          },
+          "age": {
+            "type": "number",
+            "example": 25
+          }
+        },
+        "additionalProperties": false
+      },
       "NotAuthorizedResponse": {
         "type": "object",
         "properties": {
@@ -196,7 +274,7 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": 123456
+            "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
           },
           "name": {
             "type": "string",
@@ -205,7 +283,7 @@
           "coachId": {
             "type": "string",
             "format": "uuid",
-            "example": 123456
+            "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
           },
           "weight": {
             "type": "number",
@@ -233,7 +311,7 @@
             "id": {
               "type": "string",
               "format": "uuid",
-              "example": 123456
+              "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
             },
             "name": {
               "type": "string",
@@ -242,7 +320,7 @@
             "coachId": {
               "type": "string",
               "format": "uuid",
-              "example": 123456
+              "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
             },
             "weight": {
               "type": "number",
@@ -605,32 +683,7 @@
           }
         }
       },
-      "71732c76-0da6-447d-b39c-99c4a1bae101": {
-        "properties": {
-          "userId": {
-            "type": "string"
-          }
-        }
-      },
-      "ba7e9923-8ee3-4c53-a488-080f2ef4b3a3": {
-        "properties": {
-          "message": {
-            "type": "string",
-            "description": "Invalid Password",
-            "example": "Invalid Password"
-          }
-        }
-      },
-      "0dbb1670-aa12-46d7-a311-f9c9c0f48669": {
-        "properties": {
-          "message": {
-            "type": "string",
-            "description": "Username already exists",
-            "example": "Username already exists"
-          }
-        }
-      },
-      "22b709cf-3cc8-4dab-9898-06f5bcb10ae3": {
+      "30fd5852-6fe3-4868-aaff-267635595747": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -671,7 +724,7 @@
         },
         "additionalProperties": false
       },
-      "96c3d540-9dfb-4c3b-aa12-fc1bb76e7e06": {
+      "bb0f9592-556c-45ff-a106-7529275c59b4": {
         "properties": {
           "message": {
             "type": "string",
@@ -680,7 +733,7 @@
           }
         }
       },
-      "3a4f3f88-edef-4895-acc2-fa3752fcb84f": {
+      "bb091b5e-4b27-4634-9937-085b20ae1fc7": {
         "properties": {
           "email": {
             "type": "string",
@@ -696,14 +749,14 @@
           "code"
         ]
       },
-      "48576be2-b9f8-45b3-93f9-08e55665c77c": {
+      "b57f3462-eff7-4f16-804b-dbb5ce5dd981": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "9067cf10-13aa-4028-baea-28c9a367cae9": {
+      "e004351e-d7da-4c6c-8b20-cf7e67c1e065": {
         "properties": {
           "message": {
             "type": "string",
@@ -712,7 +765,7 @@
           }
         }
       },
-      "6e6479f6-d01e-4b95-b031-f0a46e5107ad": {
+      "80ad8b14-b5e1-4cb1-8351-12271201f02a": {
         "properties": {
           "message": {
             "type": "string",
@@ -721,7 +774,7 @@
           }
         }
       },
-      "eb05111e-4059-4e70-a949-dbd643314113": {
+      "ccb4fdff-c9f3-4ae0-b9e1-feb8f43c44a6": {
         "properties": {
           "email": {
             "type": "string",
@@ -737,7 +790,7 @@
           "password"
         ]
       },
-      "d67c6a64-646c-47dd-ba9f-39770db043a1": {
+      "e85b575d-4c98-46eb-94ac-78f8912d5946": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -749,7 +802,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "1141a5d7-280b-46f6-a75f-40775cb5c388": {
+      "ea585a3b-527d-47b6-b207-a9a527045838": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -769,7 +822,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "eb8b2168-3a63-4972-ad39-feccf69c8aaf": {
+      "10bef31d-3918-4435-a9e1-0eaaa510c49d": {
         "properties": {
           "workoutId": {
             "type": "string",
@@ -793,11 +846,26 @@
           "athleteId"
         ]
       },
-      "338cbae8-d17d-4d9c-a831-d87502e3b0c0": {
+      "16082466-a320-4f2e-97f7-1a41974325c5": {
         "properties": {
           "message": {
             "type": "string",
             "example": "Settings not found"
+          }
+        }
+      },
+      "7f9bd2a2-d61a-4d0f-876e-0d5acb6057d6": {
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "3d130b55-2a5f-4450-b359-216d8d047472": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
           }
         }
       }
@@ -821,86 +889,6 @@
     }
   ],
   "paths": {
-    "/auth/signup": {
-      "post": {
-        "summary": "auth/signup",
-        "description": "Creates a user and sends a validation code to email. This route can be used to create a athlete, coach or admin.",
-        "operationId": "signup",
-        "parameters": [],
-        "tags": [
-          "Auth"
-        ],
-        "security": [],
-        "requestBody": {
-          "description": "A basic information about user. If the user is a athlete, the coachId is required.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthSignupModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Return the userId create by the server",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/71732c76-0da6-447d-b39c-99c4a1bae101"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "400": {
-            "description": "Invalid Password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ba7e9923-8ee3-4c53-a488-080f2ef4b3a3"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "409": {
-            "description": "Username already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/0dbb1670-aa12-46d7-a311-f9c9c0f48669"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "422": {
-            "description": "An error message when send invalid data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "500": {
-            "description": "An unknown error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        }
-      }
-    },
     "/auth/profile": {
       "get": {
         "summary": "auth/profile",
@@ -916,7 +904,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/22b709cf-3cc8-4dab-9898-06f5bcb10ae3"
+                  "$ref": "#/components/schemas/30fd5852-6fe3-4868-aaff-267635595747"
                 }
               }
             },
@@ -938,7 +926,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/96c3d540-9dfb-4c3b-aa12-fc1bb76e7e06"
+                  "$ref": "#/components/schemas/bb0f9592-556c-45ff-a106-7529275c59b4"
                 }
               }
             },
@@ -974,7 +962,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/3a4f3f88-edef-4895-acc2-fa3752fcb84f"
+                "$ref": "#/components/schemas/bb091b5e-4b27-4634-9937-085b20ae1fc7"
               }
             }
           }
@@ -985,7 +973,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/48576be2-b9f8-45b3-93f9-08e55665c77c"
+                  "$ref": "#/components/schemas/b57f3462-eff7-4f16-804b-dbb5ce5dd981"
                 }
               }
             },
@@ -996,7 +984,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/9067cf10-13aa-4028-baea-28c9a367cae9"
+                  "$ref": "#/components/schemas/e004351e-d7da-4c6c-8b20-cf7e67c1e065"
                 }
               }
             },
@@ -1007,7 +995,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/6e6479f6-d01e-4b95-b031-f0a46e5107ad"
+                  "$ref": "#/components/schemas/80ad8b14-b5e1-4cb1-8351-12271201f02a"
                 }
               }
             },
@@ -1054,7 +1042,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/eb05111e-4059-4e70-a949-dbd643314113"
+                "$ref": "#/components/schemas/ccb4fdff-c9f3-4ae0-b9e1-feb8f43c44a6"
               }
             }
           }
@@ -1065,7 +1053,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d67c6a64-646c-47dd-ba9f-39770db043a1"
+                  "$ref": "#/components/schemas/e85b575d-4c98-46eb-94ac-78f8912d5946"
                 }
               }
             },
@@ -1073,6 +1061,74 @@
           },
           "401": {
             "description": "Invalid Credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/athlete": {
+      "post": {
+        "summary": "create",
+        "description": "Route to create athlete",
+        "operationId": "createAthlete",
+        "parameters": [],
+        "tags": [
+          "Athletes"
+        ],
+        "requestBody": {
+          "description": "A basic information about user.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AthleteSignupModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AthleteModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
             "content": {
               "application/json": {
                 "schema": {
@@ -1250,7 +1306,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/1141a5d7-280b-46f6-a75f-40775cb5c388"
+                "$ref": "#/components/schemas/ea585a3b-527d-47b6-b207-a9a527045838"
               }
             }
           }
@@ -1321,7 +1377,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/eb8b2168-3a63-4972-ad39-feccf69c8aaf"
+                "$ref": "#/components/schemas/10bef31d-3918-4435-a9e1-0eaaa510c49d"
               }
             }
           }
@@ -1500,7 +1556,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/338cbae8-d17d-4d9c-a831-d87502e3b0c0"
+                  "$ref": "#/components/schemas/16082466-a320-4f2e-97f7-1a41974325c5"
                 }
               }
             },
@@ -1579,6 +1635,74 @@
           }
         }
       }
+    },
+    "/coach": {
+      "post": {
+        "summary": "create",
+        "description": "Route to create coach",
+        "operationId": "createCoach",
+        "parameters": [],
+        "tags": [
+          "Coaches"
+        ],
+        "requestBody": {
+          "description": "A basic information about user.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CoachSignupModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/3d130b55-2a5f-4450-b359-216d8d047472"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -1589,6 +1713,10 @@
     {
       "name": "Athletes",
       "description": "Routes for athletes"
+    },
+    {
+      "name": "Coaches",
+      "description": "Routes for coaches"
     },
     {
       "name": "Exercises",
