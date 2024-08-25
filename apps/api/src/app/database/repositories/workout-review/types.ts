@@ -8,8 +8,24 @@ export type WorkoutReviewDynamoDB = Prettify<
 		updated_at: string;
 		coach_id: string;
 		athlete_id: string;
+		workout_id: string;
+		planned_exercises: WorkoutReview["plannedExercises"];
+		realized_exercises: WorkoutReview["realizedExercises"];
+		planned_volume: WorkoutReview["plannedVolume"];
+		realized_volume: WorkoutReview["realizedVolume"];
 	} & TBaseEntity &
-		Omit<WorkoutReview, "createdAt" | "updatedAt" | "coachId" | "athleteId">
+		Omit<
+			WorkoutReview,
+			| "createdAt"
+			| "updatedAt"
+			| "coachId"
+			| "athleteId"
+			| "workoutId"
+			| "plannedExercises"
+			| "realizedExercises"
+			| "plannedVolume"
+			| "realizedVolume"
+		>
 >;
 
 export interface IWorkoutReviewRepository {

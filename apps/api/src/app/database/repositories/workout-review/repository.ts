@@ -3,10 +3,8 @@ import type {
 	IDatabaseClient,
 	TBaseEntity,
 } from "@application/database/database";
-import { defaultVolume } from "@application/modules/workout/functions/get-workout-volume";
 import type { WorkoutReview } from "@core/domain/workout-review";
 import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
-import { WorkoutDynamoDB } from "../workout/types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}
@@ -14,9 +12,18 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	async create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
 	): Promise<WorkoutReview> {
-		const { athleteId, coachId, notes } = workout;
+		const {
+			athleteId,
+			coachId,
+			notes,
+			workoutId,
+			plannedExercises,
+			realizedExercises,
+			plannedVolume,
+			realizedVolume,
+		} = workout;
 		const { PK, SK } = this.getKeys(athleteId);
-		const workoutId = randomUUID();
+		const workoutReviewId = randomUUID();
 		const now = new Date().toISOString();
 
 		const newWorkout: WorkoutReviewDynamoDB = {
@@ -26,8 +33,13 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			coach_id: coachId,
 			created_at: now,
 			updated_at: now,
-			id: workoutId,
+			id: workoutReviewId,
 			notes,
+			workout_id: workoutId,
+			planned_exercises: plannedExercises,
+			realized_exercises: realizedExercises,
+			planned_volume: plannedVolume,
+			realized_volume: realizedVolume,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
@@ -51,6 +63,11 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			updatedAt: workout.updated_at,
 			id: workout.id,
 			notes: workout.notes,
+			workoutId: workout.workout_id,
+			plannedExercises: workout.planned_exercises,
+			realizedExercises: workout.realized_exercises,
+			plannedVolume: workout.planned_volume,
+			realizedVolume: workout.realized_volume,
 		};
 	}
 }

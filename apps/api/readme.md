@@ -69,6 +69,8 @@ This document outlines the table design for a DynamoDB single-table pattern base
 | **Workout**          | `WORKOUT#ATHLETE#<athleteId>`  | `WORKOUT#<date>`                       | Store workouts by athlete ID, sorted by date.      |
 | **Workout Review**   | `REVIEW`   | `STATUS#PENDING#ATHLETE#<athleteId>#DATE<date>`       | Track exercise performance over time per athlete.  |
 | **Workout Feedback** | `FEEDBACK#ATHLETE#<athleteId>` | `WORKOUT#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
+| **Personal Record** | `PR#ATHLETE#<athleteId>` | `EXERCISE#<workoutId>#DATE<date>`       | Track exercise performance over time per athlete.  |
+
 
 
 ## Access Patterns and Queries
