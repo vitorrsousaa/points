@@ -1,4 +1,4 @@
-import type { TBaseEntity } from "@application/database/database";
+import type { TBaseEntity, TBaseIndexes } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
 import type { WorkoutReview } from "@core/domain/workout-review";
 
@@ -13,7 +13,11 @@ export type WorkoutReviewDynamoDB = Prettify<
 		realized_exercises: WorkoutReview["realizedExercises"];
 		planned_volume: WorkoutReview["plannedVolume"];
 		realized_volume: WorkoutReview["realizedVolume"];
+		end_time: WorkoutReview["endTime"];
+		start_time: WorkoutReview["startTime"];
+		reviewed_at: WorkoutReview["reviewedAt"];
 	} & TBaseEntity &
+		TBaseIndexes &
 		Omit<
 			WorkoutReview,
 			| "createdAt"
@@ -25,6 +29,9 @@ export type WorkoutReviewDynamoDB = Prettify<
 			| "realizedExercises"
 			| "plannedVolume"
 			| "realizedVolume"
+			| "endTime"
+			| "startTime"
+			| "reviewedAt"
 		>
 >;
 

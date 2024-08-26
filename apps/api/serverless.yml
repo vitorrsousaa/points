@@ -290,4 +290,12 @@ functions:
           method: POST
           path: /coach
           documentation: ${file(src/server/functions/coach/create/handler.doc.yml):createCoach}
+  createWorkoutReview:
+    handler: src/server/functions/workout-review/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /workout-review/{coachId}
+          authorizer:
+            name: CognitoAuthorizer
           

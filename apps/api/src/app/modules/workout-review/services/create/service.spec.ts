@@ -19,6 +19,8 @@ describe("Service:Create", () => {
 		coachId: "456",
 		notes: "Some notes",
 		workoutId: "789",
+		endTime: new Date().getTime(),
+		startTime: new Date().getTime(),
 		plannedExercises: [workoutExerciseInput],
 		realizedExercises: [workoutExerciseInput],
 		plannedVolume: defaultVolume,
@@ -71,5 +73,21 @@ describe("Service:Create", () => {
 			workoutCount: DEFAULT_WORKOUT_COUNT + 1,
 			name: "John Doe",
 		});
+	});
+	it("Should call workoutReviewRepository with reviewed as false by default", async () => {
+		// Arrange
+		mockedAthleteRepository.getById.mockResolvedValue({
+			name: "John Doe",
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+
+		// Act
+		await service.execute(inputData);
+
+		// Assert
+		expect(mockedWorkoutReviewRepository.create).toHaveBeenCalledWith(
+			expect.objectContaining({
+				reviewed: false,
+			}),
+		);
 	});
 });

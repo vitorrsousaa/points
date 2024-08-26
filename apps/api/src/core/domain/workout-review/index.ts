@@ -8,10 +8,14 @@ export const WorkoutReviewSchema = z.object({
 	coachId: z.string().uuid(),
 	athleteId: z.string().uuid(),
 	workoutId: z.string().uuid(),
+	startTime: z.number(),
+	endTime: z.number(),
 	plannedExercises: z.array(WorkoutExerciseSchema),
 	realizedExercises: z.array(WorkoutExerciseSchema),
 	plannedVolume: WorkoutVolumeSchema,
 	realizedVolume: WorkoutVolumeSchema,
+	reviewed: z.boolean(),
+	reviewedAt: z.string().nullable().optional(),
 });
 
 export type CreateWorkoutReview = z.infer<typeof WorkoutReviewSchema>;

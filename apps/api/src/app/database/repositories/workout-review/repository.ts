@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
+	TBaseIndexes,
 } from "@application/database/database";
 import type { WorkoutReview } from "@core/domain/workout-review";
 import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
@@ -21,14 +22,20 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			realizedExercises,
 			plannedVolume,
 			realizedVolume,
+			endTime,
+			startTime,
+			reviewed,
 		} = workout;
-		const { PK, SK } = this.getKeys(athleteId);
+		const { PK, SK } = this.getKeys(athleteId, workoutId);
 		const workoutReviewId = randomUUID();
 		const now = new Date().toISOString();
+		const { gsi1pk, gsi1sk } = this.getIndexes(reviewed, coachId, workoutId);
 
 		const newWorkout: WorkoutReviewDynamoDB = {
 			PK,
 			SK,
+			gsi1pk,
+			gsi1sk,
 			athlete_id: athleteId,
 			coach_id: coachId,
 			created_at: now,
@@ -40,6 +47,10 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			realized_exercises: realizedExercises,
 			planned_volume: plannedVolume,
 			realized_volume: realizedVolume,
+			end_time: endTime,
+			start_time: startTime,
+			reviewed,
+			reviewed_at: null,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
@@ -47,11 +58,24 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		return this.mapToDomain(newWorkout);
 	}
 
-	private getKeys(athleteId: string): TBaseEntity {
+	private getKeys(athleteId: string, workoutId: string): TBaseEntity {
 		const now = new Date().toISOString();
 		return {
-			PK: `WORKOUT|ATHLETE|${athleteId}`,
-			SK: `WORKOUT|${now}`,
+			PK: `WORKOUTREVIEW|ATHLETE|${athleteId}`,
+			SK: `WORKOUTREVIEW|WORKOUT|${workoutId}|${now}`,
+		};
+	}
+
+	private getIndexes(
+		reviewed: boolean,
+		coachId: string,
+		workoutId: string,
+	): TBaseIndexes {
+		const status = reviewed ? "REVIEWED" : "PENDING";
+
+		return {
+			gsi1pk: `WORKOUTREVIEW|COACH|${coachId}`,
+			gsi1sk: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}`,
 		};
 	}
 
@@ -68,6 +92,10 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			realizedExercises: workout.realized_exercises,
 			plannedVolume: workout.planned_volume,
 			realizedVolume: workout.realized_volume,
+			endTime: workout.end_time,
+			startTime: workout.start_time,
+			reviewed: workout.reviewed,
+			reviewedAt: workout.reviewed_at,
 		};
 	}
 }
