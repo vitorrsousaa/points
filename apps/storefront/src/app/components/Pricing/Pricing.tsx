@@ -3,15 +3,15 @@ import { Card } from "./Card";
 export function Pricing() {
 	return (
 		<div
-			className="overflow-hidden w-full bg-gray-50 rounded-[72px] py-10"
+			className="overflow-hidden w-full bg-gray-50 rounded-[32px] md:rounded-[72px] py-10"
 			id="planos"
 		>
-			<div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+			<div className="mx-auto max-w-[85rem] px-6 lg:px-8">
 				<div className="mx-auto mb-8 max-w-2xl text-center lg:mb-14">
-					<span className="font-medium mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
+					<span className="font-medium mb-4 md:mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 						Planos & Preços
 					</span>
-					<h2 className="text-4xl font-medium text-gray-800 dark:text-gray-200 sm:text-5xl  md:text-5xl lg:text-6xl">
+					<h2 className="text-4xl font-medium text-gray-800 dark:text-gray-200 md:text-5xl">
 						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 							Economize{" "}
 						</span>

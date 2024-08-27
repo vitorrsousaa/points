@@ -2,12 +2,11 @@
 
 import { ROUTES } from "@/config/routes";
 import { Button, Icon } from "@shared/ui";
-import Link from "next/link";
 
 export function Footer() {
 	return (
 		<footer className="mx-auto w-full bg-black">
-			<div className="w-full h-20 rounded-bl-[72px] rounded-br-[72px] bg-white" />
+			<div className="w-full h-20 rounded-bl-[32px] rounded-br-[32px] md:rounded-bl-[72px] md:rounded-br-[72px] bg-white" />
 
 			{/** <!-- Grid --> */}
 			<div className="text-center px-4 py-10 sm:px-6 lg:px-8">

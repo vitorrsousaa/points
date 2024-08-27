@@ -6,14 +6,14 @@ export function Faq() {
 	return (
 		<>
 			{/**<!-- FAQ --> */}
-			<div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8" id="duvidas">
+			<div className="mx-auto w-full md:max-w-[85rem] md:px-4" id="duvidas">
 				{/**<!-- Title --> */}
 				<div className="mx-auto mb-10 max-w-2xl lg:mb-14">
-					<span className="font-medium mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent text-center">
+					<span className="font-medium mb-4 md:mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent text-center">
 						FAQ
 					</span>
 
-					<h2 className="text-5xl font-semibold dark:text-white md:text-4xl md:leading-tight text-center">
+					<h2 className="text-4xl md:text-5xl font-medium dark:text-white text-center">
 						Dúvidas frequentes
 					</h2>
 				</div>

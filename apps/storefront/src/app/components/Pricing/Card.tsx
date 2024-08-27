@@ -88,7 +88,7 @@ export function Card(props: CardProps) {
 
 				<div className="mt-6 flex flex-col gap-4 py-4 border p-4 rounded-xl">
 					<div>
-						<span className="text-5xl font-medium text-gray-800 dark:text-gray-200">
+						<span className="text-4xl md:text-5xl font-medium text-gray-800 dark:text-gray-200">
 							R$ {price}
 						</span>
 						<span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
