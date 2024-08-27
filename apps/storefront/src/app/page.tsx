@@ -1,38 +1,35 @@
-import { log } from "@shared/logger";
-import { Button } from "@shared/ui";
-
-export const metadata = {
-	title: "Store | Kitchen Sink",
-};
-
-const buttonVariants = [
-	"default",
-	"destructive",
-	"outline",
-	"secondary",
-	"ghost",
-	"link",
-] as const;
+import {
+	Faq,
+	Features,
+	Footer,
+	Hero,
+	Pricing,
+	ReafirmValueSection,
+	Reviews,
+} from "./components";
 
 export default function Store(): JSX.Element {
-	log("Hey! This is the Store page.");
-
 	return (
-		<div className="mt-8 items-center space-y-4">
-			<div className="flex w-full justify-center text-3xl font-bold">
-				Welcome to Next
-			</div>
-			<div className="flex w-full justify-center space-x-4">
-				<ul className="items-center space-y-1 md:inline-flex md:space-x-1 md:space-y-0">
-					{buttonVariants.map((variant) => (
-						<li key={variant}>
-							<Button variant={variant} className="capitalize">
-								{variant}
-							</Button>
-						</li>
-					))}
-				</ul>
-			</div>
-		</div>
+		<>
+			<main className="flex min-h-screen flex-col items-center justify-between mx-auto gap-14 md:gap-20 ">
+				<Hero />
+
+				<Reviews />
+
+				<section className="max-w-[85rem] flex flex-col gap-20 px-6 md:px-8">
+					<Features />
+				</section>
+
+				<Pricing />
+
+				<section className="max-w-[85rem] flex flex-col gap-20 px-6 md:px-8">
+					<Faq />
+
+					<ReafirmValueSection />
+				</section>
+			</main>
+
+			<Footer />
+		</>
 	);
 }

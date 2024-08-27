@@ -22,6 +22,9 @@ import {
 	ReaderIcon,
 	TrashIcon,
 	CheckCircledIcon,
+	ChevronRightIcon,
+	CheckIcon,
+	StarFilledIcon,
 } from "@radix-ui/react-icons";
 
 interface IconProps {
@@ -41,6 +44,7 @@ const icons = {
 	home: HomeIcon,
 	layers: LayersIcon,
 	double_arrow: CaretSortIcon,
+	arrow_right: ChevronRightIcon,
 	crossCircled: CrossCircledIcon,
 	trash: TrashIcon,
 	filter: ListFilter,
@@ -54,6 +58,8 @@ const icons = {
 	cursor: CursorArrowIcon,
 	eyeOpen: EyeOpenIcon,
 	check: CheckCircledIcon,
+	check_without_circle: CheckIcon,
+	filledStar: StarFilledIcon,
 } as const;
 
 export function Icon(props: IconProps) {
