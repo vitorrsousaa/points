@@ -24,6 +24,7 @@ import {
 	CheckCircledIcon,
 	ChevronRightIcon,
 	CheckIcon,
+	StarFilledIcon,
 } from "@radix-ui/react-icons";
 
 interface IconProps {
@@ -58,6 +59,7 @@ const icons = {
 	eyeOpen: EyeOpenIcon,
 	check: CheckCircledIcon,
 	check_without_circle: CheckIcon,
+	filledStar: StarFilledIcon,
 } as const;
 
 export function Icon(props: IconProps) {

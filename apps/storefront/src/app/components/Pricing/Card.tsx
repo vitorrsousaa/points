@@ -1,95 +1,121 @@
 import { ROUTES } from "@/config/routes";
-import { Button, cn, Icon } from "@shared/ui";
+import { Button, Icon } from "@shared/ui";
 
 interface CardProps {
+	label: string;
 	title: string;
 	description: string;
 	price: number;
 	benefits: string[];
 	malefits?: string[];
 	mostPopular?: boolean;
-	footer?: string;
 }
 
 export function Card(props: CardProps) {
-	const { title, description, price, benefits, malefits, footer, mostPopular } =
+	const { title, description, price, benefits, malefits, label, mostPopular } =
 		props;
 
 	return (
-		<div>
+		<div className="rounded-2xl border bg-white relative z-10 overflow-hidden">
+			{label && (
+				<span
+					className={`block text-center w-full px-3 py-3 text-sm font-semibold border-b-2 dark:bg-white dark:text-gray-800 ${
+						mostPopular
+							? "bg-orange-500 text-white border-orange-500"
+							: "bg-gray-100 text-gray-800"
+					}`}
+				>
+					{label}
+				</span>
+			)}
+
 			{/**<!-- Card --> */}
-			<div className="relative z-10 rounded-xl border bg-white p-4 md:p-10">
-				<h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-					{title}
-				</h3>
-				<div className="text-sm text-gray-400">{description}</div>
+			<div className="p-4 pt-8">
+				<div className="px-4">
+					<div>
+						<span className="tracking-wider">PLANO</span>
+						<h3 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">
+							{title}
+						</h3>
+					</div>
 
-				{mostPopular && (
-					<span className="absolute end-0 top-0 rounded-es-xl rounded-se-xl bg-orange-800 px-3 py-1.5 text-xs font-medium text-white dark:bg-white dark:text-gray-800">
-						Mais Popular
-					</span>
-				)}
-
-				<div className="mt-5">
-					<span className="text-6xl font-bold text-gray-800 dark:text-gray-200">
-						R$ {price}
-					</span>
-					<span className="text-lg font-bold text-gray-800 dark:text-gray-200">
-						.00
-					</span>
-					<span className="ms-3 text-gray-400">BRL / mensalmente</span>
-				</div>
-
-				<div className="mt-5 grid gap-y-2 py-4 first:pt-0 last:pb-0 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0">
-					{/**<!-- List --> */}
-					<ul className="space-y-2 text-sm sm:text-base">
-						{benefits.map((benefit) => (
-							<li className="flex space-x-3" key={benefit}>
-								<Icon
-									name="check"
-									className="h-5 w-5 mt-0.5 bg-orange-200 rounded-full text-orange-600"
-								/>
-								<span className="text-gray-800 dark:text-gray-200">
-									{benefit}
-								</span>
-							</li>
-						))}
-					</ul>
-					{/**<!-- End List --> */}
-
-					{/**<!-- List --> */}
-					{malefits && (
-						<ul className="space-y-2 text-sm sm:text-base">
-							{malefits.map((malefit) => (
-								<li className="flex space-x-3" key={malefit}>
-									<span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-200 text-gray-500 dark:bg-gray-800">
-										<Icon name="check" />
-									</span>
-									<span className="text-gray-800 dark:text-gray-200">
-										{malefit}
+					<div className="mt-6 gap-y-2">
+						{/**<!-- List --> */}
+						<ul className="space-y-2 text-sm sm:text-base w-full flex flex-col">
+							{benefits.map((benefit) => (
+								<li className="flex space-x-3" key={benefit}>
+									<Icon
+										name="check_without_circle"
+										className="h-6 w-6 text-orange-600"
+									/>
+									<span className="text-gray-600 dark:text-gray-200">
+										{benefit}
 									</span>
 								</li>
 							))}
 						</ul>
-					)}
+						{/**<!-- End List --> */}
 
-					{/**<!-- End List --> */}
+						{/**<!-- List --> */}
+						{malefits && (
+							<ul className="space-y-2 text-sm sm:text-base">
+								{malefits.map((malefit) => (
+									<li className="flex space-x-3" key={malefit}>
+										<span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-200 text-gray-500 dark:bg-gray-800">
+											<Icon name="check" />
+										</span>
+										<span className="text-gray-800 dark:text-gray-200">
+											{malefit}
+										</span>
+									</li>
+								))}
+							</ul>
+						)}
+
+						<li className="flex items-center space-x-3 mt-2">
+							<Icon
+								name="filledStar"
+								className="h-5 w-5 ml-0.5 text-orange-600"
+							/>
+
+							<span className="text-gray-600 dark:text-gray-200">
+								...muito mais vindo aí!
+							</span>
+						</li>
+						{/**<!-- End List --> */}
+					</div>
 				</div>
 
-				<div className="mt-5 grid grid-cols-2 gap-x-4 py-4 first:pt-0 last:pb-0">
+				<div className="mt-6 flex flex-col gap-4 py-4 border p-4 rounded-xl">
 					<div>
-						<p className="text-sm text-gray-500">
-							{footer ? footer : "Cancele qualquer momento."}
-						</p>
+						<span className="text-5xl font-medium text-gray-800 dark:text-gray-200">
+							R$ {price}
+						</span>
+						<span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+							,00
+						</span>
+						<span className="ms-2 text-muted-foreground">/ mês</span>
+
+						<small className="block mt-2 text-muted-foreground">
+							Cancele quando quiser.
+						</small>
 					</div>
 
-					<div className="flex justify-end">
-						<a href={ROUTES.LOGIN}>
-							<Button variant={mostPopular ? "default" : "outline"}>
-								Cadastre-se
-							</Button>
-						</a>
-					</div>
+					{description && (
+						<p className="text-base text-gray-700 text-pretty ">
+							{description}
+						</p>
+					)}
+
+					<a href={ROUTES.LOGIN} className="w-full">
+						<Button
+							className="w-full"
+							size="lg"
+							variant={mostPopular ? "default" : "outline"}
+						>
+							Selecionar Plano
+						</Button>
+					</a>
 				</div>
 			</div>
 			{/**<!-- End Card --> */}

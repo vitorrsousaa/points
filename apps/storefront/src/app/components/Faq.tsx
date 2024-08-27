@@ -6,11 +6,15 @@ export function Faq() {
 	return (
 		<>
 			{/**<!-- FAQ --> */}
-			<div className="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+			<div className="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8" id="duvidas">
 				{/**<!-- Title --> */}
 				<div className="mx-auto mb-10 max-w-2xl lg:mb-14">
-					<h2 className="text-2xl font-bold dark:text-white md:text-4xl md:leading-tight">
-						Perguntas frequentes
+					<span className="font-medium mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent text-center">
+						FAQ
+					</span>
+
+					<h2 className="text-5xl font-semibold dark:text-white md:text-4xl md:leading-tight text-center">
+						Dúvidas frequentes
 					</h2>
 				</div>
 				{/**<!-- End Title --> */}

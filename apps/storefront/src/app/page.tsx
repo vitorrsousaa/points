@@ -1,22 +1,35 @@
-import { log } from "@shared/logger";
-import { Hero } from "./components/Hero";
-import { Footer } from "./components/Footer";
-import { Features } from "./components/Features";
-import { Faq } from "./components/Faq";
-import { Pricing } from "./components/Pricing";
+import {
+	Faq,
+	Features,
+	Footer,
+	Hero,
+	Pricing,
+	ReafirmValueSection,
+	Reviews,
+} from "./components";
 
 export default function Store(): JSX.Element {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between">
-			<Hero />
+		<>
+			<main className="flex min-h-screen flex-col items-center justify-between mx-auto gap-20 ">
+				<Hero />
 
-			<Features />
+				<Reviews />
 
-			<Pricing />
+				<section className="max-w-[85rem] flex flex-col gap-20 px-4 sm:px-6 lg:px-8">
+					<Features />
+				</section>
 
-			<Faq />
+				<Pricing />
+
+				<section className="max-w-[85rem] flex flex-col gap-20 px-4 sm:px-6 lg:px-8">
+					<Faq />
+
+					<ReafirmValueSection />
+				</section>
+			</main>
 
 			<Footer />
-		</main>
+		</>
 	);
 }
