@@ -171,6 +171,12 @@ functions:
           trigger: CustomMessage
           existing: true
           forceDeploy: true
+  resendCode:
+    handler: src/server/functions/auth/resendCode.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/resend-code/{email}
   profile:
     handler: src/server/functions/auth/profile.handler
     events:

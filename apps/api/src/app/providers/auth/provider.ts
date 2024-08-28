@@ -33,4 +33,8 @@ export class AuthProvider implements IAuthProvider {
 	}> {
 		return this.identityManagerProvider.signin(email, password);
 	}
+
+	async resendCode(email: string): Promise<void> {
+		return this.identityManagerProvider.resendConfirmationCode(email);
+	}
 }

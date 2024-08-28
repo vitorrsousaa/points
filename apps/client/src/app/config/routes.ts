@@ -10,4 +10,5 @@ export const ROUTES = {
 	ATHLETE_MORE_INFO: "/atleta/:athleteId",
 	NEW_TRAINING: "/atleta/:athleteId/new-training",
 	UPDATE_WORKOUT: "/atleta/:athleteId/update-training/:workoutId",
+	VERIFICATION: "/verificacao",
 } as const;
