@@ -24,4 +24,5 @@ export interface IIdentityManagerProvider {
 	forgotPassword(email: string): Promise<void>;
 	profile(email: string): Promise<TUserProfileOutput>;
 	resetPassword(payload: UpdatePasswordIdentityUserDTO): Promise<void>;
+	resendConfirmationCode(email: string): Promise<void>;
 }

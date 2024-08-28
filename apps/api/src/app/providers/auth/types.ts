@@ -16,4 +16,5 @@ export interface IAuthProvider {
 		accessToken: string;
 		refreshToken: string;
 	}>;
+	resendCode(email: string): Promise<void>;
 }

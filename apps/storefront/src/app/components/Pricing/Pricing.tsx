@@ -26,7 +26,7 @@ export function Pricing() {
 							label="ACESSO ANTECIPADO"
 							title="Explorador - Bônus"
 							description="Tenha acesso antecipado, nos auxilie no desenvolvimento e ganhe BÔNUS nos ajudando."
-							price={5}
+							price={0}
 							benefits={[
 								"Cadastre até 10 atletas",
 								"Crie treinamentos",
