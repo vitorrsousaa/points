@@ -15,6 +15,7 @@ import {
 	UserNotConfirmedException,
 	UserNotFoundException,
 	UsernameExistsException,
+	ResendConfirmationCodeCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 import type {
 	IIdentityManagerProvider,
@@ -30,6 +31,22 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 		private readonly configEnvironment: IConfig,
 	) {
 		this.COGNITO_POOL_CLIENT_ID = configEnvironment.COGNITO_POOL_CLIENT_ID;
+	}
+	async resendConfirmationCode(email: string): Promise<void> {
+		try {
+			const command = new ResendConfirmationCodeCommand({
+				ClientId: this.COGNITO_POOL_CLIENT_ID,
+				Username: email,
+			});
+
+			await this.cognitoClient.send(command);
+		} catch (error) {
+			if (error instanceof UserNotFoundException) {
+				throw new AppError("User not found", 404);
+			}
+
+			throw new AppError("Internal Server Error", 500);
+		}
 	}
 
 	async signup(payload: CreateUserDTO): Promise<{ userId: string }> {

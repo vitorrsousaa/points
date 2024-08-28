@@ -12,6 +12,7 @@ import {
 	SignUpScreen,
 	TrainingScreen,
 	UpdateTrainingScreen,
+	VerificationCodeScreen,
 } from "@/screens/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardLayout } from "../layouts/dashboard";
@@ -28,6 +29,10 @@ export function RouterStack() {
 					<Route
 						path={ROUTES.CONFIRMATION_ACCOUNT}
 						element={<ConfirmationAccountScreen />}
+					/>
+					<Route
+						path={ROUTES.VERIFICATION}
+						element={<VerificationCodeScreen />}
 					/>
 				</Route>
 				<Route element={<AuthGuard isPrivate={true} />}>
