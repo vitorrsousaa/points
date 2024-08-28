@@ -1,3 +1,10 @@
 {
-	"conventionalCommits.scopes": ["shared", "docs", "client", "api", "admin"]
+	"conventionalCommits.scopes": [
+		"shared",
+		"docs",
+		"client",
+		"api",
+		"admin",
+		"root"
+	]
 }

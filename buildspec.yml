@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
   
-  pre-build:
+  pre_build:
     commands:
       - yarn install --lock-file
       
@@ -15,4 +15,7 @@ phases:
       
   post_build:
     commands:
-      - yarn test
+      - aws s3 sync --delete 'PASTA DO CLIENT' s3://${DEPLOY_BUCKET_CLIENT}
+      - aws cloudfront create-invalidation --distribution-id ${CF_ID_CLIENT} --paths /index.html
+      - aws s3 sync --delete 'PASTA DO NEXT' s3://${DEPLOY_BUCKET_NEXT}
+      - aws cloudfront create-invalidation --distribution-id ${CF_ID_NEXT} --paths /index.html
