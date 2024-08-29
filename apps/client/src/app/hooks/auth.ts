@@ -1,9 +1,9 @@
 import { AuthContext, type AuthContextValue } from "@/contexts/auth";
+import { SentryHandler } from "@/libs/SentryHandler";
 import { authService } from "@/services/auth";
 import type { ResetPasswordFn } from "@/services/auth/reset-password";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
-
 export function useAuth(): AuthContextValue {
 	const authContext = useContext(AuthContext);
 
@@ -18,8 +18,28 @@ export function useForgotPassword(): {
 	isLoading: boolean;
 	forgotPassword: (params: { email: string }) => Promise<void>;
 } {
+	const { sendEvent, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.forgotPassword,
+		onSuccess(_, variables) {
+			sendEvent({
+				message: "ForgotPassword",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+		},
+		onError(error) {
+			sendException({
+				exceptionName: "forgot_password",
+				...error,
+			});
+		},
 	});
 
 	return {
@@ -32,8 +52,28 @@ export function useResetPassword(): {
 	isLoading: boolean;
 	resetPassword: ResetPasswordFn;
 } {
+	const { sendEvent, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.resetPassword,
+		onSuccess(_, variables) {
+			sendEvent({
+				message: "ResetPassword",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+		},
+		onError(error) {
+			sendException({
+				exceptionName: "reset_password",
+				...error,
+			});
+		},
 	});
 
 	return {
@@ -43,8 +83,28 @@ export function useResetPassword(): {
 }
 
 export function useSignup() {
+	const { sendEvent, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.signup,
+		onSuccess(_, variables) {
+			sendEvent({
+				message: "SignUp",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+		},
+		onError(error) {
+			sendException({
+				exceptionName: "sign_up",
+				...error,
+			});
+		},
 	});
 
 	return {
@@ -54,8 +114,28 @@ export function useSignup() {
 }
 
 export function useAccountConfirmation() {
+	const { sendEvent, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.accountConfirmation,
+		onSuccess(_, variables) {
+			sendEvent({
+				message: "AccountConfirmation",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+		},
+		onError(error) {
+			sendException({
+				exceptionName: "account_confirmation",
+				...error,
+			});
+		},
 	});
 
 	return {
@@ -65,8 +145,30 @@ export function useAccountConfirmation() {
 }
 
 export function useSignin() {
+	const { sendEvent, startSession, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.signin,
+		onSuccess(_, variables) {
+			sendEvent({
+				message: "SignIn",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+
+			startSession(variables.email);
+		},
+		onError(error) {
+			sendException({
+				exceptionName: "sign_in",
+				...error,
+			});
+		},
 	});
 
 	return {

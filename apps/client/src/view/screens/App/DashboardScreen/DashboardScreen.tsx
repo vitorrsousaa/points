@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import {
 	Button,
 	Card,

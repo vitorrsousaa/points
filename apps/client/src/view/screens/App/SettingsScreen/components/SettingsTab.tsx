@@ -1,28 +1,24 @@
 import {
-	Label,
 	Select,
 	SelectContent,
 	SelectGroup,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-	type Theme,
 	useTheme,
+	type Theme,
 } from "@shared/ui";
+import { Section, SectionItem } from ".";
 
 export function SettingsTab() {
 	const { setTheme, theme } = useTheme();
 
 	return (
-		<div className="w-full">
-			<div className="w-full grid grid-cols-2 items-center">
-				<div>
-					<Label>Aparência</Label>
-					<p className="text-[0.8rem] text-muted-foreground">
-						Personalize a aparência da sua aplicação.
-					</p>
-				</div>
-
+		<Section
+			title="Aparência"
+			description="Personalize a aparência da sua aplicação."
+		>
+			<SectionItem title="Tema" description="Ajuste conforme sua preferência.">
 				<Select
 					onValueChange={(event: string) => setTheme(event as Theme)}
 					value={theme}
@@ -32,12 +28,12 @@ export function SettingsTab() {
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
-							<SelectItem value="light">Light</SelectItem>
-							<SelectItem value="dark">Dark</SelectItem>
+							<SelectItem value="light">Claro</SelectItem>
+							<SelectItem value="dark">Escuro</SelectItem>
 						</SelectGroup>
 					</SelectContent>
 				</Select>
-			</div>
-		</div>
+			</SectionItem>
+		</Section>
 	);
 }

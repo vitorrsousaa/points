@@ -1,11 +1,14 @@
 import { QUERY_KEYS } from "@/config/queryKeys";
 import type { Workout } from "@/entitites/workout";
+import { SentryHandler } from "@/libs/SentryHandler";
 import { workoutServices } from "@/services/workout";
 import type { WithStatus } from "@/utils/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useCreateWorkout() {
 	const queryClient = useQueryClient();
+
+	const { sendEvent, sendException } = SentryHandler();
 
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: workoutServices.create,
@@ -28,7 +31,7 @@ export function useCreateWorkout() {
 
 			return { tempId, athleteId };
 		},
-		onSuccess: async (data, _, context) => {
+		onSuccess: async (data, variables, context) => {
 			await queryClient.cancelQueries({
 				queryKey: QUERY_KEYS.WORKOUTS(context?.athleteId),
 			});
@@ -40,6 +43,17 @@ export function useCreateWorkout() {
 						workout.id === context?.tempId ? data : workout,
 					),
 			);
+
+			sendEvent({
+				message: "UpdateWorkout",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
 		},
 		onError: async (_error, _, context) => {
 			await queryClient.cancelQueries({
@@ -55,6 +69,11 @@ export function useCreateWorkout() {
 							: workout,
 					),
 			);
+
+			sendException({
+				exceptionName: "create_workout",
+				..._error,
+			});
 		},
 	});
 
@@ -86,6 +105,8 @@ export function useGetAllWorkouts(athleteId: string | undefined) {
 export function useRemoveWorkout() {
 	const queryClient = useQueryClient();
 
+	const { sendEvent, sendException } = SentryHandler();
+
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: workoutServices.remove,
 		onMutate: (variables) => {
@@ -113,6 +134,17 @@ export function useRemoveWorkout() {
 				QUERY_KEYS.WORKOUTS(athleteId),
 				(old) => old?.filter((workout) => workout.id !== workoutId),
 			);
+
+			sendEvent({
+				message: "CreateExercise",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
 		},
 		onError: async (_error, variables, context) => {
 			const { athleteId } = variables;
@@ -128,6 +160,11 @@ export function useRemoveWorkout() {
 						: workout,
 				),
 			);
+
+			sendException({
+				exceptionName: "remove_workout",
+				..._error,
+			});
 		},
 	});
 
@@ -139,6 +176,8 @@ export function useRemoveWorkout() {
 
 export function useUpdateWorkout() {
 	const queryClient = useQueryClient();
+
+	const { sendEvent, sendException } = SentryHandler();
 
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: workoutServices.update,
@@ -169,8 +208,19 @@ export function useUpdateWorkout() {
 				QUERY_KEYS.WORKOUTS(athleteId),
 				(old) => old?.map((w) => (w.id === workout.id ? workout : w)),
 			);
+
+			sendEvent({
+				message: "UpdateWorkout",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
 		},
-		onError: async (_, variables, context) => {
+		onError: async (error, variables, context) => {
 			const { athleteId, workout } = variables;
 
 			await queryClient.cancelQueries({
@@ -183,6 +233,11 @@ export function useUpdateWorkout() {
 					w.id === workout.id ? { ...w, status: "error" } : w,
 				),
 			);
+
+			sendException({
+				exceptionName: "update_workout",
+				...error,
+			});
 		},
 	});
 
