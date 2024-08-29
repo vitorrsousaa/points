@@ -26,7 +26,7 @@ export function QueryClientProvider({
 	return (
 		<TanstackQueryClientProvider client={queryClient}>
 			{children}
-			<ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right" />
+			<ReactQueryDevtools initialIsOpen={false} buttonPosition="top-left" />
 		</TanstackQueryClientProvider>
 	);
 }

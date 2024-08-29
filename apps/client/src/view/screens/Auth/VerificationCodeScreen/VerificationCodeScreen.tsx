@@ -34,23 +34,28 @@ export function VerificationCodeScreen() {
 
 	useEffect(() => {
 		if (email && code) {
-			toast.promise(confirmAccount({ email, code }), {
-				success: () => {
-					navigate(ROUTES.SIGNIN);
-					return "Conta confirmada com sucesso";
-				},
-				error: (error: { statusCode: number }) => {
-					if (error.statusCode === 422) return "E-mail inválido";
+			const confirm = async () => {
+				try {
+					await toast.promise(confirmAccount({ email, code }), {
+						success: () => {
+							navigate(ROUTES.SIGNIN);
+							return "Conta confirmada com sucesso";
+						},
+						error: (error) => {
+							if (error.statusCode === 422) return "E-mail inválido";
+							if (error.statusCode === 400) return "Código expirado";
+							return "Erro ao confirmar conta";
+						},
+						loading: "Confirmando conta",
+					});
+				} catch (err) {
+					// Tratamento de erro global se necessário
+				}
+			};
 
-					if (error.statusCode === 400) return "Código expirado";
-
-					return "Erro ao confirmar conta";
-				},
-				loading: "Confirmando conta",
-			});
+			confirm();
 		}
-	});
-
+	}, [email, code, confirmAccount, navigate]);
 	return (
 		<div className="flex h-full items-center justify-center">
 			<Card className="mx-auto max-w-md">
