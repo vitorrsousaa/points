@@ -22,7 +22,7 @@ export function RouterStack() {
 	return (
 		<BrowserRouter basename="/">
 			<Routes>
-				<Route path="/" element={<AuthGuard isPrivate={false} />}>
+				<Route element={<AuthGuard isPrivate={false} />}>
 					<Route index element={<Navigate to={ROUTES.SIGNIN} replace />} />
 					<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
 					<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
