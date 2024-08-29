@@ -40,7 +40,7 @@ function App() {
 				<RouterStack />
 
 				<Toaster
-					position="bottom-right"
+					position="top-right"
 					toastOptions={{
 						duration: 3000,
 					}}
