@@ -158,7 +158,7 @@ export function useUpdateWorkout() {
 
 			return { oldWorkouts };
 		},
-		onSuccess: async (_, variables) => {
+		onSuccess: async (data, variables) => {
 			const { athleteId, workout } = variables;
 
 			await queryClient.cancelQueries({
@@ -167,7 +167,7 @@ export function useUpdateWorkout() {
 
 			queryClient.setQueryData<WithStatus<Workout>[]>(
 				QUERY_KEYS.WORKOUTS(athleteId),
-				(old) => old?.map((w) => (w.id === workout.id ? workout : w)),
+				(old) => old?.map((w) => (w.id === workout.id ? data : w)),
 			);
 		},
 		onError: async (_, variables, context) => {
