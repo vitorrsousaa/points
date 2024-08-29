@@ -34,6 +34,7 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:Scan
             - dynamodb:Query
+            - dynamodb:ConditionCheckItem
           Resource: 
             - !GetAtt GryppTable.Arn
             - !Sub ${GryppTable.Arn}/index/EmailIndex
@@ -206,6 +207,7 @@ functions:
       - httpApi:
           method: POST
           path: /athlete
+          documentation: ${file(src/server/functions/athlete/create/handler.doc.yml):createAthlete}
           authorizer:
             name: CognitoAuthorizer
   getAllByCoachId:
@@ -293,4 +295,13 @@ functions:
       - httpApi:
           method: POST
           path: /coach
+          documentation: ${file(src/server/functions/coach/create/handler.doc.yml):createCoach}
+  createWorkoutReview:
+    handler: src/server/functions/workout-review/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /workout-review/{coachId}
+          authorizer:
+            name: CognitoAuthorizer
           

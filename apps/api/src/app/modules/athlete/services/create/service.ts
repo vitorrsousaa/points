@@ -60,6 +60,8 @@ export class CreateService implements ICreateService {
 			athleteId = userId;
 		}
 
+		const DEFAULT_WORKOUT_COUNT = 0;
+
 		const athlete = await this.athleteRepository.create({
 			id: isDefaultAthlete ? createInput.athleteId || "" : athleteId,
 			coachId: createInput.coachId,
@@ -68,6 +70,7 @@ export class CreateService implements ICreateService {
 			age: createInput.age,
 			name: `${createInput.firstName} ${createInput.lastName}`,
 			email: createInput.email,
+			workoutCount: DEFAULT_WORKOUT_COUNT,
 		});
 
 		return athlete;

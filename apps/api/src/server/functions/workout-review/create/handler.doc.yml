@@ -1,24 +1,23 @@
-createCoach:
-  summary: create
-  description: Route to create coach
+create:
+  summary: Sample Lambda
+  description: Sample Lambda
+  security:
+    - CognitoAuthorizer: []
   tags:
-    - Coaches
+    - Sample
   requestBody:
-    description: A basic information about user.
+    description: Sample request body
     required: true
   requestModels:
-    application/json: CoachSignupModel
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        email:
+          type: string
+          example: user@email.com
+      required:
+        - email
   methodResponses:
-    - statusCode: 200
-      responseBody:
-        description: Return the userId create by the server
-      responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              userId:
-                type: string
     - statusCode: 200
       responseBody:
         description: Return default response
@@ -27,9 +26,9 @@ createCoach:
           schema:
             $schema: http://json-schema.org/draft-04/schema#
             properties:
-              userId:
+              message:
                 type: string
-                example: b70f0460-ca06-4769-bb01-ea5b6f0a0245
+                example: ok
     - statusCode: 401
       responseBody:
         description: Not authorized

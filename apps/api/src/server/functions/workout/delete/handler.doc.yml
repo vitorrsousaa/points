@@ -5,29 +5,19 @@ delete:
     - CognitoAuthorizer: []
   tags:
     - Workouts
-  requestBody:
-    description: Sample request body
-    required: true
-  requestModels:
-    application/json: 
-      $schema: http://json-schema.org/draft-04/schema#
-      properties:
-        workoutId:
-          type: string
-          format: uuid
-          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
-        coachId:
-          type: string
-          format: uuid
-          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
-        athleteId:
-          type: string
-          format: uuid
-          example: 4df43fc4-fbf5-4286-9b51-edf852db180d
-      required:
-        - workoutId
-        - coachId
-        - athleteId
+  queryParams:
+    - name: "workoutId"
+      description: "The workoutId to delete"
+      required: true
+      schema:
+        type: "string"
+        example: "4df43fc4-fbf5-4286-9b51-edf852db180d"
+    - name: "athleteId"
+      description: "The athlete who owns the workout"
+      required: true
+      schema:
+        type: "string"
+        example: "4df43fc4-fbf5-4286-9b51-edf852db180d"
   methodResponses:
     - statusCode: 201
       responseBody:

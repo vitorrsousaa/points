@@ -1,6 +1,6 @@
-import type { TBaseEntity } from "@application/database/database";
+import type { TBaseEntity, TBaseIndexes } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
-import type { Workout, WorkoutVolume } from "@core/domain/workout";
+import type { Workout } from "@core/domain/workout";
 
 export type WorkoutDynamoDB = Prettify<
 	{
@@ -10,6 +10,7 @@ export type WorkoutDynamoDB = Prettify<
 		athlete_id: string;
 		is_active: boolean;
 	} & TBaseEntity &
+		TBaseIndexes &
 		Omit<
 			Workout,
 			"createdAt" | "updatedAt" | "coachId" | "athleteId" | "isActive"
@@ -20,7 +21,11 @@ export interface IWorkoutRepository {
 	update(workout: Workout): Promise<Workout>;
 	getAllByAthleteId(athleteId: string): Promise<Workout[]>;
 	getById(athleteId: string, workoutId: string): Promise<Workout | null>;
-	delete(athleteId: string, workoutId: string): Promise<void>;
+	delete(
+		athleteId: string,
+		workoutId: string,
+		createdAt: string,
+	): Promise<void>;
 	create(
 		workout: Omit<Workout, "createdAt" | "updatedAt" | "id" | "visibility">,
 	): Promise<Workout>;

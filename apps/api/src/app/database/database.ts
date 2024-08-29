@@ -12,7 +12,15 @@ import {
 	type ScanCommandInput,
 	UpdateCommand,
 	type UpdateCommandInput,
+	// TransactionWriteCommand
+	TransactWriteCommand,
+	type TransactWriteCommandInput,
 } from "@aws-sdk/lib-dynamodb";
+
+export type TBaseIndexes = {
+	gsi1pk: string;
+	gsi1sk: string;
+};
 
 export type TBaseEntity = {
 	SK: string;
@@ -36,11 +44,18 @@ export interface IDatabaseClient {
 	): Promise<T | undefined>;
 	get<T>(args: Omit<GetCommandInput, "TableName">): Promise<T | undefined>;
 	delete(args: Omit<DeleteCommandInput, "TableName">): Promise<void>;
+	transactWrite(args: TransactWriteCommandInput): Promise<void>;
 }
 
 export class DatabaseClient implements IDatabaseClient {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	constructor(private readonly dynamoClient: DynamoDBDocumentClient) {}
+
+	async transactWrite(args: TransactWriteCommandInput): Promise<void> {
+		const command = new TransactWriteCommand({ ...args });
+
+		await this.dynamoClient.send(command);
+	}
 
 	async create<T extends TBaseEntity>(attributes: T) {
 		const command = new PutCommand({

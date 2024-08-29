@@ -1,8 +1,8 @@
 import { randomUUID } from "node:crypto";
-import { DATABASE_TABLE } from "@application/config/tables";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
+	TBaseIndexes,
 } from "@application/database/database";
 import { defaultVolume } from "@application/modules/workout/functions/get-workout-volume";
 import type { Workout, WorkoutVolume } from "@core/domain/workout";
@@ -11,15 +11,15 @@ import type { IWorkoutRepository, WorkoutDynamoDB } from "./types";
 export class WorkoutRepository implements IWorkoutRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 	async getAllActiveByAthleteId(athleteId: string): Promise<Workout[]> {
-		const { PK } = this.getKeys(athleteId);
+		const { gsi1pk, gsi1sk } = this.getGSIKeys(true, athleteId);
 
 		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
-			KeyConditionExpression: "PK = :PK",
-			FilterExpression: "#is_active = :is_active",
-			ExpressionAttributeNames: { "#is_active": "is_active" },
+			KeyConditionExpression:
+				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
+			IndexName: "GSI1Index",
 			ExpressionAttributeValues: {
-				":PK": PK,
-				":is_active": true,
+				":gsi1pk": gsi1pk,
+				":gsi1sk": gsi1sk,
 			},
 		});
 
@@ -27,8 +27,11 @@ export class WorkoutRepository implements IWorkoutRepository {
 	}
 
 	async create(
-		workout: Omit<Workout, "createdAt" | "updatedAt"> & {
+		workout: Omit<Workout, "createdAt" | "updatedAt" | "id"> & {
 			volume?: WorkoutVolume;
+			createdAt?: string;
+			updatedAt?: string;
+			id?: string;
 		},
 	): Promise<Workout> {
 		const {
@@ -39,70 +42,95 @@ export class WorkoutRepository implements IWorkoutRepository {
 			description,
 			isActive,
 			volume,
+			createdAt,
+			id,
+			updatedAt,
 		} = workout;
-		const { PK, SK } = this.getKeys(athleteId);
-		const workoutId = randomUUID();
+		const workoutId = id || randomUUID();
+		const { PK, SK } = this.getKeys(athleteId, workoutId);
 		const now = new Date().toISOString();
+
+		const { gsi1pk, gsi1sk } = this.getGSIKeys(isActive, athleteId, workoutId);
 
 		const newWorkout: WorkoutDynamoDB = {
 			PK,
 			SK,
 			athlete_id: athleteId,
 			coach_id: coachId,
-			created_at: now,
-			updated_at: now,
+			created_at: createdAt || now,
+			updated_at: updatedAt || now,
 			id: workoutId,
 			name,
 			exercises,
 			description,
 			is_active: isActive,
 			volume,
+			gsi1pk,
+			gsi1sk,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
 
-		return {
-			exercises,
-			name,
-			id: workoutId,
-			athleteId,
-			coachId,
-			createdAt: now,
-			updatedAt: now,
-			description,
-			isActive,
-			volume,
-		};
+		return this.mapToDomain(newWorkout);
 	}
 
 	async update(workout: Workout): Promise<Workout> {
-		const { PK } = this.getKeys(workout.athleteId);
-		const SK = `WORKOUT|${workout.createdAt}`;
-		const now = new Date().toISOString();
+		await this.delete(workout.athleteId, workout.id, workout.createdAt);
 
-		await this.dbInstance.update({
-			Key: { PK, SK },
-			UpdateExpression:
-				"set #name = :name, #exercises = :exercises, #updated_at = :updated_at, #is_active = :is_active, #description = :description, #volume = :volume",
-			ExpressionAttributeNames: {
-				"#name": "name",
-				"#exercises": "exercises",
-				"#updated_at": "updated_at",
-				"#is_active": "is_active",
-				"#description": "description",
-				"#volume": "volume",
-			},
-			ExpressionAttributeValues: {
-				":name": workout.name,
-				":exercises": workout.exercises,
-				":updated_at": now,
-				":is_active": workout.isActive,
-				":description": workout.description,
-				":volume": workout.volume,
-			},
+		const result = await this.create({
+			...workout,
+			updatedAt: new Date().toISOString(),
 		});
 
-		return { ...workout, updatedAt: now };
+		// const newWorkout: WorkoutDynamoDB = {
+		// 	PK:newPK,
+		// 	SK:newSK,
+		// 	athlete_id: workout.athleteId,
+		// 	coach_id: workout.coachId,
+		// 	created_at: workout.createdAt,
+		// 	updated_at: now,
+		// 	id: workout.id,
+		// 	name: workout.name,
+		// 	exercises: workout.exercises,
+		// 	description: workout.description,
+		// 	is_active: workout.isActive,
+		// 	volume: workout.volume,
+		// 	gsi1pk,
+		// 	gsi1sk,
+		// };
+
+		// await this.dbInstance.transactWrite({
+		// 	TransactItems: [
+		// 		{
+		// 			ConditionCheck: {
+		// 				TableName: DATABASE_TABLE.TABLE_NAME,
+		// 				Key: {
+		// 					PK: PK,
+		// 					SK: SK,
+		// 				},
+		// 				ConditionExpression: "attribute_exists(PK) and attribute_exists(SK)"
+		// 			}
+		// 		},
+		// 		{
+		// 			Delete:{
+		// 				Key: {
+		// 					PK: PK,
+		// 					SK: SK,
+		// 				},
+		// 				TableName: DATABASE_TABLE.TABLE_NAME
+		// 			},
+
+		// 		},
+		// 		{
+		// 			Put:{
+		// 				TableName: DATABASE_TABLE.TABLE_NAME,
+		// 				Item:newWorkout
+		// 			}
+		// 		}
+		// 	]
+		// })
+
+		return result;
 	}
 
 	async getAllByAthleteId(athleteId: string): Promise<Workout[]> {
@@ -117,23 +145,28 @@ export class WorkoutRepository implements IWorkoutRepository {
 
 		return result ? result.map(this.mapToDomain) : [];
 	}
+
 	async getById(athleteId: string, workoutId: string): Promise<Workout | null> {
 		const { PK } = this.getKeys(athleteId);
+		const SK = this.getSK(workoutId);
 		const result = await this.dbInstance.query<WorkoutDynamoDB[]>({
-			KeyConditionExpression: "PK = :PK",
-			FilterExpression: "id = :id",
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
 			ExpressionAttributeValues: {
 				":PK": PK,
-				":id": workoutId,
+				":SK": SK,
 			},
 		});
 
-		return result ? this.mapToDomain(result[0]) : null;
+		return result && result.length > 0 ? this.mapToDomain(result[0]) : null;
 	}
 
-	async delete(athleteId: string, createdAt: string): Promise<void> {
+	async delete(
+		athleteId: string,
+		workoutId: string,
+		createdAt: string,
+	): Promise<void> {
 		const { PK } = this.getKeys(athleteId);
-		const SK = `WORKOUT|${createdAt}`;
+		const SK = this.getSK(workoutId, createdAt);
 		await this.dbInstance.delete({
 			Key: {
 				PK: PK,
@@ -142,11 +175,32 @@ export class WorkoutRepository implements IWorkoutRepository {
 		});
 	}
 
-	private getKeys(athleteId: string): TBaseEntity {
+	private getGSIKeys(
+		isActive: boolean,
+		athleteId: string,
+		workoutId?: string,
+	): TBaseIndexes {
+		const status = isActive ? "ACTIVE" : "INACTIVE";
+
+		return {
+			gsi1pk: `WORKOUT|ATHLETE|${athleteId}`,
+			gsi1sk: workoutId
+				? `STATUS#${status}|WORKOUT#${workoutId}`
+				: `STATUS#${status}`,
+		};
+	}
+
+	private getSK(workoutId: string, createdAt?: string) {
+		return createdAt
+			? `WORKOUT|${workoutId}|${createdAt}`
+			: `WORKOUT|${workoutId}`;
+	}
+
+	private getKeys(athleteId: string, workoutId?: string): TBaseEntity {
 		const now = new Date().toISOString();
 		return {
 			PK: `WORKOUT|ATHLETE|${athleteId}`,
-			SK: `WORKOUT|${now}`,
+			SK: workoutId ? `WORKOUT|${workoutId}|${now}` : `WORKOUT|${now}`,
 		};
 	}
 

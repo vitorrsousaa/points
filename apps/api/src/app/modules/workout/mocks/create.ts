@@ -1,22 +1,22 @@
 import type { ICreateInput } from "../services/create";
 
+export const workoutExerciseInput: ICreateInput["workout"]["exercises"][0] = {
+	equipment: "Barra",
+	primaryMuscle: "muscle",
+	secondaryMuscle: "muscle",
+	name: "Exercise 1",
+	restTime: "Off",
+	exerciseId: "f734ceaf-aed9-4a34-a8b2-ee12b9f7da25",
+	notes: "Notes",
+	target: null,
+	sets: [{ type: "W", reps: 10, weight: 10 }],
+};
+
 export const createWorkoutInput: ICreateInput["workout"] = {
 	name: "Workout 1",
 	description: "Description",
 	isActive: false,
-	exercises: [
-		{
-			equipment: "Barra",
-			primaryMuscle: "muscle",
-			secondaryMuscle: "muscle",
-			name: "Exercise 1",
-			restTime: "Off",
-			exerciseId: "f734ceaf-aed9-4a34-a8b2-ee12b9f7da25",
-			notes: "Notes",
-			target: null,
-			sets: [{ type: "W", reps: 10, weight: 10 }],
-		},
-	],
+	exercises: [workoutExerciseInput],
 };
 
 export const createInput: ICreateInput = {

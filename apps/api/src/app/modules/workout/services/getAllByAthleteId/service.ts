@@ -5,6 +5,7 @@ import * as z from "zod";
 
 export const GetAllByAthleteIdInputServiceSchema = z.object({
 	athleteId: z.string(),
+	status: z.enum(["active"]).optional(),
 });
 
 export type TGetAllByAthleteId = z.infer<
@@ -26,6 +27,12 @@ export class GetAllByAthleteIdService implements IGetAllByAthleteIdService {
 	async execute(
 		getAllByAthleteIdInput: IGetAllByAthleteIdInput,
 	): Promise<IGetAllByAthleteIdOutput> {
+		if (getAllByAthleteIdInput.status === "active") {
+			return this.workoutRepository.getAllActiveByAthleteId(
+				getAllByAthleteIdInput.athleteId,
+			);
+		}
+
 		return this.workoutRepository.getAllByAthleteId(
 			getAllByAthleteIdInput.athleteId,
 		);
