@@ -12,7 +12,7 @@
 		"format": "biome format --write ./src",
 		"test": "vitest run",
 		"test:watch": "vitest run --watch"
-	},
+	},	
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@shared/config-css": "*",
@@ -25,7 +25,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
-		"react-router-dom": "^6.23.1",
+		"react-router-dom": "^6.26.1",
 		"tailwindcss": "^3.4.3"
 	},
 	"devDependencies": {

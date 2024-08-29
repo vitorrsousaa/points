@@ -24,6 +24,7 @@
 		"node": ">=18"
 	},
 	"resolutions": {
+		"rollup": "4.15.0",
 		"vitest": "^latest-version"
 	},
 	"packageManager": "yarn@1.22.17",
