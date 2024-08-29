@@ -11,6 +11,7 @@ import {
 	SignInScreen,
 	SignUpScreen,
 	VerificationCodeScreen,
+	NotFoundScreen,
 } from "@/screens/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthGuard } from "./AuthGuard";
@@ -52,7 +53,7 @@ export function RouterStack() {
 						<Route path={ROUTES.NEW_TRAINING} element={<NewTrainingScreen />} />
 					</Route>
 				</Route>
-				<Route path="*" element={<>Error page</>} />
+				<Route path="*" element={<NotFoundScreen />} />
 			</Routes>
 		</BrowserRouter>
 	);
