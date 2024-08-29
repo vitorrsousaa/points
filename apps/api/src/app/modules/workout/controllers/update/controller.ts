@@ -21,7 +21,7 @@ export class UpdateController implements IController {
 			const service = await this.updateService.execute(parsedBody);
 
 			return {
-				statusCode: 204,
+				statusCode: 200,
 				body: service,
 			};
 		} catch (error) {
