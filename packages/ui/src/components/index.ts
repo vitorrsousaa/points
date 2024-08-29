@@ -1,4 +1,5 @@
 export * from "./alert-dialog";
+export * from "./avatar";
 export * from "./badge";
 export * from "./breadcrumb";
 export * from "./Button";
@@ -30,9 +31,5 @@ export * from "./tabs";
 export * from "./text-area";
 export * from "./theme-provider";
 export * from "./tooltip";
-export * from "./header-screen";
-export * from "./mode-toggle";
-export * from "./select";
-export * from "./scroll-area";
-export * from "./modal";
+export * from "./popover";
 export * from "./collapsible";

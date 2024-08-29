@@ -1,4 +1,5 @@
 import { STORAGE_KEYS } from "@/config/storages";
+import { SentryHandler } from "@/libs/SentryHandler";
 import { userService } from "@/services/user";
 import { PageLoader } from "@/ui/page-loader";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ export interface AuthContextValue {
 	email?: string;
 	name?: string;
 	id?: string;
+	isLoading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextValue>(
@@ -20,6 +22,8 @@ export const AuthContext = createContext<AuthContextValue>(
 );
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+	const { endSession } = SentryHandler();
+
 	const [signedIn, setSignedIn] = useState<boolean>(() => {
 		const storageAccessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
@@ -28,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 	const queryClient = useQueryClient();
 
-	const { data, isError, isFetching, isSuccess } = useQuery({
+	const { data, isError, isLoading, isFetching, isSuccess } = useQuery({
 		queryKey: ["users", "me"],
 		queryFn: async () => userService.profile(),
 		enabled: signedIn,
@@ -46,9 +50,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		queryClient.invalidateQueries({
 			queryKey: ["users", "me"],
 		});
+		endSession();
 
 		setSignedIn(false);
-	}, [queryClient]);
+	}, [queryClient, endSession]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
@@ -68,6 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 				email: data?.email as string,
 				name: data?.name ?? "",
 				id: data?.id ?? "",
+				isLoading: isLoading || isFetching,
 			}}
 		>
 			<PageLoader isLoading={isFetching} />

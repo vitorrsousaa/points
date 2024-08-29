@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from "@/config/queryKeys";
 import type { Athlete } from "@/entitites/athlete";
+import { SentryHandler } from "@/libs/SentryHandler";
 import { athleteServices } from "@/services/athlete";
 import type { WithStatus } from "@/utils/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,6 +9,8 @@ type AthletesQueryData = WithStatus<Athlete>[];
 
 export function useCreateAthlete() {
 	const queryClient = useQueryClient();
+
+	const { sendEvent, sendException } = SentryHandler();
 
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: athleteServices.create,
@@ -30,7 +33,7 @@ export function useCreateAthlete() {
 
 			return { tempId };
 		},
-		onSuccess: async (data, _, context) => {
+		onSuccess: async (data, variables, context) => {
 			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
 
 			queryClient.setQueryData<AthletesQueryData>(
@@ -40,6 +43,17 @@ export function useCreateAthlete() {
 						athlete.id === context?.tempId ? data : athlete,
 					),
 			);
+
+			sendEvent({
+				message: "CreateAthlete",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
 		},
 		onError: async (_error, _, context) => {
 			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
@@ -51,6 +65,11 @@ export function useCreateAthlete() {
 						: athlete,
 				),
 			);
+
+			sendException({
+				exceptionName: "create_athlete",
+				..._error,
+			});
 		},
 	});
 

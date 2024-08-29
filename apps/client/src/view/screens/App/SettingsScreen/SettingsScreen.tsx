@@ -1,39 +1,56 @@
 import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-	cn,
-	useTheme,
-	type Theme,
+	HeaderScreen,
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
 } from "@shared/ui";
+import { MyAccountTab, SettingsTab, SupportTab } from "./components";
+
+import { SentryHandler } from "@/libs/SentryHandler";
+import { useEffect } from "react";
 
 export function SettingsScreen() {
-	const { setTheme, theme } = useTheme();
+	const { viewPage } = SentryHandler();
+
+	useEffect(() => {
+		viewPage("user_view", "jane");
+	}, [viewPage]);
+
 	return (
-		<div className={"flex w-full flex-col justify-between sm:flex-row "}>
-			<div className={cn("mb-6 sm:mb-0 sm:w-72")}>
-				<h2 className={cn("text-sm font-medium")}>Aparência</h2>
-				<small className="font-medium text-gray-500">
-					Personalize a aparência da sua aplicação.
-				</small>
-			</div>
-			<Select
-				onValueChange={(event: string) => setTheme(event as Theme)}
-				value={theme}
-			>
-				<SelectTrigger className="w-[180px]">
-					<SelectValue placeholder="Selecione o tema" />
-				</SelectTrigger>
-				<SelectContent>
-					<SelectGroup>
-						<SelectItem value="light">Light</SelectItem>
-						<SelectItem value="dark">Dark</SelectItem>
-					</SelectGroup>
-				</SelectContent>
-			</Select>
-		</div>
+		<>
+			<Tabs defaultValue="my-account">
+				<HeaderScreen
+					title="Configurações"
+					description="Gerencie seu perfil e preferências aqui."
+				/>
+
+				<TabsList defaultValue="my-account" className="mb-6 w-full">
+					<TabsTrigger value="my-account" className="w-full">
+						Minha Conta
+					</TabsTrigger>
+
+					<TabsTrigger value="preferences" className="w-full">
+						Preferências
+					</TabsTrigger>
+
+					<TabsTrigger value="support" className="w-full">
+						Suporte
+					</TabsTrigger>
+				</TabsList>
+
+				<TabsContent value="my-account">
+					<MyAccountTab />
+				</TabsContent>
+
+				<TabsContent value="preferences">
+					<SettingsTab />
+				</TabsContent>
+
+				<TabsContent value="support">
+					<SupportTab />
+				</TabsContent>
+			</Tabs>
+		</>
 	);
 }
