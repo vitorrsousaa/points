@@ -1,11 +1,15 @@
 import {
 	ArchiveIcon,
 	CaretSortIcon,
+	CheckCircledIcon,
+	CheckIcon,
+	ChevronRightIcon,
 	ClipboardIcon,
 	Cross1Icon,
 	CrossCircledIcon,
 	CursorArrowIcon,
 	DotsHorizontalIcon,
+	ExclamationTriangleIcon,
 	EyeOpenIcon,
 	FileIcon,
 	GearIcon,
@@ -20,11 +24,8 @@ import {
 	PlusCircledIcon,
 	QuestionMarkCircledIcon,
 	ReaderIcon,
-	TrashIcon,
-	CheckCircledIcon,
-	ChevronRightIcon,
-	CheckIcon,
 	StarFilledIcon,
+	TrashIcon,
 } from "@radix-ui/react-icons";
 
 interface IconProps {
@@ -60,6 +61,7 @@ const icons = {
 	check: CheckCircledIcon,
 	check_without_circle: CheckIcon,
 	filledStar: StarFilledIcon,
+	exclamationTriangle: ExclamationTriangleIcon,
 } as const;
 
 export function Icon(props: IconProps) {

@@ -7,6 +7,7 @@ import {
 	ExercisesScreen,
 	NewAthleteScreen,
 	NewTrainingScreen,
+	NotFoundScreen,
 	SettingsScreen,
 	SignInScreen,
 	SignUpScreen,
@@ -26,7 +27,7 @@ import { AuthGuard } from "./AuthGuard";
 
 const routes = createRoutesFromElements(
 	<Route element={<Outlet />}>
-		<Route path="*" element={<>Error page</>} />
+		<Route path="*" element={<NotFoundScreen />} />
 		<Route element={<AuthGuard isPrivate={false} />}>
 			<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
 			<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
