@@ -127,7 +127,7 @@ export function useResendCode() {
 
 export function useAccountConfirmation() {
 	const { sendEvent, sendException } = SentryHandler();
-	
+
 	const { isPending, mutateAsync, isError, error } = useMutation({
 		mutationFn: authService.accountConfirmation,
 		onSuccess(_, variables) {

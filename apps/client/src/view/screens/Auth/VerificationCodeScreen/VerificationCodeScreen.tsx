@@ -68,7 +68,8 @@ export function VerificationCodeScreen() {
 					) : isErrorConfirmingAccount ? (
 						<div className="flex flex-col gap-2 items-center">
 							<span>Encontramos um erro para validar sua conta</span>
-							{error?.statusCode === 400 ? (
+							{(error as unknown as Record<string, number>)?.statusCode ===
+							400 ? (
 								<>
 									<small>
 										Clique no botão abaixo para reenviar o código de validação
