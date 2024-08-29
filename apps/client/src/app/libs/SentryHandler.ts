@@ -16,7 +16,7 @@ export function SentryHandler() {
 	function viewPage(
 		name: string,
 		value: string | number,
-		data?: any | undefined,
+		data?: Record<string, string> | undefined,
 	) {
 		Sentry.metrics.set(name, value, data);
 	}
@@ -25,7 +25,10 @@ export function SentryHandler() {
 		Sentry.captureEvent(event, hint);
 	}
 
-	function sendException(exception: any, hint?: Sentry.EventHint | undefined) {
+	function sendException(
+		exception: Record<string, string>,
+		hint?: Sentry.EventHint | undefined,
+	) {
 		Sentry.captureException(exception, hint);
 	}
 

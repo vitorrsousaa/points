@@ -17,7 +17,7 @@ interface SectionItemProps {
 export function Section({
 	title,
 	description,
-	numChildrens,
+	numChildrens = 1,
 	isLoading,
 	children,
 }: SectionProps) {
@@ -37,7 +37,7 @@ export function Section({
 			<div className="space-y-5 w-full py-6 mb-6 border-y">
 				<RenderIfElse
 					condition={!!isLoading}
-					ifRender={Array.from({ length: numChildrens! }).map(() => (
+					ifRender={Array.from({ length: numChildrens }).map(() => (
 						<Skeleton key={Math.random()} className="h-24 w-full" />
 					))}
 					elseRender={children}

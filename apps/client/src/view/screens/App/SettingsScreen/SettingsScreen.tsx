@@ -15,7 +15,7 @@ export function SettingsScreen() {
 
 	useEffect(() => {
 		viewPage("user_view", "jane");
-	}, []);
+	}, [viewPage]);
 
 	return (
 		<>

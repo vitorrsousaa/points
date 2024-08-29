@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		endSession();
 
 		setSignedIn(false);
-	}, [queryClient]);
+	}, [queryClient, endSession]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
