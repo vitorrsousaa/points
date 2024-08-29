@@ -13,6 +13,7 @@ import { Onboarding } from "./components";
 export function DashboardScreen() {
 	return (
 		<div className="w-full flex flex-col">
+			<Onboarding />
 			<HeaderScreen title="Visão geral" />
 
 			<main>

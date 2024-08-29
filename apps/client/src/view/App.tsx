@@ -6,9 +6,10 @@ import { ThemeProvider } from "@shared/ui";
 import { Toaster } from "react-hot-toast";
 import { RouterStack } from "./router/RouterStack";
 
+const { VITE_SENTRY_URL } = import.meta.env;
+
 const SENTRY_CONFIGURATION: Sentry.BrowserOptions = {
-	// TROCAR PRA .ENV
-	dsn: "https://ab94816162e6e23d5e1223f71eae958d@o4507817911189504.ingest.us.sentry.io/4507817914269696",
+	dsn: VITE_SENTRY_URL,
 	tracesSampleRate: 1,
 	maxBreadcrumbs: 50,
 	debug: true,

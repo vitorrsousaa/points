@@ -30,6 +30,7 @@ export function SettingsTab() {
 						<SelectGroup>
 							<SelectItem value="light">Claro</SelectItem>
 							<SelectItem value="dark">Escuro</SelectItem>
+							<SelectItem value="system">Sistema</SelectItem>
 						</SelectGroup>
 					</SelectContent>
 				</Select>
