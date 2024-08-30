@@ -242,7 +242,7 @@ export function AthleteForm(props: AtheleFormProps) {
 
 					<CardContent className="space-y-4">
 						<FormField
-							name="email"
+							name="category"
 							render={({ field }) => (
 								<FormItem className="w-full">
 									<FormLabel>Categoria</FormLabel>
@@ -268,7 +268,7 @@ export function AthleteForm(props: AtheleFormProps) {
 						/>
 
 						<FormField
-							name="email"
+							name="objectives"
 							render={({ field: { value, onChange, name } }) => (
 								<FormItem className="w-full">
 									<FormLabel>Objetivos</FormLabel>
