@@ -1,0 +1,5 @@
+- get all coaches
+- get all users
+  - adicionar um query params que vai ser pra comparar quantos foram criados até aquele período de tempo
+  - retornar um objeto com current e period 
+- get all athletes
