@@ -32,6 +32,7 @@ interface WorkoutDialogProps {
 
 export function WorkoutDialog({ workout, children }: WorkoutDialogProps) {
 	const {
+		status,
 		handleDuplicateWorkout,
 		navigateToUpdateWorkout,
 		handleDeleteWorkout,
@@ -70,7 +71,7 @@ export function WorkoutDialog({ workout, children }: WorkoutDialogProps) {
 	}
 
 	return (
-		<Dialog>
+		<Dialog open={status && false}>
 			<DialogTrigger>{children}</DialogTrigger>
 
 			<DialogContent className="min-w-[50%]">
