@@ -210,6 +210,14 @@ functions:
           documentation: ${file(src/server/functions/athlete/create/handler.doc.yml):createAthlete}
           authorizer:
             name: CognitoAuthorizer
+  updateAthlete:
+    handler: src/server/functions/athlete/update.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /athlete
+          authorizer:
+            name: CognitoAuthorizer
   getAllByCoachId:
     handler: src/server/functions/athlete/getAllByCoachId.handler
     events:
