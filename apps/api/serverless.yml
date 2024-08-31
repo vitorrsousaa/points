@@ -310,3 +310,5 @@ functions:
       - httpApi:
           method: GET 
           path: /coach/metrics/athlete-growth
+          authorizer:
+            name: CognitoAuthorizer
