@@ -31,7 +31,7 @@ export function DashboardScreen() {
 								<Button>Visualizar treinos</Button>
 							</CardFooter>
 						</Card>
-						<div className="grid gap-4 grid-cols-2">
+						<div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
 							<Card x-chunk="dashboard-05-chunk-1">
 								<CardHeader className="pb-2">
 									<CardDescription>Treinos desta semana</CardDescription>
