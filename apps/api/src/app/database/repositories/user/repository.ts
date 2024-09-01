@@ -113,12 +113,8 @@ export class UserRepository implements IUserRepository {
 
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
-			SK: "PROFILE",
-			PK: this.setUserId(id),
+			SK: `PROFILE#${id}`,
+			PK: "USER",
 		};
-	}
-
-	private setUserId(id: string): string {
-		return `${this.DEFAULT_USER_ID}|${id}`;
 	}
 }
