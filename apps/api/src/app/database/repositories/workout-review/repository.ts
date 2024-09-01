@@ -9,6 +9,41 @@ import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}
+	async getAllWorkoutReviewByAthleteId(
+		athleteId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]> {
+		const hasSK = Boolean(status);
+		const { PK } = this.getKeys(athleteId, "", hasSK);
+
+		const SK = `WORKOUTREVIEW|STATUS|${status === undefined ? "" : status ? "REVIEWED" : "PENDING"}`;
+		const workouts = await this.dbInstance.query({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+		throw new Error("Method not implemented.");
+	}
+	getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(
+		workoutId: string,
+		athleteId: string,
+	): Promise<WorkoutReview[]> {
+		throw new Error("Method not implemented.");
+	}
+	getAllPendingWorkoutReviewByWorkoutIdAndCoachId(
+		workoutId: string,
+		coachId: string,
+	): Promise<WorkoutReview[]> {
+		throw new Error("Method not implemented.");
+	}
+	getAllWorkoutReviewByCoachId(
+		coachId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]> {
+		throw new Error("Method not implemented.");
+	}
 
 	async create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
@@ -26,7 +61,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			startTime,
 			reviewed,
 		} = workout;
-		const { PK, SK } = this.getKeys(athleteId, workoutId);
+		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
 		const workoutReviewId = randomUUID();
 		const now = new Date().toISOString();
 		const { gsi1pk, gsi1sk } = this.getIndexes(reviewed, coachId, workoutId);
@@ -58,11 +93,17 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		return this.mapToDomain(newWorkout);
 	}
 
-	private getKeys(athleteId: string, workoutId: string): TBaseEntity {
+	private getKeys(
+		athleteId: string,
+		workoutId: string,
+		reviewed: boolean,
+	): TBaseEntity {
 		const now = new Date().toISOString();
+		const status = reviewed ? "REVIEWED" : "PENDING";
+
 		return {
 			PK: `WORKOUTREVIEW|ATHLETE|${athleteId}`,
-			SK: `WORKOUTREVIEW|WORKOUT|${workoutId}|${now}`,
+			SK: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}|${now}`,
 		};
 	}
 
