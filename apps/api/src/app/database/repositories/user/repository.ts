@@ -113,7 +113,7 @@ export class UserRepository implements IUserRepository {
 
 	private getKeys(id: string): { PK: string; SK: string } {
 		return {
-			SK: `PROFILE#${id}`,
+			SK: `PROFILE|${id}`,
 			PK: "USER",
 		};
 	}

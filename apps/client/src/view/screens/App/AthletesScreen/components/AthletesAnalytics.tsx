@@ -9,7 +9,6 @@ import {
 	Skeleton,
 } from "@shared/ui";
 import { AthletesAnalyticsCard } from "./AthletesAnalyticsCard";
-import { useMemo } from "react";
 
 interface AthletesAnalyticsProps {
 	isLoading: boolean;
@@ -36,13 +35,11 @@ export function AthletesAnalytics({
 		);
 	}
 
-	const activedAthletes = useMemo(
-		() =>
-			athletes?.length
-				? athletes?.filter((athlete) => athlete.isActive).length
-				: 0,
-		[athletes],
-	);
+	const activedAthletes = athletes
+		? athletes.length > 0
+			? athletes.filter((athlete) => athlete.isActive).length
+			: 0
+		: 0;
 
 	return (
 		<>
