@@ -17,7 +17,6 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-	Switch,
 	Textarea,
 } from "@shared/ui";
 import type { TAthleteFormSchema } from "./AthleteFormSchema";
@@ -34,9 +33,6 @@ export function AthleteForm(props: AtheleFormProps) {
 	const { formId = "athlete-form", isSubmitting } = props;
 
 	const { methods, isUpdating, handleSubmit } = useAthleteForm(props);
-
-	// TODO: add height field to the form
-	// TODO: add firstName and lastName fields to the form
 
 	return (
 		<Form {...methods}>
@@ -128,6 +124,7 @@ export function AthleteForm(props: AtheleFormProps) {
 						<FormField
 							control={methods.control}
 							name="email"
+							disabled={isUpdating}
 							render={({ field }) => (
 								<FormItem className="w-full">
 									<FormLabel>E-mail</FormLabel>
@@ -150,7 +147,7 @@ export function AthleteForm(props: AtheleFormProps) {
 					</CardContent>
 				</Card>
 
-				{isUpdating && (
+				{/* {isUpdating && (
 					<FormField
 						control={methods.control}
 						name="isActive"
@@ -168,7 +165,7 @@ export function AthleteForm(props: AtheleFormProps) {
 							</FormItem>
 						)}
 					/>
-				)}
+				)} */}
 
 				<Card>
 					<CardHeader>

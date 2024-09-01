@@ -53,7 +53,7 @@ export class CreateService implements ICreateService {
 		await this.createAthleteService.execute({
 			...defaultAthlete,
 			coachId: userId,
-			email: 'examplo@email.com',
+			email: "examplo@email.com",
 		});
 
 		return {

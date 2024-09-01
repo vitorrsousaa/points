@@ -210,6 +210,14 @@ functions:
           documentation: ${file(src/server/functions/athlete/create/handler.doc.yml):createAthlete}
           authorizer:
             name: CognitoAuthorizer
+  updateAthlete:
+    handler: src/server/functions/athlete/update.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /athlete
+          authorizer:
+            name: CognitoAuthorizer
   getAllByCoachId:
     handler: src/server/functions/athlete/getAllByCoachId.handler
     events:
@@ -304,4 +312,11 @@ functions:
           path: /workout-review/{coachId}
           authorizer:
             name: CognitoAuthorizer
-          
+  getAthleteGrowthByCoach:
+    handler: src/server/functions/coach/getAthleteGrowth.handler
+    events:
+      - httpApi:
+          method: GET 
+          path: /coach/metrics/athlete-growth
+          authorizer:
+            name: CognitoAuthorizer
