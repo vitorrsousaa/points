@@ -42,9 +42,17 @@ export function AthletesScreen() {
 				description="Gerencie seus atletas, veja suas informações e acesse suas fichas de treino."
 			/>
 
-			<div className="flex gap-4 mb-4">
-				<AthletesAnalytics isLoading={isLoadingAthletes} athletes={athletes} />
-			</div>
+			<RenderIf
+				condition={!isErrorAthletes}
+				render={
+					<div className="flex gap-4 mb-4">
+						<AthletesAnalytics
+							isLoading={isLoadingAthletes}
+							athletes={athletes}
+						/>
+					</div>
+				}
+			/>
 
 			<Card className="p-4 rounded-xl border flex items-center">
 				<CardContent className="p-0 w-full flex items-center justify-between gap-2">

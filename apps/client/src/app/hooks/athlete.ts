@@ -26,7 +26,6 @@ export function useCreateAthlete() {
 						id: tempId,
 						status: "pending",
 						name,
-						accountConfirmation: false,
 						...variables,
 					}),
 			);
@@ -35,6 +34,9 @@ export function useCreateAthlete() {
 		},
 		onSuccess: async (data, variables, context) => {
 			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
+			await queryClient.invalidateQueries({
+				queryKey: QUERY_KEYS.ATHLETE_GROWTH,
+			});
 
 			queryClient.setQueryData<AthletesQueryData>(
 				QUERY_KEYS.ATHLETES,
