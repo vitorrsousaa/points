@@ -5,4 +5,5 @@ export interface Athlete {
 	weight: number;
 	height: number;
 	email: string;
+	isActive: boolean;
 }

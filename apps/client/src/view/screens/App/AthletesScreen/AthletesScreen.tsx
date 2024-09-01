@@ -104,7 +104,7 @@ export function AthletesScreen() {
 												<span className="font-medium flex gap-4">
 													{athlete.name}
 													<TableAvailableAthlete
-														isActive={Boolean(athlete.status)}
+														isActive={Boolean(athlete.isActive)}
 													/>
 												</span>
 

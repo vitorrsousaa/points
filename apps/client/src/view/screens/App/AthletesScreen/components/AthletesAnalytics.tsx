@@ -9,6 +9,7 @@ import {
 	Skeleton,
 } from "@shared/ui";
 import { AthletesAnalyticsCard } from "./AthletesAnalyticsCard";
+import { useMemo } from "react";
 
 interface AthletesAnalyticsProps {
 	isLoading: boolean;
@@ -35,6 +36,14 @@ export function AthletesAnalytics({
 		);
 	}
 
+	const activedAthletes = useMemo(
+		() =>
+			athletes?.length
+				? athletes?.filter((athlete) => athlete.isActive).length
+				: 0,
+		[athletes],
+	);
+
 	return (
 		<>
 			<AthletesAnalyticsCard
@@ -48,9 +57,7 @@ export function AthletesAnalytics({
 			<Card className="w-full">
 				<CardHeader className="pb-2">
 					<CardDescription>Ativos agora</CardDescription>
-					<CardTitle className="text-4xl">
-						{athletes?.filter((item) => Boolean(item.age)).length}
-					</CardTitle>
+					<CardTitle className="text-4xl">{activedAthletes}</CardTitle>
 				</CardHeader>
 
 				<CardContent>

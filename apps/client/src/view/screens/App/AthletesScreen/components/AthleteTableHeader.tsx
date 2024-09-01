@@ -38,7 +38,7 @@ export function AthleteTableHeader({ searchControl }: AthleteTableHeaderProps) {
 					control={searchControl}
 					render={({ field }) => (
 						<Input
-							className="h-9 w-72 border bg-transparent"
+							className="h-9 w-50 lg:w-72 border bg-transparent"
 							placeholder="Busque pelo nome..."
 							type="text"
 							{...field}
@@ -49,7 +49,7 @@ export function AthleteTableHeader({ searchControl }: AthleteTableHeaderProps) {
 				<Link to={ROUTES.NEW_ATHLETE}>
 					<Button size="sm" className="h-9 gap-1">
 						<Icon name="plusCircle" className="h-5 w-5" />
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+						<span className="sr-only md:not-sr-only md:whitespace-nowrap">
 							Adicionar atleta
 						</span>
 					</Button>

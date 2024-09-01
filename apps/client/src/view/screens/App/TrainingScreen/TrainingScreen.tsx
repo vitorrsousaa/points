@@ -76,15 +76,12 @@ export function TrainingScreen() {
 										<div className="flex flex-col gap-1">
 											<strong>Nome: </strong>
 											<small className="flex items-center gap-2">
-												{
-													// Substituir o name pela propriedade que define o status do atleta
-												}
 												{athlete?.name}
 
 												<Badge
-													variant={athlete?.name ? "default" : "secondary"}
+													variant={athlete?.isActive ? "default" : "secondary"}
 												>
-													{athlete?.name ? "Ativo" : "Inativo"}
+													{athlete?.isActive ? "Ativo" : "Inativo"}
 												</Badge>
 											</small>
 										</div>
