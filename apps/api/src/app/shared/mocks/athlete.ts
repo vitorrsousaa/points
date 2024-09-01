@@ -11,4 +11,5 @@ export const athleteMock: Athlete = {
 	createdAt: new Date().toISOString(),
 	updatedAt: new Date().toISOString(),
 	workoutCount: 0,
+	isActive: false,
 };
