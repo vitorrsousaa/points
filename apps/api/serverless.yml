@@ -312,6 +312,14 @@ functions:
           path: /workout-review/{coachId}
           authorizer:
             name: CognitoAuthorizer
+  getAllWorkoutReview:
+    handler: src/server/functions/workout-review/getAllWorkoutReview.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /workout-review
+          authorizer:
+            name: CognitoAuthorizer
   getAthleteGrowthByCoach:
     handler: src/server/functions/coach/getAthleteGrowth.handler
     events:

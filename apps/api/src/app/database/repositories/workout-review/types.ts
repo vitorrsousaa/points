@@ -36,11 +36,22 @@ export type WorkoutReviewDynamoDB = Prettify<
 >;
 
 export interface IWorkoutReviewRepository {
-	// update(workout: Workout): Promise<Workout>;
-	// getAllByAthleteId(athleteId: string): Promise<Workout[]>;
-	// getById(athleteId: string, workoutId: string): Promise<Workout | null>;
-	// delete(athleteId: string, workoutId: string): Promise<void>;
-	// getAllActiveByAthleteId(athleteId: string): Promise<Workout[]>;
+	getAllWorkoutReviewByAthleteId(
+		athleteId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]>;
+	getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(
+		workoutId: string,
+		athleteId: string,
+	): Promise<WorkoutReview[]>;
+	getAllPendingWorkoutReviewByWorkoutIdAndCoachId(
+		workoutId: string,
+		coachId: string,
+	): Promise<WorkoutReview[]>;
+	getAllWorkoutReviewByCoachId(
+		coachId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]>;
 	create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
 	): Promise<WorkoutReview>;

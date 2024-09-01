@@ -9,6 +9,85 @@ import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}
+	async getAllWorkoutReviewByAthleteId(
+		athleteId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]> {
+		const hasSK = Boolean(status);
+		const { PK } = this.getKeys(athleteId, "", hasSK);
+		const skStatus = this.getSkStatus(status);
+
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const workouts = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+
+		return workouts ? workouts.map(this.mapToDomain) : [];
+	}
+	async getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(
+		workoutId: string,
+		athleteId: string,
+	): Promise<WorkoutReview[]> {
+		const { PK } = this.getKeys(athleteId, workoutId, false);
+		const skStatus = this.getSkStatus(false);
+
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const workouts = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+
+		return workouts ? workouts.map(this.mapToDomain) : [];
+	}
+	async getAllPendingWorkoutReviewByWorkoutIdAndCoachId(
+		workoutId: string,
+		coachId: string,
+	): Promise<WorkoutReview[]> {
+		const { gsi1pk, gsi1sk } = this.getIndexes(false, coachId, workoutId);
+
+		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression:
+				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
+			IndexName: "GSI1Index",
+			ExpressionAttributeValues: {
+				":gsi1pk": gsi1pk,
+				":gsi1sk": gsi1sk,
+			},
+		});
+
+		return result ? result.map(this.mapToDomain) : [];
+	}
+	async getAllWorkoutReviewByCoachId(
+		coachId: string,
+		status?: boolean,
+	): Promise<WorkoutReview[]> {
+		const { gsi1pk } = this.getIndexes(false, coachId, "workoutId");
+
+		const skStatus = this.getSkStatus(status);
+
+		const gsi1sk = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression:
+				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
+			IndexName: "GSI1Index",
+			ExpressionAttributeValues: {
+				":gsi1pk": gsi1pk,
+				":gsi1sk": gsi1sk,
+			},
+		});
+
+		return result ? result.map(this.mapToDomain) : [];
+	}
 
 	async create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
@@ -26,7 +105,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			startTime,
 			reviewed,
 		} = workout;
-		const { PK, SK } = this.getKeys(athleteId, workoutId);
+		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
 		const workoutReviewId = randomUUID();
 		const now = new Date().toISOString();
 		const { gsi1pk, gsi1sk } = this.getIndexes(reviewed, coachId, workoutId);
@@ -58,11 +137,17 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		return this.mapToDomain(newWorkout);
 	}
 
-	private getKeys(athleteId: string, workoutId: string): TBaseEntity {
+	private getKeys(
+		athleteId: string,
+		workoutId: string,
+		reviewed: boolean,
+	): TBaseEntity {
 		const now = new Date().toISOString();
+		const status = reviewed ? "REVIEWED" : "PENDING";
+
 		return {
 			PK: `WORKOUTREVIEW|ATHLETE|${athleteId}`,
-			SK: `WORKOUTREVIEW|WORKOUT|${workoutId}|${now}`,
+			SK: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}|${now}`,
 		};
 	}
 
@@ -72,11 +157,16 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		workoutId: string,
 	): TBaseIndexes {
 		const status = reviewed ? "REVIEWED" : "PENDING";
+		const now = new Date().toISOString();
 
 		return {
 			gsi1pk: `WORKOUTREVIEW|COACH|${coachId}`,
-			gsi1sk: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}`,
+			gsi1sk: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}|${now}`,
 		};
+	}
+
+	private getSkStatus(reviewed?: boolean) {
+		return reviewed === undefined ? "" : reviewed ? "REVIEWED" : "PENDING";
 	}
 
 	private mapToDomain(workout: WorkoutReviewDynamoDB): WorkoutReview {
