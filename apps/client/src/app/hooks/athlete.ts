@@ -26,6 +26,7 @@ export function useCreateAthlete() {
 						id: tempId,
 						status: "pending",
 						name,
+						isActive: false,
 						...variables,
 					}),
 			);
