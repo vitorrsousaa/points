@@ -17,6 +17,7 @@ describe("Service:Update", () => {
 		height: 180,
 		weight: 80,
 		workoutCount: 10,
+		isActive: true,
 	};
 
 	beforeEach(() => {

@@ -12,5 +12,6 @@ export type Athlete = Prettify<
 		name: string;
 		email: string;
 		workoutCount: number;
+		isActive: boolean;
 	}
 >;

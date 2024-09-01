@@ -28,6 +28,7 @@ export class AthleteRepository implements IAthleteRepository {
 			weight: athlete.weight,
 			email: athlete.email,
 			workout_count: DEFAULT_WORKOUT_COUNT,
+			is_active: athlete.isActive,
 		};
 
 		await this.dbInstance.create({ ...newAthlete });
@@ -42,13 +43,14 @@ export class AthleteRepository implements IAthleteRepository {
 		await this.dbInstance.update({
 			Key: { PK, SK },
 			UpdateExpression:
-				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at, #workout_count = :workout_count",
+				"set  #weight = :weight, #height = :height, #age = :age, #updated_at = :updated_at, #workout_count = :workout_count, #is_active = :is_active",
 			ExpressionAttributeNames: {
 				"#weight": "weight",
 				"#height": "height",
 				"#age": "age",
 				"#updated_at": "updated_at",
 				"#workout_count": "workout_count",
+				"#is_active": "is_active",
 			},
 			ExpressionAttributeValues: {
 				":weight": athlete.weight,
@@ -56,6 +58,7 @@ export class AthleteRepository implements IAthleteRepository {
 				":age": athlete.age,
 				":workout_count": athlete.workoutCount,
 				":updated_at": now,
+				":is_active": athlete.isActive,
 			},
 		});
 
@@ -69,6 +72,7 @@ export class AthleteRepository implements IAthleteRepository {
 			gsi1pk: "",
 			gsi1sk: "",
 			workout_count: athlete.workoutCount,
+			is_active: athlete.isActive,
 		};
 
 		return this.mapToDomain(updatedAthlete);
@@ -133,6 +137,7 @@ export class AthleteRepository implements IAthleteRepository {
 			updatedAt: athlete.updated_at,
 			email: athlete.email,
 			workoutCount: athlete.workout_count,
+			isActive: athlete.is_active || false,
 		};
 	}
 }

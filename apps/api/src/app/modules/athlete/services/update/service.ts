@@ -11,6 +11,7 @@ export const UpdateInputServiceSchema = z.object({
 	height: z.number().positive(),
 	weight: z.number().positive(),
 	workoutCount: z.number().positive(),
+	isActive: z.boolean(),
 });
 
 export type TUpdate = z.infer<typeof UpdateInputServiceSchema>;
@@ -35,6 +36,7 @@ export class UpdateService implements IUpdateService {
 			weight: updateInput.weight,
 			height: updateInput.height,
 			workoutCount: updateInput.workoutCount,
+			isActive: updateInput.isActive,
 		});
 
 		return updateAthlete;
