@@ -15,34 +15,78 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	): Promise<WorkoutReview[]> {
 		const hasSK = Boolean(status);
 		const { PK } = this.getKeys(athleteId, "", hasSK);
+		const skStatus = this.getSkStatus(status);
 
-		const SK = `WORKOUTREVIEW|STATUS|${status === undefined ? "" : status ? "REVIEWED" : "PENDING"}`;
-		const workouts = await this.dbInstance.query({
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const workouts = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
 			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
 			ExpressionAttributeValues: {
 				":PK": PK,
 				":SK": SK,
 			},
 		});
-		throw new Error("Method not implemented.");
+
+		return workouts ? workouts.map(this.mapToDomain) : [];
 	}
-	getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(
+	async getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(
 		workoutId: string,
 		athleteId: string,
 	): Promise<WorkoutReview[]> {
-		throw new Error("Method not implemented.");
+		const { PK } = this.getKeys(athleteId, workoutId, false);
+		const skStatus = this.getSkStatus(false);
+
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const workouts = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+
+		return workouts ? workouts.map(this.mapToDomain) : [];
 	}
-	getAllPendingWorkoutReviewByWorkoutIdAndCoachId(
+	async getAllPendingWorkoutReviewByWorkoutIdAndCoachId(
 		workoutId: string,
 		coachId: string,
 	): Promise<WorkoutReview[]> {
-		throw new Error("Method not implemented.");
+		const { gsi1pk, gsi1sk } = this.getIndexes(false, coachId, workoutId);
+
+		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression:
+				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
+			IndexName: "GSI1Index",
+			ExpressionAttributeValues: {
+				":gsi1pk": gsi1pk,
+				":gsi1sk": gsi1sk,
+			},
+		});
+
+		return result ? result.map(this.mapToDomain) : [];
 	}
-	getAllWorkoutReviewByCoachId(
+	async getAllWorkoutReviewByCoachId(
 		coachId: string,
 		status?: boolean,
 	): Promise<WorkoutReview[]> {
-		throw new Error("Method not implemented.");
+		const { gsi1pk } = this.getIndexes(false, coachId, "workoutId");
+
+		const skStatus = this.getSkStatus(status);
+
+		const gsi1sk = `WORKOUTREVIEW|STATUS|${skStatus}`;
+
+		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression:
+				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
+			IndexName: "GSI1Index",
+			ExpressionAttributeValues: {
+				":gsi1pk": gsi1pk,
+				":gsi1sk": gsi1sk,
+			},
+		});
+
+		return result ? result.map(this.mapToDomain) : [];
 	}
 
 	async create(
@@ -113,11 +157,16 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		workoutId: string,
 	): TBaseIndexes {
 		const status = reviewed ? "REVIEWED" : "PENDING";
+		const now = new Date().toISOString();
 
 		return {
 			gsi1pk: `WORKOUTREVIEW|COACH|${coachId}`,
-			gsi1sk: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}`,
+			gsi1sk: `WORKOUTREVIEW|STATUS|${status}|WORKOUT|${workoutId}|${now}`,
 		};
+	}
+
+	private getSkStatus(reviewed?: boolean) {
+		return reviewed === undefined ? "" : reviewed ? "REVIEWED" : "PENDING";
 	}
 
 	private mapToDomain(workout: WorkoutReviewDynamoDB): WorkoutReview {
