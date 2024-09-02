@@ -1,6 +1,3 @@
-import { ROUTES } from "@/config/routes";
-import { Link } from "react-router-dom";
-
 import { useNavigate } from "@/hooks/navigate";
 import {
 	Badge,
@@ -19,6 +16,7 @@ import {
 	cn,
 } from "@shared/ui";
 import type { ReactNode } from "react";
+import type { Athlete } from "@/entitites/athlete";
 
 interface TableRowProps {
 	children: ReactNode;
@@ -49,10 +47,10 @@ export function TableAvailableAthlete({ isActive }: { isActive: boolean }) {
 
 export function TableActions({
 	status,
-	athleteId,
+	athlete,
 }: {
 	status?: "pending" | "error";
-	athleteId: string;
+	athlete: Athlete;
 }) {
 	const { navigate } = useNavigate();
 
@@ -86,7 +84,7 @@ export function TableActions({
 								variant="ghost"
 								onClick={() =>
 									navigate("ATHLETE_MORE_INFO", {
-										replace: { athleteId },
+										replace: { athleteId: athlete.id },
 									})
 								}
 							>
@@ -106,9 +104,16 @@ export function TableActions({
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>Ações</DropdownMenuLabel>
 
-								<Link to={ROUTES.ATHLETES}>
-									<DropdownMenuItem>Editar</DropdownMenuItem>
-								</Link>
+								<DropdownMenuItem
+									onClick={() =>
+										navigate("UPDATE_ATHLETE", {
+											replace: { athleteId: athlete.id },
+											state: { athlete },
+										})
+									}
+								>
+									Editar
+								</DropdownMenuItem>
 
 								<DropdownMenuItem>Deletar</DropdownMenuItem>
 							</DropdownMenuContent>

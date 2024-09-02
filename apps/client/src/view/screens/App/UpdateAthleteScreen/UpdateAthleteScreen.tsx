@@ -22,7 +22,7 @@ import {
 	HeaderScreen,
 	Icon,
 } from "@shared/ui";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function UpdateAthleteScreen() {
 	const navigate = useNavigate();
@@ -32,12 +32,13 @@ export function UpdateAthleteScreen() {
 
 	const hasAthlete = Boolean(state?.athlete);
 
-	// const { athleteId } = useParams<{
-	// 	athleteId: string;
-	// }>();
+	const { athleteId } = useParams<{
+		athleteId: string;
+	}>();
 
 	async function handleSubmit(data: TAthleteFormSchema) {
 		if (!id) return;
+		if (!athleteId) return;
 
 		const newAthlete = { ...data, coachId: id };
 
