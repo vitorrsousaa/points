@@ -17,6 +17,7 @@ export type IGetAthleteGrowthInput = TGetAthleteGrowth;
 
 export interface IGetAthleteGrowthOutput {
 	growth: string;
+	activeGrowth: string;
 }
 
 export type IGetAthleteGrowthService = IService<
@@ -46,7 +47,11 @@ export class GetAthleteGrowthService implements IGetAthleteGrowthService {
 		const DEFAULT_MINOR_GROWTH = Number(0).toFixed(2);
 		const DEFAULT_MAJOR_GROWTH = Number(100).toFixed(2);
 
-		if (athletes.length === 0) return { growth: DEFAULT_MINOR_GROWTH };
+		if (athletes.length === 0)
+			return {
+				growth: DEFAULT_MINOR_GROWTH,
+				activeGrowth: DEFAULT_MINOR_GROWTH,
+			};
 
 		const dateEndOfLastMonth = getDateInTheLastMonth();
 
@@ -66,15 +71,38 @@ export class GetAthleteGrowthService implements IGetAthleteGrowthService {
 		const currentMonthCount = allAthletesCreatedAfterTheLastMonth.length;
 
 		if (previousMonthCount === 0 && currentMonthCount === 0)
-			return { growth: DEFAULT_MINOR_GROWTH };
+			return {
+				growth: DEFAULT_MINOR_GROWTH,
+				activeGrowth: DEFAULT_MINOR_GROWTH,
+			};
 
-		if (previousMonthCount === 0) return { growth: DEFAULT_MAJOR_GROWTH };
+		const activeAthletesUpToTheLastMonth =
+			allAthletesCreatedUpToTheLastMonth.filter((athlete) => athlete.isActive);
+		const activeAthletesAfterTheLastMonth =
+			allAthletesCreatedAfterTheLastMonth.filter((athlete) => athlete.isActive);
 
-		const growth =
+		const activeAthletesPreviousMonthCount =
+			activeAthletesUpToTheLastMonth.length;
+		const activeAthletesCurrentMonthCount =
+			activeAthletesAfterTheLastMonth.length;
+
+		if (previousMonthCount === 0)
+			return {
+				growth: DEFAULT_MAJOR_GROWTH,
+				activeGrowth: DEFAULT_MAJOR_GROWTH,
+			};
+
+		const athletesGrowth =
 			((currentMonthCount - previousMonthCount) / previousMonthCount) * 100;
 
+		const activeAthletesGrowth =
+			((activeAthletesCurrentMonthCount - activeAthletesPreviousMonthCount) /
+				activeAthletesPreviousMonthCount) *
+			100;
+
 		return {
-			growth: growth.toFixed(2),
+			growth: athletesGrowth.toFixed(2),
+			activeGrowth: activeAthletesGrowth.toFixed(2),
 		};
 	}
 }
