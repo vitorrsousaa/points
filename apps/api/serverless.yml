@@ -280,6 +280,7 @@ functions:
       - httpApi:
           method: PUT
           path: /workout
+          documentation: ${file(src/server/functions/workout/update/handler.doc.yml):update}
           authorizer:
             name: CognitoAuthorizer
   updateSettings:
@@ -313,6 +314,7 @@ functions:
       - httpApi:
           method: POST
           path: /workout-review/{coachId}
+          documentation: ${file(src/server/functions/workout-review/create/handler.doc.yml):createWorkoutReview}
           authorizer:
             name: CognitoAuthorizer
   getAllWorkoutReview:

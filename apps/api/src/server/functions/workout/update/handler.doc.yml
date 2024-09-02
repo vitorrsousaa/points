@@ -1,39 +1,50 @@
 update:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+  summary: workout
+  description: This route updates a workout
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Workouts
+  requestBody:
+    description: A basic information about workout
+    required: true
+  requestModels:
+    application/json: WorkoutInputModel
+  methodResponses:
     - statusCode: 200
       responseBody:
-        description: Return default response
+        description: Return all workouts of athlete
       responseModels:
-        application/json: 
+        application/json: WorkoutModel
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 403
+      responseBody:
+        description: Workout is owned by other coach
+      responseModels:
+        application/json:
           schema:
             $schema: http://json-schema.org/draft-04/schema#
             properties:
               message:
                 type: string
-                example: ok
-		- statusCode: 401
+                description: Workout is owned by other coach
+                example: Workout is owned by other coach
+    - statusCode: 404
       responseBody:
-        description: Not authorized
+        description: User not found
       responseModels:
-        application/json: NotAuthorizedResponse
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: User not found
+                example: User not found
     - statusCode: 422
       responseBody:
         description: An error message when send invalid data
@@ -44,4 +55,3 @@ update:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						
