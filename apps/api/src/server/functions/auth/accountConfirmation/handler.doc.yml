@@ -48,6 +48,18 @@ accountConfirmation:
                 type: string
                 description: Expired Code
                 example: Expired Code
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Not authorized
+                example: Not authorized
     - statusCode: 404
       responseBody:
         description: User not found
@@ -60,6 +72,18 @@ accountConfirmation:
                 type: string
                 description: User not found
                 example: User not found
+    - statusCode: 409
+      responseBody:
+        description: Account already confirmed
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Account already confirmed
+                example: Account already confirmed
     - statusCode: 500
       responseBody:
         description: An unknown error message

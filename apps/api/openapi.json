@@ -683,7 +683,7 @@
           }
         }
       },
-      "a6b1320d-a031-4959-b75e-7287f6216c28": {
+      "eed113b4-a6a0-4872-a8d7-810230128a13": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -724,7 +724,7 @@
         },
         "additionalProperties": false
       },
-      "8efcbcf3-e1bb-4d80-ad29-6e9611740172": {
+      "71216a3f-a0c2-420b-809b-06bcd8473411": {
         "properties": {
           "message": {
             "type": "string",
@@ -733,7 +733,7 @@
           }
         }
       },
-      "a28fea0e-2b0e-439e-8a0a-c62a784d43c6": {
+      "7ba044b2-ce37-42d3-b193-24e8dbd64d17": {
         "properties": {
           "email": {
             "type": "string",
@@ -749,14 +749,14 @@
           "code"
         ]
       },
-      "822403ce-df63-4008-8f13-4d936c484a67": {
+      "32962ae0-2e97-44a9-9e8a-ca8e441ef81b": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "262d79d6-6025-43fd-9b5c-29b7abaa44b3": {
+      "351afe59-dc75-4b7d-b061-e83675a4e763": {
         "properties": {
           "message": {
             "type": "string",
@@ -765,7 +765,16 @@
           }
         }
       },
-      "d4fd8b2a-65b2-4124-8ad4-3714236fe0b4": {
+      "e16f800d-849c-4c82-b966-b1dcf86836f8": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not authorized",
+            "example": "Not authorized"
+          }
+        }
+      },
+      "e6454405-b96f-4394-acba-f1eee165b3c9": {
         "properties": {
           "message": {
             "type": "string",
@@ -774,7 +783,16 @@
           }
         }
       },
-      "24865d90-c10e-4b95-82ae-700c05ff5445": {
+      "7dc738bf-3066-43fe-b587-b1802a184070": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Account already confirmed",
+            "example": "Account already confirmed"
+          }
+        }
+      },
+      "e51f405b-c743-4fb7-9e21-3736be71cf4f": {
         "properties": {
           "email": {
             "type": "string",
@@ -790,7 +808,7 @@
           "password"
         ]
       },
-      "a2a8ce3f-eaf7-44b3-8fd5-09a673c84514": {
+      "0149f92c-8019-4948-841c-fe0ef476be49": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -802,7 +820,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "89b6de31-92ed-471c-a054-e4edb07a8b2a": {
+      "f508ce86-adb9-414a-a58c-fde4283ffea0": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -831,11 +849,11 @@
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3": {
+      "athleteId-aa4f00d9-958d-4db6-8543-fb1e42de0738": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "05069667-a646-485a-84ff-6703e67c5004": {
+      "b04a2892-d28c-456b-af80-1ea0fb577998": {
         "properties": {
           "message": {
             "type": "string",
@@ -843,14 +861,14 @@
           }
         }
       },
-      "a597fb67-cc0d-47bb-bea9-425ccf5011d6": {
+      "c3a66566-dbc6-489e-9fe5-1c5c9421d5d6": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "d044574f-cc09-4548-a427-fd73c54a24b3": {
+      "27389061-6649-4178-9fb2-f84e95be7780": {
         "properties": {
           "userId": {
             "type": "string",
@@ -893,7 +911,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a6b1320d-a031-4959-b75e-7287f6216c28"
+                  "$ref": "#/components/schemas/eed113b4-a6a0-4872-a8d7-810230128a13"
                 }
               }
             },
@@ -915,7 +933,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/8efcbcf3-e1bb-4d80-ad29-6e9611740172"
+                  "$ref": "#/components/schemas/71216a3f-a0c2-420b-809b-06bcd8473411"
                 }
               }
             },
@@ -951,7 +969,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/a28fea0e-2b0e-439e-8a0a-c62a784d43c6"
+                "$ref": "#/components/schemas/7ba044b2-ce37-42d3-b193-24e8dbd64d17"
               }
             }
           }
@@ -962,7 +980,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/822403ce-df63-4008-8f13-4d936c484a67"
+                  "$ref": "#/components/schemas/32962ae0-2e97-44a9-9e8a-ca8e441ef81b"
                 }
               }
             },
@@ -973,7 +991,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/262d79d6-6025-43fd-9b5c-29b7abaa44b3"
+                  "$ref": "#/components/schemas/351afe59-dc75-4b7d-b061-e83675a4e763"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/e16f800d-849c-4c82-b966-b1dcf86836f8"
                 }
               }
             },
@@ -984,7 +1013,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d4fd8b2a-65b2-4124-8ad4-3714236fe0b4"
+                  "$ref": "#/components/schemas/e6454405-b96f-4394-acba-f1eee165b3c9"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Account already confirmed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/7dc738bf-3066-43fe-b587-b1802a184070"
                 }
               }
             },
@@ -1031,7 +1071,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/24865d90-c10e-4b95-82ae-700c05ff5445"
+                "$ref": "#/components/schemas/e51f405b-c743-4fb7-9e21-3736be71cf4f"
               }
             }
           }
@@ -1042,7 +1082,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a2a8ce3f-eaf7-44b3-8fd5-09a673c84514"
+                  "$ref": "#/components/schemas/0149f92c-8019-4948-841c-fe0ef476be49"
                 }
               }
             },
@@ -1295,7 +1335,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/89b6de31-92ed-471c-a054-e4edb07a8b2a"
+                "$ref": "#/components/schemas/f508ce86-adb9-414a-a58c-fde4283ffea0"
               }
             }
           }
@@ -1367,7 +1407,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3"
+              "$ref": "#/components/schemas/athleteId-aa4f00d9-958d-4db6-8543-fb1e42de0738"
             }
           }
         ],
@@ -1562,7 +1602,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/05069667-a646-485a-84ff-6703e67c5004"
+                  "$ref": "#/components/schemas/b04a2892-d28c-456b-af80-1ea0fb577998"
                 }
               }
             },
@@ -1668,7 +1708,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d044574f-cc09-4548-a427-fd73c54a24b3"
+                  "$ref": "#/components/schemas/27389061-6649-4178-9fb2-f84e95be7780"
                 }
               }
             },
