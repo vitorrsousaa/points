@@ -3,6 +3,7 @@ import type { IService } from "@application/interfaces/service";
 import type { IAuthProvider } from "@application/providers/auth";
 import * as z from "zod";
 import { UserNotFound } from "../../errors/user-not-found";
+import { AccountAlreadyConfirmed } from "../../errors/account-already-confirmed";
 
 export const AccountConfirmationInputServiceSchema = z.object({
 	code: z.string().min(6),
@@ -36,6 +37,8 @@ export class AccountConfirmationService implements IAccountConfirmationService {
 		const userExists = await this.userRepository.getByEmail(email);
 
 		if (!userExists) throw new UserNotFound();
+
+		if (userExists.accountConfirmation) throw new AccountAlreadyConfirmed();
 
 		await this.authProvider.accountConfirmation(email, code);
 
