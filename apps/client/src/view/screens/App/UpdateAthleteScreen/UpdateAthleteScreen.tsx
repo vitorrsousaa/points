@@ -1,5 +1,6 @@
 import { AthleteForm } from "@/components/AthleteForm";
 import type { TAthleteFormSchema } from "@/components/AthleteForm/AthleteFormSchema";
+import { useUpdateAthlete } from "@/hooks/athlete";
 import { useAuth } from "@/hooks/auth";
 import {
 	AlertDialog,
@@ -36,11 +37,22 @@ export function UpdateAthleteScreen() {
 		athleteId: string;
 	}>();
 
+	const { updateAthlete, isUpdatingAthlete } = useUpdateAthlete();
+
 	async function handleSubmit(data: TAthleteFormSchema) {
 		if (!id) return;
 		if (!athleteId) return;
+		if (!state?.athlete) return;
 
 		const newAthlete = { ...data, coachId: id };
+
+		updateAthlete({
+			id: athleteId,
+			...newAthlete,
+			workoutCount: state?.athlete.workoutCount,
+		});
+
+		navigate(-1);
 
 		console.log(newAthlete);
 
@@ -83,7 +95,9 @@ export function UpdateAthleteScreen() {
 				<div className="flex flex-col items-center gap-4 md:ml-auto md:flex-row">
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
-							<Button variant="secondary">Descartar</Button>
+							<Button variant="secondary" disabled={isUpdatingAthlete}>
+								Descartar
+							</Button>
 						</AlertDialogTrigger>
 						<AlertDialogContent>
 							<AlertDialogHeader>
@@ -107,7 +121,7 @@ export function UpdateAthleteScreen() {
 					<Button
 						type="submit"
 						form="new-athlete-form"
-						// isLoading={isCreatingAthlete}
+						isLoading={isUpdatingAthlete}
 					>
 						Adicionar
 					</Button>
@@ -117,6 +131,7 @@ export function UpdateAthleteScreen() {
 			<AthleteForm
 				onSubmit={handleSubmit}
 				formId="new-athlete-form"
+				isSubmitting={isUpdatingAthlete}
 				initialValues={
 					hasAthlete && {
 						...state?.athlete,
@@ -127,7 +142,6 @@ export function UpdateAthleteScreen() {
 							],
 					}
 				}
-				// isSubmitting={isCreatingAthlete}
 			/>
 		</div>
 	);

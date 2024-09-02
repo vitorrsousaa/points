@@ -10,7 +10,7 @@ export const UpdateInputServiceSchema = z.object({
 	age: z.number(),
 	height: z.number().positive(),
 	weight: z.number().positive(),
-	workoutCount: z.number().positive(),
+	workoutCount: z.number().min(0),
 	isActive: z.boolean(),
 });
 
