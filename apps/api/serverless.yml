@@ -177,6 +177,7 @@ functions:
     events:
       - httpApi:
           method: POST
+          documentation: ${file(src/server/functions/auth/resendCode/handler.doc.yml):resendCode}
           path: /auth/resend-code/{email}
   profile:
     handler: src/server/functions/auth/profile.handler
@@ -216,6 +217,7 @@ functions:
       - httpApi:
           method: PUT
           path: /athlete
+          documentation: ${file(src/server/functions/athlete/update/handler.doc.yml):updateAthlete}
           authorizer:
             name: CognitoAuthorizer
   getAllByCoachId:
@@ -233,6 +235,7 @@ functions:
       - httpApi:
           method: POST
           path: /exercise
+          documentation: ${file(src/server/functions/exercise/create/handler.doc.yml):createExercise}
           authorizer:
             name: CognitoAuthorizer
   getAllExercises:
@@ -326,5 +329,6 @@ functions:
       - httpApi:
           method: GET 
           path: /coach/metrics/athlete-growth
+          documentation: ${file(src/server/functions/coach/getAthleteGrowth/handler.doc.yml):getAthleteGrowth}
           authorizer:
             name: CognitoAuthorizer

@@ -48,6 +48,10 @@ documentation:
       description: Athlete signup model
       contentType: application/json
       schema: ${file(docs/models/athlete/create.json)}
+    - name: ExerciseInputModel
+      description: Exercise signup model
+      contentType: application/json
+      schema: ${file(docs/models/exercise/create.json)}
     - name: NotAuthorizedResponse
       description: Not Authorized response model
       contentType: application/json
@@ -136,6 +140,9 @@ documentation:
               email:
                 type: string
                 example: email@email.com
+              workoutCount:
+                type: number
+                example: 2
     - name: AthletesResponse
       description: Athletes response model
       content:
