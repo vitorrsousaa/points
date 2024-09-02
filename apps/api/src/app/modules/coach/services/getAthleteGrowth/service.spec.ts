@@ -62,7 +62,10 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(0).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(0).toFixed(2),
+			activeGrowth: Number(0).toFixed(2),
+		});
 	});
 
 	it("Should return growth=100 when in the last month the coach has 0 athletes, and in the current month the coach has 2 athletes", async () => {
@@ -86,7 +89,10 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(100).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(100).toFixed(2),
+			activeGrowth: Number(100).toFixed(2),
+		});
 	});
 
 	it("Should return growth=-100 when in the last month the coach has 2 athletes, and in the current month the coach has 0 athletes", async () => {
@@ -99,10 +105,12 @@ describe("Service:GetAthleteGrowth", () => {
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 		]);
 
@@ -110,7 +118,10 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(-100).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(-100).toFixed(2),
+			activeGrowth: Number(-100).toFixed(2),
+		});
 	});
 
 	it("Should return growth=0 when in the last month the coach has 1 athlete, and in the current month the coach has 1 athlete", async () => {
@@ -123,10 +134,12 @@ describe("Service:GetAthleteGrowth", () => {
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: now,
+				isActive: true,
 			},
 		]);
 
@@ -134,7 +147,10 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(0).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(0).toFixed(2),
+			activeGrowth: Number(0).toFixed(2),
+		});
 	});
 
 	it("Should return growth=100 when in the last month the coach has 1 athlete, and in the currentMonth the coach has 2 athletes", async () => {
@@ -148,14 +164,17 @@ describe("Service:GetAthleteGrowth", () => {
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: now,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: now,
+				isActive: true,
 			},
 		]);
 
@@ -163,7 +182,10 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(100).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(100).toFixed(2),
+			activeGrowth: Number(100).toFixed(2),
+		});
 	});
 
 	it("Should return growth=-50 when in the last month the coach has 2 athlete, and in the currentMonth the coach has 1 athletes", async () => {
@@ -177,14 +199,17 @@ describe("Service:GetAthleteGrowth", () => {
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: dateEndOfLastMonth,
+				isActive: true,
 			},
 			{
 				...athleteMock,
 				createdAt: now,
+				isActive: true,
 			},
 		]);
 
@@ -192,6 +217,9 @@ describe("Service:GetAthleteGrowth", () => {
 		const result = await service.execute(inputData);
 
 		// Assert
-		expect(result).toEqual({ growth: Number(-50).toFixed(2) });
+		expect(result).toEqual({
+			growth: Number(-50).toFixed(2),
+			activeGrowth: Number(-50).toFixed(2),
+		});
 	});
 });

@@ -102,7 +102,10 @@ export class GetAthleteGrowthService implements IGetAthleteGrowthService {
 
 		return {
 			growth: athletesGrowth.toFixed(2),
-			activeGrowth: activeAthletesGrowth.toFixed(2),
+			activeGrowth:
+				activeAthletesPreviousMonthCount === 0
+					? DEFAULT_MINOR_GROWTH
+					: activeAthletesGrowth.toFixed(2),
 		};
 	}
 }
