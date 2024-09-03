@@ -25,6 +25,8 @@ documentation:
       description: 'Routes for Settings'
     - name: Workout Review
       description: 'Routes for Workout Review'
+    - name: Questions
+      description: 'Routes for Questions'
   models:
     - name: ValidationErrorResponse
       description: This is a schema for responses when occurs errors on validation schema.

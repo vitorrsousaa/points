@@ -1,0 +1,80 @@
+create:
+  summary: /question
+  description: Route to create questions in the system
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Questions
+  requestBody:
+    description: Request body to create questions
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        userId:
+          type: string
+          format: uuid
+          example: 123e4567-e89b-12d3-a456-426614174000
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+                example: "What is your favorite color?"
+              answer:
+                type: string
+                example: "Blue"
+            required:
+              - question
+              - answer
+      required:
+        - userId
+        - questions
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Questions created with successful
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  example: "789e4567-e89b-12d3-a456-426614174000"
+                userId:
+                  type: string
+                  format: uuid
+                  example: "123e4567-e89b-12d3-a456-426614174000"
+                question:
+                  type: string
+                  example: "What is your favorite color?"
+                answer:
+                  type: string
+                  example: "Blue"
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: "2024-09-03T12:34:56Z"
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json: NotAuthorizedResponse
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse
