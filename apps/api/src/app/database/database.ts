@@ -15,6 +15,8 @@ import {
 	// TransactionWriteCommand
 	TransactWriteCommand,
 	type TransactWriteCommandInput,
+	type BatchWriteCommandInput,
+	BatchWriteCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 export type TBaseIndexes = {
@@ -45,12 +47,17 @@ export interface IDatabaseClient {
 	get<T>(args: Omit<GetCommandInput, "TableName">): Promise<T | undefined>;
 	delete(args: Omit<DeleteCommandInput, "TableName">): Promise<void>;
 	transactWrite(args: TransactWriteCommandInput): Promise<void>;
+	batchWrite(args: BatchWriteCommandInput): Promise<void>;
 }
 
 export class DatabaseClient implements IDatabaseClient {
 	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	constructor(private readonly dynamoClient: DynamoDBDocumentClient) {}
+	async batchWrite(args: BatchWriteCommandInput): Promise<void> {
+		const command = new BatchWriteCommand({ ...args });
 
+		await this.dynamoClient.send(command);
+	}
 	async transactWrite(args: TransactWriteCommandInput): Promise<void> {
 		const command = new TransactWriteCommand({ ...args });
 

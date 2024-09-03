@@ -122,10 +122,7 @@ export function AthletesScreen() {
 											{athlete.weight}
 										</TableCell>
 
-										<TableActions
-											status={athlete.status}
-											athleteId={athlete.id}
-										/>
+										<TableActions status={athlete.status} athlete={athlete} />
 									</TableRowAthlete>
 								))}
 							</TableBody>
