@@ -35,6 +35,7 @@ provider:
             - dynamodb:Scan
             - dynamodb:Query
             - dynamodb:ConditionCheckItem
+            - dynamodb:BatchWriteItem
           Resource: 
             - !GetAtt GryppTable.Arn
             - !Sub ${GryppTable.Arn}/index/EmailIndex
@@ -326,5 +327,14 @@ functions:
       - httpApi:
           method: GET 
           path: /coach/metrics/athlete-growth
+          authorizer:
+            name: CognitoAuthorizer
+  createQuestions:
+    handler: src/server/functions/question/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /question
+          documentation: ${file(src/server/functions/question/create/handler.doc.yml):create}
           authorizer:
             name: CognitoAuthorizer

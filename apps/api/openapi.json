@@ -683,7 +683,7 @@
           }
         }
       },
-      "eed113b4-a6a0-4872-a8d7-810230128a13": {
+      "e52df2e0-2022-4dee-b515-1f72c7916ad4": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -724,7 +724,7 @@
         },
         "additionalProperties": false
       },
-      "71216a3f-a0c2-420b-809b-06bcd8473411": {
+      "764f8735-a7ae-48f1-b28a-37a8d369f085": {
         "properties": {
           "message": {
             "type": "string",
@@ -733,7 +733,7 @@
           }
         }
       },
-      "7ba044b2-ce37-42d3-b193-24e8dbd64d17": {
+      "f45a0e51-0c57-45df-b667-2945bc3e9184": {
         "properties": {
           "email": {
             "type": "string",
@@ -749,14 +749,14 @@
           "code"
         ]
       },
-      "32962ae0-2e97-44a9-9e8a-ca8e441ef81b": {
+      "66a14073-363c-4888-aee0-3808a8a02ba6": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "351afe59-dc75-4b7d-b061-e83675a4e763": {
+      "c75dfb98-5500-4578-a43b-4eceeccff9c6": {
         "properties": {
           "message": {
             "type": "string",
@@ -765,7 +765,7 @@
           }
         }
       },
-      "e16f800d-849c-4c82-b966-b1dcf86836f8": {
+      "931002df-7a89-4354-a291-ed923395df2c": {
         "properties": {
           "message": {
             "type": "string",
@@ -774,7 +774,7 @@
           }
         }
       },
-      "e6454405-b96f-4394-acba-f1eee165b3c9": {
+      "fb70e587-a32d-46cf-9a70-28acd34314ed": {
         "properties": {
           "message": {
             "type": "string",
@@ -783,7 +783,7 @@
           }
         }
       },
-      "7dc738bf-3066-43fe-b587-b1802a184070": {
+      "ec6b7faa-2a99-44cd-9ce7-0fd18aa70085": {
         "properties": {
           "message": {
             "type": "string",
@@ -792,7 +792,7 @@
           }
         }
       },
-      "e51f405b-c743-4fb7-9e21-3736be71cf4f": {
+      "3b58c735-b866-40d9-8109-8e3f9167e4d9": {
         "properties": {
           "email": {
             "type": "string",
@@ -808,7 +808,7 @@
           "password"
         ]
       },
-      "0149f92c-8019-4948-841c-fe0ef476be49": {
+      "119d3de0-11c9-4f47-8040-c01f4ddb7494": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -820,7 +820,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "f508ce86-adb9-414a-a58c-fde4283ffea0": {
+      "85ca2ec4-6b63-4a78-8676-ab27ab658078": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -849,11 +849,11 @@
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-aa4f00d9-958d-4db6-8543-fb1e42de0738": {
+      "athleteId-be555b0b-7843-49fc-9442-3705aa9463af": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "b04a2892-d28c-456b-af80-1ea0fb577998": {
+      "aeb5f537-2df2-4c01-9d1f-ce08f0102f4b": {
         "properties": {
           "message": {
             "type": "string",
@@ -861,18 +861,82 @@
           }
         }
       },
-      "c3a66566-dbc6-489e-9fe5-1c5c9421d5d6": {
+      "398a090a-23fd-46aa-a345-23d5709db9e2": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "27389061-6649-4178-9fb2-f84e95be7780": {
+      "424a8257-6895-4d17-99e6-160293a62716": {
         "properties": {
           "userId": {
             "type": "string",
             "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
+          }
+        }
+      },
+      "29471280-728b-40db-9aba-c0a998567fc2": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string",
+                  "example": "What is your favorite color?"
+                },
+                "answer": {
+                  "type": "string",
+                  "example": "Blue"
+                }
+              },
+              "required": [
+                "question",
+                "answer"
+              ]
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "questions"
+        ]
+      },
+      "4f513b4c-48fe-4cc9-9c52-bfcf7468cc53": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "example": "789e4567-e89b-12d3-a456-426614174000"
+            },
+            "userId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "question": {
+              "type": "string",
+              "example": "What is your favorite color?"
+            },
+            "answer": {
+              "type": "string",
+              "example": "Blue"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-09-03T12:34:56Z"
+            }
           }
         }
       }
@@ -911,7 +975,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/eed113b4-a6a0-4872-a8d7-810230128a13"
+                  "$ref": "#/components/schemas/e52df2e0-2022-4dee-b515-1f72c7916ad4"
                 }
               }
             },
@@ -933,7 +997,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/71216a3f-a0c2-420b-809b-06bcd8473411"
+                  "$ref": "#/components/schemas/764f8735-a7ae-48f1-b28a-37a8d369f085"
                 }
               }
             },
@@ -969,7 +1033,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/7ba044b2-ce37-42d3-b193-24e8dbd64d17"
+                "$ref": "#/components/schemas/f45a0e51-0c57-45df-b667-2945bc3e9184"
               }
             }
           }
@@ -980,7 +1044,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/32962ae0-2e97-44a9-9e8a-ca8e441ef81b"
+                  "$ref": "#/components/schemas/66a14073-363c-4888-aee0-3808a8a02ba6"
                 }
               }
             },
@@ -991,7 +1055,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/351afe59-dc75-4b7d-b061-e83675a4e763"
+                  "$ref": "#/components/schemas/c75dfb98-5500-4578-a43b-4eceeccff9c6"
                 }
               }
             },
@@ -1002,7 +1066,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e16f800d-849c-4c82-b966-b1dcf86836f8"
+                  "$ref": "#/components/schemas/931002df-7a89-4354-a291-ed923395df2c"
                 }
               }
             },
@@ -1013,7 +1077,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e6454405-b96f-4394-acba-f1eee165b3c9"
+                  "$ref": "#/components/schemas/fb70e587-a32d-46cf-9a70-28acd34314ed"
                 }
               }
             },
@@ -1024,7 +1088,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/7dc738bf-3066-43fe-b587-b1802a184070"
+                  "$ref": "#/components/schemas/ec6b7faa-2a99-44cd-9ce7-0fd18aa70085"
                 }
               }
             },
@@ -1071,7 +1135,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/e51f405b-c743-4fb7-9e21-3736be71cf4f"
+                "$ref": "#/components/schemas/3b58c735-b866-40d9-8109-8e3f9167e4d9"
               }
             }
           }
@@ -1082,7 +1146,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0149f92c-8019-4948-841c-fe0ef476be49"
+                  "$ref": "#/components/schemas/119d3de0-11c9-4f47-8040-c01f4ddb7494"
                 }
               }
             },
@@ -1335,7 +1399,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/f508ce86-adb9-414a-a58c-fde4283ffea0"
+                "$ref": "#/components/schemas/85ca2ec4-6b63-4a78-8676-ab27ab658078"
               }
             }
           }
@@ -1407,7 +1471,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-aa4f00d9-958d-4db6-8543-fb1e42de0738"
+              "$ref": "#/components/schemas/athleteId-be555b0b-7843-49fc-9442-3705aa9463af"
             }
           }
         ],
@@ -1602,7 +1666,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b04a2892-d28c-456b-af80-1ea0fb577998"
+                  "$ref": "#/components/schemas/aeb5f537-2df2-4c01-9d1f-ce08f0102f4b"
                 }
               }
             },
@@ -1708,7 +1772,80 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/27389061-6649-4178-9fb2-f84e95be7780"
+                  "$ref": "#/components/schemas/424a8257-6895-4d17-99e6-160293a62716"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/question": {
+      "post": {
+        "summary": "/question",
+        "description": "Route to create questions in the system",
+        "operationId": "createQuestions",
+        "parameters": [],
+        "tags": [
+          "Questions"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Request body to create questions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/29471280-728b-40db-9aba-c0a998567fc2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Questions created with successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/4f513b4c-48fe-4cc9-9c52-bfcf7468cc53"
                 }
               }
             },
@@ -1775,6 +1912,10 @@
     {
       "name": "Settings",
       "description": "Routes for Settings"
+    },
+    {
+      "name": "Questions",
+      "description": "Routes for Questions"
     }
   ]
 }
