@@ -1,10 +1,16 @@
-create:
-  summary: Sample Lambda
-  description: Sample Lambda
+createWorkoutReview:
+  summary: /workout-review
+  description: This endpoint is used to create a workout review
   security:
     - CognitoAuthorizer: []
   tags:
-    - Sample
+    - Workout Review
+  pathParams:
+    - name: "coachId"
+      description: "The coachId to filter coach"
+      schema:
+        type: "string"
+        example: "example-uuid"
   requestBody:
     description: Sample request body
     required: true
@@ -34,6 +40,18 @@ create:
         description: Not authorized
       responseModels:
         application/json: NotAuthorizedResponse
+    - statusCode: 404
+      responseBody:
+        description: Athlete not found
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Athlete not found
+                example: Athlete not found
     - statusCode: 422
       responseBody:
         description: An error message when send invalid data

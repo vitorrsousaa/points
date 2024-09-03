@@ -1,10 +1,10 @@
-update:
-  summary: Sample Lambda
-  description: Sample Lambda
+updateAthlete:
+  summary: /athlete
+  description: Route to update athlete. It's not possible to update email, name and coachId.
   security:
     - CognitoAuthorizer: []
   tags:
-    - Sample
+    - Athletes
   requestBody:
     description: Sample request body
     required: true
@@ -12,28 +12,46 @@ update:
     application/json: 
       $schema: http://json-schema.org/draft-04/schema#
       properties:
-        email:
-          type: string
-          example: user@email.com
+        age:
+          type: number
+          example: 24
+        weight:
+          type: number
+          example: 40
+        height:
+          type: number
+          example: 180
+        workoutCount:
+          type: number
+          example: 2
       required:
-        - email
+        - age
+        - weight
+        - height
+        - workoutCount
   methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
+        application/json: AthleteModel
     - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
         application/json: NotAuthorizedResponse
+    - statusCode: 404
+      responseBody:
+        description: Athlete not found
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Athlete not found
+                example: Athlete not found
     - statusCode: 422
       responseBody:
         description: An error message when send invalid data

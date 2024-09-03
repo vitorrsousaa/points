@@ -1,35 +1,22 @@
-create:
-	summary: Sample Lambda
-	description: Sample Lambda
-	security:
-		- CognitoAuthorizer: []
-	tags:
-		- Sample
-	requestBody:
-		description: Sample request body
-		required: true
-	requestModels:
-		application/json: 
-			$schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-			required:
-				- email
-	methodResponses:
+createExercise:
+  summary: exercise
+  description: This route creates a new exercise
+  security:
+    - CognitoAuthorizer: []
+  tags:
+    - Exercises
+  requestBody:
+    description: Sample request body
+    required: true
+  requestModels:
+    application/json: ExerciseInputModel
+  methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
-		- statusCode: 401
+        application/json: ExerciseModel
+    - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
@@ -44,4 +31,3 @@ create:
         description: An unknown error message
       responseModels:
         application/json: ErrorResponse
-						
