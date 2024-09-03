@@ -3,7 +3,6 @@ import {
 	Badge,
 	Button,
 	Card,
-	CardContent,
 	RenderIf,
 	Skeleton,
 	Table,
@@ -23,7 +22,7 @@ import {
 	DropdownMenuLabel,
 } from "@shared/ui";
 import { ExercisesTableHeader } from "./components/ExercisesTableHeader";
-import { useNavigate } from "@/hooks/navigate";
+import { useGetAllCustomExercises } from "@/hooks/exercise";
 
 interface TableRowProps {
 	children: React.ReactNode;
@@ -32,13 +31,12 @@ interface TableRowProps {
 
 export function TableActions({
 	status,
-	athleteId,
+	exerciseId,
 }: {
 	status?: "pending" | "error";
-	athleteId: string;
+	exerciseId: string;
 }) {
-	const { navigate } = useNavigate();
-
+	console.log(exerciseId);
 	return (
 		<TableCell className="hidden min-[540px]:flex text-center items-center h-20">
 			<RenderIf
@@ -97,6 +95,11 @@ export function TableRowExercise({ children, status }: TableRowProps) {
 }
 
 export function ExercisesScreen() {
+	const { isLoadingCustomExercises, customExercises, isErrorCustomExercises } =
+		useGetAllCustomExercises();
+
+	const hasExercises = customExercises.length > 0;
+
 	return (
 		<div className="flex flex-col gap-4">
 			<HeaderScreen
@@ -104,42 +107,93 @@ export function ExercisesScreen() {
 				description="Adicione novos exercícios para habilitar no treino dos seus atletas."
 			/>
 
-			<ExercisesTableHeader />
+			<RenderIf
+				condition={isLoadingCustomExercises}
+				render={
+					<Card>
+						<div className="flex flex-col gap-2">
+							<Skeleton className="h-12" />
+							<Skeleton className="h-12" />
+							<Skeleton className="h-12" />
+						</div>
+					</Card>
+				}
+			/>
 
-			<div className="p-4 border rounded-xl bg-card">
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>Nome</TableHead>
-							<TableHead className="hidden md:table-cell">Equipamento</TableHead>
-							<TableHead className="hidden lg:table-cell">
-								Músculo primário
-							</TableHead>
-							<TableHead className="hidden min-[540px]:table-cell">Ações</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						<TableRowExercise>
-							<TableCell className="flex">
-								<span className="font-medium truncate max-w-[200px] sm:max-w-[100px] md:max-w-[110px] lg:max-w-[300px]">
-									Nome do exercícioaaaaaaaaaaa
-								</span>
-							</TableCell>
+			<RenderIf
+				condition={isErrorCustomExercises}
+				render={
+					<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
+						<strong className="font-medium text-center">
+							Tivemos um erro para buscar os exercícios.
+						</strong>
+						<span className="text-muted-foreground">Tente novamente!</span>
+					</div>
+				}
+			/>
 
-							<TableCell className="hidden md:table-cell">
-								<Badge variant="outline">Barra</Badge>
-							</TableCell>
+			<RenderIf
+				condition={
+					!hasExercises && !isLoadingCustomExercises && !isErrorCustomExercises
+				}
+				render={
+					<div className="w-full flex flex-col gap-2 items-center justify-center mt-14">
+						<strong className="font-medium">
+							Você ainda não possui exercícios cadastrados.
+						</strong>
+						<Button>Adicionar exercício</Button>
+					</div>
+				}
+			/>
 
-							<TableCell className="hidden lg:table-cell">
-								Posteriores
-							</TableCell>
+			<RenderIf
+				condition={
+					!isLoadingCustomExercises && !isErrorCustomExercises && hasExercises
+				}
+				render={
+					<>
+						<ExercisesTableHeader />
 
-							<TableActions status={undefined} athleteId={"123"} />
-						</TableRowExercise>
-						
-					</TableBody>
-				</Table>
-			</div>
+						<div className="p-4 border rounded-xl bg-card">
+							<Table>
+								<TableHeader>
+									<TableRow>
+										<TableHead>Nome</TableHead>
+										<TableHead className="hidden md:table-cell">
+											Equipamento
+										</TableHead>
+										<TableHead className="hidden lg:table-cell">
+											Músculo primário
+										</TableHead>
+										<TableHead className="hidden min-[540px]:table-cell">
+											Ações
+										</TableHead>
+									</TableRow>
+								</TableHeader>
+								<TableBody>
+									<TableRowExercise>
+										<TableCell className="flex">
+											<span className="font-medium truncate max-w-[200px] sm:max-w-[100px] md:max-w-[110px] lg:max-w-[300px]">
+												Nome do exercícioaaaaaaaaaaa
+											</span>
+										</TableCell>
+
+										<TableCell className="hidden md:table-cell">
+											<Badge variant="outline">Barra</Badge>
+										</TableCell>
+
+										<TableCell className="hidden lg:table-cell">
+											Posteriores
+										</TableCell>
+
+										<TableActions status={undefined} exerciseId={"123"} />
+									</TableRowExercise>
+								</TableBody>
+							</Table>
+						</div>
+					</>
+				}
+			/>
 		</div>
 	);
 }

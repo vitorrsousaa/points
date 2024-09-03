@@ -4,7 +4,7 @@ import { errorHandler } from "@application/utils/error-handler";
 import { missingFields } from "@application/utils/missing-fields";
 import {
 	GetAllInputServiceSchema,
-	IGetAllService,
+	type IGetAllService,
 } from "../../services/getAll";
 
 export class GetAllController implements IController {

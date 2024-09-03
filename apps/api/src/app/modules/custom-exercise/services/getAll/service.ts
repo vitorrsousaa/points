@@ -1,6 +1,6 @@
-import { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
+import type { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
 import type { IService } from "@application/interfaces/service";
-import { CustomExercise } from "@core/domain/exercise";
+import type { CustomExercise } from "@core/domain/exercise";
 import * as z from "zod";
 
 export const GetAllInputServiceSchema = z.object({

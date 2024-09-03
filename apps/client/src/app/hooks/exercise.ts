@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from "@/config/queryKeys";
 import { SentryHandler } from "@/libs/SentryHandler";
+import { customExerciseServices } from "@/services/custom-exercise";
 import { exerciseServices } from "@/services/exercise";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -41,8 +42,21 @@ export function useGetAllExercises() {
 	});
 
 	return {
-		exercises: data,
+		exercises: data ?? [],
 		isLoadingExercises: isLoading,
 		isErrorExercises: isError,
+	};
+}
+
+export function useGetAllCustomExercises() {
+	const { data, isLoading, isError } = useQuery({
+		queryKey: QUERY_KEYS.CUSTOM_EXERCISES,
+		queryFn: customExerciseServices.getAll,
+	});
+
+	return {
+		customExercises: data ?? [],
+		isLoadingCustomExercises: isLoading,
+		isErrorCustomExercises: isError,
 	};
 }

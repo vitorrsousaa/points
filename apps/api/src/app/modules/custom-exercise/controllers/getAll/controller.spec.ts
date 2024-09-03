@@ -2,7 +2,7 @@ import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
 import { GetAllController } from "./controller";
-import { IGetAllService } from "../../services/getAll";
+import type { IGetAllService } from "../../services/getAll";
 
 describe("Controller: GetAll", () => {
 	let mockRequest: IRequest;

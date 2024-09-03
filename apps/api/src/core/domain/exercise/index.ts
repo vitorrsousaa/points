@@ -1,6 +1,6 @@
-import { Prettify } from "@application/utils/types";
+import type { Prettify } from "@application/utils/types";
 import * as z from "zod";
-import { BaseEntity } from "../base";
+import type { BaseEntity } from "../base";
 
 export const EquipmentEnumSchema = z.enum(["Barra", "Halter", "Maquina"]);
 

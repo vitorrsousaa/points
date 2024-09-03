@@ -1,20 +1,8 @@
 import { ROUTES } from "@/config/routes";
 import { Button, Icon, Input } from "@shared/ui";
-import { Controller, type Control } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-interface ExercisesTableHeaderProps {
-	// searchControl: Control<
-	// 	{
-	// 		search: string;
-	// 	},
-	// 	unknown
-	// >;
-}
-
-export function ExercisesTableHeader({
-	searchControl,
-}: ExercisesTableHeaderProps) {
+export function ExercisesTableHeader() {
 	return (
 		<div className="w-full flex items-center justify-end gap-2">
 			<div className="flex items-center gap-2">

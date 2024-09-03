@@ -4,7 +4,7 @@ import {
 	type IGetAllService,
 	GetAllService,
 } from "./service";
-import { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
+import type { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
 
 describe("Service:GetAll", () => {
 	let service: IGetAllService;
