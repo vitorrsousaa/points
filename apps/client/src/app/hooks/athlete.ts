@@ -112,3 +112,74 @@ export function useGetAthleteById({
 		isErrorAthlete: isErrorAthletes,
 	};
 }
+
+export function useUpdateAthlete() {
+	const queryClient = useQueryClient();
+
+	const { sendEvent, sendException } = SentryHandler();
+
+	const { mutateAsync, isPending } = useMutation({
+		mutationFn: athleteServices.update,
+		onMutate: (variables) => {
+			const { id } = variables;
+
+			const oldAthletes = queryClient.getQueryData<WithStatus<Athlete>[]>(
+				QUERY_KEYS.ATHLETES,
+			);
+
+			queryClient.setQueryData<WithStatus<Athlete>[]>(
+				QUERY_KEYS.ATHLETES,
+				(old) =>
+					old?.map((athlete) =>
+						athlete.id === id
+							? { ...athlete, ...variables, status: "pending" }
+							: athlete,
+					),
+			);
+
+			return { oldAthletes };
+		},
+		onSuccess: async (data, variables, _context) => {
+			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
+
+			queryClient.setQueryData<WithStatus<Athlete>[]>(
+				QUERY_KEYS.ATHLETES,
+				(old) =>
+					old?.map((athlete) => (athlete.id === data.id ? data : athlete)),
+			);
+
+			sendEvent({
+				message: "UpdateAthlete",
+				level: "log",
+				tags: {
+					event_type: "transaction",
+				},
+				extra: {
+					...variables,
+				},
+			});
+		},
+		onError: async (error, variables, context) => {
+			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
+
+			queryClient.setQueryData<WithStatus<Athlete>[]>(
+				QUERY_KEYS.ATHLETES,
+				context?.oldAthletes?.map((athlete) =>
+					athlete.id === variables.id
+						? { ...athlete, status: "error" }
+						: athlete,
+				),
+			);
+
+			sendException({
+				exceptionName: "update_athlete",
+				...error,
+			});
+		},
+	});
+
+	return {
+		updateAthlete: mutateAsync,
+		isUpdatingAthlete: isPending,
+	};
+}
