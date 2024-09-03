@@ -26,6 +26,7 @@ import {
 	ReaderIcon,
 	StarFilledIcon,
 	TrashIcon,
+	StopwatchIcon,
 } from "@radix-ui/react-icons";
 
 export interface IconProps {
@@ -62,6 +63,7 @@ const icons = {
 	check_without_circle: CheckIcon,
 	filledStar: StarFilledIcon,
 	exclamationTriangle: ExclamationTriangleIcon,
+	stopwatch: StopwatchIcon,
 } as const;
 
 export function Icon(props: IconProps) {

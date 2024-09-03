@@ -52,6 +52,11 @@ const NAV_ITEMS: NavSectionsProps[] = [
 				icon: "person",
 				label: "Atletas",
 			},
+			{
+				href: ROUTES.EXERCISES,
+				icon: "stopwatch",
+				label: "Exercícios",
+			},
 		],
 	},
 ];
@@ -73,7 +78,7 @@ export function Sidebar() {
 								{section.label}
 							</span>
 
-							<div className="w-full">
+							<div className="w-full space-y-2">
 								{section.items.map((item) => (
 									<Button
 										key={item.label}
