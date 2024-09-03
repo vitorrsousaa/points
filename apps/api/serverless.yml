@@ -344,3 +344,11 @@ functions:
           documentation: ${file(src/server/functions/question/create/handler.doc.yml):create}
           authorizer:
             name: CognitoAuthorizer
+  getAllCustomExercises:
+    handler: src/server/functions/custom-exercise/getAll.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /custom-exercise
+          authorizer:
+            name: CognitoAuthorizer
