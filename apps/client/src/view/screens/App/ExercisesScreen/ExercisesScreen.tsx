@@ -86,12 +86,16 @@ export function TableRowExercise({ children, status }: TableRowProps) {
 	return (
 		<TableRow
 			className={cn(
-				"h-20 align-middle",
+				"h-20 align-middle relative",
 				status === "error" &&
 					"bg-destructive/10 border-2 border-destructive/50 rounded-sm",
+				status === "pending" && "bg-primary/10",
 			)}
 		>
 			{children}
+			{status === "pending" && (
+				<Spinner className="absolute bottom-0 right-5 top-2 h-4 w-4" />
+			)}
 		</TableRow>
 	);
 }
@@ -169,29 +173,33 @@ export function ExercisesScreen() {
 										<TableHead className="hidden lg:table-cell">
 											Músculo primário
 										</TableHead>
-										<TableHead className="hidden min-[540px]:table-cell">
-											Ações
+										<TableHead className="hidden lg:table-cell">
+											Target
 										</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									<TableRowExercise>
-										<TableCell className="flex">
-											<span className="font-medium truncate max-w-[200px] sm:max-w-[100px] md:max-w-[110px] lg:max-w-[300px]">
-												Nome do exercícioaaaaaaaaaaa
-											</span>
-										</TableCell>
+									{customExercises.map((exercise) => (
+										<TableRowExercise
+											key={exercise.id}
+											status={exercise.status}
+										>
+											<TableCell className="font-medium truncate max-w-[200px] sm:max-w-[100px] md:max-w-[110px] lg:max-w-[300px]">
+												{exercise.name}
+											</TableCell>
 
-										<TableCell className="hidden md:table-cell">
-											<Badge variant="outline">Barra</Badge>
-										</TableCell>
+											<TableCell className="hidden md:table-cell">
+												<Badge variant="outline">{exercise.equipment}</Badge>
+											</TableCell>
 
-										<TableCell className="hidden lg:table-cell">
-											Posteriores
-										</TableCell>
-
-										<TableActions status={undefined} exerciseId={"123"} />
-									</TableRowExercise>
+											<TableCell className="hidden lg:table-cell">
+												{exercise.primaryMuscle}
+											</TableCell>
+											<TableCell className="hidden lg:table-cell">
+												{exercise.target ? exercise.target : "Nenhum"}
+											</TableCell>
+										</TableRowExercise>
+									))}
 								</TableBody>
 							</Table>
 						</div>

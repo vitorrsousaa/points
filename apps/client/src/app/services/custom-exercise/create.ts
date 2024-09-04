@@ -1,9 +1,9 @@
-import type { Exercise } from "@/entitites/exercise";
+import type { CustomExercise } from "@/entitites/exercise";
 import { httpClient } from "../httpClient";
 
 export interface CreateCustomExerciseParams {
 	name: string;
-	equipment: string;
+	equipment: "Barra" | "Halter" | "Maquina";
 	primaryMuscle: string;
 	secondaryMuscle: string | null;
 	target: "D" | "S" | "B" | null;
@@ -11,7 +11,10 @@ export interface CreateCustomExerciseParams {
 }
 
 export async function create(params: CreateCustomExerciseParams) {
-	const { data } = await httpClient.post<Exercise>("/custom-exercise", params);
+	const { data } = await httpClient.post<CustomExercise>(
+		"/custom-exercise",
+		params,
+	);
 
 	return data;
 }

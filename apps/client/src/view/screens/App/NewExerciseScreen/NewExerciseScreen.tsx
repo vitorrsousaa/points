@@ -1,4 +1,7 @@
-import { ExerciseForm, TExerciseFormSchema } from "@/components/ExerciseForm";
+import {
+	ExerciseForm,
+	type TExerciseFormSchema,
+} from "@/components/ExerciseForm";
 import { ROUTES } from "@/config/routes";
 import { useAuth } from "@/hooks/auth";
 import { useCreateCustomExercise } from "@/hooks/exercise";
