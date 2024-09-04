@@ -2,8 +2,8 @@ import z from "zod";
 
 export const SignInFormSchema = z.object({
 	email: z
-		.string({ message: "O e-mail é obrigatório." })
-		.email("Formato de e-mail inválido."),
+		.string({ message: "O email é obrigatório." })
+		.email("Formato de email inválido."),
 	password: z.string().min(6, "A senha deve conter ao menos 6 caracteres."),
 });
 

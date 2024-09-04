@@ -1,41 +1,44 @@
+import { ROUTES } from "@/config/routes";
 import {
-	ConfirmationAccountScreen,
 	AthletesScreen,
+	ConfirmationAccountScreen,
 	DashboardScreen,
 	ExercisesScreen,
 	NewAthleteScreen,
 	NewTrainingScreen,
+	NotFoundScreen,
 	SettingsScreen,
-	TrainingScreen,
-	UpdateTrainingScreen,
 	SignInScreen,
 	SignUpScreen,
-	VerificationCodeScreen,
-	NotFoundScreen,
+	TrainingScreen,
 	UpdateAthleteScreen,
+	UpdateTrainingScreen,
+	VerificationCodeScreen,
 } from "@/screens/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AuthLayout, DashboardLayout } from "../layouts";
 import { AuthGuard } from "./AuthGuard";
-import { ROUTES } from "@/config/routes";
-import { DashboardLayout } from "@/layouts/dashboard";
 
 export function RouterStack() {
 	return (
 		<BrowserRouter basename="/">
 			<Routes>
 				<Route element={<AuthGuard isPrivate={false} />}>
-					<Route index element={<Navigate to={ROUTES.SIGNIN} replace />} />
-					<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
-					<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
-					<Route
-						path={ROUTES.CONFIRMATION_ACCOUNT}
-						element={<ConfirmationAccountScreen />}
-					/>
-					<Route
-						path={ROUTES.VERIFICATION}
-						element={<VerificationCodeScreen />}
-					/>
+					<Route path="/" element={<AuthLayout />}>
+						<Route index element={<Navigate to={ROUTES.SIGNUP} replace />} />
+						<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
+						<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
+						<Route
+							path={ROUTES.CONFIRMATION_ACCOUNT}
+							element={<ConfirmationAccountScreen />}
+						/>
+						<Route
+							path={ROUTES.VERIFICATION}
+							element={<VerificationCodeScreen />}
+						/>
+					</Route>
 				</Route>
+
 				<Route path="/" element={<AuthGuard isPrivate />}>
 					<Route path="/" element={<DashboardLayout />}>
 						<Route path={ROUTES.DASHBOARD} element={<DashboardScreen />} />

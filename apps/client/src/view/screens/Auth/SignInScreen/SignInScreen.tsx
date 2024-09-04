@@ -1,13 +1,6 @@
 import { ROUTES } from "@/config/routes";
-import { useAuth, useSignin } from "@/hooks/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Button,
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
 	Form,
 	FormControl,
 	FormDescription,
@@ -19,71 +12,51 @@ import {
 	PasswordInput,
 	Separator,
 } from "@shared/ui";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-
-import {
-	SIGN_IN_FORM_DEFAULT_VALUES,
-	SignInFormSchema,
-	type SigninFormSchemaTypes,
-} from "./SignInFormSchema";
+import { Link } from "react-router-dom";
+import { useSignIn } from "./useSignIn";
 
 export function SignInScreen() {
-	// TO-DO: CRIAR SCREEN HOOK PARA ESSA SCREEN
-
-	const methods = useForm<SigninFormSchemaTypes>({
-		resolver: zodResolver(SignInFormSchema),
-		defaultValues: SIGN_IN_FORM_DEFAULT_VALUES,
-	});
-
-	const { control, handleSubmit: hookFormSubmit, setError } = methods;
-
-	const navigate = useNavigate();
-
-	const { signin } = useAuth();
-
-	const { isLoggingAccount, signin: apiSignin } = useSignin();
-
-	const handleSubmit = hookFormSubmit(async (data) => {
-		try {
-			const { accessToken } = await apiSignin(data);
-			signin(accessToken);
-			navigate(ROUTES.DASHBOARD);
-
-			toast.success("Bem-vindo de volta!");
-		} catch (error) {
-			toast.error("Credenciais inválidas");
-			setError("password", {
-				message: "E-mail ou senha inválido",
-			});
-		}
-	});
+	const { control, handleSubmit, isLoggingAccount, methods } = useSignIn();
 
 	return (
-		<div className="flex h-full items-center justify-center">
-			<Card className="mx-auto max-w-sm">
-				<CardHeader>
-					<CardTitle className="text-xl">Faça login</CardTitle>
-					<CardDescription>
-						Faça login e acesse o painel de administrador da sua loja.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
+		<>
+			<div className="hidden bg-muted lg:block">
+				{/* <Image
+          src="/placeholder.svg"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        /> */}
+			</div>
+
+			<div className="flex items-center justify-center py-12">
+				<div className="mx-auto grid w-[480px]">
+					<div className="flex flex-col items-center gap-2 mb-8 text-center">
+						<h1 className="text-3xl font-bold">Acesse a GRYPP</h1>
+						<p className="text-balance text-muted-foreground">
+							Facilitando sua rotina no acompanhamento dos alunos.
+						</p>
+					</div>
+
 					<Form {...methods}>
-						<form onSubmit={handleSubmit} id="Signin">
+						<form
+							onSubmit={handleSubmit}
+							id="Signin"
+							className="flex flex-col gap-4"
+						>
 							<FormField
 								control={control}
 								name="email"
 								disabled={isLoggingAccount}
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>E-mail</FormLabel>
+										<FormLabel>Email</FormLabel>
 										<FormControl>
 											<Input placeholder="email@email.com.br" {...field} />
 										</FormControl>
 										<FormDescription>
-											Informe o seu melhor e-mail para contato.
+											Informe o seu melhor email para contato.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -97,19 +70,22 @@ export function SignInScreen() {
 									<FormItem>
 										<FormLabel>Senha</FormLabel>
 										<FormControl>
-											<PasswordInput placeholder="*******" {...field} />
+											<PasswordInput
+												placeholder="*******"
+												description="Informe sua senha de acesso."
+												{...field}
+											/>
 										</FormControl>
-										<FormDescription>
-											Informe sua senha de acesso.
-										</FormDescription>
 										<FormMessage />
 									</FormItem>
 								)}
 							/>
 						</form>
 					</Form>
-					<Separator className="mt-4 mb-4" />
-					<div className="space-y-2 w-full">
+
+					<Separator className="mt-8 mb-8" />
+
+					<div className="space-y-8 w-full">
 						<Button
 							type="submit"
 							form="Signin"
@@ -118,23 +94,16 @@ export function SignInScreen() {
 						>
 							Acessar conta
 						</Button>
+
 						<div className="text-center text-sm">
 							Ainda não tem uma conta ?{" "}
 							<Link to={ROUTES.SIGNUP} className="font-medium text-primary">
 								Crie agora!
 							</Link>
 						</div>
-						<div className="text-center text-sm">
-							<Link
-								to={ROUTES.CONFIRMATION_ACCOUNT}
-								className="text-sm font-medium text-primary"
-							>
-								Confirme sua conta aqui.
-							</Link>
-						</div>
 					</div>
-				</CardContent>
-			</Card>
-		</div>
+				</div>
+			</div>
+		</>
 	);
 }

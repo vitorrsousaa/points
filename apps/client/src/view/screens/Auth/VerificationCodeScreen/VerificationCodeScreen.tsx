@@ -1,6 +1,5 @@
+import { ROUTES } from "@/config/routes";
 import { useAccountConfirmation, useResendCode } from "@/hooks/auth";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -10,8 +9,9 @@ import {
 	CardTitle,
 	Spinner,
 } from "@shared/ui";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { ROUTES } from "@/config/routes";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function VerificationCodeScreen() {
 	const location = useLocation();
@@ -42,7 +42,7 @@ export function VerificationCodeScreen() {
 							return "Conta confirmada com sucesso";
 						},
 						error: (error) => {
-							if (error.statusCode === 422) return "E-mail inválido";
+							if (error.statusCode === 422) return "Email inválido";
 							if (error.statusCode === 400) return "Código expirado";
 							return "Erro ao confirmar conta";
 						},

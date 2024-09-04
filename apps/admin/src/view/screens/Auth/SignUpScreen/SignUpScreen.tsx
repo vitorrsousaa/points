@@ -76,12 +76,12 @@ export function SignUpScreen() {
 								disabled={isCreatingAccount}
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>E-mail</FormLabel>
+										<FormLabel>Email</FormLabel>
 										<FormControl>
 											<Input placeholder="email@email.com.br" {...field} />
 										</FormControl>
 										<FormDescription>
-											Informe o seu melhor e-mail para contato.
+											Informe o seu melhor email para contato.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -121,14 +121,6 @@ export function SignUpScreen() {
 							Já possui uma conta ?{" "}
 							<Link to={ROUTES.SIGNIN} className="font-medium text-primary">
 								Faça login!
-							</Link>
-						</div>
-						<div className="text-center text-sm">
-							<Link
-								to={ROUTES.CONFIRMATION_ACCOUNT}
-								className="text-sm font-medium text-primary "
-							>
-								Confirme sua conta aqui.
 							</Link>
 						</div>
 					</div>

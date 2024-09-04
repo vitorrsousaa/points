@@ -10,8 +10,8 @@ export const SignUpFormSchema = z.object({
 		.min(2, "O nome deve conter ao menos 2 caracteres.")
 		.max(50),
 	email: z
-		.string({ message: "O e-mail é obrigatório." })
-		.email("Formato de e-mail inválido."),
+		.string({ message: "O email é obrigatório." })
+		.email("Formato de email inválido."),
 	password: z.string().min(6, "A senha deve conter ao menos 6 caracteres."),
 });
 
