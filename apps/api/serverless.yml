@@ -352,3 +352,11 @@ functions:
           path: /custom-exercise
           authorizer:
             name: CognitoAuthorizer
+  createCustomExercise:
+    handler: src/server/functions/custom-exercise/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /custom-exercise
+          authorizer:
+            name: CognitoAuthorizer
