@@ -35,6 +35,9 @@ export function useCreateCustomExercise() {
 			await queryClient.cancelQueries({
 				queryKey: QUERY_KEYS.CUSTOM_EXERCISES,
 			});
+			await queryClient.invalidateQueries({
+				queryKey: QUERY_KEYS.EXERCISES,
+			});
 
 			queryClient.setQueryData<CustomExercisesQueryData>(
 				QUERY_KEYS.CUSTOM_EXERCISES,
