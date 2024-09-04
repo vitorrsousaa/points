@@ -18,6 +18,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 	Textarea,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+	Button,
+	Icon,
 } from "@shared/ui";
 import type { TAthleteFormSchema } from "./AthleteFormSchema";
 import { useAthleteForm } from "./useAthleteForm";
@@ -59,6 +67,7 @@ export function AthleteForm(props: AtheleFormProps) {
 												placeholder="Jhon"
 												type="text"
 												required
+												readOnly={isUpdating}
 												disabled={isSubmitting}
 												{...field}
 												className="w-full"
@@ -82,6 +91,7 @@ export function AthleteForm(props: AtheleFormProps) {
 												placeholder="Doe"
 												type="text"
 												required
+												readOnly={isUpdating}
 												disabled={isSubmitting}
 												{...field}
 												className="w-full"
@@ -124,7 +134,6 @@ export function AthleteForm(props: AtheleFormProps) {
 						<FormField
 							control={methods.control}
 							name="email"
-							disabled={isUpdating}
 							render={({ field }) => (
 								<FormItem className="w-full">
 									<FormLabel>Email</FormLabel>
@@ -133,6 +142,7 @@ export function AthleteForm(props: AtheleFormProps) {
 											placeholder="example@email.com"
 											type="email"
 											required
+											readOnly={isUpdating}
 											disabled={isSubmitting}
 											{...field}
 										/>
@@ -144,28 +154,60 @@ export function AthleteForm(props: AtheleFormProps) {
 								</FormItem>
 							)}
 						/>
+						<FormField
+							name="isActive"
+							control={methods.control}
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormLabel className="flex flex-row items-center gap-2">
+										Status
+										<Dialog>
+											<DialogTrigger asChild>
+												<Button
+													style={{ all: "unset", cursor: "pointer" }}
+													size={"icon"}
+												>
+													<Icon name="questionMark" className="h-4 w-4" />
+												</Button>
+											</DialogTrigger>
+
+											<DialogContent className="sm:max-w-[425px]">
+												<DialogHeader className="gap-2">
+													<DialogTitle>Como funciona ?</DialogTitle>
+													<DialogDescription>
+														Quando o status é selecionado como ativo, o atleta
+														consegue acessar o aplicativo e visualizar os
+														treinos. Quando o status é selecionado como inativo,
+														o atleta não tem permissão para acessar o
+														aplicativo.
+													</DialogDescription>
+												</DialogHeader>
+											</DialogContent>
+										</Dialog>
+									</FormLabel>
+									<Select
+										onValueChange={(value) =>
+											field.onChange(value === "active")
+										}
+										defaultValue={field.value ? "active" : "inactive"}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Selecione o status do atleta" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											<SelectItem value="active">Ativo</SelectItem>
+											<SelectItem value="inactive">Inativo</SelectItem>
+										</SelectContent>
+									</Select>
+									<FormDescription>Status do atleta</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 					</CardContent>
 				</Card>
-
-				{/* {isUpdating && (
-					<FormField
-						control={methods.control}
-						name="isActive"
-						render={({ field: { value, onChange, name } }) => (
-							<FormItem className="w-full items-center flex-row flex justify-between gap-4 min-[580px]:max-w-40">
-								<FormLabel>Status</FormLabel>
-								<FormControl>
-									<Switch
-										checked={value}
-										onCheckedChange={onChange}
-										name={name}
-										disabled={isSubmitting}
-									/>
-								</FormControl>
-							</FormItem>
-						)}
-					/>
-				)} */}
 
 				<Card>
 					<CardHeader>

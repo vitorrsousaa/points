@@ -1,22 +1,16 @@
 resendCode:
-  summary: Sample Lambda
-  description: Sample Lambda
+  summary: auth/resend-code
+  description: This endpoint resends the code to the user's email
   security:
     - CognitoAuthorizer: []
   tags:
-    - Sample
-  requestBody:
-    description: Sample request body
-    required: true
-  requestModels:
-    application/json: 
-      $schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-      required:
-        - email
+    - Auth
+  pathParams:
+    - name: "email"
+      description: The email to resend code
+      schema:
+        type: "string"
+        example: "email@email.com"
   methodResponses:
     - statusCode: 200
       responseBody:
@@ -29,11 +23,18 @@ resendCode:
               message:
                 type: string
                 example: ok
-    - statusCode: 401
+    - statusCode: 404
       responseBody:
-        description: Not authorized
+        description: User not found
       responseModels:
-        application/json: NotAuthorizedResponse
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: User not found
+                example: User not found
     - statusCode: 422
       responseBody:
         description: An error message when send invalid data

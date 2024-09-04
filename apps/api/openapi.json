@@ -192,6 +192,52 @@
         },
         "additionalProperties": false
       },
+      "ExerciseInputModel": {
+        "title": "Exercise Schema",
+        "description": "Schema for input data when creating a exercise.",
+        "type": "object",
+        "required": [
+          "name",
+          "primaryMuscle",
+          "secondaryMuscle",
+          "target",
+          "equipment"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Deadlift barbell"
+          },
+          "primaryMuscle": {
+            "type": "string",
+            "example": "Back"
+          },
+          "secondaryMuscle": {
+            "type": "string",
+            "example": "Biceps"
+          },
+          "target": {
+            "type": "string",
+            "enum": [
+              "B",
+              "S",
+              "D"
+            ],
+            "example": "B",
+            "nullable": true
+          },
+          "equipment": {
+            "type": "string",
+            "enum": [
+              "Barra",
+              "Halter",
+              "Maquina"
+            ],
+            "example": "Barra"
+          }
+        },
+        "additionalProperties": false
+      },
       "NotAuthorizedResponse": {
         "type": "object",
         "properties": {
@@ -300,6 +346,10 @@
           "email": {
             "type": "string",
             "example": "email@email.com"
+          },
+          "workoutCount": {
+            "type": "number",
+            "example": 2
           }
         }
       },
@@ -337,6 +387,10 @@
             "email": {
               "type": "string",
               "example": "email@email.com"
+            },
+            "workoutCount": {
+              "type": "number",
+              "example": 2
             }
           }
         }
@@ -436,7 +490,7 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "123456"
+            "example": "02bc86a5-1f2d-4fd6-b2c8-2f97fad8811a"
           },
           "createdAt": {
             "type": "string",
@@ -450,19 +504,63 @@
             "type": "string",
             "example": "2024-08-13T21:23:33.482Z"
           },
-          "visibility": {
+          "isActive": {
             "type": "boolean",
             "example": true
           },
           "athleteId": {
             "type": "string",
             "format": "uuid",
-            "example": "123456"
+            "example": "02bc86a5-1f2d-4fd6-b2c8-2f97fad8811a"
           },
           "coachId": {
             "type": "string",
             "format": "uuid",
-            "example": "123456"
+            "example": "02bc86a5-1f2d-4fd6-b2c8-2f97fad8811a"
+          },
+          "volume": {
+            "type": "object",
+            "properties": {
+              "S": {
+                "type": "object",
+                "properties": {
+                  "sets": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "load": {
+                    "type": "number",
+                    "example": 50
+                  }
+                }
+              },
+              "B": {
+                "type": "object",
+                "properties": {
+                  "sets": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "load": {
+                    "type": "number",
+                    "example": 50
+                  }
+                }
+              },
+              "D": {
+                "type": "object",
+                "properties": {
+                  "sets": {
+                    "type": "number",
+                    "example": 10
+                  },
+                  "load": {
+                    "type": "number",
+                    "example": 50
+                  }
+                }
+              }
+            }
           },
           "exercises": {
             "type": "array",
@@ -683,7 +781,28 @@
           }
         }
       },
-      "a6b1320d-a031-4959-b75e-7287f6216c28": {
+      "email": {
+        "type": "string",
+        "example": "email@email.com"
+      },
+      "978d070d-411b-428b-b2ac-94474d23c9cc": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "ok"
+          }
+        }
+      },
+      "02b50df6-8ea5-4715-94da-49d527cfa9a8": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User not found",
+            "example": "User not found"
+          }
+        }
+      },
+      "ca4b48be-57b0-427c-919a-88692aa866e4": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -724,7 +843,7 @@
         },
         "additionalProperties": false
       },
-      "8efcbcf3-e1bb-4d80-ad29-6e9611740172": {
+      "a425fd50-dae9-49ae-8ef8-8b73fed74dd6": {
         "properties": {
           "message": {
             "type": "string",
@@ -733,7 +852,7 @@
           }
         }
       },
-      "a28fea0e-2b0e-439e-8a0a-c62a784d43c6": {
+      "042b4edb-08e0-4266-8a89-cde02871dc4f": {
         "properties": {
           "email": {
             "type": "string",
@@ -749,14 +868,14 @@
           "code"
         ]
       },
-      "822403ce-df63-4008-8f13-4d936c484a67": {
+      "0e3233b2-830b-441e-a711-3319cd6ddf72": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "262d79d6-6025-43fd-9b5c-29b7abaa44b3": {
+      "d277e801-75c1-441f-ac4c-f575ddf291f9": {
         "properties": {
           "message": {
             "type": "string",
@@ -765,7 +884,16 @@
           }
         }
       },
-      "d4fd8b2a-65b2-4124-8ad4-3714236fe0b4": {
+      "687f5b49-7d4b-4b6c-9193-1e61222fdba7": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not authorized",
+            "example": "Not authorized"
+          }
+        }
+      },
+      "b3637833-c157-4267-91e1-4e90c04dc2e9": {
         "properties": {
           "message": {
             "type": "string",
@@ -774,7 +902,16 @@
           }
         }
       },
-      "24865d90-c10e-4b95-82ae-700c05ff5445": {
+      "74ddadd1-2586-44c2-a898-7a0028cb4b47": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Account already confirmed",
+            "example": "Account already confirmed"
+          }
+        }
+      },
+      "dfb604b9-57fb-4829-a31b-2897c5633017": {
         "properties": {
           "email": {
             "type": "string",
@@ -790,7 +927,7 @@
           "password"
         ]
       },
-      "a2a8ce3f-eaf7-44b3-8fd5-09a673c84514": {
+      "b524a16e-3c55-4769-a897-d473d80c319a": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -798,11 +935,46 @@
           }
         }
       },
+      "7656057f-07e5-4be8-8b71-6c0c9523a400": {
+        "properties": {
+          "age": {
+            "type": "number",
+            "example": 24
+          },
+          "weight": {
+            "type": "number",
+            "example": 40
+          },
+          "height": {
+            "type": "number",
+            "example": 180
+          },
+          "workoutCount": {
+            "type": "number",
+            "example": 2
+          }
+        },
+        "required": [
+          "age",
+          "weight",
+          "height",
+          "workoutCount"
+        ]
+      },
+      "c2a50db1-6638-4778-8695-577cf1893d31": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Athlete not found",
+            "example": "Athlete not found"
+          }
+        }
+      },
       "coachId": {
         "type": "string",
         "example": "example-uuid"
       },
-      "89b6de31-92ed-471c-a054-e4edb07a8b2a": {
+      "64fdaef5-b1c4-45ef-8828-42c726064928": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -831,11 +1003,29 @@
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3": {
+      "athleteId-c16001bb-e102-4e65-8ffe-3b72c9615333": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "05069667-a646-485a-84ff-6703e67c5004": {
+      "8f66b696-dbfd-440d-b5bc-d13e51be363b": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Workout is owned by other coach",
+            "example": "Workout is owned by other coach"
+          }
+        }
+      },
+      "f3a5b300-145a-46da-bf07-9e231767e1cb": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "User not found",
+            "example": "User not found"
+          }
+        }
+      },
+      "13b7722a-f615-4987-8497-6b2e81f4bce5": {
         "properties": {
           "message": {
             "type": "string",
@@ -843,18 +1033,127 @@
           }
         }
       },
-      "a597fb67-cc0d-47bb-bea9-425ccf5011d6": {
+      "222a4dd9-9bc5-4642-8172-dd620cc5091c": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "d044574f-cc09-4548-a427-fd73c54a24b3": {
+      "99e36cd3-9d08-4ce6-9971-4f9308c92a37": {
         "properties": {
           "userId": {
             "type": "string",
             "example": "b70f0460-ca06-4769-bb01-ea5b6f0a0245"
+          }
+        }
+      },
+      "76da3e2c-3a91-439e-9a80-a890519eeb85": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@email.com"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "2372cf8f-2619-4431-bc18-d7ec636fd095": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "ok"
+          }
+        }
+      },
+      "ebc3ef54-e46e-4598-b3e6-8839decba7df": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Athlete not found",
+            "example": "Athlete not found"
+          }
+        }
+      },
+      "d1b8ce1f-07a9-4921-a3b2-c50d8f8c3fea": {
+        "properties": {
+          "growth": {
+            "type": "number",
+            "example": 40
+          }
+        }
+      },
+      "f15ba9d9-4133-425a-b61c-e5d5311f95b4": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Coach not found",
+            "example": "Coach not found"
+          }
+        }
+      },
+      "efd971d2-aab8-4a6f-b79c-33ab704dcf68": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string",
+                  "example": "What is your favorite color?"
+                },
+                "answer": {
+                  "type": "string",
+                  "example": "Blue"
+                }
+              },
+              "required": [
+                "question",
+                "answer"
+              ]
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "questions"
+        ]
+      },
+      "8f529add-ea27-4558-bbf5-c2a40d13d3e9": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "example": "789e4567-e89b-12d3-a456-426614174000"
+            },
+            "userId": {
+              "type": "string",
+              "format": "uuid",
+              "example": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "question": {
+              "type": "string",
+              "example": "What is your favorite color?"
+            },
+            "answer": {
+              "type": "string",
+              "example": "Blue"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-09-03T12:34:56Z"
+            }
           }
         }
       }
@@ -878,6 +1177,78 @@
     }
   ],
   "paths": {
+    "/auth/resend-code/{email}": {
+      "post": {
+        "summary": "auth/resend-code",
+        "description": "This endpoint resends the code to the user's email",
+        "operationId": "resendCode",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "The email to resend code",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/email"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/978d070d-411b-428b-b2ac-94474d23c9cc"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/02b50df6-8ea5-4715-94da-49d527cfa9a8"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
     "/auth/profile": {
       "get": {
         "summary": "auth/profile",
@@ -893,7 +1264,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a6b1320d-a031-4959-b75e-7287f6216c28"
+                  "$ref": "#/components/schemas/ca4b48be-57b0-427c-919a-88692aa866e4"
                 }
               }
             },
@@ -915,7 +1286,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/8efcbcf3-e1bb-4d80-ad29-6e9611740172"
+                  "$ref": "#/components/schemas/a425fd50-dae9-49ae-8ef8-8b73fed74dd6"
                 }
               }
             },
@@ -951,7 +1322,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/a28fea0e-2b0e-439e-8a0a-c62a784d43c6"
+                "$ref": "#/components/schemas/042b4edb-08e0-4266-8a89-cde02871dc4f"
               }
             }
           }
@@ -962,7 +1333,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/822403ce-df63-4008-8f13-4d936c484a67"
+                  "$ref": "#/components/schemas/0e3233b2-830b-441e-a711-3319cd6ddf72"
                 }
               }
             },
@@ -973,7 +1344,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/262d79d6-6025-43fd-9b5c-29b7abaa44b3"
+                  "$ref": "#/components/schemas/d277e801-75c1-441f-ac4c-f575ddf291f9"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/687f5b49-7d4b-4b6c-9193-1e61222fdba7"
                 }
               }
             },
@@ -984,7 +1366,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d4fd8b2a-65b2-4124-8ad4-3714236fe0b4"
+                  "$ref": "#/components/schemas/b3637833-c157-4267-91e1-4e90c04dc2e9"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Account already confirmed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/74ddadd1-2586-44c2-a898-7a0028cb4b47"
                 }
               }
             },
@@ -1031,7 +1424,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/24865d90-c10e-4b95-82ae-700c05ff5445"
+                "$ref": "#/components/schemas/dfb604b9-57fb-4829-a31b-2897c5633017"
               }
             }
           }
@@ -1042,7 +1435,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a2a8ce3f-eaf7-44b3-8fd5-09a673c84514"
+                  "$ref": "#/components/schemas/b524a16e-3c55-4769-a897-d473d80c319a"
                 }
               }
             },
@@ -1086,7 +1479,7 @@
     },
     "/athlete": {
       "post": {
-        "summary": "create",
+        "summary": "/athlete",
         "description": "Route to create athlete",
         "operationId": "createAthlete",
         "parameters": [],
@@ -1122,6 +1515,88 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "/athlete",
+        "description": "Route to update athlete. It's not possible to update email, name and coachId.",
+        "operationId": "updateAthlete",
+        "parameters": [],
+        "tags": [
+          "Athletes"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/7656057f-07e5-4be8-8b71-6c0c9523a400"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AthleteModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Athlete not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/c2a50db1-6638-4778-8695-577cf1893d31"
                 }
               }
             },
@@ -1214,6 +1689,77 @@
       }
     },
     "/exercise": {
+      "post": {
+        "summary": "exercise",
+        "description": "This route creates a new exercise",
+        "operationId": "createExercise",
+        "parameters": [],
+        "tags": [
+          "Exercises"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseInputModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
       "get": {
         "summary": "exercises/getAll",
         "description": "Get all exercises",
@@ -1295,7 +1841,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/89b6de31-92ed-471c-a054-e4edb07a8b2a"
+                "$ref": "#/components/schemas/64fdaef5-b1c4-45ef-8828-42c726064928"
               }
             }
           }
@@ -1367,7 +1913,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-e002fa36-5407-4a5c-afc2-29687dac85a3"
+              "$ref": "#/components/schemas/athleteId-c16001bb-e102-4e65-8ffe-3b72c9615333"
             }
           }
         ],
@@ -1398,6 +1944,99 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "workout",
+        "description": "This route updates a workout",
+        "operationId": "updateWorkout",
+        "parameters": [],
+        "tags": [
+          "Workouts"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "A basic information about workout",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutInputModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return all workouts of athlete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutModel"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Workout is owned by other coach",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/8f66b696-dbfd-440d-b5bc-d13e51be363b"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/f3a5b300-145a-46da-bf07-9e231767e1cb"
                 }
               }
             },
@@ -1562,7 +2201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/05069667-a646-485a-84ff-6703e67c5004"
+                  "$ref": "#/components/schemas/13b7722a-f615-4987-8497-6b2e81f4bce5"
                 }
               }
             },
@@ -1668,7 +2307,236 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d044574f-cc09-4548-a427-fd73c54a24b3"
+                  "$ref": "#/components/schemas/99e36cd3-9d08-4ce6-9971-4f9308c92a37"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/workout-review/{coachId}": {
+      "post": {
+        "summary": "/workout-review",
+        "description": "This endpoint is used to create a workout review",
+        "operationId": "createWorkoutReview",
+        "parameters": [
+          {
+            "name": "coachId",
+            "in": "path",
+            "description": "The coachId to filter coach",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/coachId"
+            }
+          }
+        ],
+        "tags": [
+          "Workout Review"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/76da3e2c-3a91-439e-9a80-a890519eeb85"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/2372cf8f-2619-4431-bc18-d7ec636fd095"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Athlete not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ebc3ef54-e46e-4598-b3e6-8839decba7df"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/coach/metrics/athlete-growth": {
+      "get": {
+        "summary": "/athlete-growth",
+        "description": "This endpoint returns the percentage growth in the number of athletes for a coach, comparing the current month with the previous month. The growth is calculated based on the number of athletes registered in both periods.",
+        "operationId": "getAthleteGrowthByCoach",
+        "parameters": [],
+        "tags": [
+          "Coaches"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/d1b8ce1f-07a9-4921-a3b2-c50d8f8c3fea"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotAuthorizedResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Coach not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/f15ba9d9-4133-425a-b61c-e5d5311f95b4"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/question": {
+      "post": {
+        "summary": "/question",
+        "description": "Route to create questions in the system",
+        "operationId": "createQuestions",
+        "parameters": [],
+        "tags": [
+          "Questions"
+        ],
+        "security": [
+          {
+            "CognitoAuthorizer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Request body to create questions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/efd971d2-aab8-4a6f-b79c-33ab704dcf68"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Questions created with successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/8f529add-ea27-4558-bbf5-c2a40d13d3e9"
                 }
               }
             },
@@ -1735,6 +2603,14 @@
     {
       "name": "Settings",
       "description": "Routes for Settings"
+    },
+    {
+      "name": "Workout Review",
+      "description": "Routes for Workout Review"
+    },
+    {
+      "name": "Questions",
+      "description": "Routes for Questions"
     }
   ]
 }

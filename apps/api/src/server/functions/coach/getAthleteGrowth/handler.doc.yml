@@ -1,22 +1,10 @@
 getAthleteGrowth:
-  summary: Sample Lambda
-  description: Sample Lambda
+  summary: /athlete-growth
+  description: This endpoint returns the percentage growth in the number of athletes for a coach, comparing the current month with the previous month. The growth is calculated based on the number of athletes registered in both periods.
   security:
     - CognitoAuthorizer: []
   tags:
-    - Sample
-  requestBody:
-    description: Sample request body
-    required: true
-  requestModels:
-    application/json: 
-      $schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-      required:
-        - email
+    - Coaches
   methodResponses:
     - statusCode: 200
       responseBody:
@@ -26,19 +14,26 @@ getAthleteGrowth:
           schema:
             $schema: http://json-schema.org/draft-04/schema#
             properties:
-              message:
-                type: string
-                example: ok
+              growth:
+                type: number
+                example: 40
     - statusCode: 401
       responseBody:
         description: Not authorized
       responseModels:
         application/json: NotAuthorizedResponse
-    - statusCode: 422
+    - statusCode: 404
       responseBody:
-        description: An error message when send invalid data
+        description: Coach not found
       responseModels:
-        application/json: ValidationErrorResponse
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Coach not found
+                example: Coach not found
     - statusCode: 500
       responseBody:
         description: An unknown error message

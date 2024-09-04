@@ -1,0 +1,39 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Exercise Schema",
+	"description": "Schema for input data when creating a exercise.",
+	"type": "object",
+	"required": ["name", "primaryMuscle", "secondaryMuscle", "target", "equipment"],
+	"properties": {
+		"name": {
+			"type": "string",
+			"example": "Deadlift barbell"
+		},
+		"primaryMuscle": {
+			"type": "string",
+			"example": "Back"
+		},
+		"secondaryMuscle": {
+			"type": "string",
+			"example": "Biceps"
+		},
+		"target": {
+			"oneOf":[
+				{
+					"type": "string",
+					"enum": ["B", "S", "D"],
+					"example": "B"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"equipment": {
+			"type": "string",
+			"enum": ["Barra", "Halter", "Maquina"],
+			"example": "Barra"
+		}
+	},
+	"additionalProperties": false
+}

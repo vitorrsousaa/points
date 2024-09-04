@@ -1,13 +1,6 @@
 import type { Athlete } from "@/entitites/athlete";
 import { useGetAthleteGrowth } from "@/hooks/coach";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-	Skeleton,
-} from "@shared/ui";
+import { Skeleton } from "@shared/ui";
 import { AthletesAnalyticsCard } from "./AthletesAnalyticsCard";
 
 interface AthletesAnalyticsProps {
@@ -45,24 +38,19 @@ export function AthletesAnalytics({
 		<>
 			<AthletesAnalyticsCard
 				title="Total de atletas"
-				percentage={growth}
+				percentage={growth?.growth}
 				value={athletes?.length || 0}
 				isFetching={isFetchingAthleteGrowth}
 				isError={isErrorAthleteGrowth}
 			/>
 
-			<Card className="w-full">
-				<CardHeader className="pb-2">
-					<CardDescription>Ativos agora</CardDescription>
-					<CardTitle className="text-4xl">{activedAthletes}</CardTitle>
-				</CardHeader>
-
-				<CardContent>
-					<p className="text-xs text-muted-foreground">
-						+20.1% que o último mês
-					</p>
-				</CardContent>
-			</Card>
+			<AthletesAnalyticsCard
+				title="Ativos agora"
+				percentage={growth?.activeGrowth}
+				value={activedAthletes}
+				isFetching={isFetchingAthleteGrowth}
+				isError={isErrorAthleteGrowth}
+			/>
 		</>
 	);
 }

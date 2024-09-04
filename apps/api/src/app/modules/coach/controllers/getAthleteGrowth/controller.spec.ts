@@ -45,7 +45,10 @@ describe("Controller: GetAthleteGrowth", () => {
 
 	it("should return response with correct return of service when fields are ok", async () => {
 		// Arrange
-		mockedService.execute.mockResolvedValue({ growth: "0.00" });
+		mockedService.execute.mockResolvedValue({
+			growth: "0.00",
+			activeGrowth: "0.00",
+		});
 		mockRequest.userId = "30ac0b91-faa4-4051-86e7-ff25526162f2";
 
 		// Act
@@ -56,6 +59,7 @@ describe("Controller: GetAthleteGrowth", () => {
 			statusCode: 200,
 			body: {
 				growth: "0.00",
+				activeGrowth: "0.00",
 			},
 		});
 	});

@@ -1,5 +1,5 @@
 createAthlete:
-  summary: create
+  summary: /athlete
   description: Route to create athlete
   tags:
     - Athletes
