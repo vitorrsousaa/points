@@ -23,6 +23,8 @@ import {
 } from "@shared/ui";
 import { ExercisesTableHeader } from "./components/ExercisesTableHeader";
 import { useGetAllCustomExercises } from "@/hooks/exercise";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/config/routes";
 
 interface TableRowProps {
 	children: React.ReactNode;
@@ -141,7 +143,9 @@ export function ExercisesScreen() {
 						<strong className="font-medium">
 							Você ainda não possui exercícios cadastrados.
 						</strong>
-						<Button>Adicionar exercício</Button>
+						<Link to={ROUTES.NEW_EXERCISE}>
+							<Button>Adicionar exercício</Button>
+						</Link>
 					</div>
 				}
 			/>

@@ -13,6 +13,7 @@ import {
 	VerificationCodeScreen,
 	NotFoundScreen,
 	UpdateAthleteScreen,
+	NewExerciseScreen,
 } from "@/screens/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthGuard } from "./AuthGuard";
@@ -47,6 +48,7 @@ export function RouterStack() {
 						/>
 						<Route path={ROUTES.SETTINGS} element={<SettingsScreen />} />
 						<Route path={ROUTES.EXERCISES} element={<ExercisesScreen />} />
+						<Route path={ROUTES.NEW_EXERCISE} element={<NewExerciseScreen />} />
 						<Route
 							path={ROUTES.ATHLETE_MORE_INFO}
 							element={<TrainingScreen />}

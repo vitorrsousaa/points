@@ -4,11 +4,11 @@ import { customExerciseServices } from "@/services/custom-exercise";
 import { exerciseServices } from "@/services/exercise";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export function useCreateExercise() {
+export function useCreateCustomExercise() {
 	const { sendEvent, sendException } = SentryHandler();
 
 	const { mutateAsync, isPending } = useMutation({
-		mutationFn: exerciseServices.create,
+		mutationFn: customExerciseServices.create,
 		onSuccess(_, variables) {
 			sendEvent({
 				message: "CreateExercise",

@@ -19,7 +19,7 @@ export function ExercisesTableHeader() {
 				{/* )}
 				/> */}
 
-				<Link to={ROUTES.EXERCISES}>
+				<Link to={ROUTES.NEW_EXERCISE}>
 					<Button size="sm" className="h-9 gap-1">
 						<Icon name="plusCircle" className="h-5 w-5" />
 						<span className="sr-only md:not-sr-only md:whitespace-nowrap">

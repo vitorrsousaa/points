@@ -1,2 +1,2 @@
 export * from "./ExerciseForm";
-export * from './ExerciseFormSchema'
+export * from "./ExerciseFormSchema";
