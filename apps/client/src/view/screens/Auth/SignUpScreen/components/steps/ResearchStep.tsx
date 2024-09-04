@@ -5,7 +5,6 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-	Label,
 	Select,
 	SelectContent,
 	SelectGroup,
