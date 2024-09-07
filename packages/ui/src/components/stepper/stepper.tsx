@@ -154,9 +154,9 @@ export function StepperLabels({ labels }: StepperLabelsProps) {
 			{labels.map((label) => (
 				<div
 					key={label.title}
-					className={`flex items-center gap-4 w-full ${label.isActive ? "opacity-1" : "opacity-70"}`}
+					className={`flex items-center gap-4 w-full ${label.isActive ? "opacity-1" : "opacity-50"}`}
 				>
-					<div className="p-3 border rounded-xl border-foreground">
+					<div className="p-3 border border-gray-400 rounded-xl">
 						<Icon name={label.icon} className="h-4 w-4" />
 					</div>
 

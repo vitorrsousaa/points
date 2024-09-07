@@ -1,0 +1,41 @@
+import { IUserRepository } from "@application/database/repositories/user";
+import { IService } from "@application/interfaces/service";
+import { z } from "zod";
+import { UserNotFound } from "../../errors/user-not-found";
+
+export const AccountStatusInputServiceSchema = z.object({
+	userId: z.string().uuid(),
+});
+
+export type TAccountStatus = z.infer<typeof AccountStatusInputServiceSchema>;
+
+export type IAccountStatusInput = TAccountStatus;
+
+export type IAccountStatusOutput = {
+	accountConfirmation: boolean;
+};
+
+export type IAccountStatusService = IService<
+	IAccountStatusInput,
+	IAccountStatusOutput
+>;
+
+export class AccountStatusService implements IAccountStatusService {
+	constructor(private readonly userRepository: IUserRepository) {}
+
+	async execute(
+		accountStatusInput: IAccountStatusInput,
+	): Promise<IAccountStatusOutput> {
+		const { userId } = accountStatusInput;
+
+		const profile = await this.userRepository.getById(userId);
+
+		if (!profile) {
+			throw new UserNotFound();
+		}
+
+		return {
+			accountConfirmation: profile.accountConfirmation,
+		};
+	}
+}

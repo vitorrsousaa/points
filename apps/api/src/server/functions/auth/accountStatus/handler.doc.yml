@@ -1,0 +1,74 @@
+accountStatus:
+  summary: auth/account-status/{userId}
+  description: Get account confirmation status
+  security: []
+  tags: 
+    - Auth
+  requestBody:
+    description: A basic information about user account is confirmated
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        userId:
+          type: string
+      required:
+        - userId
+  methodResponses:
+    - statusCode: 200
+      responseBody:
+        description: Return the info about account status
+      responseModels:
+        application/json: 
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              userId:
+                type: string
+    - statusCode: 422
+      responseBody:
+        description: An error message when send invalid data
+      responseModels:
+        application/json: ValidationErrorResponse
+    - statusCode: 400
+      responseBody:
+        description: Expired Code
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Expired Code
+                example: Expired Code
+    - statusCode: 401
+      responseBody:
+        description: Not authorized
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: Not authorized
+                example: Not authorized
+    - statusCode: 404
+      responseBody:
+        description: User not found
+      responseModels:
+        application/json:
+          schema:
+            $schema: http://json-schema.org/draft-04/schema#
+            properties:
+              message:
+                type: string
+                description: User not found
+                example: User not found
+    - statusCode: 500
+      responseBody:
+        description: An unknown error message
+      responseModels:
+        application/json: ErrorResponse

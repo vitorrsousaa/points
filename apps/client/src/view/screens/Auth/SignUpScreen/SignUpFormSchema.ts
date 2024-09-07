@@ -1,6 +1,6 @@
 import z from "zod";
 
-const AccountDetailsSchema = z.object({
+export const AccountDetailsSchema = z.object({
 	firstName: z
 		.string({ required_error: "Este campo é obrigatório" })
 		.min(2, "O nome deve conter ao menos 2 caracteres.")
@@ -24,17 +24,27 @@ const AccountDetailsSchema = z.object({
 });
 
 const ResearchSchema = z.object({
-	firstAnswer: z.string({ required_error: "A resposta é obrigatória" }),
-	secondAnswer: z.string({ required_error: "A resposta é obrigatória" }),
-	thirthAnswer: z.string({ required_error: "A resposta é obrigatória" }),
+	leadInidication: z.enum([
+		"indication",
+		"whatsapp",
+		"instagram",
+		"facebook",
+		"other",
+	]),
+	athleteNumber: z.enum(["0-5", "5-25", "25-50", "50-100", "100+"]),
+	challengers: z
+		.string({
+			required_error: "A resposta é obrigatória",
+		})
+		.min(5, "Este campo precisa ter no mínimo 5 caracteres."),
 });
 
 export const SignUpFormSchema = z.object({
+	userId: z.string(),
 	currentStep: z.enum([
 		"AccountDetailsStep",
 		"ConfirmationAccountStep",
 		"ResearchStep",
-		"WelcomeStep",
 	]),
 	steps: z.object({
 		accountDetails: AccountDetailsSchema,
@@ -43,8 +53,11 @@ export const SignUpFormSchema = z.object({
 });
 
 export type SignupFormSchemaTypes = z.infer<typeof SignUpFormSchema>;
+export type AccountDetailsStepTypes = z.infer<typeof AccountDetailsSchema>;
+export type ResearchStepTypes = z.infer<typeof ResearchSchema>;
 
 export const SIGN_UP_FORM_DEFAULT_VALUES: SignupFormSchemaTypes = {
+	userId: "",
 	currentStep: "AccountDetailsStep",
 	steps: {
 		accountDetails: {
@@ -54,9 +67,9 @@ export const SIGN_UP_FORM_DEFAULT_VALUES: SignupFormSchemaTypes = {
 			password: "",
 		},
 		researchStep: {
-			firstAnswer: "",
-			secondAnswer: "",
-			thirthAnswer: "",
+			leadInidication: "indication",
+			athleteNumber: "0-5",
+			challengers: "",
 		},
 	},
 };

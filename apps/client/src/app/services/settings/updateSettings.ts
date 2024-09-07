@@ -1,4 +1,4 @@
-import type { Settings } from "src/app/types";
+import { Settings } from "@/entitites/Settings";
 import { httpClient } from "../httpClient";
 
 export async function updateSettings(settings: Settings) {

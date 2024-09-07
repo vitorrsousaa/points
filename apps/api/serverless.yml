@@ -189,6 +189,13 @@ functions:
           authorizer:
             name: CognitoAuthorizer
           documentation: ${file(src/server/functions/auth/profile/handler.doc.yml):profile}
+  accountStatus:
+    handler: src/server/functions/auth/accountStatus.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /auth/account-status/{userID}
+          documentation: ${file(src/server/functions/auth/accountStatus/handler.doc.yml):accountStatus}
   accountConfirmation:
     handler: src/server/functions/auth/accountConfirmation.handler
     events:

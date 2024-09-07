@@ -1,3 +1,4 @@
+import { useSignup } from "@/hooks/auth";
 import {
 	FormControl,
 	FormDescription,
@@ -7,52 +8,67 @@ import {
 	FormMessage,
 	Input,
 	PasswordInput,
+	RenderIf,
 	Separator,
 	StepperFooter,
 	StepperHeader,
 	StepperNextButton,
 	useStepper,
 } from "@shared/ui";
-
-import { useSignup } from "@/hooks/auth";
-import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { SignupFormSchemaTypes } from "../../SignUpFormSchema";
+import toast from "react-hot-toast";
+import {
+	AccountDetailsStepTypes,
+	SignupFormSchemaTypes,
+} from "../../SignUpFormSchema";
 
 export function AccountDetailsStep() {
-	const { signup } = useSignup();
+	const { nextStep } = useStepper();
 
 	const {
 		control,
 		setValue,
 		trigger,
-		handleSubmit: hookFormSubmit,
-		formState: { isSubmitting, isValidating, errors },
+		getValues,
+		register,
+		formState: { errors },
 	} = useFormContext<SignupFormSchemaTypes>();
 
-	useEffect(() => console.log(errors), [errors]);
+	const { signup, isCreatingAccount } = useSignup({
+		onSuccess(data, variables) {
+			setValue("userId", data!.userId);
+			setValue("currentStep", "ConfirmationAccountStep");
+			setValue("steps.accountDetails.password", variables!.password);
 
-	const { nextStep } = useStepper();
+			nextStep();
+		},
+		onError(error) {
+			console.log(error);
 
-	const handleSubmit = hookFormSubmit(async (data) => {
-		const ROLE = ["COACH"];
-		const newUser = { ...data.steps.accountDetails, role: ROLE };
-
-		await signup(newUser);
+			toast.error("Ocorreu um erro ao criar a sua conta.");
+		},
 	});
 
+	function handleSubmit() {
+		const userData: AccountDetailsStepTypes = getValues("steps.accountDetails");
+
+		const ROLE = ["COACH"];
+		const newUserData = { ...userData, role: ROLE };
+
+		signup(newUserData);
+	}
+
 	async function handleClickNextStep() {
-		const isValidStep = await trigger("steps.accountDetails");
+		const isValidStep = await trigger("steps.accountDetails", {
+			shouldFocus: true,
+		});
 
 		if (isValidStep) {
-			await handleSubmit();
-
-			setValue("currentStep", "ConfirmationAccountStep");
-			nextStep();
+			handleSubmit();
 		}
 	}
 
-	const isLoadingForm = isSubmitting || isValidating;
+	const isLoadingForm = isCreatingAccount;
 
 	return (
 		<>
@@ -63,54 +79,69 @@ export function AccountDetailsStep() {
 
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-row align-center gap-4">
-					<FormField
-						control={control}
-						name="steps.accountDetails.firstName"
-						disabled={isLoadingForm}
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Nome</FormLabel>
-								<FormControl>
-									<Input placeholder="João" {...field} />
-								</FormControl>
+					<FormItem>
+						<FormLabel>Nome</FormLabel>
 
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={control}
-						name="steps.accountDetails.lastName"
-						disabled={isLoadingForm}
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Sobrenome</FormLabel>
-								<FormControl>
-									<Input placeholder="da Silva" {...field} />
-								</FormControl>
+						<Input
+							placeholder="João"
+							{...register("steps.accountDetails.firstName")}
+						/>
 
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+						<RenderIf
+							condition={!!errors.steps?.accountDetails?.firstName?.message}
+							render={
+								<FormMessage>
+									{errors.steps?.accountDetails?.firstName?.message}
+								</FormMessage>
+							}
+						/>
+					</FormItem>
+
+					<FormItem>
+						<FormLabel>Sobrenome</FormLabel>
+						<FormControl>
+							<Input
+								placeholder="da Silva"
+								{...register("steps.accountDetails.lastName")}
+							/>
+						</FormControl>
+
+						<RenderIf
+							condition={!!errors.steps?.accountDetails?.lastName?.message}
+							render={
+								<FormMessage>
+									{errors.steps?.accountDetails?.lastName?.message}
+								</FormMessage>
+							}
+						/>
+					</FormItem>
 				</div>
-				<FormField
-					control={control}
-					name="steps.accountDetails.email"
-					disabled={isLoadingForm}
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Email</FormLabel>
-							<FormControl>
-								<Input placeholder="grypp.contato@exemplo.com" {...field} />
-							</FormControl>
-							<FormDescription>
-								Enviaremos uma confirmação para este email.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+
+				<FormItem>
+					<FormLabel>Email</FormLabel>
+
+					<FormControl>
+						<Input
+							placeholder="grypp.contato@exemplo.com"
+							{...register("steps.accountDetails.email")}
+						/>
+					</FormControl>
+
+					<RenderIf
+						condition={!!errors.steps?.accountDetails?.email?.message}
+						render={
+							<FormMessage>
+								{errors.steps?.accountDetails?.email?.message}
+							</FormMessage>
+						}
+					/>
+
+					<FormDescription>
+						Enviaremos uma confirmação para este email.
+					</FormDescription>
+					<FormMessage />
+				</FormItem>
+
 				<FormField
 					control={control}
 					name="steps.accountDetails.password"

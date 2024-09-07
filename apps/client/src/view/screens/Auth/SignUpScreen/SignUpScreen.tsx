@@ -1,7 +1,5 @@
 import { Stepper } from "@shared/ui";
 
-import { useSignUpScreen } from "./useSignUpScreen";
-
 import { FormProvider } from "react-hook-form";
 import {
 	AccountDetailsStep,
@@ -9,16 +7,18 @@ import {
 	SideProgressStepper,
 	VerifyAccountStep,
 } from "./components";
+import { useSignUpScreen } from "./useSignUpScreen";
 
 export function SignUpScreen() {
-	const { methods } = useSignUpScreen();
+	const { form, handleClickFinishForm } = useSignUpScreen();
 
 	return (
-		<FormProvider {...methods}>
+		<FormProvider {...form}>
 			<SideProgressStepper />
 
 			<form
 				id="signup"
+				onSubmit={handleClickFinishForm}
 				className="flex items-center justify-center py-12 mx-auto w-full sm:w-[460px] gap-6"
 			>
 				<Stepper

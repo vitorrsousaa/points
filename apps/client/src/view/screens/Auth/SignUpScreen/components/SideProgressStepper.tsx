@@ -1,14 +1,21 @@
 import { Icon, StepperLabels } from "@shared/ui";
 
 import { ROUTES } from "@/config/routes";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { SignupFormSchemaTypes } from "../SignUpFormSchema";
 
 export function SideProgressStepper() {
-	const { watch } = useFormContext<SignupFormSchemaTypes>();
+	const { watch, setValue } = useFormContext<SignupFormSchemaTypes>();
 
 	const currentStep = watch("currentStep");
+
+	useEffect(() => {
+		return () => {
+			setValue("currentStep", "AccountDetailsStep");
+		};
+	}, []);
 
 	return (
 		<div className="hidden bg-muted lg:flex flex-col p-10">

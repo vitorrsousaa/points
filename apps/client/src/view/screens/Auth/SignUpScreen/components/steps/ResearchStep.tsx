@@ -17,14 +17,18 @@ import {
 	StepperFooter,
 	StepperHeader,
 	StepperNextButton,
-	StepperPreviousButton,
 	Textarea,
 } from "@shared/ui";
 import { useFormContext } from "react-hook-form";
 import { SignupFormSchemaTypes } from "../../SignUpFormSchema";
 
 export function ResearchStep() {
-	const { control } = useFormContext<SignupFormSchemaTypes>();
+	const {
+		control,
+		formState: { isSubmitting, isLoading },
+	} = useFormContext<SignupFormSchemaTypes>();
+
+	const formIsLoading = isSubmitting || isLoading;
 
 	return (
 		<>
@@ -36,15 +40,13 @@ export function ResearchStep() {
 			<StepperContent>
 				<FormField
 					control={control}
-					name="steps.researchStep.firstAnswer"
+					name="steps.researchStep.leadInidication"
+					disabled={formIsLoading}
 					render={({ field }) => (
 						<FormItem className="w-full">
 							<FormLabel>Onde você nos conheceu?</FormLabel>
 							<FormControl>
-								<Select
-									onValueChange={field.onChange}
-									defaultValue={field.value}
-								>
+								<Select onValueChange={field.onChange}>
 									<SelectTrigger>
 										<SelectValue placeholder="Selecione um opção" />
 									</SelectTrigger>
@@ -56,6 +58,7 @@ export function ResearchStep() {
 											<SelectItem value="google">Google</SelectItem>
 											<SelectItem value="instagram">Instagram</SelectItem>
 											<SelectItem value="facebook">Facebook</SelectItem>
+											<SelectItem value="other">Outro</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>
@@ -70,17 +73,15 @@ export function ResearchStep() {
 
 				<FormField
 					control={control}
-					name="steps.researchStep.secondAnswer"
+					name="steps.researchStep.athleteNumber"
+					disabled={formIsLoading}
 					render={({ field }) => (
 						<FormItem className="w-full">
 							<FormLabel>
 								Quantos alunos aproximadamente você gerencia?
 							</FormLabel>
 							<FormControl>
-								<Select
-									onValueChange={field.onChange}
-									defaultValue={field.value}
-								>
+								<Select onValueChange={field.onChange}>
 									<SelectTrigger>
 										<SelectValue placeholder="Números de alunos" />
 									</SelectTrigger>
@@ -104,14 +105,15 @@ export function ResearchStep() {
 
 				<FormField
 					control={control}
-					name="steps.researchStep.thirthAnswer"
-					render={({ field: { value, onChange, name } }) => (
+					name="steps.researchStep.challengers"
+					disabled={formIsLoading}
+					render={({ field }) => (
 						<FormItem className="w-full">
 							<FormLabel>
 								Qual sua maior dificuldade cuidado de seus alunos e treinos?
 							</FormLabel>
 							<FormControl>
-								<Textarea value={value} onChange={onChange} name={name} />
+								<Textarea {...field} className="max-h-[80px]" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -122,8 +124,11 @@ export function ResearchStep() {
 			<Separator className="mt-8 mb-8" />
 
 			<StepperFooter>
-				<StepperPreviousButton />
-				<StepperNextButton text="Finalizar" />
+				<StepperNextButton
+					text="Finalizar"
+					isLoading={formIsLoading}
+					type="submit"
+				/>
 			</StepperFooter>
 		</>
 	);

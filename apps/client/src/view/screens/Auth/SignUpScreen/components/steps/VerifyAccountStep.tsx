@@ -12,12 +12,18 @@ import { SignupFormSchemaTypes } from "../../SignUpFormSchema";
 export function VerifyAccountStep() {
 	const { setValue, getValues } = useFormContext<SignupFormSchemaTypes>();
 
-	const { previousStep } = useStepper();
+	const { nextStep, previousStep } = useStepper();
 
 	function handleClickPreviousStep() {
 		setValue("currentStep", "AccountDetailsStep");
 
 		previousStep();
+	}
+
+	function handleClickNextStep() {
+		setValue("currentStep", "ResearchStep");
+
+		nextStep();
 	}
 
 	return (
@@ -43,7 +49,7 @@ export function VerifyAccountStep() {
 
 			<StepperFooter>
 				<StepperPreviousButton onClick={handleClickPreviousStep} />
-				<StepperNextButton />
+				<StepperNextButton onClick={handleClickNextStep} />
 			</StepperFooter>
 		</>
 	);
