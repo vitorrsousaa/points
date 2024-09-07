@@ -47,6 +47,7 @@ describe("Controller: GetAll", () => {
 		// Arrange
 		mockedService.execute.mockResolvedValue([]);
 		mockRequest.body = {};
+		mockRequest.userId = "d6478982-3702-4c9f-884d-3af74f5d992b";
 
 		// Act
 		const result = await controller.handle(mockRequest);
