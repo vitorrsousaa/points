@@ -4,6 +4,7 @@ type MeResponse = {
 	email: string;
 	name: string;
 	id: string;
+	role: string[];
 };
 
 export async function profile() {

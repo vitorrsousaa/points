@@ -34,7 +34,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 	const { data, isError, isLoading, isFetching, isSuccess } = useQuery({
 		queryKey: ["users", "me"],
-		queryFn: async () => userService.profile(),
+		queryFn: async () => {
+			const user = await userService.profile();
+			const hasCoach = user.role.includes("COACH");
+			if (hasCoach) {
+				return user;
+			}
+
+			toast.error("Somente treinadores.");
+			throw new Error("User is not a coach");
+		},
 		enabled: signedIn,
 		staleTime: Number.POSITIVE_INFINITY,
 	});
