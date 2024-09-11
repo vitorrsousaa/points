@@ -1,8 +1,8 @@
 import { MUTATION_KEYS } from "@/config/mutationKeys";
 import { QUERY_KEYS } from "@/config/queryKeys";
+import type { Settings } from "@/entitites/Settings";
 import { settingsService } from "@/services/settings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Settings } from "../types";
 
 export function useGetSettings() {
 	const { getSettings } = settingsService();

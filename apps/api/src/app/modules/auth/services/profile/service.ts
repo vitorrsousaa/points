@@ -17,6 +17,9 @@ export interface IProfileOutput {
 	email: string;
 	role: Role;
 	id: string;
+	accountConfirmation: boolean;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export type IProfileService = IService<IProfileInput, IProfileOutput>;

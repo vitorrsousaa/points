@@ -136,7 +136,7 @@ export function AthleteForm(props: AtheleFormProps) {
 							name="email"
 							render={({ field }) => (
 								<FormItem className="w-full">
-									<FormLabel>E-mail</FormLabel>
+									<FormLabel>Email</FormLabel>
 									<FormControl>
 										<Input
 											placeholder="example@email.com"
@@ -148,7 +148,7 @@ export function AthleteForm(props: AtheleFormProps) {
 										/>
 									</FormControl>
 									<FormDescription>
-										Preencha com o e-mail do atleta.
+										Preencha com o email do atleta.
 									</FormDescription>
 									<FormMessage />
 								</FormItem>

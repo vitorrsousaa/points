@@ -3,6 +3,7 @@ import {
 	CaretSortIcon,
 	CheckCircledIcon,
 	CheckIcon,
+	ChevronLeftIcon,
 	ChevronRightIcon,
 	ClipboardIcon,
 	Cross1Icon,
@@ -26,6 +27,8 @@ import {
 	ReaderIcon,
 	StarFilledIcon,
 	TrashIcon,
+	RocketIcon,
+	EnvelopeClosedIcon,
 	StopwatchIcon,
 } from "@radix-ui/react-icons";
 
@@ -47,6 +50,7 @@ const icons = {
 	layers: LayersIcon,
 	double_arrow: CaretSortIcon,
 	arrow_right: ChevronRightIcon,
+	arrow_left: ChevronLeftIcon,
 	crossCircled: CrossCircledIcon,
 	trash: TrashIcon,
 	filter: ListFilter,
@@ -62,6 +66,8 @@ const icons = {
 	check: CheckCircledIcon,
 	check_without_circle: CheckIcon,
 	filledStar: StarFilledIcon,
+	rocket: RocketIcon,
+	closedEnvelope: EnvelopeClosedIcon,
 	exclamationTriangle: ExclamationTriangleIcon,
 	stopwatch: StopwatchIcon,
 } as const;

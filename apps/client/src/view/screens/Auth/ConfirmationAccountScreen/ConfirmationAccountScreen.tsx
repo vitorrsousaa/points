@@ -68,8 +68,7 @@ export function ConfirmationAccountScreen() {
 				<CardHeader>
 					<CardTitle className="text-xl">Confirmação de conta</CardTitle>
 					<CardDescription>
-						Digite o código que você recebeu por e-mail para confirmar sua
-						conta.
+						Digite o código que você recebeu por email para confirmar sua conta.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
@@ -90,7 +89,7 @@ export function ConfirmationAccountScreen() {
 												{...field}
 											/>
 										</FormControl>
-										<FormDescription>Preencha com seu e-mail.</FormDescription>
+										<FormDescription>Preencha com seu email.</FormDescription>
 										<FormMessage />
 									</FormItem>
 								)}
@@ -115,7 +114,7 @@ export function ConfirmationAccountScreen() {
 											</InputOTP>
 										</FormControl>
 										<FormDescription>
-											Por favor, insira o código enviado para o e-mail.
+											Por favor, insira o código enviado para o email.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>

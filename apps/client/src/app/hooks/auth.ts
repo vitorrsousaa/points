@@ -1,9 +1,10 @@
 import { AuthContext, type AuthContextValue } from "@/contexts/auth";
+import type { ResetPasswordFn, SignupParams } from "@/entitites/Auth";
 import { SentryHandler } from "@/libs/SentryHandler";
 import { authService } from "@/services/auth";
-import type { ResetPasswordFn } from "@/services/auth/reset-password";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
+import type { MutationOptions } from "../types/useMutation";
 
 export function useAuth(): AuthContextValue {
 	const authContext = useContext(AuthContext);
@@ -83,12 +84,14 @@ export function useResetPassword(): {
 	};
 }
 
-export function useSignup() {
+export function useSignup(
+	options?: MutationOptions<{ userId: string }, SignupParams>,
+) {
 	const { sendEvent, sendException } = SentryHandler();
 
 	const { isPending, mutateAsync } = useMutation({
 		mutationFn: authService.signup,
-		onSuccess(_, variables) {
+		onSuccess(data, variables) {
 			sendEvent({
 				message: "SignUp",
 				level: "log",
@@ -99,12 +102,20 @@ export function useSignup() {
 					...variables,
 				},
 			});
+
+			if (options?.onSuccess) {
+				options.onSuccess(data, variables);
+			}
 		},
 		onError(error) {
 			sendException({
 				exceptionName: "sign_up",
 				...error,
 			});
+
+			if (options?.onError) {
+				options.onError(error || options.errorMessage);
+			}
 		},
 	});
 

@@ -1,6 +1,5 @@
+import { ROUTES } from "@/config/routes";
 import { useAccountConfirmation, useResendCode } from "@/hooks/auth";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -10,8 +9,9 @@ import {
 	CardTitle,
 	Spinner,
 } from "@shared/ui";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { ROUTES } from "@/config/routes";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function VerificationCodeScreen() {
 	const location = useLocation();
@@ -42,7 +42,7 @@ export function VerificationCodeScreen() {
 							return "Conta confirmada com sucesso";
 						},
 						error: (error) => {
-							if (error.statusCode === 422) return "E-mail inválido";
+							if (error.statusCode === 422) return "Email inválido";
 							if (error.statusCode === 400) return "Código expirado";
 							return "Erro ao confirmar conta";
 						},
@@ -57,67 +57,81 @@ export function VerificationCodeScreen() {
 		}
 	}, [email, code, confirmAccount, navigate]);
 	return (
-		<div className="flex h-full items-center justify-center">
-			<Card className="mx-auto max-w-md">
-				<CardHeader>
-					<CardTitle className="text-xl">Confirmação de conta</CardTitle>
-					<CardDescription>
-						Aguarde enquanto estamos confirmando a sua conta.
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					{email && code && isConfirmingAccount ? (
-						<div className="w-full flex items-center justify-center mt-8 mb-8">
-							<Spinner />
-						</div>
-					) : isErrorConfirmingAccount ? (
-						<div className="flex flex-col gap-2 items-center">
-							<span>Encontramos um erro para validar sua conta</span>
-							{(error as unknown as Record<string, number>)?.statusCode ===
-							400 ? (
-								<>
-									<small>
-										Clique no botão abaixo para reenviar o código de validação
-									</small>
-									<Button
-										onClick={() => {
-											navigate(ROUTES.CONFIRMATION_ACCOUNT);
-											email &&
-												toast.promise(resendCode(email), {
-													loading: "Reenviando código",
-													success: () => {
-														return "Código reenviado com sucesso";
-													},
-													error: "Erro ao reenviar código",
-												});
-										}}
-										isLoading={isResendingCode}
-									>
-										Reenviar
-									</Button>
-								</>
-							) : (
-								<>
-									<small>
-										Por favor, tente realizar a confirmação manualmente
-									</small>
-									<Button onClick={() => navigate(ROUTES.CONFIRMATION_ACCOUNT)}>
-										Redirecionar
-									</Button>
-								</>
-							)}
-						</div>
-					) : (
-						<div className="flex flex-col items-center gap-4">
-							<span>Parabéns, sua conta já foi confirmada!</span>
-							<small>Acesse a página de login.</small>
-							<Button>
-								<a href={ROUTES.SIGNIN}>Login</a>
-							</Button>
-						</div>
-					)}
-				</CardContent>
-			</Card>
-		</div>
+		<>
+			<div className="hidden bg-muted lg:block">
+				{/* <Image
+          src="/placeholder.svg"
+          alt="Image"
+          width="1920"
+          height="1080"
+          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        /> */}
+			</div>
+
+			<div className="flex h-full items-center justify-center">
+				<Card className="mx-auto max-w-md">
+					<CardHeader>
+						<CardTitle className="text-xl">Confirmação de conta</CardTitle>
+						<CardDescription>
+							Aguarde enquanto estamos confirmando a sua conta.
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						{email && code && isConfirmingAccount ? (
+							<div className="w-full flex items-center justify-center mt-8 mb-8">
+								<Spinner />
+							</div>
+						) : isErrorConfirmingAccount ? (
+							<div className="flex flex-col gap-2 items-center">
+								<span>Encontramos um erro para validar sua conta</span>
+								{(error as unknown as Record<string, number>)?.statusCode ===
+								400 ? (
+									<>
+										<small>
+											Clique no botão abaixo para reenviar o código de validação
+										</small>
+										<Button
+											onClick={() => {
+												navigate(ROUTES.CONFIRMATION_ACCOUNT);
+												email &&
+													toast.promise(resendCode(email), {
+														loading: "Reenviando código",
+														success: () => {
+															return "Código reenviado com sucesso";
+														},
+														error: "Erro ao reenviar código",
+													});
+											}}
+											isLoading={isResendingCode}
+										>
+											Reenviar
+										</Button>
+									</>
+								) : (
+									<>
+										<small>
+											Por favor, tente realizar a confirmação manualmente
+										</small>
+										<Button
+											onClick={() => navigate(ROUTES.CONFIRMATION_ACCOUNT)}
+										>
+											Redirecionar
+										</Button>
+									</>
+								)}
+							</div>
+						) : (
+							<div className="flex flex-col items-center gap-4">
+								<span>Parabéns, sua conta já foi confirmada!</span>
+								<small>Acesse a página de login.</small>
+								<Button>
+									<a href={ROUTES.SIGNIN}>Login</a>
+								</Button>
+							</div>
+						)}
+					</CardContent>
+				</Card>
+			</div>
+		</>
 	);
 }

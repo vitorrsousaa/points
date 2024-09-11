@@ -3,6 +3,7 @@ import type { Mocked } from "vitest";
 
 import type { IProfileService } from "../../services/profile";
 import { ProfileController } from "./controller";
+import type { UnwrapPromise } from "@application/utils/types";
 
 describe("Controller: Profile", () => {
 	let mockRequest: IRequest;
@@ -47,7 +48,7 @@ describe("Controller: Profile", () => {
 			name: "John",
 			email: "email@email.com",
 			role: ["ADMIN"],
-		});
+		} as unknown as UnwrapPromise<ReturnType<IProfileService["execute"]>>);
 		mockRequest.userId = "c65c40a3-4455-4bc3-9bda-451abc54250b";
 
 		// Act

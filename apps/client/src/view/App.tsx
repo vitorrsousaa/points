@@ -21,7 +21,6 @@ const SENTRY_CONFIGURATION: Sentry.BrowserOptions = {
 		}),
 	],
 	replaysOnErrorSampleRate: 1.0,
-	// Set `tracePropagationTargets` to control for which URLs trace propagation should be enabled
 	tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
 };
 

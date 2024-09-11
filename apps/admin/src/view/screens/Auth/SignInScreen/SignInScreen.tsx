@@ -55,7 +55,7 @@ export function SignInScreen() {
 		} catch (error) {
 			toast.error("Credenciais inválidas");
 			setError("password", {
-				message: "E-mail ou senha inválido",
+				message: "Email ou senha inválido",
 			});
 		}
 	});
@@ -78,12 +78,12 @@ export function SignInScreen() {
 								disabled={isLoggingAccount}
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>E-mail</FormLabel>
+										<FormLabel>Email</FormLabel>
 										<FormControl>
 											<Input placeholder="email@email.com.br" {...field} />
 										</FormControl>
 										<FormDescription>
-											Informe o seu melhor e-mail para contato.
+											Informe o seu melhor email para contato.
 										</FormDescription>
 										<FormMessage />
 									</FormItem>
@@ -122,14 +122,6 @@ export function SignInScreen() {
 							Ainda não tem uma conta ?{" "}
 							<Link to={ROUTES.SIGNUP} className="font-medium text-primary">
 								Crie agora!
-							</Link>
-						</div>
-						<div className="text-center text-sm">
-							<Link
-								to={ROUTES.CONFIRMATION_ACCOUNT}
-								className="text-sm font-medium text-primary"
-							>
-								Confirme sua conta aqui.
 							</Link>
 						</div>
 					</div>

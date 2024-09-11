@@ -1,4 +1,4 @@
-import type { Athlete } from "src/app/entities/athlete";
+import type { Athlete } from "@/entitites/athlete";
 import { httpClient } from "../httpClient";
 
 export interface CreateAthleteParams {
