@@ -24,14 +24,15 @@ export const AccountDetailsSchema = z.object({
 });
 
 const ResearchSchema = z.object({
-	leadInidication: z.enum([
-		"indication",
-		"whatsapp",
-		"instagram",
-		"facebook",
-		"other",
-	]),
-	athleteNumber: z.enum(["0-5", "5-25", "25-50", "50-100", "100+"]),
+	leadInidication: z.enum(
+		["indication", "whatsapp", "instagram", "facebook", "google", "other"],
+		{
+			message: "Incorreto",
+		},
+	),
+	athleteNumber: z.enum(["0-5", "5-25", "25-50", "50-100", "100+"], {
+		message: "A resposta é obrigatória",
+	}),
 	challengers: z
 		.string({
 			required_error: "A resposta é obrigatória",

@@ -58,6 +58,7 @@ export function Stepper({
 		);
 	}, [steps]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies(initialStepIndex): <explanation>
 	useEffect(() => {
 		() => {
 			setCurrentStepIndex(initialStepIndex);
@@ -72,7 +73,7 @@ export function Stepper({
 					{steps[currentStepIndex].content}
 				</div>
 
-				<div className="w-full sm:absolute max-sm:top-4 sm:bottom-4 max-w-[220px] left-0 right-0 mx-auto">
+				<div className="w-full sm:absolute max-sm:top-4 sm:bottom-[-4rem] lg.:bottom-4 max-w-[220px] left-0 right-0 mx-auto">
 					<ProgressIndicator
 						total={steps.length}
 						currentIndex={currentStepIndex}

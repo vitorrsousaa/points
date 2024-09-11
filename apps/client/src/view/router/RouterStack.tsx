@@ -25,7 +25,7 @@ export function RouterStack() {
 			<Routes>
 				<Route element={<AuthGuard isPrivate={false} />}>
 					<Route path="/" element={<AuthLayout />}>
-						<Route index element={<Navigate to={ROUTES.SIGNUP} replace />} />
+						<Route index element={<Navigate to={ROUTES.SIGNIN} replace />} />
 						<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
 						<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
 						<Route

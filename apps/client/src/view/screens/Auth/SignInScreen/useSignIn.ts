@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {
 	SIGN_IN_FORM_DEFAULT_VALUES,
 	SignInFormSchema,
-	SigninFormSchemaTypes,
+	type SigninFormSchemaTypes,
 } from "./SignInFormSchema";
 
 export function useSignIn() {

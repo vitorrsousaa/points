@@ -1,6 +1,7 @@
 import { Stepper } from "@shared/ui";
 
 import { FormProvider } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import {
 	AccountDetailsStep,
 	ResearchStep,
@@ -21,6 +22,7 @@ export function SignUpScreen() {
 				onSubmit={handleClickFinishForm}
 				className="flex items-center justify-center py-12 mx-auto w-full sm:w-[460px] gap-6"
 			>
+				<DevTool control={form.control} />
 				<Stepper
 					steps={[
 						{

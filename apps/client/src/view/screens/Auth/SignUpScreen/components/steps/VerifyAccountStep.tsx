@@ -7,7 +7,7 @@ import {
 	useStepper,
 } from "@shared/ui";
 import { useFormContext } from "react-hook-form";
-import { SignupFormSchemaTypes } from "../../SignUpFormSchema";
+import type { SignupFormSchemaTypes } from "../../SignUpFormSchema";
 
 export function VerifyAccountStep() {
 	const { setValue, getValues } = useFormContext<SignupFormSchemaTypes>();

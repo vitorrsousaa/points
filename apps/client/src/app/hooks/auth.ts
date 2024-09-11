@@ -1,10 +1,10 @@
 import { AuthContext, type AuthContextValue } from "@/contexts/auth";
-import { ResetPasswordFn, SignupParams } from "@/entitites/Auth";
+import type { ResetPasswordFn, SignupParams } from "@/entitites/Auth";
 import { SentryHandler } from "@/libs/SentryHandler";
 import { authService } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useContext } from "react";
-import { MutationOptions } from "../types/useMutation";
+import type { MutationOptions } from "../types/useMutation";
 
 export function useAuth(): AuthContextValue {
 	const authContext = useContext(AuthContext);

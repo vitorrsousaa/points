@@ -1,4 +1,4 @@
-import { SigninParams } from "@/entitites/Auth";
+import type { SigninParams } from "@/entitites/Auth";
 import { httpClient } from "../httpClient";
 
 export async function signin(params: SigninParams) {

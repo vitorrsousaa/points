@@ -1,4 +1,4 @@
-import { AccountConfirmationParams } from "@/entitites/Auth";
+import type { AccountConfirmationParams } from "@/entitites/Auth";
 import { httpClient } from "../httpClient";
 
 export async function accountConfirmation(params: AccountConfirmationParams) {

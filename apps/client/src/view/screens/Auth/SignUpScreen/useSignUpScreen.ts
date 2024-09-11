@@ -1,13 +1,11 @@
-import { ResearchQuestion } from "@/entitites/Question";
+import type { ResearchQuestion } from "@/entitites/Question";
 import { useNavigate } from "@/hooks/navigate";
 import { useSendQuestion } from "@/hooks/question";
-import { safeSessionStorageGetItem } from "@/utils/safeSessionStorageGetItem";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
-	ResearchStepTypes,
+	type ResearchStepTypes,
 	SIGN_UP_FORM_DEFAULT_VALUES,
 	SignUpFormSchema,
 	type SignupFormSchemaTypes,
@@ -22,9 +20,7 @@ const MAPPED_QUESTIONS: Array<keyof ResearchStepTypes> = [
 export function useSignUpScreen() {
 	const form = useForm<SignupFormSchemaTypes>({
 		resolver: zodResolver(SignUpFormSchema),
-		defaultValues:
-			safeSessionStorageGetItem<SignupFormSchemaTypes>("onboarding-form") ??
-			SIGN_UP_FORM_DEFAULT_VALUES,
+		defaultValues: SIGN_UP_FORM_DEFAULT_VALUES,
 		mode: "onChange",
 	});
 
@@ -62,22 +58,10 @@ export function useSignUpScreen() {
 				};
 
 				await send(questionPayload);
-				sessionStorage.removeItem("onboarding-form");
 			}
 		},
 		(e) => console.log(e),
 	);
-
-	useEffect(() => {
-		const { unsubscribe } = form.watch((formData) => {
-			sessionStorage.setItem("onboarding-form", JSON.stringify(formData));
-		});
-
-		return () => {
-			unsubscribe();
-			form.setValue("currentStep", "AccountDetailsStep");
-		};
-	}, [form]);
 
 	return {
 		form,

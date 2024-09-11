@@ -1,4 +1,4 @@
-import { ForgotPasswordParams } from "@/entitites/Auth";
+import type { ForgotPasswordParams } from "@/entitites/Auth";
 import { httpClient } from "../httpClient";
 
 export async function forgotPassword(params: ForgotPasswordParams) {

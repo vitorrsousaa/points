@@ -1,6 +1,7 @@
-import { ResearchQuestion } from "@/entitites/Question";
+import type { ResearchQuestion } from "@/entitites/Question";
 import { httpClient } from "../httpClient";
 
-export function sendQuestions(question: ResearchQuestion) {
-	return httpClient.post<void>("/question", question);
+export async function sendQuestions(question: ResearchQuestion) {
+	const { data } = await httpClient.post<void>("/question", question);
+	return data;
 }

@@ -13,7 +13,7 @@ export class CreateController implements IController {
 		try {
 			const [status, parsedBody] = missingFields(CreateInputServiceSchema, {
 				questions: request.body.questions,
-				userId: request.userId,
+				userId: request.body.userId,
 			});
 
 			if (!status) return parsedBody;

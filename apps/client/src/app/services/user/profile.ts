@@ -1,4 +1,4 @@
-import { UserProps } from "@/entitites/User";
+import type { UserProps } from "@/entitites/User";
 import { httpClient } from "../httpClient";
 
 export async function profile() {

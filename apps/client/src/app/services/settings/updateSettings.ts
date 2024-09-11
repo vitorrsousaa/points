@@ -1,4 +1,4 @@
-import { Settings } from "@/entitites/Settings";
+import type { Settings } from "@/entitites/Settings";
 import { httpClient } from "../httpClient";
 
 export async function updateSettings(settings: Settings) {

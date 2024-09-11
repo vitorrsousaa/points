@@ -1,8 +1,7 @@
 create:
   summary: /question
   description: Route to create questions in the system
-  security:
-    - CognitoAuthorizer: []
+  security: []
   tags:
     - Questions
   requestBody:

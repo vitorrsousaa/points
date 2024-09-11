@@ -142,9 +142,9 @@ const PasswordInput = forwardRef<
 				condition={showErrors}
 				render={
 					<ul className="text-sm mt-4">
-						{validationCriteria.map((criterion, index) => (
+						{validationCriteria.map((criterion) => (
 							<li
-								key={index}
+								key={Math.random().toString()}
 								className={`text-sm ${criterion.valid ? "text-green-600" : "text-red-600"}`}
 							>
 								<strong>{`${criterion.title}: `}</strong>

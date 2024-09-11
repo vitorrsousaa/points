@@ -1,5 +1,5 @@
-import { IUserRepository } from "@application/database/repositories/user";
-import { IService } from "@application/interfaces/service";
+import type { IUserRepository } from "@application/database/repositories/user";
+import type { IService } from "@application/interfaces/service";
 import { z } from "zod";
 import { UserNotFound } from "../../errors/user-not-found";
 

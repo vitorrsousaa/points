@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
 	FormControl,
 	FormDescription,
@@ -20,15 +21,44 @@ import {
 	Textarea,
 } from "@shared/ui";
 import { useFormContext } from "react-hook-form";
-import { SignupFormSchemaTypes } from "../../SignUpFormSchema";
+import type { SignupFormSchemaTypes } from "../../SignUpFormSchema";
+import { useSendQuestion } from "@/hooks/question";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/config/routes";
+import toast from "react-hot-toast";
 
 export function ResearchStep() {
 	const {
 		control,
 		formState: { isSubmitting, isLoading },
+		getValues,
 	} = useFormContext<SignupFormSchemaTypes>();
 
 	const formIsLoading = isSubmitting || isLoading;
+
+	const { send } = useSendQuestion({
+		onSuccess: () => {
+			toast.success("Conta criada com sucesso!");
+		},
+	});
+
+	const navigate = useNavigate();
+
+	const handleSendQuestions = useCallback(() => {
+		const questions = getValues("steps.researchStep");
+		const userId = getValues("userId");
+		const questionsMapped = Object.keys(questions).map((question) => ({
+			question,
+			answer: questions[question as keyof typeof questions],
+		}));
+
+		send({
+			userId,
+			questions: questionsMapped,
+		});
+
+		navigate(ROUTES.SIGNIN);
+	}, [getValues, navigate, send]);
 
 	return (
 		<>
@@ -127,7 +157,7 @@ export function ResearchStep() {
 				<StepperNextButton
 					text="Finalizar"
 					isLoading={formIsLoading}
-					type="submit"
+					onClick={handleSendQuestions}
 				/>
 			</StepperFooter>
 		</>

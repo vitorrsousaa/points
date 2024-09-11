@@ -1,4 +1,4 @@
-import { SignupParams } from "@/entitites/Auth";
+import type { SignupParams } from "@/entitites/Auth";
 import { httpClient } from "../httpClient";
 
 export async function signup(params: SignupParams) {

@@ -4,13 +4,14 @@ import { ROUTES } from "@/config/routes";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { SignupFormSchemaTypes } from "../SignUpFormSchema";
+import type { SignupFormSchemaTypes } from "../SignUpFormSchema";
 
 export function SideProgressStepper() {
 	const { watch, setValue } = useFormContext<SignupFormSchemaTypes>();
 
 	const currentStep = watch("currentStep");
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies(setValue): <explanation>
 	useEffect(() => {
 		return () => {
 			setValue("currentStep", "AccountDetailsStep");

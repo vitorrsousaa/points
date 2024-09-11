@@ -17,7 +17,7 @@ import {
 } from "@shared/ui";
 import { useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
-import {
+import type {
 	AccountDetailsStepTypes,
 	SignupFormSchemaTypes,
 } from "../../SignUpFormSchema";
@@ -35,10 +35,11 @@ export function AccountDetailsStep() {
 	} = useFormContext<SignupFormSchemaTypes>();
 
 	const { signup, isCreatingAccount } = useSignup({
-		onSuccess(data, variables) {
-			setValue("userId", data!.userId);
+		onSuccess: (data, variables) => {
+			if (!data || !variables) return;
+			setValue("userId", data?.userId);
 			setValue("currentStep", "ConfirmationAccountStep");
-			setValue("steps.accountDetails.password", variables!.password);
+			setValue("steps.accountDetails.password", variables?.password);
 
 			nextStep();
 		},
@@ -74,12 +75,12 @@ export function AccountDetailsStep() {
 		<>
 			<StepperHeader
 				title="Crie sua conta"
-				subtitle="Adicione seu email e escolha uma senha."
+				subtitle="Adicione seu e-mail e crie uma senha."
 			/>
 
 			<div className="flex flex-col gap-4">
 				<div className="flex flex-row align-center gap-4">
-					<FormItem>
+					<FormItem className="w-full">
 						<FormLabel>Nome</FormLabel>
 
 						<Input
@@ -97,7 +98,7 @@ export function AccountDetailsStep() {
 						/>
 					</FormItem>
 
-					<FormItem>
+					<FormItem className="w-full">
 						<FormLabel>Sobrenome</FormLabel>
 						<FormControl>
 							<Input

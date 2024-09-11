@@ -1,4 +1,4 @@
-import { Athlete } from "@/entitites/athlete";
+import type { Athlete } from "@/entitites/athlete";
 import { httpClient } from "../httpClient";
 
 export interface CreateAthleteParams {

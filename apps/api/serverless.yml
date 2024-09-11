@@ -349,5 +349,3 @@ functions:
           method: POST
           path: /question
           documentation: ${file(src/server/functions/question/create/handler.doc.yml):create}
-          authorizer:
-            name: CognitoAuthorizer

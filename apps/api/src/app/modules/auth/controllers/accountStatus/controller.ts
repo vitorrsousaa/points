@@ -1,10 +1,10 @@
-import { IController } from "@application/interfaces/controller";
-import { IRequest, IResponse } from "@application/interfaces/http";
+import type { IController } from "@application/interfaces/controller";
+import type { IRequest, IResponse } from "@application/interfaces/http";
 import { errorHandler } from "@application/utils/error-handler";
 import { missingFields } from "@application/utils/missing-fields";
 import {
 	AccountStatusInputServiceSchema,
-	IAccountStatusService,
+	type IAccountStatusService,
 } from "../../services/accountStatus";
 
 export class AccountStatusController implements IController {
