@@ -29,6 +29,7 @@ import {
 	TrashIcon,
 	RocketIcon,
 	EnvelopeClosedIcon,
+	StopwatchIcon,
 } from "@radix-ui/react-icons";
 
 export interface IconProps {
@@ -68,6 +69,7 @@ const icons = {
 	rocket: RocketIcon,
 	closedEnvelope: EnvelopeClosedIcon,
 	exclamationTriangle: ExclamationTriangleIcon,
+	stopwatch: StopwatchIcon,
 } as const;
 
 export function Icon(props: IconProps) {

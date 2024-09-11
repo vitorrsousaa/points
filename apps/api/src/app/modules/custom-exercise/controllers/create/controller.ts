@@ -1,23 +1,24 @@
 import type { IController } from "@application/interfaces/controller";
 import type { IRequest, IResponse } from "@application/interfaces/http";
 import { errorHandler } from "@application/utils/error-handler";
-import {
-	GetAllInputServiceSchema,
-	type IGetAllService,
-} from "../../services/getAll";
 import { missingFields } from "@application/utils/missing-fields";
+import {
+	CreateInputServiceSchema,
+	type ICreateService,
+} from "../../services/create";
 
-export class GetAllController implements IController {
-	constructor(private readonly getAllService: IGetAllService) {}
+export class CreateController implements IController {
+	constructor(private readonly createService: ICreateService) {}
 	async handle(request: IRequest): Promise<IResponse> {
 		try {
-			const [status, parsedBody] = missingFields(GetAllInputServiceSchema, {
+			const [status, parsedBody] = missingFields(CreateInputServiceSchema, {
+				...request.body,
 				coachId: request.userId,
 			});
 
 			if (!status) return parsedBody;
 
-			const service = await this.getAllService.execute(parsedBody);
+			const service = await this.createService.execute(parsedBody);
 
 			return {
 				statusCode: 200,

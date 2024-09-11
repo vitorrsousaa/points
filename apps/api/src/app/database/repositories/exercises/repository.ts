@@ -1,20 +1,17 @@
 import { randomUUID } from "node:crypto";
-import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import type { Exercise } from "@core/domain/exercise";
 import type { ExerciseDynamoDB, IExerciseRepository } from "./types";
 
 export class ExerciseRepository implements IExerciseRepository {
-	private TABLE_NAME = DATABASE_TABLE.TABLE_NAME;
 	private DEFAULT_EXERCISE_ID = "EXERCISE";
-	private DEFAULT_TRAINING_ID = "TRAINING";
 
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 
 	async create(exerciseInput: Omit<Exercise, "id">): Promise<Exercise> {
 		const exerciseId = randomUUID();
 
-		const { PK, SK } = this.getKeys({ exerciseId });
+		const { PK, SK } = this.getKeys(exerciseId);
 
 		const now = new Date().toISOString();
 
@@ -51,28 +48,11 @@ export class ExerciseRepository implements IExerciseRepository {
 			: [];
 	}
 
-	private getKeys({
-		exerciseId,
-		trainingId,
-	}: { exerciseId: string; trainingId?: string }): { PK: string; SK: string } {
+	private getKeys(exerciseId: string): { PK: string; SK: string } {
 		return {
-			PK: trainingId
-				? this.setTrainingId(trainingId)
-				: this.DEFAULT_EXERCISE_ID,
-			SK: this.setExerciseId(exerciseId),
+			PK: "EXERCISE",
+			SK: `EXERCISE|${exerciseId}`,
 		};
-	}
-
-	private setExerciseId(id: string): string {
-		return `${this.DEFAULT_EXERCISE_ID}|${id}`;
-	}
-
-	private setTrainingId(id: string): string {
-		return `${this.DEFAULT_TRAINING_ID}|${id}`;
-	}
-
-	private getExerciseId(SK: string): string {
-		return SK.split("|")[1];
 	}
 
 	private mapToExerciseDomain(exercise: ExerciseDynamoDB): Exercise {
@@ -82,7 +62,7 @@ export class ExerciseRepository implements IExerciseRepository {
 			primaryMuscle: exercise.primary_muscle,
 			secondaryMuscle: exercise.secondary_muscle,
 			target: exercise.target,
-			id: this.getExerciseId(exercise.SK),
+			id: exercise.id,
 		};
 	}
 }

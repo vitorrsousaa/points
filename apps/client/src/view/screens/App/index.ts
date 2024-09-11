@@ -8,3 +8,4 @@ export * from "./SettingsScreen/SettingsScreen";
 export * from "./TrainingScreen/TrainingScreen";
 export * from "./UpdateTrainingScreen";
 export * from "./UpdateAthleteScreen";
+export * from "./NewExerciseScreen";

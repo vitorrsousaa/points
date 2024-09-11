@@ -14,6 +14,7 @@ import {
 	UpdateAthleteScreen,
 	UpdateTrainingScreen,
 	VerificationCodeScreen,
+	NewExerciseScreen,
 } from "@/screens/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthLayout, DashboardLayout } from "../layouts";
@@ -50,6 +51,7 @@ export function RouterStack() {
 						/>
 						<Route path={ROUTES.SETTINGS} element={<SettingsScreen />} />
 						<Route path={ROUTES.EXERCISES} element={<ExercisesScreen />} />
+						<Route path={ROUTES.NEW_EXERCISE} element={<NewExerciseScreen />} />
 						<Route
 							path={ROUTES.ATHLETE_MORE_INFO}
 							element={<TrainingScreen />}

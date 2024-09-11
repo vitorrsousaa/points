@@ -1,14 +1,52 @@
 import { QUERY_KEYS } from "@/config/queryKeys";
+import type { CustomExercise } from "@/entitites/exercise";
 import { SentryHandler } from "@/libs/SentryHandler";
+import { customExerciseServices } from "@/services/custom-exercise";
 import { exerciseServices } from "@/services/exercise";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import type { WithStatus } from "@/utils/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export function useCreateExercise() {
+type CustomExercisesQueryData = WithStatus<CustomExercise>[];
+
+export function useCreateCustomExercise() {
 	const { sendEvent, sendException } = SentryHandler();
+	const queryClient = useQueryClient();
 
 	const { mutateAsync, isPending } = useMutation({
-		mutationFn: exerciseServices.create,
-		onSuccess(_, variables) {
+		mutationFn: customExerciseServices.create,
+		onMutate: (variables) => {
+			const tempId = Math.random().toString(36).substr(2, 9);
+
+			queryClient.setQueryData<CustomExercisesQueryData>(
+				QUERY_KEYS.CUSTOM_EXERCISES,
+				(oldData) =>
+					oldData?.concat({
+						id: tempId,
+						status: "pending",
+						...variables,
+						createdAt: new Date().toISOString(),
+						updatedAt: new Date().toISOString(),
+					}),
+			);
+
+			return { tempId };
+		},
+		onSuccess: async (data, variables, context) => {
+			await queryClient.cancelQueries({
+				queryKey: QUERY_KEYS.CUSTOM_EXERCISES,
+			});
+			await queryClient.invalidateQueries({
+				queryKey: QUERY_KEYS.EXERCISES,
+			});
+
+			queryClient.setQueryData<CustomExercisesQueryData>(
+				QUERY_KEYS.CUSTOM_EXERCISES,
+				(oldData) =>
+					oldData?.map((exercise) =>
+						exercise.id === context?.tempId ? data : exercise,
+					),
+			);
+
 			sendEvent({
 				message: "CreateExercise",
 				level: "log",
@@ -20,7 +58,21 @@ export function useCreateExercise() {
 				},
 			});
 		},
-		onError(error) {
+		onError: async (error, _, context) => {
+			await queryClient.cancelQueries({
+				queryKey: QUERY_KEYS.CUSTOM_EXERCISES,
+			});
+
+			queryClient.setQueryData<CustomExercisesQueryData>(
+				QUERY_KEYS.CUSTOM_EXERCISES,
+				(oldData) =>
+					oldData?.map((exercise) =>
+						exercise.id === context?.tempId
+							? { ...exercise, status: "error" }
+							: exercise,
+					),
+			);
+
 			sendException({
 				exceptionName: "create_exercise",
 				...error,
@@ -41,8 +93,25 @@ export function useGetAllExercises() {
 	});
 
 	return {
-		exercises: data,
+		exercises: data ?? [],
 		isLoadingExercises: isLoading,
 		isErrorExercises: isError,
+	};
+}
+
+export function useGetAllCustomExercises() {
+	const { data, isLoading, isError } = useQuery({
+		queryKey: QUERY_KEYS.CUSTOM_EXERCISES,
+		queryFn: async () => {
+			const exercises = await customExerciseServices.getAll();
+
+			return exercises as WithStatus<CustomExercise>[];
+		},
+	});
+
+	return {
+		customExercises: data ?? [],
+		isLoadingCustomExercises: isLoading,
+		isErrorCustomExercises: isError,
 	};
 }

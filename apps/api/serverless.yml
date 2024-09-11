@@ -349,3 +349,19 @@ functions:
           method: POST
           path: /question
           documentation: ${file(src/server/functions/question/create/handler.doc.yml):create}
+  getAllCustomExercises:
+    handler: src/server/functions/custom-exercise/getAll.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /custom-exercise
+          authorizer:
+            name: CognitoAuthorizer
+  createCustomExercise:
+    handler: src/server/functions/custom-exercise/create.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /custom-exercise
+          authorizer:
+            name: CognitoAuthorizer

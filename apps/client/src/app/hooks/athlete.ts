@@ -58,7 +58,7 @@ export function useCreateAthlete() {
 				},
 			});
 		},
-		onError: async (_error, _, context) => {
+		onError: async (error, _, context) => {
 			await queryClient.cancelQueries({ queryKey: QUERY_KEYS.ATHLETES });
 
 			queryClient.setQueryData<AthletesQueryData>(QUERY_KEYS.ATHLETES, (old) =>
@@ -71,7 +71,7 @@ export function useCreateAthlete() {
 
 			sendException({
 				exceptionName: "create_athlete",
-				..._error,
+				...error,
 			});
 		},
 	});
