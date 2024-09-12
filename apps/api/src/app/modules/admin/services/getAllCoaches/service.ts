@@ -8,7 +8,16 @@ import { getGrowth } from "../../utils/get-growth";
 
 export const GetAllCoachesInputServiceSchema = z.object({
 	userId: z.string().uuid(),
-	period: z.number().int().positive().default(1),
+	period: z
+		.string()
+		.transform((val) => {
+			const num = Number(val);
+			if (Number.isNaN(num) || !Number.isInteger(num) || num <= 0) {
+				throw new Error("Invalid number");
+			}
+			return num;
+		})
+		.default("1"),
 });
 
 export type TGetAllCoaches = z.infer<typeof GetAllCoachesInputServiceSchema>;
