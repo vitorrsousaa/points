@@ -30,7 +30,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 	const { data, isError, isFetching, isSuccess } = useQuery({
 		queryKey: ["users", "me"],
-		queryFn: async () => userService.profile(),
+		queryFn: async () => {
+			const user = await userService.profile();
+			const hasAdmin = user.role.includes("ADMIN");
+			if (hasAdmin) {
+				return user;
+			}
+
+			toast.error("Somente administradores.");
+
+			throw new Error("User is not an admin");
+		},
 		enabled: signedIn,
 		staleTime: Number.POSITIVE_INFINITY,
 	});

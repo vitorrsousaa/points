@@ -151,7 +151,11 @@ export function AccountDetailsStep() {
 						<FormItem>
 							<FormLabel>Senha</FormLabel>
 							<FormControl>
-								<PasswordInput placeholder="*******" {...field} />
+								<PasswordInput
+									placeholder="*******"
+									showValidation
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
