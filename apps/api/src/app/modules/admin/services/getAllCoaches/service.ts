@@ -6,32 +6,32 @@ import { userIsAdmin } from "../../utils/user-is-admin";
 import { UserNotAdmin } from "../../errors/user-not-admin";
 import { getGrowth } from "../../utils/get-growth";
 
-export const GetAllUsersInputServiceSchema = z.object({
+export const GetAllCoachesInputServiceSchema = z.object({
 	userId: z.string().uuid(),
 	period: z.number().int().positive().default(1),
 });
 
-export type TGetAllUsers = z.infer<typeof GetAllUsersInputServiceSchema>;
+export type TGetAllCoaches = z.infer<typeof GetAllCoachesInputServiceSchema>;
 
-export type IGetAllUsersInput = TGetAllUsers;
+export type IGetAllCoachesInput = TGetAllCoaches;
 
-export type IGetAllUsersOutput = {
+export type IGetAllCoachesOutput = {
 	length: number;
 	growth: string;
 };
 
-export type IGetAllUsersService = IService<
-	IGetAllUsersInput,
-	IGetAllUsersOutput
+export type IGetAllCoachesService = IService<
+	IGetAllCoachesInput,
+	IGetAllCoachesOutput
 >;
 
-export class GetAllUsersService implements IGetAllUsersService {
+export class GetAllCoachesService implements IGetAllCoachesService {
 	constructor(private readonly userRepository: IUserRepository) {}
 
 	async execute(
-		getAllUsersInput: IGetAllUsersInput,
-	): Promise<IGetAllUsersOutput> {
-		const user = await this.userRepository.getById(getAllUsersInput.userId);
+		getAllCoachesInput: IGetAllCoachesInput,
+	): Promise<IGetAllCoachesOutput> {
+		const user = await this.userRepository.getById(getAllCoachesInput.userId);
 
 		if (!user) {
 			throw new UserNotFound();
@@ -45,7 +45,9 @@ export class GetAllUsersService implements IGetAllUsersService {
 
 		const users = await this.userRepository.getAll();
 
-		const growth = getGrowth(users, getAllUsersInput.period);
+		const coaches = users.filter((user) => user.role.includes("COACH"));
+
+		const growth = getGrowth(coaches, getAllCoachesInput.period);
 
 		return growth;
 	}
