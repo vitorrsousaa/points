@@ -365,3 +365,19 @@ functions:
           path: /custom-exercise
           authorizer:
             name: CognitoAuthorizer
+  getGrowthCoachMetricByAdmin:
+    handler: src/server/functions/admin/growthCoach.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /admin/metrics/growth-coach
+          authorizer:
+            name: CognitoAuthorizer
+  getGrowthAthleteMetricByAdmin:
+    handler: src/server/functions/admin/growthAthlete.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /admin/metrics/growth-athlete
+          authorizer:
+            name: CognitoAuthorizer

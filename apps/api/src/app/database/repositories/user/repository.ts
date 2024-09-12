@@ -99,6 +99,21 @@ export class UserRepository implements IUserRepository {
 		return item ? this.mapToDomain(item) : undefined;
 	}
 
+	async getAll(): Promise<User[]> {
+		const { PK } = this.getKeys("fakeId");
+		const SK = "PROFILE|";
+
+		const users = await this.dbInstance.query<UserDynamoDB[]>({
+			KeyConditionExpression: "PK = :primaryKey and begins_with(SK, :sortKey)",
+			ExpressionAttributeValues: {
+				":sortKey": SK,
+				":primaryKey": PK,
+			},
+		});
+
+		return users ? users.map(this.mapToDomain) : [];
+	}
+
 	private mapToDomain(item: UserDynamoDB): User {
 		return {
 			email: item.email,

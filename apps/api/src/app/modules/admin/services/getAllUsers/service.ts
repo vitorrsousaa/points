@@ -4,10 +4,11 @@ import * as z from "zod";
 import { UserNotFound } from "../../errors/user-not-found";
 import { userIsAdmin } from "../../utils/user-is-admin";
 import { UserNotAdmin } from "../../errors/user-not-admin";
+import { getGrowth } from "../../utils/get-growth";
 
 export const GetAllUsersInputServiceSchema = z.object({
 	userId: z.string().uuid(),
-	period: z.number().int().positive(),
+	period: z.number().int().positive().default(1),
 });
 
 export type TGetAllUsers = z.infer<typeof GetAllUsersInputServiceSchema>;
@@ -15,8 +16,8 @@ export type TGetAllUsers = z.infer<typeof GetAllUsersInputServiceSchema>;
 export type IGetAllUsersInput = TGetAllUsers;
 
 export type IGetAllUsersOutput = {
-	current: number;
-	period: number;
+	length: number;
+	growth: string;
 };
 
 export type IGetAllUsersService = IService<
@@ -42,11 +43,10 @@ export class GetAllUsersService implements IGetAllUsersService {
 			throw new UserNotAdmin();
 		}
 
-		// buscar todos os usuários cadastrados
+		const users = await this.userRepository.getAll();
 
-		return {
-			current: 0,
-			period: 0,
-		};
+		const growth = getGrowth(users, getAllUsersInput.period);
+
+		return growth;
 	}
 }

@@ -24,4 +24,5 @@ export interface IUserRepository {
 	update(id: string, updateInput: Omit<User, "id">): Promise<User>;
 	getByEmail(email: string): Promise<User | undefined>;
 	getById(id: string): Promise<User | undefined>;
+	getAll(): Promise<User[]>;
 }

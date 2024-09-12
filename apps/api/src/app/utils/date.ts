@@ -1,4 +1,4 @@
-export function getDateInTheLastMonth(): Date {
+export function getDateInTheLastMonth(monthsAgo = 1): Date {
 	const LAST_MONTH_IN_THE_YEAR = 11;
 
 	const now = new Date();
@@ -7,7 +7,7 @@ export function getDateInTheLastMonth(): Date {
 	const currentYear = now.getFullYear();
 
 	const lastMonth =
-		currentMonth === 0 ? LAST_MONTH_IN_THE_YEAR : currentMonth - 1;
+		currentMonth === 0 ? LAST_MONTH_IN_THE_YEAR : currentMonth - monthsAgo;
 	const lastYear = currentMonth === 0 ? currentYear - 1 : currentYear;
 
 	const firstDayOfCurrentMonth = new Date(currentYear, currentMonth, 1);
