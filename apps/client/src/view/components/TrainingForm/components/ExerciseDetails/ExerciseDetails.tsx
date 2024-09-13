@@ -35,12 +35,12 @@ export function ExerciseDetail(props: ExerciseDetailProps) {
 
 	return (
 		<Collapsible
-			className="border rounded-lg p-4 shadow-md flex flex-col gap-4"
+			className="border rounded-lg p-2 sm:p-4 shadow-md flex flex-col gap-4"
 			defaultOpen
 		>
 			<div className="flex justify-between items-start">
 				<div className="flex flex-col w-full">
-					<span className="text-lg font-semibold">{name}</span>
+					<span className="text:sm sm:text-lg font-semibold">{name}</span>
 					{target && (
 						<small className="text-gray-500 mt-1">
 							<strong>Target</strong>: {target}
@@ -48,7 +48,7 @@ export function ExerciseDetail(props: ExerciseDetailProps) {
 					)}
 				</div>
 
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-1">
 					<CollapsibleTrigger>
 						<Button variant="ghost" size="icon">
 							<Icon name="double_arrow" className="h-6 w-6" />
@@ -134,7 +134,7 @@ export function ExerciseDetail(props: ExerciseDetailProps) {
 							<div className="uppercase flex grow-[2] justify-center font-semibold text-gray-700">
 								REPS
 							</div>
-							<div className="w-7 flex justify-center" />
+							{sets.length > 1 && <div className="w-7 flex justify-center" />}
 						</div>
 						{sets.map((set, setIndex) => (
 							<SetRow

@@ -147,7 +147,7 @@ export function TrainingForm(props: TrainingFormProps) {
 								/>
 							</div>
 
-							<div className="flex items-center gap-4 space-between">
+							<div className="flex flex-col md:flex-row items-center gap-4 space-between">
 								<FormField
 									name="category"
 									control={methods.control}
@@ -250,13 +250,13 @@ export function TrainingForm(props: TrainingFormProps) {
 					</Collapsible>
 				</div>
 
-				<div className="w-full h-[720px] flex gap-4">
+				<div className="w-full h-[720px] flex flex-col md:flex-row gap-4">
 					<ExerciseList onAddExercise={handleAddNewExercise} />
 
 					<Card className="w-full flex flex-col h-full">
 						<CardHeader className="space-y-2 min-h-[114px] p-6">
 							<CardTitle>Exercicios adicionados</CardTitle>
-							<CardDescription>
+							<CardDescription className="text-[12px] sm:text-sm">
 								Selecione os treinos na listagem à esquerda e acompanhe os
 								detalhes completos logo abaixo.
 							</CardDescription>

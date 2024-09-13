@@ -82,7 +82,7 @@ export function ExerciseList(props: ExerciseListProps) {
 	}
 
 	return (
-		<Card className="lg:min-w-[280px] w-[280px] h-full flex flex-col">
+		<Card className="lg:min-w-[280px] h-full flex flex-col md:w-[250px]">
 			<RenderIf
 				condition={isLoadingExercises}
 				render={<Skeleton className="h-full w-full" />}
