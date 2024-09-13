@@ -349,6 +349,12 @@ functions:
           method: POST
           path: /question
           documentation: ${file(src/server/functions/question/create/handler.doc.yml):create}
+  getAllQuestions:
+    handler: src/server/functions/question/getAll.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /question
   getAllCustomExercises:
     handler: src/server/functions/custom-exercise/getAll.handler
     events:
