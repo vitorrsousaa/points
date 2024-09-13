@@ -19,3 +19,5 @@ phases:
       - aws cloudfront create-invalidation --distribution-id ${CF_ID_CLIENT} --paths /index.html
       - aws s3 sync --delete ./apps/storefront/out s3://${DEPLOY_BUCKET_NEXT}
       - aws cloudfront create-invalidation --distribution-id ${CF_ID_NEXT} --paths /index.html
+      - aws s3 sync --delete ./apps/admin/dist s3://${DEPLOY_BUCKET_ADMIN}
+      - aws cloudfront create-invalidation --distribution-id ${CF_ID_ADMIN} --paths /index.html
