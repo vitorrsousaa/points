@@ -37,9 +37,12 @@ export function TableRowAthlete({ children, status }: TableRowProps) {
 	);
 }
 
-export function TableAvailableAthlete({ isActive }: { isActive: boolean }) {
+export function TableAvailableAthlete({
+	isActive,
+	className,
+}: { isActive: boolean; className?: string }) {
 	return (
-		<Badge variant={isActive ? "default" : "secondary"}>
+		<Badge variant={isActive ? "default" : "secondary"} className={className}>
 			{isActive ? "Ativo" : "Inativo"}
 		</Badge>
 	);
@@ -48,14 +51,16 @@ export function TableAvailableAthlete({ isActive }: { isActive: boolean }) {
 export function TableActions({
 	status,
 	athlete,
+	className,
 }: {
 	status?: "pending" | "error";
 	athlete: Athlete;
+	className?: string;
 }) {
 	const { navigate } = useNavigate();
 
 	return (
-		<TableCell className="hidden min-[540px]:flex text-center items-center h-20">
+		<TableCell className={cn("text-center items-center h-20", className)}>
 			<RenderIf
 				condition={status === "error"}
 				render={
