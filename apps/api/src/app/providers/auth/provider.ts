@@ -37,4 +37,8 @@ export class AuthProvider implements IAuthProvider {
 	async resendCode(email: string): Promise<void> {
 		return this.identityManagerProvider.resendConfirmationCode(email);
 	}
+
+	async refreshToken(refreshToken: string): Promise<{ accessToken: string }> {
+		return this.identityManagerProvider.refreshToken(refreshToken);
+	}
 }
