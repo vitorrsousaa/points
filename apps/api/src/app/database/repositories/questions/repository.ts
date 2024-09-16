@@ -40,8 +40,6 @@ export class QuestionRepository implements IQuestionRepository {
 			},
 		}));
 
-		console.log(putRequests);
-
 		const tableName = DATABASE_TABLE.TABLE_NAME;
 
 		await this.dbInstance.batchWrite({
