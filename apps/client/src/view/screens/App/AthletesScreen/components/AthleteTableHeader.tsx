@@ -38,7 +38,7 @@ export function AthleteTableHeader({ searchControl }: AthleteTableHeaderProps) {
 					control={searchControl}
 					render={({ field }) => (
 						<Input
-							className="h-9 w-50 lg:w-72 border bg-transparent"
+							className="h-9 w-40 sm:w-56 lg:w-72 border bg-transparent"
 							placeholder="Busque pelo nome..."
 							type="text"
 							{...field}

@@ -45,7 +45,7 @@ export function AthletesScreen() {
 			<RenderIf
 				condition={!isErrorAthletes}
 				render={
-					<div className="flex gap-4 mb-4">
+					<div className="flex flex-col sm:flex-row gap-4 mb-4">
 						<AthletesAnalytics
 							isLoading={isLoadingAthletes}
 							athletes={athletes}
@@ -91,9 +91,13 @@ export function AthletesScreen() {
 							<TableHeader>
 								<TableRow>
 									<TableHead>Nome</TableHead>
-									<TableHead>Categoria</TableHead>
-									<TableHead>Peso (kg)</TableHead>
-									<TableHead>Ações</TableHead>
+									<TableHead className="hidden lg:table-cell">
+										Categoria
+									</TableHead>
+									<TableHead className="hidden min-[430px]:table-cell sm:hidden md:table-cell">
+										Peso (kg)
+									</TableHead>
+									<TableHead className="text-center">Ações</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
@@ -105,24 +109,29 @@ export function AthletesScreen() {
 													{athlete.name}
 													<TableAvailableAthlete
 														isActive={Boolean(athlete.isActive)}
+														className="hidden"
 													/>
 												</span>
 
-												<span className="text-sm text-muted-foreground md:inline">
+												<span className="hidden sm:flex text-sm text-muted-foreground md:inline">
 													{athlete.email}
 												</span>
 											</div>
 										</TableCell>
 
-										<TableCell>
+										<TableCell className="hidden lg:table-cell">
 											<Badge variant="outline">Categoria</Badge>
 										</TableCell>
 
-										<TableCell className="hidden md:table-cell">
+										<TableCell className="hidden min-[430px]:table-cell sm:hidden md:table-cell">
 											{athlete.weight}
 										</TableCell>
 
-										<TableActions status={athlete.status} athlete={athlete} />
+										<TableActions
+											status={athlete.status}
+											athlete={athlete}
+											className=""
+										/>
 									</TableRowAthlete>
 								))}
 							</TableBody>
