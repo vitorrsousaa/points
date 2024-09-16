@@ -231,4 +231,41 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			throw new AppError("Internal Server Error", 500);
 		}
 	}
+
+	async refreshToken(refreshToken: string): Promise<{ accessToken: string }> {
+		try {
+			const command = new InitiateAuthCommand({
+				ClientId: this.COGNITO_POOL_CLIENT_ID,
+				AuthFlow: "REFRESH_TOKEN_AUTH",
+				AuthParameters: {
+					REFRESH_TOKEN: refreshToken,
+				},
+			});
+
+			const { AuthenticationResult } = await this.cognitoClient.send(command);
+
+			if (!AuthenticationResult) {
+				throw new AppError("Invalid Credentials", 401);
+			}
+
+			return {
+				accessToken: AuthenticationResult.AccessToken as string,
+			};
+		} catch (error) {
+			if (error instanceof UserNotFoundException) {
+				throw new AppError("Invalid Credentials", 401);
+			}
+			if (error instanceof NotAuthorizedException) {
+				throw new AppError("Invalid Credentials", 401);
+			}
+			if (error instanceof UserNotConfirmedException) {
+				throw new AppError(
+					"You need to confirm your account before sign in.",
+					401,
+				);
+			}
+
+			throw new AppError("Internal Server Error", 500);
+		}
+	}
 }

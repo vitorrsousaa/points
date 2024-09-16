@@ -180,6 +180,13 @@ functions:
           method: POST
           documentation: ${file(src/server/functions/auth/resendCode/handler.doc.yml):resendCode}
           path: /auth/resend-code/{email}
+  refreshToken:
+    handler: src/server/functions/auth/refresh-token.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/refresh-token
+          documentation: ${file(src/server/functions/auth/refresh-token/handler.doc.yml):refreshToken}
   profile:
     handler: src/server/functions/auth/profile.handler
     events:
