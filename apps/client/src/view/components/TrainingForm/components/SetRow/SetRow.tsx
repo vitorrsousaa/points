@@ -1,5 +1,6 @@
 import {
 	Button,
+	cn,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -23,16 +24,19 @@ export function SetRow(props: SetRowProps) {
 		props;
 	const { control, typeOfSet, updateType } = useSetRowHook(props);
 
+	const classToRemoveArrows =
+		"[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none sm:[&::-webkit-outer-spin-button]:appearance-auto [&::-webkit-inner-spin-button]:appearance-none sm:[&::-webkit-inner-spin-button]:appearance-auto";
+
 	return (
-		<div className="flex flex-row items-center h-12 gap-4 bg-muted-foreground/5 rounded-md">
-			<div className="uppercase justify-center flex w-12">
+		<div className="flex flex-row items-center h-12 gap-4 bg-muted-foreground/5 rounded-md p-1">
+			<div className="uppercase justify-center flex">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button aria-haspopup="true" size="icon" variant="secondary">
 							<span>{typeOfSet}</span>
 						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end" className="px-2 ">
+					<DropdownMenuContent align="end" className="px-2">
 						{typeOfSets.map((type) => (
 							<DropdownMenuItem
 								key={type.value}
@@ -59,7 +63,7 @@ export function SetRow(props: SetRowProps) {
 					render={({ field: { onChange, ...props } }) => (
 						<Input
 							type="number"
-							className="text-center"
+							className={cn(classToRemoveArrows, "text-center")}
 							onChange={(event) => onChange(Number(event.target.value))}
 							{...props}
 						/>
@@ -73,7 +77,7 @@ export function SetRow(props: SetRowProps) {
 					render={({ field: { onChange, ...props } }) => (
 						<Input
 							type="number"
-							className="text-center"
+							className={cn(classToRemoveArrows, "text-center")}
 							onChange={(event) => onChange(Number(event.target.value))}
 							{...props}
 						/>
@@ -87,15 +91,15 @@ export function SetRow(props: SetRowProps) {
 					render={({ field: { onChange, ...props } }) => (
 						<Input
 							type="number"
-							className="text-center"
+							className={cn(classToRemoveArrows, "text-center")}
 							onChange={(event) => onChange(Number(event.target.value))}
 							{...props}
 						/>
 					)}
 				/>
 			</div>
-			<div className="w-7 flex justify-center">
-				{shouldDisplayRemoveButton && (
+			{shouldDisplayRemoveButton && (
+				<div className="w-7 flex justify-center">
 					<Button
 						aria-haspopup="true"
 						size="icon"
@@ -105,8 +109,8 @@ export function SetRow(props: SetRowProps) {
 						<Icon name="close" className="h-3 w-3 rotate-90" />
 						<span className="sr-only">Remove sets</span>
 					</Button>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }
