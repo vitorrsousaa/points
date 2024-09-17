@@ -4,7 +4,7 @@ import { z } from "zod";
 import { UserNotFound } from "../../errors/user-not-found";
 
 export const AccountStatusInputServiceSchema = z.object({
-	userId: z.string().uuid(),
+	email: z.string().email(),
 });
 
 export type TAccountStatus = z.infer<typeof AccountStatusInputServiceSchema>;
@@ -26,9 +26,9 @@ export class AccountStatusService implements IAccountStatusService {
 	async execute(
 		accountStatusInput: IAccountStatusInput,
 	): Promise<IAccountStatusOutput> {
-		const { userId } = accountStatusInput;
+		const { email } = accountStatusInput;
 
-		const profile = await this.userRepository.getById(userId);
+		const profile = await this.userRepository.getByEmail(email);
 
 		if (!profile) {
 			throw new UserNotFound();

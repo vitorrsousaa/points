@@ -5,11 +5,11 @@ accountStatus:
   tags: 
     - Auth
   pathParams:
-    - name: userID
-      description: The userId to get account confirmation status
+    - name: email
+      description: The email to get account confirmation status
       schema:
         type: "string"
-        example: "123as45da6sda78s987as"
+        example: email@email.com
   methodResponses:
     - statusCode: 200
       responseBody:
