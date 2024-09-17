@@ -209,6 +209,7 @@ functions:
       - httpApi:
           method: POST
           path: /auth/reset-password
+          documentation: ${file(src/server/functions/auth/reset-password/handler.doc.yml):resetPassword}
   accountStatus:
     handler: src/server/functions/auth/accountStatus.handler
     events:

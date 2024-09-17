@@ -45,4 +45,16 @@ export class AuthProvider implements IAuthProvider {
 	async forgotPassword(email: string): Promise<void> {
 		return this.identityManagerProvider.forgotPassword(email);
 	}
+
+	async resetPassword({
+		email,
+		code,
+		newPassword,
+	}: { email: string; code: string; newPassword: string }): Promise<void> {
+		return this.identityManagerProvider.resetPassword({
+			email,
+			code,
+			newPassword,
+		});
+	}
 }
