@@ -196,6 +196,19 @@ functions:
           authorizer:
             name: CognitoAuthorizer
           documentation: ${file(src/server/functions/auth/profile/handler.doc.yml):profile}
+  forgotPassword:
+    handler: src/server/functions/auth/forgot-password.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/forgot-password
+          documentation: ${file(src/server/functions/auth/forgot-password/handler.doc.yml):forgotPassword}
+  resetPassword:
+    handler: src/server/functions/auth/reset-password.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /auth/reset-password
   accountStatus:
     handler: src/server/functions/auth/accountStatus.handler
     events:
