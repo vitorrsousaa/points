@@ -1,10 +1,29 @@
-refreshToken:
-  summary: /auth/refresh-token
-  description: Route to get refresh token
-  security:
-    - CognitoAuthorizer: []
+resetPassword:
+  summary: auth/reset-password
+  description: Route to reset password
+  security: []
   tags:
     - Auth
+  requestBody:
+    description: Sample request body
+    required: true
+  requestModels:
+    application/json: 
+      $schema: http://json-schema.org/draft-04/schema#
+      properties:
+        email:
+          type: string
+          example: user@email.com
+        code:
+          type: string
+          example: 845671
+        newPassword:
+          type: string
+          example: password
+      required:
+        - email
+        - code
+        - newPassword
   methodResponses:
     - statusCode: 200
       responseBody:
@@ -14,14 +33,9 @@ refreshToken:
           schema:
             $schema: http://json-schema.org/draft-04/schema#
             properties:
-              accessToken:
+              message:
                 type: string
-                example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-    - statusCode: 401
-      responseBody:
-        description: Not authorized
-      responseModels:
-        application/json: NotAuthorizedResponse
+                example: ok
     - statusCode: 422
       responseBody:
         description: An error message when send invalid data

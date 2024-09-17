@@ -785,7 +785,7 @@
         "type": "string",
         "example": "email@email.com"
       },
-      "c2f59de4-0053-4002-990b-0e9c111bb778": {
+      "88cc573e-bf32-4f17-bad1-aeb67dedd02a": {
         "properties": {
           "message": {
             "type": "string",
@@ -793,7 +793,7 @@
           }
         }
       },
-      "9f4b0276-82dd-4185-940b-b623c32a4786": {
+      "ae5a5940-1ba2-4a38-85f4-a870167fc57c": {
         "properties": {
           "message": {
             "type": "string",
@@ -802,26 +802,15 @@
           }
         }
       },
-      "385a20b2-04ae-4e36-95e3-068959790f05": {
+      "110b4722-316c-48ce-a417-5fa155a79d33": {
         "properties": {
-          "email": {
+          "accessToken": {
             "type": "string",
-            "example": "user@email.com"
-          }
-        },
-        "required": [
-          "email"
-        ]
-      },
-      "ffe729ce-0fe1-4334-8309-d612872f982d": {
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "ok"
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
           }
         }
       },
-      "a8595041-7d11-4a1d-b9ef-c822769e112a": {
+      "a1345021-f3e0-403f-a877-825138343b50": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -862,7 +851,7 @@
         },
         "additionalProperties": false
       },
-      "487bf548-9c18-4ebb-820c-7bb02430a28a": {
+      "777b78f8-ea0e-460b-b233-6d774dc1b2a0": {
         "properties": {
           "message": {
             "type": "string",
@@ -871,11 +860,59 @@
           }
         }
       },
+      "8a178b10-63b4-489a-8d32-47490ef5a2c3": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@email.com"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "90b532e6-0534-47c2-bb4e-826ae795dbb8": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "ok"
+          }
+        }
+      },
+      "461fe5a2-64be-4ec7-815c-fdf296301687": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@email.com"
+          },
+          "code": {
+            "type": "string",
+            "example": 845671
+          },
+          "newPassword": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "required": [
+          "email",
+          "code",
+          "newPassword"
+        ]
+      },
+      "f58d3abf-c45c-4c6c-9099-35714107d6c9": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "ok"
+          }
+        }
+      },
       "userID": {
         "type": "string",
         "example": "123as45da6sda78s987as"
       },
-      "a2b544f9-3511-46f7-aeed-d22b623aec37": {
+      "45737e8e-7710-41cd-9bf6-67a96ff71fb3": {
         "properties": {
           "accountConfirmation": {
             "type": "boolean",
@@ -883,7 +920,7 @@
           }
         }
       },
-      "69e07c14-69a1-41d3-b5e1-3dd687e41ed9": {
+      "e7e25f50-5591-4724-a01d-a0430d47b64a": {
         "properties": {
           "message": {
             "type": "string",
@@ -892,7 +929,7 @@
           }
         }
       },
-      "cbf51a13-362d-4554-a0d6-778454891607": {
+      "f29dcf9c-a980-41d1-a12d-1dc2c94f5e1f": {
         "properties": {
           "message": {
             "type": "string",
@@ -901,7 +938,7 @@
           }
         }
       },
-      "9fe3e228-e822-4783-9d8a-d4ebeb51d687": {
+      "b3e69dc1-d93a-4d64-b9c7-bb66a05bc8cb": {
         "properties": {
           "message": {
             "type": "string",
@@ -910,7 +947,7 @@
           }
         }
       },
-      "ea0400de-0591-4603-a7e7-2c03d7cb7d5a": {
+      "ff092014-fffe-4f07-bb1f-8a6d55ca373b": {
         "properties": {
           "email": {
             "type": "string",
@@ -926,14 +963,14 @@
           "code"
         ]
       },
-      "a0c9c3fe-0fbd-429a-a8c9-f378b94a1ab8": {
+      "2afc53d2-791e-4549-b8bd-17d5b1c2940f": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "471b2b9a-bc1a-455d-92d1-4b8351ff389a": {
+      "6d4fd4cb-b982-49ed-8ba6-c69a6cb5a36a": {
         "properties": {
           "message": {
             "type": "string",
@@ -942,7 +979,7 @@
           }
         }
       },
-      "24a5334b-9395-462b-a2a9-63d6880121d4": {
+      "f4fe6068-4ec4-46d5-8a5d-bbd04ea12d11": {
         "properties": {
           "message": {
             "type": "string",
@@ -951,7 +988,7 @@
           }
         }
       },
-      "0f949af7-a914-4c63-a7d6-688488cb70e0": {
+      "86c345ce-ada2-4ad5-9b10-f538ec5ce6e4": {
         "properties": {
           "message": {
             "type": "string",
@@ -960,7 +997,7 @@
           }
         }
       },
-      "99a39c5d-7a60-4a03-91bb-9ce2e338c64a": {
+      "bd92a6ac-f727-4e1d-8050-9c9a7b0bee43": {
         "properties": {
           "message": {
             "type": "string",
@@ -969,7 +1006,7 @@
           }
         }
       },
-      "62f5b75b-d773-47d2-81a4-056e7deb1f70": {
+      "0812abdc-178f-4eba-b67a-59b3a33fd008": {
         "properties": {
           "email": {
             "type": "string",
@@ -985,7 +1022,7 @@
           "password"
         ]
       },
-      "6c0f7b56-7ac1-45b1-a2f5-e52c0a7c41ef": {
+      "d4b799e3-55ba-4130-a9da-366d044967bf": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -993,7 +1030,7 @@
           }
         }
       },
-      "da69030c-adc4-450e-a749-1cf5edfcd7e6": {
+      "d936f0d1-e315-40d6-bbe1-e128a2269b74": {
         "properties": {
           "age": {
             "type": "number",
@@ -1019,7 +1056,7 @@
           "workoutCount"
         ]
       },
-      "db036e22-6bb4-432d-9261-6d7a5930fb50": {
+      "57651e74-6687-4b1b-bd3e-4bda7dcd5066": {
         "properties": {
           "message": {
             "type": "string",
@@ -1032,7 +1069,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "639c91b4-b5ec-4467-a52e-eda834a34306": {
+      "68970115-76cc-4cf8-9921-e7a7a8006660": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -1061,11 +1098,11 @@
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-6743afb6-bcf9-45df-aaa3-3667b56ad41f": {
+      "athleteId-d7113735-2556-4f0f-82cb-7ce08187b66f": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "b42c5b59-587e-4d06-9005-7dfc80f4d9dc": {
+      "946c37e7-b22f-478c-92a4-b85b5f1ef54c": {
         "properties": {
           "message": {
             "type": "string",
@@ -1074,7 +1111,7 @@
           }
         }
       },
-      "7e87d11a-f035-4978-8618-af4609baa3d3": {
+      "b2692cdb-4a5f-4302-98c5-b28ca4d08c5b": {
         "properties": {
           "message": {
             "type": "string",
@@ -1083,7 +1120,7 @@
           }
         }
       },
-      "e91908f3-0bad-4b6a-bd8f-1bf98ffc4378": {
+      "8203b3c6-1757-4aa9-8370-76c6e994b854": {
         "properties": {
           "message": {
             "type": "string",
@@ -1091,14 +1128,14 @@
           }
         }
       },
-      "8ccd4253-1bc6-45d5-9d43-10131c8c3bef": {
+      "479c5261-22bd-43a8-bbd6-17452f452a65": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "0485781d-c573-4186-969d-c12a2f6e0e8e": {
+      "890ac132-e81c-4014-98f3-1c9ce08044f0": {
         "properties": {
           "userId": {
             "type": "string",
@@ -1106,7 +1143,7 @@
           }
         }
       },
-      "3277e5b9-ad17-4523-a6af-6b41946514ed": {
+      "88209ecc-c4c7-4483-bc18-bcdfd7e0dfe6": {
         "properties": {
           "email": {
             "type": "string",
@@ -1117,7 +1154,7 @@
           "email"
         ]
       },
-      "d7faa302-a8be-48db-9892-41089cdcf260": {
+      "2f7f3819-d4ea-42da-84e1-bc016c0492a4": {
         "properties": {
           "message": {
             "type": "string",
@@ -1125,7 +1162,7 @@
           }
         }
       },
-      "e572cb0e-c23d-45a1-b432-6f5af505bce8": {
+      "86b5fed8-6ab3-471c-b433-2f8979eda5d8": {
         "properties": {
           "message": {
             "type": "string",
@@ -1134,7 +1171,7 @@
           }
         }
       },
-      "bc2c85f9-8c92-40e2-ab1c-70a0d1aab777": {
+      "8ccf9688-ff69-4807-9d3b-6bcaa08f87b3": {
         "properties": {
           "growth": {
             "type": "number",
@@ -1142,7 +1179,7 @@
           }
         }
       },
-      "516e0c9a-7b5e-44ba-967f-dad85bcf3c83": {
+      "e3924bf0-043f-49d2-a4b4-9f3d723d2ee6": {
         "properties": {
           "message": {
             "type": "string",
@@ -1151,7 +1188,7 @@
           }
         }
       },
-      "49d7da79-2a7b-4743-b519-ea7ed18498af": {
+      "c1347330-4758-4000-8995-435ca7f288fc": {
         "properties": {
           "userId": {
             "type": "string",
@@ -1184,7 +1221,7 @@
           "questions"
         ]
       },
-      "662e33f0-0812-430e-b0d4-05af247aefeb": {
+      "d37a5ea1-1969-4c21-9235-141041023383": {
         "type": "array",
         "items": {
           "type": "object",
@@ -1265,7 +1302,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c2f59de4-0053-4002-990b-0e9c111bb778"
+                  "$ref": "#/components/schemas/88cc573e-bf32-4f17-bad1-aeb67dedd02a"
                 }
               }
             },
@@ -1276,7 +1313,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/9f4b0276-82dd-4185-940b-b623c32a4786"
+                  "$ref": "#/components/schemas/ae5a5940-1ba2-4a38-85f4-a870167fc57c"
                 }
               }
             },
@@ -1309,8 +1346,8 @@
     },
     "/auth/refresh-token": {
       "post": {
-        "summary": "Sample Lambda",
-        "description": "Sample Lambda",
+        "summary": "/auth/refresh-token",
+        "description": "Route to get refresh token",
         "operationId": "refreshToken",
         "parameters": [],
         "tags": [
@@ -1321,24 +1358,13 @@
             "CognitoAuthorizer": []
           }
         ],
-        "requestBody": {
-          "description": "Sample request body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/385a20b2-04ae-4e36-95e3-068959790f05"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Return default response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ffe729ce-0fe1-4334-8309-d612872f982d"
+                  "$ref": "#/components/schemas/110b4722-316c-48ce-a417-5fa155a79d33"
                 }
               }
             },
@@ -1395,7 +1421,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a8595041-7d11-4a1d-b9ef-c822769e112a"
+                  "$ref": "#/components/schemas/a1345021-f3e0-403f-a877-825138343b50"
                 }
               }
             },
@@ -1417,7 +1443,123 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/487bf548-9c18-4ebb-820c-7bb02430a28a"
+                  "$ref": "#/components/schemas/777b78f8-ea0e-460b-b233-6d774dc1b2a0"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "summary": "/auth/forgot-password",
+        "description": "Route to get code to reset password",
+        "operationId": "forgotPassword",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/8a178b10-63b4-489a-8d32-47490ef5a2c3"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/90b532e6-0534-47c2-bb4e-826ae795dbb8"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "An unknown error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "summary": "auth/reset-password",
+        "description": "Route to reset password",
+        "operationId": "resetPassword",
+        "parameters": [],
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "description": "Sample request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/461fe5a2-64be-4ec7-815c-fdf296301687"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/f58d3abf-c45c-4c6c-9099-35714107d6c9"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "422": {
+            "description": "An error message when send invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
                 }
               }
             },
@@ -1463,7 +1605,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a2b544f9-3511-46f7-aeed-d22b623aec37"
+                  "$ref": "#/components/schemas/45737e8e-7710-41cd-9bf6-67a96ff71fb3"
                 }
               }
             },
@@ -1474,7 +1616,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/69e07c14-69a1-41d3-b5e1-3dd687e41ed9"
+                  "$ref": "#/components/schemas/e7e25f50-5591-4724-a01d-a0430d47b64a"
                 }
               }
             },
@@ -1485,7 +1627,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/cbf51a13-362d-4554-a0d6-778454891607"
+                  "$ref": "#/components/schemas/f29dcf9c-a980-41d1-a12d-1dc2c94f5e1f"
                 }
               }
             },
@@ -1496,7 +1638,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/9fe3e228-e822-4783-9d8a-d4ebeb51d687"
+                  "$ref": "#/components/schemas/b3e69dc1-d93a-4d64-b9c7-bb66a05bc8cb"
                 }
               }
             },
@@ -1543,7 +1685,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ea0400de-0591-4603-a7e7-2c03d7cb7d5a"
+                "$ref": "#/components/schemas/ff092014-fffe-4f07-bb1f-8a6d55ca373b"
               }
             }
           }
@@ -1554,7 +1696,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a0c9c3fe-0fbd-429a-a8c9-f378b94a1ab8"
+                  "$ref": "#/components/schemas/2afc53d2-791e-4549-b8bd-17d5b1c2940f"
                 }
               }
             },
@@ -1565,7 +1707,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/471b2b9a-bc1a-455d-92d1-4b8351ff389a"
+                  "$ref": "#/components/schemas/6d4fd4cb-b982-49ed-8ba6-c69a6cb5a36a"
                 }
               }
             },
@@ -1576,7 +1718,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/24a5334b-9395-462b-a2a9-63d6880121d4"
+                  "$ref": "#/components/schemas/f4fe6068-4ec4-46d5-8a5d-bbd04ea12d11"
                 }
               }
             },
@@ -1587,7 +1729,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0f949af7-a914-4c63-a7d6-688488cb70e0"
+                  "$ref": "#/components/schemas/86c345ce-ada2-4ad5-9b10-f538ec5ce6e4"
                 }
               }
             },
@@ -1598,7 +1740,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/99a39c5d-7a60-4a03-91bb-9ce2e338c64a"
+                  "$ref": "#/components/schemas/bd92a6ac-f727-4e1d-8050-9c9a7b0bee43"
                 }
               }
             },
@@ -1645,7 +1787,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/62f5b75b-d773-47d2-81a4-056e7deb1f70"
+                "$ref": "#/components/schemas/0812abdc-178f-4eba-b67a-59b3a33fd008"
               }
             }
           }
@@ -1656,7 +1798,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/6c0f7b56-7ac1-45b1-a2f5-e52c0a7c41ef"
+                  "$ref": "#/components/schemas/d4b799e3-55ba-4130-a9da-366d044967bf"
                 }
               }
             },
@@ -1784,7 +1926,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/da69030c-adc4-450e-a749-1cf5edfcd7e6"
+                "$ref": "#/components/schemas/d936f0d1-e315-40d6-bbe1-e128a2269b74"
               }
             }
           }
@@ -1817,7 +1959,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/db036e22-6bb4-432d-9261-6d7a5930fb50"
+                  "$ref": "#/components/schemas/57651e74-6687-4b1b-bd3e-4bda7dcd5066"
                 }
               }
             },
@@ -2062,7 +2204,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/639c91b4-b5ec-4467-a52e-eda834a34306"
+                "$ref": "#/components/schemas/68970115-76cc-4cf8-9921-e7a7a8006660"
               }
             }
           }
@@ -2134,7 +2276,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-6743afb6-bcf9-45df-aaa3-3667b56ad41f"
+              "$ref": "#/components/schemas/athleteId-d7113735-2556-4f0f-82cb-7ce08187b66f"
             }
           }
         ],
@@ -2246,7 +2388,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b42c5b59-587e-4d06-9005-7dfc80f4d9dc"
+                  "$ref": "#/components/schemas/946c37e7-b22f-478c-92a4-b85b5f1ef54c"
                 }
               }
             },
@@ -2257,7 +2399,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/7e87d11a-f035-4978-8618-af4609baa3d3"
+                  "$ref": "#/components/schemas/b2692cdb-4a5f-4302-98c5-b28ca4d08c5b"
                 }
               }
             },
@@ -2422,7 +2564,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e91908f3-0bad-4b6a-bd8f-1bf98ffc4378"
+                  "$ref": "#/components/schemas/8203b3c6-1757-4aa9-8370-76c6e994b854"
                 }
               }
             },
@@ -2528,7 +2670,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0485781d-c573-4186-969d-c12a2f6e0e8e"
+                  "$ref": "#/components/schemas/890ac132-e81c-4014-98f3-1c9ce08044f0"
                 }
               }
             },
@@ -2600,7 +2742,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/3277e5b9-ad17-4523-a6af-6b41946514ed"
+                "$ref": "#/components/schemas/88209ecc-c4c7-4483-bc18-bcdfd7e0dfe6"
               }
             }
           }
@@ -2611,7 +2753,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d7faa302-a8be-48db-9892-41089cdcf260"
+                  "$ref": "#/components/schemas/2f7f3819-d4ea-42da-84e1-bc016c0492a4"
                 }
               }
             },
@@ -2633,7 +2775,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e572cb0e-c23d-45a1-b432-6f5af505bce8"
+                  "$ref": "#/components/schemas/86b5fed8-6ab3-471c-b433-2f8979eda5d8"
                 }
               }
             },
@@ -2684,7 +2826,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/bc2c85f9-8c92-40e2-ab1c-70a0d1aab777"
+                  "$ref": "#/components/schemas/8ccf9688-ff69-4807-9d3b-6bcaa08f87b3"
                 }
               }
             },
@@ -2706,7 +2848,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/516e0c9a-7b5e-44ba-967f-dad85bcf3c83"
+                  "$ref": "#/components/schemas/e3924bf0-043f-49d2-a4b4-9f3d723d2ee6"
                 }
               }
             },
@@ -2742,7 +2884,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/49d7da79-2a7b-4743-b519-ea7ed18498af"
+                "$ref": "#/components/schemas/c1347330-4758-4000-8995-435ca7f288fc"
               }
             }
           }
@@ -2753,7 +2895,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/662e33f0-0812-430e-b0d4-05af247aefeb"
+                  "$ref": "#/components/schemas/d37a5ea1-1969-4c21-9235-141041023383"
                 }
               }
             },
