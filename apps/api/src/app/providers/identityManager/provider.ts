@@ -42,7 +42,7 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			await this.cognitoClient.send(command);
 		} catch (error) {
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("User not found", 404);
+				throw new AppError("User not found", 404, "USER_NOT_FOUND");
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -76,11 +76,11 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			};
 		} catch (error) {
 			if (error instanceof UsernameExistsException) {
-				throw new AppError("Username already exists", 409);
+				throw new AppError("Username already exists", 409, "USERNAME_EXISTS");
 			}
 
 			if (error instanceof InvalidPasswordException) {
-				throw new AppError("Invalid Password", 400);
+				throw new AppError("Invalid Password", 400, "INVALID_CREDENTIALS");
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -98,14 +98,14 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			await this.cognitoClient.send(command);
 		} catch (error) {
 			if (error instanceof ExpiredCodeException) {
-				throw new AppError("Expired Code", 400);
+				throw new AppError("Expired Code", 400, "EXPIRED_CODE");
 			}
 			if (error instanceof NotAuthorizedException) {
-				throw new AppError("Not Authorized", 401);
+				throw new AppError("Not Authorized", 401, "INVALID_CREDENTIALS");
 			}
 
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("User not found", 404);
+				throw new AppError("User not found", 404, "USER_NOT_FOUND");
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -129,7 +129,7 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			const { AuthenticationResult } = await this.cognitoClient.send(command);
 
 			if (!AuthenticationResult) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "INVALID_CREDENTIALS");
 			}
 
 			return {
@@ -138,15 +138,16 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			};
 		} catch (error) {
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "INVALID_CREDENTIALS");
 			}
 			if (error instanceof NotAuthorizedException) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "INVALID_CREDENTIALS");
 			}
 			if (error instanceof UserNotConfirmedException) {
 				throw new AppError(
 					"You need to confirm your account before sign in.",
 					401,
+					"USER_NOT_CONFIRMED",
 				);
 			}
 
@@ -178,7 +179,7 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			}, {} as TUserProfile);
 
 			if (!profile) {
-				throw new AppError("User not found", 404);
+				throw new AppError("User not found", 404, "USER_NOT_FOUND");
 			}
 
 			return profile;
@@ -197,7 +198,7 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			await this.cognitoClient.send(command);
 		} catch (error) {
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("User not found", 404);
+				throw new AppError("User not found", 404, "USER_NOT_FOUND");
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -219,13 +220,13 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 		} catch (error) {
 			console.log(error);
 			if (error instanceof ExpiredCodeException) {
-				throw new AppError("Expired code", 400);
+				throw new AppError("Expired code", 400, "EXPIRED_CODE");
 			}
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("User not found", 401);
+				throw new AppError("User not found", 401, "USER_NOT_FOUND");
 			}
 			if (error instanceof UserNotConfirmedException) {
-				throw new AppError("User not confirmed", 401);
+				throw new AppError("User not confirmed", 401, "USER_NOT_CONFIRMED");
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -245,7 +246,7 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			const { AuthenticationResult } = await this.cognitoClient.send(command);
 
 			if (!AuthenticationResult) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "INVALID_CREDENTIALS");
 			}
 
 			return {
@@ -253,15 +254,16 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			};
 		} catch (error) {
 			if (error instanceof UserNotFoundException) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "USER_NOT_FOUND");
 			}
 			if (error instanceof NotAuthorizedException) {
-				throw new AppError("Invalid Credentials", 401);
+				throw new AppError("Invalid Credentials", 401, "INVALID_CREDENTIALS");
 			}
 			if (error instanceof UserNotConfirmedException) {
 				throw new AppError(
 					"You need to confirm your account before sign in.",
 					401,
+					"USER_NOT_CONFIRMED",
 				);
 			}
 
