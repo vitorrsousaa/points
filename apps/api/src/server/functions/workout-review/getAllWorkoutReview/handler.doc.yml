@@ -1,34 +1,41 @@
 getAllWorkoutReview:
-  summary: Sample Lambda
-  description: Sample Lambda
+  summary: /workout-review
+  description: Route to get all workout review data. It's necessary to set coachId or athleteId to filter the data.
   security:
     - CognitoAuthorizer: []
   tags:
-    - Sample
-  requestBody:
-    description: Sample request body
-    required: true
-  requestModels:
-    application/json: 
-      $schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-      required:
-        - email
+    - Workout Review
+  queryParams:
+    - name: "coachId"
+      description: "The coachId to filter coach"
+      required: true
+      schema:
+        type: "string"
+        example: "4df43fc4-fbf5-4286-9b51-edf852db180d"
+    - name: "athleteId"
+      description: "The athlete who owns the workout"
+      required: true
+      schema:
+        type: "string"
+        example: "4df43fc4-fbf5-4286-9b51-edf852db180d"
+    - name: "reviewed"
+      description: "The queryParams define if the workout was reviewed or not. If true, the workout was reviewed. If false, the workout was not reviewed."
+      required: true
+      schema:
+        type: "boolean"
+        example: true
+    - name: "limit"
+      description: "The limit of items to return. Default value is 5."
+      required: true
+      schema:
+        type: "boolean"
+        example: 10
   methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
+        application/json: WorkoutReviewResponse
     - statusCode: 401
       responseBody:
         description: Not authorized

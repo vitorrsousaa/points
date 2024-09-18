@@ -11,7 +11,7 @@ export class GetAllWorkoutReviewController implements IController {
 	constructor(private readonly service: IGetAllWorkoutReviewService) {}
 	async handle(request: IRequest): Promise<IResponse> {
 		try {
-			const { athleteId, coachId, reviewed } = request.queryParams;
+			const { athleteId, coachId, reviewed, limit } = request.queryParams;
 
 			const [status, parsedBody] = missingFields(
 				GetAllWorkoutReviewInputServiceSchema,
@@ -19,6 +19,7 @@ export class GetAllWorkoutReviewController implements IController {
 					athleteId,
 					coachId,
 					reviewed,
+					limit,
 				},
 			);
 

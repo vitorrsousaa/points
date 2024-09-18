@@ -67,6 +67,22 @@ documentation:
             type: string
             description: Not Authorized
             example: Not Authorized
+    - name: WorkoutReviewModel
+      description: Workout review model
+      contentType: application/json
+      schema: ${file(docs/models/workout-review/workout.json)}
+    - name: WorkoutReviewInputModel
+      description: Workout review model
+      contentType: application/json
+      schema: ${file(docs/models/workout-review/create.json)}
+    - name: WorkoutReviewResponse
+      description: Workout Review Response
+      contentType: application/json
+      content:
+        application/json:
+          schema:
+            type: array
+            items: ${file(docs/models/workout-review/workout.json)}
     - name: SettingsModel
       description: Settings response model
       contentType: application/json
