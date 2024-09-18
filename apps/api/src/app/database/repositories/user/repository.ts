@@ -85,7 +85,7 @@ export class UserRepository implements IUserRepository {
 
 			return this.mapToDomain(user);
 		} catch {
-			throw new AppError("User not found", 404);
+			throw new AppError("User not found", 404, "USER_NOT_FOUND");
 		}
 	}
 
