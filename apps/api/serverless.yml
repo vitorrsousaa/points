@@ -352,6 +352,7 @@ functions:
       - httpApi:
           method: GET
           path: /workout-review
+          documentation: ${file(src/server/functions/workout-review/getAllWorkoutReview/handler.doc.yml):getAllWorkoutReview}
           authorizer:
             name: CognitoAuthorizer
   getAthleteGrowthByCoach:

@@ -9,6 +9,7 @@ export const GetAllWorkoutReviewInputServiceSchema = z
 		coachId: z.string().uuid().optional(),
 		athleteId: z.string().uuid().optional(),
 		reviewed: z.boolean().optional(),
+		limit: z.number().int().optional().default(5),
 	})
 	.refine((data) => data.coachId || data.athleteId, {
 		message: "You must provide a coachId or athleteId",
@@ -35,13 +36,14 @@ export class GetAllWorkoutReviewService implements IGetAllWorkoutReviewService {
 	async execute(
 		getAllWorkoutReviewInput: IGetAllWorkoutReviewInput,
 	): Promise<IGetAllWorkoutReviewOutput> {
-		const { coachId, athleteId, reviewed } = getAllWorkoutReviewInput;
+		const { coachId, athleteId, reviewed, limit } = getAllWorkoutReviewInput;
 
 		if (!coachId && !athleteId) throw new ParameterIsRequired();
 
 		if (athleteId)
 			return this.workoutReviewRepository.getAllWorkoutReviewByAthleteId(
 				athleteId,
+				limit,
 				reviewed,
 			);
 

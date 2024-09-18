@@ -15,26 +15,13 @@ createWorkoutReview:
     description: Sample request body
     required: true
   requestModels:
-    application/json: 
-      $schema: http://json-schema.org/draft-04/schema#
-      properties:
-        email:
-          type: string
-          example: user@email.com
-      required:
-        - email
+    application/json: WorkoutReviewInputModel
   methodResponses:
     - statusCode: 200
       responseBody:
         description: Return default response
       responseModels:
-        application/json: 
-          schema:
-            $schema: http://json-schema.org/draft-04/schema#
-            properties:
-              message:
-                type: string
-                example: ok
+        application/json: WorkoutReviewModel
     - statusCode: 401
       responseBody:
         description: Not authorized

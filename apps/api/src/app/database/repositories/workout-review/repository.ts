@@ -11,6 +11,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}
 	async getAllWorkoutReviewByAthleteId(
 		athleteId: string,
+		limit: number,
 		status?: boolean,
 	): Promise<WorkoutReview[]> {
 		const hasSK = Boolean(status);
@@ -25,6 +26,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 				":PK": PK,
 				":SK": SK,
 			},
+			Limit: limit,
 		});
 
 		return workouts ? workouts.map(this.mapToDomain) : [];

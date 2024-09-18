@@ -1,0 +1,279 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Workout Review Schema",
+	"description": "Schema for input data when creating a exercise.",
+	"type": "object",
+	"required": [
+		"notes",
+		"coachId",
+		"athleteId",
+		"workoutId",
+		"startTime",
+		"endTime",
+		"reviewed",
+		"reviewedAt",
+		"plannedExercises",
+		"realizedExercises",
+		"plannedVolume",
+		"realizedVolume"
+	],
+	"properties": {
+		"notes": {
+			"type": "string",
+			"example": "This is a note"
+		},
+		"coachId": {
+			"type": "string",
+			"example": "5e8e1b2f4b1c11e9a7e1b5d5"
+		},
+		"athleteId": {
+			"type": "string",
+			"example": "5e8e1b2f4b1c11e9a7e1b5d5"
+		},
+		"workoutId": {
+			"type": "string",
+			"example": "5e8e1b2f4b1c11e9a7e1b5d5"
+		},
+		"startTime": {
+			"type": "number",
+			"example": 1586323200000
+		},
+		"endTime": {
+			"type": "number",
+			"example": 1586323200000
+		},
+		"reviewed": {
+			"type": "boolean",
+			"example": true
+		},
+		"reviewedAt": {
+			"type": "string",
+			"example": "2020-04-08T00:00:00.000Z"
+		},
+		"plannedExercises": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"exerciseId": {
+						"type": "string",
+						"example": "5e8e1b2f4b1c11e9a7e1b5d5"
+					},
+					"notes": {
+						"type": "string",
+						"example": "This is a note"
+					},
+					"restTime": {
+						"type": "string",
+						"example": "1:60"
+					},
+					"sets": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"reps": {
+									"type": "number",
+									"minimum": 0,
+									"example": 10
+								},
+								"weight": {
+									"type": "number",
+									"example": 100
+								},
+								"rpe": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 10,
+									"example": 8
+								},
+								"type": {
+									"type": "string",
+									"enum": [
+										"T",
+										"W"
+									],
+									"example": "T"
+								}
+							},
+							"required": [
+								"reps",
+								"weight",
+								"rpe",
+								"type"
+							]
+						}
+					}
+				},
+				"required": [
+					"exerciseId",
+					"notes",
+					"restTime"
+				]
+			}
+		},
+		"realizedExercises": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"exerciseId": {
+						"type": "string",
+						"example": "5e8e1b2f4b1c11e9a7e1b5d5"
+					},
+					"notes": {
+						"type": "string",
+						"example": "This is a note"
+					},
+					"restTime": {
+						"type": "string",
+						"example": "1:60"
+					},
+					"sets": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"reps": {
+									"type": "number",
+									"minimum": 0,
+									"example": 10
+								},
+								"weight": {
+									"type": "number",
+									"example": 100
+								},
+								"rpe": {
+									"type": "number",
+									"minimum": 0,
+									"maximum": 10,
+									"example": 8
+								},
+								"type": {
+									"type": "string",
+									"enum": [
+										"T",
+										"W"
+									],
+									"example": "T"
+								}
+							},
+							"required": [
+								"reps",
+								"weight",
+								"rpe",
+								"type"
+							]
+						}
+					}
+				},
+				"required": [
+					"exerciseId",
+					"notes",
+					"restTime"
+				]
+			}
+		},
+		"plannedVolume": {
+			"type": "object",
+			"properties": {
+				"S": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				},
+				"B": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				},
+				"D": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				}
+			}
+		},
+		"realizedVolume": {
+			"type": "object",
+			"properties": {
+				"S": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				},
+				"B": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				},
+				"D": {
+					"type": "object",
+					"properties": {
+						"sets": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						},
+						"load": {
+							"type": "number",
+							"minimum": 0,
+							"example": 10
+						}
+					}
+				}
+			}
+		}
+	},
+	"additionalProperties": false
+}

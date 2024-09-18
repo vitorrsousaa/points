@@ -38,6 +38,7 @@ export type WorkoutReviewDynamoDB = Prettify<
 export interface IWorkoutReviewRepository {
 	getAllWorkoutReviewByAthleteId(
 		athleteId: string,
+		limit: number,
 		status?: boolean,
 	): Promise<WorkoutReview[]>;
 	getAllPendingWorkoutReviewByWorkoutIdAndAthleteId(

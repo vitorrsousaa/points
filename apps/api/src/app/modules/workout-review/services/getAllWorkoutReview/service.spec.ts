@@ -1,15 +1,17 @@
+import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import { type Mocked, vi } from "vitest";
 import {
 	type IGetAllWorkoutReviewInput,
 	type IGetAllWorkoutReviewService,
 	GetAllWorkoutReviewService,
 } from "./service";
-import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 
 describe("Service:GetAllWorkoutReview", () => {
 	let service: IGetAllWorkoutReviewService;
 	let mockedWorkoutReviewRepository: Mocked<IWorkoutReviewRepository>;
-	const inputData: IGetAllWorkoutReviewInput = {};
+	const inputData: IGetAllWorkoutReviewInput = {
+		limit: 10,
+	};
 
 	beforeEach(() => {
 		mockedWorkoutReviewRepository = {
@@ -54,6 +56,6 @@ describe("Service:GetAllWorkoutReview", () => {
 		// Assert
 		expect(
 			mockedWorkoutReviewRepository.getAllWorkoutReviewByAthleteId,
-		).toHaveBeenCalledWith("123", true);
+		).toHaveBeenCalledWith("123", inputData.limit, true);
 	});
 });
