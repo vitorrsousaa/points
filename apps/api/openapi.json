@@ -1561,7 +1561,7 @@
         "type": "string",
         "example": "email@email.com"
       },
-      "ee7dd786-e43e-451a-b7cd-1258ed434b56": {
+      "00600067-177f-497f-9d07-dca564b3c91b": {
         "properties": {
           "message": {
             "type": "string",
@@ -1569,7 +1569,7 @@
           }
         }
       },
-      "d754714b-d017-46c0-b319-32a8a1048280": {
+      "21bb8eaa-6f38-46d0-8bfc-fa961e3438b7": {
         "properties": {
           "message": {
             "type": "string",
@@ -1578,7 +1578,7 @@
           }
         }
       },
-      "99559ad2-8696-4421-bc46-82161c3ebbd2": {
+      "0ef38b00-8774-4519-b491-f0642ee82cfc": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -1586,7 +1586,7 @@
           }
         }
       },
-      "c24fd032-08a9-47a5-95a7-8ec5d1ba0fd9": {
+      "f99889cd-aea1-4137-b818-4ed29639c241": {
         "title": "User Schema",
         "description": "Schema for input data when signing up a user.",
         "type": "object",
@@ -1627,7 +1627,7 @@
         },
         "additionalProperties": false
       },
-      "b6edeafb-5ad9-442f-a27b-e9cc065d1ab7": {
+      "d782f91c-88c1-43a6-959a-06d47287df19": {
         "properties": {
           "message": {
             "type": "string",
@@ -1636,7 +1636,7 @@
           }
         }
       },
-      "b466c672-3120-43df-803e-9128df0c3c06": {
+      "36a67605-836c-41ab-a054-97479f84afbb": {
         "properties": {
           "email": {
             "type": "string",
@@ -1647,7 +1647,7 @@
           "email"
         ]
       },
-      "f2ed2f0a-5aac-4da5-9a07-2c317d5b97cc": {
+      "a46cc745-f8a9-4f1e-9582-b8966ea8fe10": {
         "properties": {
           "message": {
             "type": "string",
@@ -1655,7 +1655,7 @@
           }
         }
       },
-      "8376b02f-d00b-47f9-8f79-788c9037cfae": {
+      "dae002ae-94a3-4709-85b6-c71fe3116948": {
         "properties": {
           "email": {
             "type": "string",
@@ -1676,7 +1676,7 @@
           "newPassword"
         ]
       },
-      "78be8c7b-858d-4181-8693-2589d6591a6c": {
+      "0c6224ed-4102-4e72-8557-5b54e956f367": {
         "properties": {
           "message": {
             "type": "string",
@@ -1684,7 +1684,7 @@
           }
         }
       },
-      "fd330996-cc88-47b8-839d-e5261609d430": {
+      "84a87a89-eb54-40fb-936f-d6cc525f622d": {
         "properties": {
           "accountConfirmation": {
             "type": "boolean",
@@ -1692,7 +1692,7 @@
           }
         }
       },
-      "63bf0afa-bbb3-4be1-8eb3-2ecf0bf6e730": {
+      "3a33e699-3bc8-4d9b-ae12-dfa23211985f": {
         "properties": {
           "message": {
             "type": "string",
@@ -1701,7 +1701,7 @@
           }
         }
       },
-      "0efd3fdb-225a-4bac-a3ce-04d0a7e61afb": {
+      "ce05e821-b9f2-4640-b603-8ff54ae85d4d": {
         "properties": {
           "message": {
             "type": "string",
@@ -1710,7 +1710,7 @@
           }
         }
       },
-      "a3d37eff-96a0-4966-8117-dcaff6936da1": {
+      "073829e6-1c85-4885-b856-4b30ea1f2eb2": {
         "properties": {
           "message": {
             "type": "string",
@@ -1719,7 +1719,7 @@
           }
         }
       },
-      "8aa6b0ae-8704-47f5-814f-7e282c538a16": {
+      "69848abd-b976-4e46-8331-a88d80eb723c": {
         "properties": {
           "email": {
             "type": "string",
@@ -1735,14 +1735,14 @@
           "code"
         ]
       },
-      "fae401d1-db9e-473a-a6e6-0274d93a8537": {
+      "419acb79-79b4-4992-afad-44b79a294cfa": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "db1179cb-177c-4363-9585-2f3e8f9052b5": {
+      "eb541ca7-b7d7-4a24-98cf-087e278717da": {
         "properties": {
           "message": {
             "type": "string",
@@ -1751,7 +1751,7 @@
           }
         }
       },
-      "29c11a45-4572-42a0-8c58-2299f12d0ffc": {
+      "b125ec4d-615c-4b83-9092-0f6e3d071aaf": {
         "properties": {
           "message": {
             "type": "string",
@@ -1760,7 +1760,7 @@
           }
         }
       },
-      "b29c2307-fd8a-4f7c-b0a8-2e4c69854379": {
+      "0378f190-f74b-49c7-a623-cc98de83d196": {
         "properties": {
           "message": {
             "type": "string",
@@ -1769,7 +1769,7 @@
           }
         }
       },
-      "46e2d54c-6e98-4e87-a70c-4fec3157cfdc": {
+      "9128eaee-dbea-4f74-873b-c370f2685115": {
         "properties": {
           "message": {
             "type": "string",
@@ -1778,7 +1778,7 @@
           }
         }
       },
-      "d31229b6-7cfe-4957-b0ee-60c5f4d9d2a1": {
+      "a8bb9150-aa3d-4118-a481-22ba38b9373e": {
         "properties": {
           "email": {
             "type": "string",
@@ -1794,7 +1794,7 @@
           "password"
         ]
       },
-      "8c47e94d-078e-4f5e-a759-700a4ce44539": {
+      "f52817f7-bfd0-4808-8ee6-38e39d5a67c6": {
         "properties": {
           "accessToken": {
             "type": "string",
@@ -1802,7 +1802,7 @@
           }
         }
       },
-      "4354d257-cbb6-41f2-9c66-638d126cfff4": {
+      "6583ad9b-4a5d-46dc-a8d0-5b2757c54c45": {
         "properties": {
           "age": {
             "type": "number",
@@ -1828,7 +1828,7 @@
           "workoutCount"
         ]
       },
-      "e5393bfe-e728-4f18-8926-8c8b12a876cf": {
+      "27f66cda-decc-48b9-bfd4-79161f798262": {
         "properties": {
           "message": {
             "type": "string",
@@ -1841,7 +1841,7 @@
         "type": "string",
         "example": "example-uuid"
       },
-      "6dbd2297-694e-4ec5-9867-9dd507827232": {
+      "652a3a12-71a3-4e8f-95eb-9714020ec8e6": {
         "properties": {
           "athleteId": {
             "type": "string",
@@ -1870,11 +1870,11 @@
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-c8ef1cb7-e2e5-4c11-ad16-2c272f565b61": {
+      "athleteId-f3ec24a7-cc8a-44cd-9e31-d0ce42e62af4": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "47520835-7cf9-4fdc-bda3-5c8a24a1a063": {
+      "e324e817-0bda-4c5b-8ac8-6a89467105ab": {
         "properties": {
           "message": {
             "type": "string",
@@ -1883,7 +1883,7 @@
           }
         }
       },
-      "e04ef3c9-b7be-44d6-8b4c-5f2f3723e456": {
+      "6e98b96f-5231-4c43-ae58-c0d6ba1cc788": {
         "properties": {
           "message": {
             "type": "string",
@@ -1892,7 +1892,7 @@
           }
         }
       },
-      "5a11e994-4844-4a4c-9d9d-05b9fa0fbc00": {
+      "ca71b4dc-b562-49ff-9f4f-25b746b5a087": {
         "properties": {
           "message": {
             "type": "string",
@@ -1900,14 +1900,14 @@
           }
         }
       },
-      "7e4c70f0-cd91-42bf-b9a0-83e6bbf60531": {
+      "42e65b9e-7c71-4910-85e9-22e365f297a0": {
         "properties": {
           "userId": {
             "type": "string"
           }
         }
       },
-      "335012b5-3e75-45a8-8d96-c183a98ffd4f": {
+      "a385ff05-7b80-47a7-aba9-87325cda7c1a": {
         "properties": {
           "userId": {
             "type": "string",
@@ -1915,7 +1915,7 @@
           }
         }
       },
-      "b9067de1-cdc6-4663-a39a-b9ff7fbe0895": {
+      "567d7739-4c2a-4ae4-944b-8d927b0847cf": {
         "properties": {
           "message": {
             "type": "string",
@@ -1924,11 +1924,11 @@
           }
         }
       },
-      "coachId-f5af1e96-e1a0-4f62-82b6-830c18370102": {
+      "coachId-9c79568d-9069-414d-8ecb-26b94ab46858": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
-      "athleteId-fa31df04-c958-4ac1-812e-66f57ede4e24": {
+      "athleteId-1bd388d0-2164-4751-8b20-5da5c5e54c65": {
         "type": "string",
         "example": "4df43fc4-fbf5-4286-9b51-edf852db180d"
       },
@@ -1940,7 +1940,7 @@
         "type": "boolean",
         "example": 10
       },
-      "28852b80-7760-4664-99a8-9e289e47b89c": {
+      "73b2da72-229f-49df-8d58-7a91522733ec": {
         "properties": {
           "growth": {
             "type": "number",
@@ -1948,7 +1948,7 @@
           }
         }
       },
-      "066a3328-998c-466e-8ddd-8bc47b0014d6": {
+      "5b23922b-02af-4eca-b4a5-9d444e9dee27": {
         "properties": {
           "message": {
             "type": "string",
@@ -1957,7 +1957,7 @@
           }
         }
       },
-      "ded6f5e2-59a9-45d7-a9ec-8c6966e12b08": {
+      "3b4a3547-1726-4665-a5e5-85f44a5ad264": {
         "properties": {
           "userId": {
             "type": "string",
@@ -1990,7 +1990,7 @@
           "questions"
         ]
       },
-      "f6200306-2d46-4c41-9405-75f22f92f78e": {
+      "125a366c-8d22-4c2e-9d54-a27f8cb65ea1": {
         "type": "array",
         "items": {
           "type": "object",
@@ -2071,7 +2071,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ee7dd786-e43e-451a-b7cd-1258ed434b56"
+                  "$ref": "#/components/schemas/00600067-177f-497f-9d07-dca564b3c91b"
                 }
               }
             },
@@ -2082,7 +2082,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/d754714b-d017-46c0-b319-32a8a1048280"
+                  "$ref": "#/components/schemas/21bb8eaa-6f38-46d0-8bfc-fa961e3438b7"
                 }
               }
             },
@@ -2133,7 +2133,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/99559ad2-8696-4421-bc46-82161c3ebbd2"
+                  "$ref": "#/components/schemas/0ef38b00-8774-4519-b491-f0642ee82cfc"
                 }
               }
             },
@@ -2190,7 +2190,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/c24fd032-08a9-47a5-95a7-8ec5d1ba0fd9"
+                  "$ref": "#/components/schemas/f99889cd-aea1-4137-b818-4ed29639c241"
                 }
               }
             },
@@ -2212,7 +2212,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b6edeafb-5ad9-442f-a27b-e9cc065d1ab7"
+                  "$ref": "#/components/schemas/d782f91c-88c1-43a6-959a-06d47287df19"
                 }
               }
             },
@@ -2248,7 +2248,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/b466c672-3120-43df-803e-9128df0c3c06"
+                "$ref": "#/components/schemas/36a67605-836c-41ab-a054-97479f84afbb"
               }
             }
           }
@@ -2259,7 +2259,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/f2ed2f0a-5aac-4da5-9a07-2c317d5b97cc"
+                  "$ref": "#/components/schemas/a46cc745-f8a9-4f1e-9582-b8966ea8fe10"
                 }
               }
             },
@@ -2306,7 +2306,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/8376b02f-d00b-47f9-8f79-788c9037cfae"
+                "$ref": "#/components/schemas/dae002ae-94a3-4709-85b6-c71fe3116948"
               }
             }
           }
@@ -2317,7 +2317,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/78be8c7b-858d-4181-8693-2589d6591a6c"
+                  "$ref": "#/components/schemas/0c6224ed-4102-4e72-8557-5b54e956f367"
                 }
               }
             },
@@ -2374,7 +2374,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/fd330996-cc88-47b8-839d-e5261609d430"
+                  "$ref": "#/components/schemas/84a87a89-eb54-40fb-936f-d6cc525f622d"
                 }
               }
             },
@@ -2385,7 +2385,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/63bf0afa-bbb3-4be1-8eb3-2ecf0bf6e730"
+                  "$ref": "#/components/schemas/3a33e699-3bc8-4d9b-ae12-dfa23211985f"
                 }
               }
             },
@@ -2396,7 +2396,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/0efd3fdb-225a-4bac-a3ce-04d0a7e61afb"
+                  "$ref": "#/components/schemas/ce05e821-b9f2-4640-b603-8ff54ae85d4d"
                 }
               }
             },
@@ -2407,7 +2407,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/a3d37eff-96a0-4966-8117-dcaff6936da1"
+                  "$ref": "#/components/schemas/073829e6-1c85-4885-b856-4b30ea1f2eb2"
                 }
               }
             },
@@ -2454,7 +2454,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/8aa6b0ae-8704-47f5-814f-7e282c538a16"
+                "$ref": "#/components/schemas/69848abd-b976-4e46-8331-a88d80eb723c"
               }
             }
           }
@@ -2465,7 +2465,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/fae401d1-db9e-473a-a6e6-0274d93a8537"
+                  "$ref": "#/components/schemas/419acb79-79b4-4992-afad-44b79a294cfa"
                 }
               }
             },
@@ -2476,7 +2476,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/db1179cb-177c-4363-9585-2f3e8f9052b5"
+                  "$ref": "#/components/schemas/eb541ca7-b7d7-4a24-98cf-087e278717da"
                 }
               }
             },
@@ -2487,7 +2487,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/29c11a45-4572-42a0-8c58-2299f12d0ffc"
+                  "$ref": "#/components/schemas/b125ec4d-615c-4b83-9092-0f6e3d071aaf"
                 }
               }
             },
@@ -2498,7 +2498,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b29c2307-fd8a-4f7c-b0a8-2e4c69854379"
+                  "$ref": "#/components/schemas/0378f190-f74b-49c7-a623-cc98de83d196"
                 }
               }
             },
@@ -2509,7 +2509,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/46e2d54c-6e98-4e87-a70c-4fec3157cfdc"
+                  "$ref": "#/components/schemas/9128eaee-dbea-4f74-873b-c370f2685115"
                 }
               }
             },
@@ -2556,7 +2556,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/d31229b6-7cfe-4957-b0ee-60c5f4d9d2a1"
+                "$ref": "#/components/schemas/a8bb9150-aa3d-4118-a481-22ba38b9373e"
               }
             }
           }
@@ -2567,7 +2567,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/8c47e94d-078e-4f5e-a759-700a4ce44539"
+                  "$ref": "#/components/schemas/f52817f7-bfd0-4808-8ee6-38e39d5a67c6"
                 }
               }
             },
@@ -2695,7 +2695,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/4354d257-cbb6-41f2-9c66-638d126cfff4"
+                "$ref": "#/components/schemas/6583ad9b-4a5d-46dc-a8d0-5b2757c54c45"
               }
             }
           }
@@ -2728,7 +2728,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e5393bfe-e728-4f18-8926-8c8b12a876cf"
+                  "$ref": "#/components/schemas/27f66cda-decc-48b9-bfd4-79161f798262"
                 }
               }
             },
@@ -2973,7 +2973,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/6dbd2297-694e-4ec5-9867-9dd507827232"
+                "$ref": "#/components/schemas/652a3a12-71a3-4e8f-95eb-9714020ec8e6"
               }
             }
           }
@@ -3045,7 +3045,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-c8ef1cb7-e2e5-4c11-ad16-2c272f565b61"
+              "$ref": "#/components/schemas/athleteId-f3ec24a7-cc8a-44cd-9e31-d0ce42e62af4"
             }
           }
         ],
@@ -3157,7 +3157,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/47520835-7cf9-4fdc-bda3-5c8a24a1a063"
+                  "$ref": "#/components/schemas/e324e817-0bda-4c5b-8ac8-6a89467105ab"
                 }
               }
             },
@@ -3168,7 +3168,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/e04ef3c9-b7be-44d6-8b4c-5f2f3723e456"
+                  "$ref": "#/components/schemas/6e98b96f-5231-4c43-ae58-c0d6ba1cc788"
                 }
               }
             },
@@ -3333,7 +3333,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/5a11e994-4844-4a4c-9d9d-05b9fa0fbc00"
+                  "$ref": "#/components/schemas/ca71b4dc-b562-49ff-9f4f-25b746b5a087"
                 }
               }
             },
@@ -3439,7 +3439,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/335012b5-3e75-45a8-8d96-c183a98ffd4f"
+                  "$ref": "#/components/schemas/a385ff05-7b80-47a7-aba9-87325cda7c1a"
                 }
               }
             },
@@ -3544,7 +3544,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/b9067de1-cdc6-4663-a39a-b9ff7fbe0895"
+                  "$ref": "#/components/schemas/567d7739-4c2a-4ae4-944b-8d927b0847cf"
                 }
               }
             },
@@ -3587,7 +3587,7 @@
             "description": "The coachId to filter coach",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/coachId-f5af1e96-e1a0-4f62-82b6-830c18370102"
+              "$ref": "#/components/schemas/coachId-9c79568d-9069-414d-8ecb-26b94ab46858"
             }
           },
           {
@@ -3596,7 +3596,7 @@
             "description": "The athlete who owns the workout",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/athleteId-fa31df04-c958-4ac1-812e-66f57ede4e24"
+              "$ref": "#/components/schemas/athleteId-1bd388d0-2164-4751-8b20-5da5c5e54c65"
             }
           },
           {
@@ -3694,7 +3694,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/28852b80-7760-4664-99a8-9e289e47b89c"
+                  "$ref": "#/components/schemas/73b2da72-229f-49df-8d58-7a91522733ec"
                 }
               }
             },
@@ -3716,7 +3716,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/066a3328-998c-466e-8ddd-8bc47b0014d6"
+                  "$ref": "#/components/schemas/5b23922b-02af-4eca-b4a5-9d444e9dee27"
                 }
               }
             },
@@ -3752,7 +3752,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ded6f5e2-59a9-45d7-a9ec-8c6966e12b08"
+                "$ref": "#/components/schemas/3b4a3547-1726-4665-a5e5-85f44a5ad264"
               }
             }
           }
@@ -3763,7 +3763,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/f6200306-2d46-4c41-9405-75f22f92f78e"
+                  "$ref": "#/components/schemas/125a366c-8d22-4c2e-9d54-a27f8cb65ea1"
                 }
               }
             },
