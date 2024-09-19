@@ -9,7 +9,8 @@ type TypeOptions =
 	| "USER_NOT_FOUND"
 	| "INVALID_CREDENTIALS"
 	| "INVALID_PARAMETER"
-	| "INTERNAL_SERVER_ERROR";
+	| "INTERNAL_SERVER_ERROR"
+	| "PASSWORD_HISTORY_POLICY_VIOLATION";
 
 export class AppError {
 	constructor(
