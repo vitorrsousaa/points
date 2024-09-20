@@ -2,6 +2,46 @@ import type { CustomMessageTriggerEvent } from "aws-lambda";
 
 export async function handler(event: CustomMessageTriggerEvent) {
 	if (
+		event.triggerSource === "CustomMessage_ForgotPassword" ||
+		event.triggerSource === "CustomMessage_ResendCode"
+	) {
+		const codeParameter = event.request.codeParameter;
+
+		event.response.emailSubject = "Seu código de confirmação - GRYPP";
+		event.response.emailMessage = `
+			<html>
+				<body
+					style="background-color:#fff; font-family: Inter,PT Sans,Trebuchet MS,sans-serif;">
+					<div
+						style="margin: 0 auto; width: 600px; padding: 42px 16px 0; background-color: #fff;"
+						align="center">
+						<div style="max-width: 480px; margin: 0 auto;">
+							<p
+								style="font-size: 1rem; line-height: 24px; color: #EA580C; text-align: center; display: block; margin-bottom: 8px; font-weight: 600;">
+								Código de Confirmação
+							</p>
+
+							<p
+								style="margin-top: 8px; font-size: 16px; line-height: 24px; color: #667085; text-align: center;">
+								Utilize o código abaixo para ativar sua conta. <br/> Caso tenha dúvidas, entre em contato com nosso suporte.
+							</p>
+
+							<div style="background-color: #F7F7F7; max-width: 320px; padding: 8px; margin-top: 24px; border-radius: 8px;">
+								<p style="font-size: 16px; line-height: 24px; color: #101828; text-align: center; font-weight: 600;">
+									Seu código:
+								</p>
+								<p style="font-size: 24px; line-height: 32px; color: #EA580C; text-align: center; font-weight: bold;">
+									${codeParameter}
+								</p>
+							</div>
+						</div>
+					</div>
+				</body>
+			</html>
+		`;
+	}
+
+	if (
 		event.triggerSource === "CustomMessage_SignUp" ||
 		event.triggerSource === "CustomMessage_ResendCode"
 	) {
