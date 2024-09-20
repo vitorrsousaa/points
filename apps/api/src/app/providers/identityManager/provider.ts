@@ -4,6 +4,8 @@ import type { ICognitoIdentityProvider } from "@application/libs/cognitoClient";
 import type { CreateUserDTO } from "@application/shared/entity/user";
 import {
 	AdminGetUserCommand,
+	CodeDeliveryFailureException,
+	CodeMismatchException,
 	ConfirmForgotPasswordCommand,
 	ConfirmSignUpCommand,
 	ExpiredCodeException,
@@ -11,11 +13,12 @@ import {
 	InitiateAuthCommand,
 	InvalidPasswordException,
 	NotAuthorizedException,
+	PasswordHistoryPolicyViolationException,
+	ResendConfirmationCodeCommand,
 	SignUpCommand,
 	UserNotConfirmedException,
 	UserNotFoundException,
 	UsernameExistsException,
-	ResendConfirmationCodeCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 import type {
 	IIdentityManagerProvider,
@@ -43,6 +46,14 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 		} catch (error) {
 			if (error instanceof UserNotFoundException) {
 				throw new AppError("User not found", 404, "USER_NOT_FOUND");
+			}
+
+			if (error instanceof CodeDeliveryFailureException) {
+				throw new AppError(
+					"Error when send code",
+					502,
+					"CODE_DELIVERY_FAILURE",
+				);
 			}
 
 			throw new AppError("Internal Server Error", 500);
@@ -219,12 +230,26 @@ export class IdentityManagerProvider implements IIdentityManagerProvider {
 			await this.cognitoClient.send(command);
 		} catch (error) {
 			console.log(error);
+			if (error instanceof CodeMismatchException) {
+				throw new AppError("Code error", 400, "CODE_MISMATCH");
+			}
+
 			if (error instanceof ExpiredCodeException) {
 				throw new AppError("Expired code", 400, "EXPIRED_CODE");
 			}
+
 			if (error instanceof UserNotFoundException) {
 				throw new AppError("User not found", 401, "USER_NOT_FOUND");
 			}
+
+			if (error instanceof PasswordHistoryPolicyViolationException) {
+				throw new AppError(
+					"Password history violation",
+					400,
+					"PASSWORD_HISTORY_POLICY_VIOLATION",
+				);
+			}
+
 			if (error instanceof UserNotConfirmedException) {
 				throw new AppError("User not confirmed", 401, "USER_NOT_CONFIRMED");
 			}
