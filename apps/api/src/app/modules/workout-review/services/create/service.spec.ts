@@ -1,14 +1,13 @@
+import type { IAthleteRepository } from "@application/database/repositories/athlete";
+import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
+import { workoutExerciseInput } from "@application/modules/workout/mocks/create";
+import type { UnwrapPromise } from "@application/utils/types";
 import { type Mocked, vi } from "vitest";
 import {
 	type ICreateInput,
 	type ICreateService,
 	CreateService,
 } from "./service";
-import type { IAthleteRepository } from "@application/database/repositories/athlete";
-import type { UnwrapPromise } from "@application/utils/types";
-import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
-import { workoutExerciseInput } from "@application/modules/workout/mocks/create";
-import { defaultVolume } from "@application/modules/workout/functions/get-workout-volume";
 
 describe("Service:Create", () => {
 	let service: ICreateService;
@@ -23,7 +22,6 @@ describe("Service:Create", () => {
 		startTime: new Date().getTime(),
 		plannedExercises: [workoutExerciseInput],
 		realizedExercises: [workoutExerciseInput],
-		plannedVolume: defaultVolume,
 	};
 
 	beforeEach(() => {

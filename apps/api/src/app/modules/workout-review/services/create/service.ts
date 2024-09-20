@@ -13,6 +13,7 @@ export const CreateInputServiceSchema = WorkoutReviewSchema.omit({
 	realizedVolume: true,
 	reviewed: true,
 	reviewedAt: true,
+	plannedVolume: true,
 });
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
@@ -39,7 +40,6 @@ export class CreateService implements ICreateService {
 			notes,
 			plannedExercises,
 			realizedExercises,
-			plannedVolume,
 			endTime,
 			startTime,
 		} = createInput;
@@ -51,6 +51,7 @@ export class CreateService implements ICreateService {
 		}
 
 		const realizedVolume = getWorkoutVolume(realizedExercises);
+		const plannedVolume = getWorkoutVolume(plannedExercises);
 
 		const workoutReview = await this.workoutReviewRepository.create({
 			athleteId,

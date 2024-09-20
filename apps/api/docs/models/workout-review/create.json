@@ -11,8 +11,7 @@
 		"startTime",
 		"endTime",
 		"plannedExercises",
-		"realizedExercises",
-		"plannedVolume"
+		"realizedExercises"
 	],
 	"properties": {
 		"notes": {
@@ -161,56 +160,6 @@
 					"notes",
 					"restTime"
 				]
-			}
-		},
-		"plannedVolume": {
-			"type": "object",
-			"properties": {
-				"S": {
-					"type": "object",
-					"properties": {
-						"sets": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						},
-						"load": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						}
-					}
-				},
-				"B": {
-					"type": "object",
-					"properties": {
-						"sets": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						},
-						"load": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						}
-					}
-				},
-				"D": {
-					"type": "object",
-					"properties": {
-						"sets": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						},
-						"load": {
-							"type": "number",
-							"minimum": 0,
-							"example": 10
-						}
-					}
-				}
 			}
 		}
 	},
