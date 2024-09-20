@@ -27,10 +27,10 @@ export async function handler(event: CustomMessageTriggerEvent) {
 							</p>
 
 							<div style="background-color: #F7F7F7; max-width: 320px; padding: 8px; margin-top: 24px; border-radius: 8px;">
-								<p style="font-size: 16px; line-height: 24px; color: #101828; text-align: center; font-weight: 600;">
+								<p style="font-size: 1rem; line-height: 24px; color: #101828; text-align: center; font-weight: 600;">
 									Seu código:
 								</p>
-								<p style="font-size: 24px; line-height: 32px; color: #EA580C; text-align: center; font-weight: bold;">
+								<p style="font-size: 20px; line-height: 32px; color: #EA580C; text-align: center; font-weight: bold;">
 									${codeParameter}
 								</p>
 							</div>
