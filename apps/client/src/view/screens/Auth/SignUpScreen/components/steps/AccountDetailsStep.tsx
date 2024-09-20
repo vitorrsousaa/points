@@ -165,6 +165,17 @@ export function AccountDetailsStep() {
 
 			<Separator className="mt-8 mb-8" />
 
+			<div className="text-sm text-center">
+				<strong className="text-[16px]">
+					Dicas para criar uma senha mais segura:
+				</strong>
+				<ul className="list-disc text-left">
+					<li>Combine letras maiúsculas e minúsculas, símbolos e números</li>
+					<li>Não use informações pessoais</li>
+					<li>Use pelo menos 8 caracteres</li>
+				</ul>
+			</div>
+
 			<StepperFooter>
 				<StepperNextButton
 					onClick={handleClickNextStep}
