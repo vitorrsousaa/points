@@ -3,6 +3,8 @@ import type { Exercise } from "./exercise";
 export type Sets = {
 	weight: number;
 	reps: number;
+	type: string;
+	rpe: number;
 };
 
 export type WorkoutVolume = {

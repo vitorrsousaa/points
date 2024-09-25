@@ -148,6 +148,7 @@ export function WorkoutDialog({ workout, children }: WorkoutDialogProps) {
 											<Table>
 												<TableHeader>
 													<TableRow>
+														<TableHead>Set</TableHead>
 														<TableHead>REPS</TableHead>
 														<TableHead>Peso</TableHead>
 													</TableRow>
@@ -156,6 +157,7 @@ export function WorkoutDialog({ workout, children }: WorkoutDialogProps) {
 												<TableBody>
 													{exercise.sets.map((set) => (
 														<TableRow key={set.weight}>
+															<TableCell>{set.type}</TableCell>
 															<TableCell>{set.reps}</TableCell>
 
 															<TableCell>{set.weight}</TableCell>

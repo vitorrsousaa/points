@@ -68,7 +68,9 @@ export function WorkoutCardHeader(props: WorkoutCardHeaderProps) {
 	return (
 		<CardHeader className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between items-center">
-				<CardTitle>{children}</CardTitle>
+				<CardTitle className="flex items-center justify-start">
+					{children}
+				</CardTitle>
 				<RenderIf
 					condition={status === "pending"}
 					render={<Spinner className="h-5 w-5 mr-1" />}
