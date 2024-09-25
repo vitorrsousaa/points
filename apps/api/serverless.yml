@@ -210,7 +210,7 @@ functions:
           method: POST
           path: /auth/reset-password
           documentation: ${file(src/server/functions/auth/reset-password/handler.doc.yml):resetPassword}
-  verifyAccountStatus:
+  verifyAccountStatusWithEmail:
     handler: src/server/functions/auth/accountStatus.handler
     events:
       - httpApi:
