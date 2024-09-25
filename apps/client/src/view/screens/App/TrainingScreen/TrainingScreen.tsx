@@ -152,7 +152,7 @@ export function TrainingScreen() {
 											{workout.name}
 
 											<Badge
-												className="ml-2"
+												className="ml-2 hidden min-[490px]:inline-flex min-[640px]:hidden lg:inline-flex"
 												variant={workout.isActive ? "default" : "secondary"}
 											>
 												{workout.isActive ? "Ativo" : "Inativo"}
