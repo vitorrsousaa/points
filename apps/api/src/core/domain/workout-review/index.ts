@@ -16,6 +16,7 @@ export const WorkoutReviewSchema = z.object({
 	realizedVolume: WorkoutVolumeSchema,
 	reviewed: z.boolean(),
 	reviewedAt: z.string().nullable().optional(),
+	workoutName: z.string(),
 });
 
 export type CreateWorkoutReview = z.infer<typeof WorkoutReviewSchema>;

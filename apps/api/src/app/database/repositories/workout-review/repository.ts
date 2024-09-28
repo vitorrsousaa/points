@@ -1,10 +1,10 @@
-import { randomUUID } from "node:crypto";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
 	TBaseIndexes,
 } from "@application/database/database";
 import type { WorkoutReview } from "@core/domain/workout-review";
+import { randomUUID } from "node:crypto";
 import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {
@@ -106,6 +106,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			endTime,
 			startTime,
 			reviewed,
+			workoutName,
 		} = workout;
 		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
 		const workoutReviewId = randomUUID();
@@ -132,6 +133,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			start_time: startTime,
 			reviewed,
 			reviewed_at: null,
+			workout_name: workoutName,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
@@ -188,6 +190,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			startTime: workout.start_time,
 			reviewed: workout.reviewed,
 			reviewedAt: workout.reviewed_at,
+			workoutName: workout.workout_name,
 		};
 	}
 }
