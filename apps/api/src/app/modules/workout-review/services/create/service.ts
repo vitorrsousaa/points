@@ -1,4 +1,5 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
+import type { IHistoryExerciseRepository } from "@application/database/repositories/history-exercise";
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import type { IService } from "@application/interfaces/service";
@@ -11,7 +12,6 @@ import {
 } from "@core/domain/workout-review";
 import type * as z from "zod";
 import { AthleteNotAssigned } from "../../errors/athlete-not-assigned";
-import { WorkoutNotAssignedToAthlete } from "../../errors/workout-not-assigned-athlete";
 import { WorkoutNotAssignedToCoach } from "../../errors/workout-not-assigned-coach";
 
 export const CreateInputServiceSchema = WorkoutReviewSchema.omit({
@@ -37,6 +37,7 @@ export class CreateService implements ICreateService {
 		private athleteRepository: IAthleteRepository,
 		private workoutReviewRepository: IWorkoutReviewRepository,
 		private workoutRepository: IWorkoutRepository,
+		private historyExerciseRepository: IHistoryExerciseRepository,
 	) {}
 
 	async execute(createInput: ICreateInput): Promise<ICreateOutput> {
@@ -66,10 +67,6 @@ export class CreateService implements ICreateService {
 			throw new WorkoutNotFound();
 		}
 
-		if (workout.athleteId !== athleteId) {
-			throw new WorkoutNotAssignedToAthlete();
-		}
-
 		if (workout.coachId !== coachId) {
 			throw new WorkoutNotAssignedToCoach();
 		}
@@ -94,6 +91,19 @@ export class CreateService implements ICreateService {
 		});
 
 		// CRIAR O PERSONAL RECORD
+
+		const now = new Date().toISOString();
+		// CRIAR O HISTORICO DE EXERCICIOS
+		for (const exercise of realizedExercises) {
+			await this.historyExerciseRepository.create({
+				athleteId,
+				date: now,
+				exerciseId: exercise.exerciseId,
+				sets: exercise.sets,
+				workoutId,
+				workoutReviewId: workoutReview.id,
+			});
+		}
 
 		const newWorkoutCount = athlete.workoutCount + 1;
 
