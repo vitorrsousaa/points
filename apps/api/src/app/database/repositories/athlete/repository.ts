@@ -102,7 +102,7 @@ export class AthleteRepository implements IAthleteRepository {
 				":gsi1pk": gsi1pk,
 			},
 		});
-		return athlete ? this.mapToDomain(athlete[0]) : null;
+		return athlete && athlete?.length > 0 ? this.mapToDomain(athlete[0]) : null;
 	}
 
 	private getGSIKeys(

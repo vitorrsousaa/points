@@ -1,8 +1,8 @@
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IService } from "@application/interfaces/service";
+import { WorkoutNotFound } from "@application/shared/errors/workout-not-found";
 import { CreateWorkoutInputSchema, type Workout } from "@core/domain/workout";
 import * as z from "zod";
-import { WorkoutNotFound } from "../../errors/workout-not-found";
 import { WorkoutIsNotOwned } from "../../errors/workout-not-owned";
 import { getWorkoutVolume } from "../../functions/get-workout-volume";
 

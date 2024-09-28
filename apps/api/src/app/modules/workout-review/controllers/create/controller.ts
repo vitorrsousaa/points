@@ -13,7 +13,7 @@ export class CreateController implements IController {
 		try {
 			const [status, parsedBody] = missingFields(CreateInputServiceSchema, {
 				...request.body,
-				athleteId: request.userId,
+				// athleteId: request.athleteId,
 				coachId: request.params.coachId,
 			});
 
