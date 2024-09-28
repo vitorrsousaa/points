@@ -5,6 +5,7 @@ import {
 	DashboardScreen,
 	ExercisesScreen,
 	NewAthleteScreen,
+	NewExerciseScreen,
 	NewTrainingScreen,
 	NotFoundScreen,
 	SettingsScreen,
@@ -14,7 +15,7 @@ import {
 	UpdateAthleteScreen,
 	UpdateTrainingScreen,
 	VerificationCodeScreen,
-	NewExerciseScreen,
+	WorkoutReviews,
 } from "@/screens/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthLayout, DashboardLayout } from "../layouts";
@@ -61,6 +62,7 @@ export function RouterStack() {
 							element={<UpdateTrainingScreen />}
 						/>
 						<Route path={ROUTES.NEW_TRAINING} element={<NewTrainingScreen />} />
+						<Route path={ROUTES.WORKOUT_REVIEW} element={<WorkoutReviews />} />
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFoundScreen />} />

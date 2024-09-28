@@ -107,6 +107,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			startTime,
 			reviewed,
 			workoutName,
+			athleteName,
 		} = workout;
 		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
 		const workoutReviewId = randomUUID();
@@ -134,6 +135,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			reviewed,
 			reviewed_at: null,
 			workout_name: workoutName,
+			athlete_name: athleteName,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
@@ -191,6 +193,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			reviewed: workout.reviewed,
 			reviewedAt: workout.reviewed_at,
 			workoutName: workout.workout_name,
+			athleteName: workout.athlete_name,
 		};
 	}
 }

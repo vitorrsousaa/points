@@ -21,6 +21,7 @@ export const CreateInputServiceSchema = WorkoutReviewSchema.omit({
 	plannedVolume: true,
 	plannedExercises: true,
 	workoutName: true,
+	athleteName: true,
 });
 
 export type TCreate = z.infer<typeof CreateInputServiceSchema>;
@@ -90,6 +91,7 @@ export class CreateService implements ICreateService {
 			startTime,
 			reviewed: this.DEFAULT_REVIEWED,
 			workoutName: workout.name,
+			athleteName: athlete.name,
 		});
 
 		// CRIAR O PERSONAL RECORD

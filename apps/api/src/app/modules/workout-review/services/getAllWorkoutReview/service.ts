@@ -6,10 +6,27 @@ import { ParameterIsRequired } from "../../errors/parameter-is-required";
 
 export const GetAllWorkoutReviewInputServiceSchema = z
 	.object({
-		coachId: z.string().uuid().optional(),
-		athleteId: z.string().uuid().optional(),
-		reviewed: z.boolean().optional(),
-		limit: z.number().int().optional().default(5),
+		coachId: z
+			.string()
+			.uuid()
+			.optional()
+			.transform((val) => (val ? val : undefined)),
+		athleteId: z
+			.string()
+			.uuid()
+			.optional()
+			.transform((val) => (val ? val : undefined)),
+		reviewed: z
+			.string()
+			.optional()
+			.transform((val) =>
+				val === "true" ? true : val === "false" ? false : undefined,
+			),
+		limit: z
+			.string()
+			.optional()
+			.transform((val) => (val ? Number.parseInt(val, 10) : undefined))
+			.default("10"),
 	})
 	.refine((data) => data.coachId || data.athleteId, {
 		message: "You must provide a coachId or athleteId",

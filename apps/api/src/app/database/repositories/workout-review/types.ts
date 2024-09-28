@@ -17,6 +17,7 @@ export type WorkoutReviewDynamoDB = Prettify<
 		start_time: WorkoutReview["startTime"];
 		reviewed_at: WorkoutReview["reviewedAt"];
 		workout_name: WorkoutReview["workoutName"];
+		athlete_name: WorkoutReview["athleteName"];
 	} & TBaseEntity &
 		TBaseIndexes &
 		Omit<
@@ -34,6 +35,7 @@ export type WorkoutReviewDynamoDB = Prettify<
 			| "startTime"
 			| "reviewedAt"
 			| "workoutName"
+			| "athleteName"
 		>
 >;
 

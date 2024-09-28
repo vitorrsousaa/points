@@ -17,6 +17,7 @@ export const WorkoutReviewSchema = z.object({
 	reviewed: z.boolean(),
 	reviewedAt: z.string().nullable().optional(),
 	workoutName: z.string(),
+	athleteName: z.string(),
 });
 
 export type CreateWorkoutReview = z.infer<typeof WorkoutReviewSchema>;
