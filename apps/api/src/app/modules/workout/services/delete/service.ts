@@ -1,8 +1,8 @@
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IService } from "@application/interfaces/service";
+import { WorkoutNotFound } from "@application/shared/errors/workout-not-found";
 import * as z from "zod";
 import { CoachNotAuthorized } from "../../errors/coach-not-authorized";
-import { WorkoutNotFound } from "../../errors/workout-not-found";
 
 export const DeleteInputServiceSchema = z.object({
 	coachId: z.string().uuid(),

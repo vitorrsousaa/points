@@ -1,4 +1,6 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
+import type { IHistoryExerciseRepository } from "@application/database/repositories/history-exercise";
+import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import { workoutExerciseInput } from "@application/modules/workout/mocks/create";
 import type { UnwrapPromise } from "@application/utils/types";
@@ -13,6 +15,8 @@ describe("Service:Create", () => {
 	let service: ICreateService;
 	let mockedAthleteRepository: Mocked<IAthleteRepository>;
 	let mockedWorkoutReviewRepository: Mocked<IWorkoutReviewRepository>;
+	let mocketHistoryExerciseRepository: Mocked<IHistoryExerciseRepository>;
+	let mocketWorkoutRepository: Mocked<IWorkoutRepository>;
 	const inputData: ICreateInput = {
 		athleteId: "123",
 		coachId: "456",
@@ -20,7 +24,6 @@ describe("Service:Create", () => {
 		workoutId: "789",
 		endTime: new Date().getTime(),
 		startTime: new Date().getTime(),
-		plannedExercises: [workoutExerciseInput],
 		realizedExercises: [workoutExerciseInput],
 	};
 
@@ -32,10 +35,18 @@ describe("Service:Create", () => {
 		mockedWorkoutReviewRepository = {
 			create: vi.fn(),
 		} as unknown as Mocked<IWorkoutReviewRepository>;
+		mocketHistoryExerciseRepository = {
+			create: vi.fn(),
+		} as unknown as Mocked<IHistoryExerciseRepository>;
+		mocketWorkoutRepository = {
+			getById: vi.fn(),
+		} as unknown as Mocked<IWorkoutRepository>;
 
 		service = new CreateService(
 			mockedAthleteRepository,
 			mockedWorkoutReviewRepository,
+			mocketWorkoutRepository,
+			mocketHistoryExerciseRepository,
 		);
 	});
 
@@ -55,28 +66,103 @@ describe("Service:Create", () => {
 			"Athlete not found",
 		);
 	});
+	it("Should throw error when athlete is owned other coach", async () => {
+		// Arrange
+		mockedAthleteRepository.getById.mockResolvedValue({
+			name: "John Doe",
+			coachId: "123",
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+
+		// Act
+		// await service.execute(inputData);
+
+		// Assert
+		await expect(service.execute(inputData)).rejects.toThrowError(
+			"Athlete is not assigned to this coach",
+		);
+	});
+	it("Should throw error when athlete is owned coach but workout dont exists", async () => {
+		// Arrange
+		mockedAthleteRepository.getById.mockResolvedValue({
+			name: "John Doe",
+			coachId: inputData.coachId,
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+		mocketWorkoutRepository.getById.mockResolvedValue(null);
+
+		// Act
+		// await service.execute(inputData);
+
+		// Assert
+		await expect(service.execute(inputData)).rejects.toThrowError(
+			"Workout not found",
+		);
+	});
+	it("Should throw error when athlete is owned coach, but workout is owned other coach", async () => {
+		// Arrange
+		mockedAthleteRepository.getById.mockResolvedValue({
+			name: "John Doe",
+			coachId: inputData.coachId,
+		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+		mocketWorkoutRepository.getById.mockResolvedValue({
+			coachId: "789",
+		} as unknown as UnwrapPromise<ReturnType<IWorkoutRepository["getById"]>>);
+
+		// Act
+		// await service.execute(inputData);
+
+		// Assert
+		await expect(service.execute(inputData)).rejects.toThrowError(
+			"Workout is not assigned to this coach",
+		);
+	});
 	it("Should update athleteRepository with one unit more on workout count", async () => {
 		// Arrange
 		const DEFAULT_WORKOUT_COUNT = 98;
 		mockedAthleteRepository.getById.mockResolvedValue({
 			workoutCount: DEFAULT_WORKOUT_COUNT,
 			name: "John Doe",
+			coachId: inputData.coachId,
 		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+		mocketWorkoutRepository.getById.mockResolvedValue({
+			coachId: inputData.coachId,
+			exercises: [],
+			volume: {},
+			id: "workoutId",
+		} as unknown as UnwrapPromise<ReturnType<IWorkoutRepository["getById"]>>);
+		mockedWorkoutReviewRepository.create.mockResolvedValue({
+			id: "workoutReviewId",
+		} as unknown as UnwrapPromise<
+			ReturnType<IWorkoutReviewRepository["create"]>
+		>);
 
 		// Act
 		await service.execute(inputData);
 
 		// Assert
-		expect(mockedAthleteRepository.update).toHaveBeenCalledWith({
-			workoutCount: DEFAULT_WORKOUT_COUNT + 1,
-			name: "John Doe",
-		});
+		expect(mockedAthleteRepository.update).toHaveBeenCalledWith(
+			expect.objectContaining({
+				workoutCount: DEFAULT_WORKOUT_COUNT + 1,
+				name: "John Doe",
+			}),
+		);
 	});
 	it("Should call workoutReviewRepository with reviewed as false by default", async () => {
 		// Arrange
 		mockedAthleteRepository.getById.mockResolvedValue({
 			name: "John Doe",
+			coachId: inputData.coachId,
 		} as unknown as UnwrapPromise<ReturnType<IAthleteRepository["getById"]>>);
+		mocketWorkoutRepository.getById.mockResolvedValue({
+			coachId: inputData.coachId,
+			exercises: [],
+			volume: {},
+			id: "workoutId",
+		} as unknown as UnwrapPromise<ReturnType<IWorkoutRepository["getById"]>>);
+		mockedWorkoutReviewRepository.create.mockResolvedValue({
+			id: "workoutReviewId",
+		} as unknown as UnwrapPromise<
+			ReturnType<IWorkoutReviewRepository["create"]>
+		>);
 
 		// Act
 		await service.execute(inputData);
