@@ -36,12 +36,12 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 					<div className="flex items-center">
 						<Icon name="person" className="w-4 h-4 mr-2" />
 
-						<span>{review.athleteName}</span>
+						<span className="text-sm">{review.athleteName}</span>
 					</div>
 					<div className="flex items-center">
 						<Icon name="calendar" className="w-4 h-4 mr-2" />
 
-						<span>{formatedDate}</span>
+						<span className="text-sm">{formatedDate}</span>
 					</div>
 				</div>
 				<Button variant="outline" className="w-full">
