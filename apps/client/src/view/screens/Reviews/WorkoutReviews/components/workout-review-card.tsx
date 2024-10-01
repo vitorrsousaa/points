@@ -1,4 +1,5 @@
 import type { WorkoutReview } from "@/entitites/workout-review";
+import { useNavigate } from "@/hooks/navigate";
 import {
 	Badge,
 	Button,
@@ -20,6 +21,16 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 	const formatedDate = new Intl.DateTimeFormat("pt-BR", {
 		dateStyle: "short",
 	}).format(new Date(review.createdAt));
+
+	const { navigate } = useNavigate();
+
+	const navigateToReview = () => {
+		navigate("UPDATE_WORKOUT_REVIEW", {
+			replace: {
+				workoutReviewId: review.id,
+			},
+		});
+	};
 
 	return (
 		<Card className="hover:shadow-lg transition-shadow">
@@ -44,7 +55,7 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 						<span className="text-sm">{formatedDate}</span>
 					</div>
 				</div>
-				<Button variant="outline" className="w-full">
+				<Button variant="outline" className="w-full" onClick={navigateToReview}>
 					<Icon name="eyeOpen" className="w-4 h-4 mr-2" />
 					Revisar
 				</Button>

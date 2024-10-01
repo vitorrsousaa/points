@@ -14,6 +14,7 @@ import {
 	TrainingScreen,
 	UpdateAthleteScreen,
 	UpdateTrainingScreen,
+	UpdateWorkoutReview,
 	VerificationCodeScreen,
 	WorkoutReviews,
 } from "@/screens/index";
@@ -63,6 +64,10 @@ export function RouterStack() {
 						/>
 						<Route path={ROUTES.NEW_TRAINING} element={<NewTrainingScreen />} />
 						<Route path={ROUTES.WORKOUT_REVIEW} element={<WorkoutReviews />} />
+						<Route
+							path={ROUTES.UPDATE_WORKOUT_REVIEW}
+							element={<UpdateWorkoutReview />}
+						/>
 					</Route>
 				</Route>
 				<Route path="*" element={<NotFoundScreen />} />

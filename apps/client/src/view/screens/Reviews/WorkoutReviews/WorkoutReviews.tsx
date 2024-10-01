@@ -1,6 +1,9 @@
 import { ROUTES } from "@/config/routes";
 import { useAuth } from "@/hooks/auth";
-import { useGetAllWorkoutReview } from "@/hooks/workout-review";
+import {
+	OPTIONS_WORKOUT_REVIEW,
+	useGetAllWorkoutReview,
+} from "@/hooks/workout-review";
 import {
 	Button,
 	HeaderScreen,
@@ -25,11 +28,7 @@ export function WorkoutReviews() {
 	const { id } = useAuth();
 
 	const { isErrorWorkoutReviews, isLoadingWorkoutReviews, workoutReviews } =
-		useGetAllWorkoutReview({
-			coachId: id || "",
-			limit: 10,
-			reviewed: false,
-		});
+		useGetAllWorkoutReview(OPTIONS_WORKOUT_REVIEW.NOT_REVIEWED(id || ""));
 
 	const filteredAndSortedReviews = useMemo(
 		() =>
