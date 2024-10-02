@@ -6,6 +6,7 @@ import {
 	HeaderScreen,
 } from "@shared/ui";
 import { WorkoutReviewContextProvider } from "./UpdateWorkoutReviewContext";
+import { CardExercise } from "./components/CardExercises";
 import { CardVolume } from "./components/CardVolume";
 
 export function UpdateWorkoutReview() {
@@ -26,6 +27,8 @@ export function UpdateWorkoutReview() {
 				<hr className="mt-6 mb-6" />
 
 				<CardVolume />
+				<hr className="mt-4 mb-4" />
+				<CardExercise />
 			</WorkoutReviewContextProvider>
 		</div>
 	);
