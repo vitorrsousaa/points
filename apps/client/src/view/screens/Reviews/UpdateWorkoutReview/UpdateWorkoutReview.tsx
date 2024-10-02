@@ -1,27 +1,32 @@
-import { useAuth } from "@/hooks/auth";
 import {
-	OPTIONS_WORKOUT_REVIEW,
-	useGetWorkoutReviewById,
-} from "@/hooks/workout-review";
-import { HeaderScreen } from "@shared/ui";
-import { useParams } from "react-router-dom";
+	Card,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+	HeaderScreen,
+} from "@shared/ui";
+import { WorkoutReviewContextProvider } from "./UpdateWorkoutReviewContext";
+import { CardVolume } from "./components/CardVolume";
 
 export function UpdateWorkoutReview() {
-	const { id } = useAuth();
-
-	const { workoutReviewId } = useParams<{ workoutReviewId: string }>();
-
-	useGetWorkoutReviewById(
-		workoutReviewId ?? "",
-		OPTIONS_WORKOUT_REVIEW.NOT_REVIEWED(id || ""),
-	);
-
 	return (
 		<div>
 			<HeaderScreen
-				title="Revisões de treino"
+				title="Revisão de treino"
 				description="Realize a revisão do treino do seu atleta."
 			/>
+			<WorkoutReviewContextProvider>
+				<Card>
+					<CardHeader>
+						<CardTitle>Atleta: João Pedro</CardTitle>
+						<CardDescription>Peso: 84kg</CardDescription>
+					</CardHeader>
+				</Card>
+
+				<hr className="mt-4 mb-4" />
+
+				<CardVolume />
+			</WorkoutReviewContextProvider>
 		</div>
 	);
 }
