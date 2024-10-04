@@ -23,7 +23,7 @@ export function UpdateWorkoutReview() {
 					</CardHeader>
 				</Card>
 
-				<hr className="mt-4 mb-4" />
+				<hr className="mt-6 mb-6" />
 
 				<CardVolume />
 			</WorkoutReviewContextProvider>

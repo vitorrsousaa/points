@@ -5,7 +5,6 @@ import {
 	Button,
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 	Icon,
@@ -35,12 +34,13 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 	return (
 		<Card className="hover:shadow-lg transition-shadow">
 			<CardHeader className="py-4">
-				<CardTitle>{review.workoutName}</CardTitle>
-				<CardDescription>
+				<CardTitle className="flex items-center gap-4 justify-between">
+					{review.workoutName}
+
 					<Badge variant="secondary" className="mt-1">
-						Pendente
+						{review.reviewed ? "Revisado" : "Pendente"}
 					</Badge>
-				</CardDescription>
+				</CardTitle>
 			</CardHeader>
 			<CardContent className="space-y-4">
 				<div className="space-y-1">
@@ -57,7 +57,8 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 				</div>
 				<Button variant="outline" className="w-full" onClick={navigateToReview}>
 					<Icon name="eyeOpen" className="w-4 h-4 mr-2" />
-					Revisar
+
+					{review.reviewed ? "Treino revisado" : "Revisar"}
 				</Button>
 			</CardContent>
 		</Card>

@@ -9,7 +9,6 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 	HeaderScreen,
@@ -23,6 +22,7 @@ import {
 	SelectValue,
 	Spinner,
 } from "@shared/ui";
+import { title } from "process";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { WorkoutReviewCard } from "./components/workout-review-card";
@@ -61,10 +61,6 @@ export function WorkoutReviews() {
 		[workoutReviews, searchTerm, sortBy],
 	);
 
-	const completedReviews = useMemo(() => {
-		return workoutReviews.filter((workout) => workout.reviewed).length;
-	}, [workoutReviews]);
-
 	const navigate = useNavigate();
 
 	return (
@@ -73,6 +69,22 @@ export function WorkoutReviews() {
 				title="Revisões de treino"
 				description="Acompanhe as últimas atualizações dos seus atletas."
 			/>
+
+			<Card className="w-full">
+				<CardHeader className="pb-2 flex flex-row justify-between items-start">
+					<div>
+						<CardDescription>{title}</CardDescription>
+						<CardTitle className="text-4xl">{value}</CardTitle>
+					</div>
+					{/* {isFetching && <Spinner className="h-4 w-4" />} */}
+				</CardHeader>
+
+				<CardContent>
+					<p className="text-xs text-muted-foreground">
+						{percentage || 0}% que o último mês
+					</p>
+				</CardContent>
+			</Card>
 
 			<RenderIf
 				condition={isLoadingWorkoutReviews}
@@ -103,66 +115,24 @@ export function WorkoutReviews() {
 				condition={!isLoadingWorkoutReviews && !isErrorWorkoutReviews}
 				render={
 					<>
-						<div className="flex flex-col sm:flex-row gap-4 mb-4">
-							<Card className="w-full">
-								<CardHeader className="pb-2 flex flex-row justify-between items-start">
-									<div>
-										<CardDescription>
-											Total de treinos realizados
-										</CardDescription>
-										<CardTitle className="text-4xl">
-											{workoutReviews.length}
-										</CardTitle>
-									</div>
-								</CardHeader>
-
-								<CardFooter>
-									<p className="text-xs text-muted-foreground">
-										Parabéns! Vocês estão evoluindo.
-									</p>
-								</CardFooter>
-							</Card>
-
-							<Card className="w-full">
-								<CardHeader className="pb-2 flex flex-row justify-between items-start">
-									<div>
-										<CardDescription>
-											Total de treinos revisados
-										</CardDescription>
-										<CardTitle className="text-4xl">
-											{completedReviews}
-										</CardTitle>
-									</div>
-								</CardHeader>
-
-								<CardContent>
-									<p className="text-xs text-muted-foreground">
-										Revise os treinos dos seus atletas
-									</p>
-								</CardContent>
-							</Card>
+						<div className="flex flex-col md:flex-row gap-4 mb-6">
+							<Input
+								type="text"
+								placeholder="Procurar por treino ou atleta"
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+							/>
+							<Select value={sortBy} onValueChange={setSortBy}>
+								<SelectTrigger className="w-full md:w-[280px]">
+									<SelectValue placeholder="Ordenar por" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="date">Ordenar por data</SelectItem>
+									<SelectItem value="athlete">Ordenar por atleta</SelectItem>
+									<SelectItem value="title">Ordenar por título</SelectItem>
+								</SelectContent>
+							</Select>
 						</div>
-
-						<Card className="p-4 rounded-xl border flex items-center">
-							<CardContent className="p-0 w-full flex items-center justify-between gap-2">
-								<Input
-									type="text"
-									placeholder="Procurar por treino ou atleta"
-									value={searchTerm}
-									onChange={(e) => setSearchTerm(e.target.value)}
-								/>
-								<Select value={sortBy} onValueChange={setSortBy}>
-									<SelectTrigger className="w-full md:w-[280px]">
-										<SelectValue placeholder="Ordenar por" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="date">Ordenar por data</SelectItem>
-										<SelectItem value="athlete">Ordenar por atleta</SelectItem>
-										<SelectItem value="title">Ordenar por título</SelectItem>
-									</SelectContent>
-								</Select>
-							</CardContent>
-						</Card>
 
 						<RenderIfElse
 							condition={filteredAndSortedReviews.length > 0}
