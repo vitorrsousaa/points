@@ -24,6 +24,7 @@
 		"@aws-sdk/lib-dynamodb": "^3.620.0",
 		"@shared/logger": "*",
 		"dotenv": "^16.4.5",
+		"resend": "^4.0.0",
 		"serverless-openapi-documenter": "^0.0.103",
 		"zod": "^3.23.8"
 	},
