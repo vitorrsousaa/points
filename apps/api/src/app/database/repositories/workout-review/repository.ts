@@ -92,7 +92,11 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	}
 
 	async create(
-		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
+		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id"> & {
+			createdAt?: string;
+			updatedAt?: string;
+			id?: string;
+		},
 	): Promise<WorkoutReview> {
 		const {
 			athleteId,
@@ -108,11 +112,19 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			reviewed,
 			workoutName,
 			athleteName,
+			createdAt: propCreatedAt,
+			updatedAt: propUpdatedAt,
+			reviewedAt: propReviewedAt,
+			id: propId,
 		} = workout;
 		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
-		const workoutReviewId = randomUUID();
+		const workoutReviewId = propId || randomUUID();
 		const now = new Date().toISOString();
 		const { gsi1pk, gsi1sk } = this.getIndexes(reviewed, coachId, workoutId);
+
+		const createdAt = propCreatedAt || now;
+		const updatedAt = propUpdatedAt || now;
+		const reviewedAt = propReviewedAt || null;
 
 		const newWorkout: WorkoutReviewDynamoDB = {
 			PK,
@@ -121,8 +133,8 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			gsi1sk,
 			athlete_id: athleteId,
 			coach_id: coachId,
-			created_at: now,
-			updated_at: now,
+			created_at: createdAt,
+			updated_at: updatedAt,
 			id: workoutReviewId,
 			notes,
 			workout_id: workoutId,
@@ -133,7 +145,7 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			end_time: endTime,
 			start_time: startTime,
 			reviewed,
-			reviewed_at: null,
+			reviewed_at: reviewedAt,
 			workout_name: workoutName,
 			athlete_name: athleteName,
 		};
@@ -141,6 +153,22 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		await this.dbInstance.create({ ...newWorkout });
 
 		return this.mapToDomain(newWorkout);
+	}
+
+	async update(workout: WorkoutReview): Promise<WorkoutReview> {
+		await this.delete(workout.athleteId, workout.workoutId);
+
+		const result = await this.create({
+			...workout,
+			createdAt: workout.createdAt,
+			updatedAt: new Date().toISOString(),
+		});
+
+		return result;
+	}
+
+	private async delete(pk: string, sk: string) {
+		await this.dbInstance.delete({ Key: { PK: pk, SK: sk } });
 	}
 
 	private getKeys(
