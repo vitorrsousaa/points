@@ -5,6 +5,7 @@ frameworkVersion: '3'
 plugins:
   - serverless-esbuild
   - serverless-openapi-documenter
+  - serverless-dotenv-plugin
   
 package:
   individually: true
@@ -44,6 +45,7 @@ provider:
     COGNITO_POOL_ID: !Ref GryppUserPool
     COGNITO_POOL_CLIENT_ID: !Ref GryppUserPoolClient
     STAGE: ${self:provider.stage}
+    RESEND_API_KEY: ${env:RESEND_API_KEY}
   httpApi:
     authorizers:
       CognitoAuthorizer:
@@ -148,6 +150,8 @@ resources:
               ProjectionType: ALL
         
 custom:
+  dotenv:
+    path: ${file(./.env)}
   documentation: ${file(serverless.doc.yml):documentation}
   stages:
     - dev
