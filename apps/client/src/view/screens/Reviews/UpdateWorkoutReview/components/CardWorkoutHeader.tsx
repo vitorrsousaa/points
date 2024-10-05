@@ -1,3 +1,5 @@
+import { useAuth } from "@/hooks/auth";
+import { useReviewedWorkoutReview } from "@/hooks/workout-review";
 import {
 	Avatar,
 	AvatarFallback,
@@ -17,6 +19,7 @@ import {
 	Icon,
 } from "@shared/ui";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { useWorkoutReviewContext } from "../UpdateWorkoutReviewContext";
 
 export function CardWorkoutHeader() {
@@ -85,6 +88,17 @@ export function CardWorkoutHeader() {
 		[],
 	);
 
+	const navigate = useNavigate();
+
+	const { id } = useAuth();
+
+	const { reviewed } = useReviewedWorkoutReview({ coachId: id || "" });
+
+	const handleReview = () => {
+		reviewed({ workoutReview });
+		navigate(-1);
+	};
+
 	return (
 		<Card>
 			<CardHeader className="flex-row justify-between">
@@ -109,8 +123,10 @@ export function CardWorkoutHeader() {
 			</CardContent>
 
 			<CardFooter className="justify-end space-x-2">
-				<Button variant={"outline"}>Voltar</Button>
-				<Button>Revisar</Button>
+				<Button variant={"outline"} onClick={() => navigate(-1)}>
+					Voltar
+				</Button>
+				<Button onClick={handleReview}>Revisar</Button>
 			</CardFooter>
 		</Card>
 	);

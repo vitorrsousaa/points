@@ -60,4 +60,5 @@ export interface IWorkoutReviewRepository {
 	create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
 	): Promise<WorkoutReview>;
+	review(workout: WorkoutReview): Promise<WorkoutReview>;
 }

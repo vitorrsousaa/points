@@ -78,6 +78,9 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 
 		const gsi1sk = `WORKOUTREVIEW|STATUS|${skStatus}`;
 
+		console.log("gsi1pk", gsi1pk);
+		console.log("gsi1sk", gsi1sk);
+
 		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
 			KeyConditionExpression:
 				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
@@ -155,8 +158,15 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		return this.mapToDomain(newWorkout);
 	}
 
-	async update(workout: WorkoutReview): Promise<WorkoutReview> {
-		await this.delete(workout.athleteId, workout.workoutId);
+	async review(workout: WorkoutReview): Promise<WorkoutReview> {
+		const OLD_STATUS = false;
+
+		await this.delete(
+			workout.athleteId,
+			workout.workoutId,
+			OLD_STATUS,
+			workout.id,
+		);
 
 		const result = await this.create({
 			...workout,
@@ -167,8 +177,31 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 		return result;
 	}
 
-	private async delete(pk: string, sk: string) {
-		await this.dbInstance.delete({ Key: { PK: pk, SK: sk } });
+	private async delete(
+		athleteId: string,
+		workoutId: string,
+		reviewed: boolean,
+		workoutReviewId: string,
+	) {
+		const { PK } = this.getKeys(athleteId, workoutId, reviewed);
+
+		const skStatus = this.getSkStatus(reviewed);
+
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}|WORKOUT|${workoutId}`;
+
+		const query = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+
+		query?.find((item) => item.id === workoutReviewId);
+
+		const item = query?.find((item) => item.id === workoutReviewId);
+
+		await this.dbInstance.delete({ Key: { PK: item?.PK, SK: item?.SK } });
 	}
 
 	private getKeys(
