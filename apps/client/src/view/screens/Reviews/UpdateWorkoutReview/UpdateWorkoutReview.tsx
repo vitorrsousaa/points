@@ -1,13 +1,8 @@
-import {
-	Card,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-	HeaderScreen,
-} from "@shared/ui";
+import { HeaderScreen } from "@shared/ui";
 import { WorkoutReviewContextProvider } from "./UpdateWorkoutReviewContext";
 import { CardExercise } from "./components/CardExercises";
 import { CardVolume } from "./components/CardVolume";
+import { CardWorkoutHeader } from "./components/CardWorkoutHeader";
 
 export function UpdateWorkoutReview() {
 	return (
@@ -17,12 +12,7 @@ export function UpdateWorkoutReview() {
 				description="Realize a revisão do treino do seu atleta."
 			/>
 			<WorkoutReviewContextProvider>
-				<Card>
-					<CardHeader>
-						<CardTitle>Atleta: João Pedro</CardTitle>
-						<CardDescription>Peso: 84kg</CardDescription>
-					</CardHeader>
-				</Card>
+				<CardWorkoutHeader />
 
 				<hr className="mt-6 mb-6" />
 

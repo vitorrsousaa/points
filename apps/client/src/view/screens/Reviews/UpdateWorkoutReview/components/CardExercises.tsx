@@ -1,4 +1,5 @@
 import type { Workout } from "@/entitites/workout";
+import type { WorkoutReview } from "@/entitites/workout-review";
 import {
 	Button,
 	Card,
@@ -6,6 +7,9 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
 	Dialog,
 	DialogContent,
 	DialogDescription,
@@ -13,7 +17,6 @@ import {
 	DialogTitle,
 	DialogTrigger,
 	Icon,
-	Skeleton,
 	Table,
 	TableBody,
 	TableCell,
@@ -21,34 +24,128 @@ import {
 	TableHeader,
 	TableRow,
 } from "@shared/ui";
+import { useMemo } from "react";
 import { useWorkoutReviewContext } from "../UpdateWorkoutReviewContext";
 
 interface BaseCardProps {
-	isLoading?: boolean;
-	isError?: boolean;
-	type: "sets" | "load";
-	planned: Workout["volume"];
-	realized: Workout["volume"];
+	planned: Workout["exercises"][0];
+	realized?: Workout["exercises"][0];
 }
 
-const ExerciseComparison: React.FC<{
-	plannedExercise?: Workout["exercises"][0];
-	realizedExercise?: Workout["exercises"][0];
-}> = ({ plannedExercise, realizedExercise }) => {
-	if (!plannedExercise) return null;
+function BaseCard(props: BaseCardProps) {
+	const { planned, realized } = props;
+
+	const dialogCardInfo = useMemo(
+		() => (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button style={{ all: "unset", cursor: "pointer" }} size={"icon"}>
+						<Icon name="questionMark" className="h-5 w-5" />
+					</Button>
+				</DialogTrigger>
+
+				<DialogContent className="sm:max-w-[425px]">
+					<DialogHeader className="gap-2">
+						<DialogTitle>Como funciona ?</DialogTitle>
+						<DialogDescription>
+							Nesta seção, o treinador pode visualizar como foi o desempenho do
+							atleta dentro de cada exercício proposto. Comparando as séries,
+							repetições, carga e RPE planejado com o realizado, é possível
+							identificar pontos de melhoria e ajustar o treino para aprimorar o
+							desempenho do atleta.
+							<br />
+							<br />
+							Em cada coluna é possível visualizar a série, as repetições, a
+							carga e o RPE planejado e realizado. Caso o atleta não tenha
+							realizado o exercício, a coluna não será preenchida.
+						</DialogDescription>
+					</DialogHeader>
+				</DialogContent>
+			</Dialog>
+		),
+		[],
+	);
 
 	return (
-		// <Accordion type="single" collapsible className="w-full">
-		//   <AccordionItem value={plannedExercise.name || "Exercício"}>
-		//     <AccordionTrigger>{plannedExercise.name || "Exercício"}</AccordionTrigger>
-		//     <AccordionContent>
+		<Card className="w-full">
+			<Collapsible defaultOpen>
+				<CardHeader className="flex flex-row justify-between items-start">
+					<div className="space-y-1">
+						<CardTitle>{planned.name}</CardTitle>
+						<CardDescription>
+							{planned.notes ||
+								"Não foi criado nenhuma anotação para este exercício."}
+						</CardDescription>
+					</div>
+					<div className="flex gap-3">
+						{dialogCardInfo}
+						<CollapsibleTrigger asChild>
+							<Button size={"icon"} variant={"outline"}>
+								<Icon name="double_arrow" className="size-5" />
+							</Button>
+						</CollapsibleTrigger>
+					</div>
+				</CardHeader>
+				<CollapsibleContent>
+					<CardContent>
+						<ExerciseComparison
+							plannedExercise={planned}
+							realizedExercise={realized}
+						/>
+					</CardContent>
+				</CollapsibleContent>
+			</Collapsible>
+		</Card>
+	);
+}
+
+function ExerciseComparison({
+	plannedExercise,
+	realizedExercise,
+}: {
+	plannedExercise: WorkoutReview["plannedExercises"][0];
+	realizedExercise?: WorkoutReview["plannedExercises"][0];
+}) {
+	if (!plannedExercise) return null;
+
+	const nullableValue = <Icon name="value_none" />;
+
+	const dialogAboutSets = useMemo(
+		() => (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button style={{ all: "unset", cursor: "pointer" }} size={"icon"}>
+						<Icon name="questionMark" />
+					</Button>
+				</DialogTrigger>
+
+				<DialogContent className="sm:max-w-[425px]">
+					<DialogHeader className="gap-2">
+						<DialogTitle>Como funciona ?</DialogTitle>
+						<DialogDescription>
+							Nesta coluna, adicionaremos qual a série que o atleta fez, e o
+							tipo da série realizada. As séries podem ser do tipo "T", que são
+							consideradas séries de trabalho, ou do tipo "W", que são
+							consideradas séries de aquecimento. A definição das séries é feita
+							durante a construção do protocolo de treinamento.
+						</DialogDescription>
+					</DialogHeader>
+				</DialogContent>
+			</Dialog>
+		),
+		[],
+	);
+
+	return (
 		<div className="overflow-x-auto">
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className="w-[100px]">Série</TableHead>
+						<TableHead className="flex items-center gap-1">
+							Série {dialogAboutSets}
+						</TableHead>
 						<TableHead>Reps (P/R)</TableHead>
-						<TableHead>Peso (P/R)</TableHead>
+						<TableHead>Carga (P/R)</TableHead>
 						<TableHead>RPE (P/R)</TableHead>
 					</TableRow>
 				</TableHeader>
@@ -56,19 +153,38 @@ const ExerciseComparison: React.FC<{
 					{plannedExercise.sets?.map((plannedSet, index) => {
 						const realizedSet = realizedExercise?.sets?.[index];
 						return (
-							<TableRow key={index}>
-								<TableCell className="font-medium">{index + 1}</TableCell>
-								<TableCell>
-									{plannedSet?.reps || "N/A"} / {realizedSet?.reps || "N/A"}
-									{/* <ComparisonBadge planned={plannedSet?.reps} realized={realizedSet?.reps} /> */}
+							<TableRow
+								key={`${plannedExercise.exerciseId}-tableRow-${realizedExercise?.exerciseId}`}
+							>
+								<TableCell className="font-medium">
+									{index + 1} - {plannedSet.type}
 								</TableCell>
 								<TableCell>
-									{plannedSet?.weight || "N/A"} / {realizedSet?.weight || "N/A"}
-									{/* <ComparisonBadge planned={plannedSet?.weight} realized={realizedSet?.weight} /> */}
+									<span className="inline-flex items-center">
+										{plannedSet?.reps || "N/A"}
+									</span>{" "}
+									/{" "}
+									<span className="inline-flex items-center">
+										{realizedSet?.reps || nullableValue}
+									</span>
 								</TableCell>
 								<TableCell>
-									{plannedSet?.rpe || "N/A"} / {realizedSet?.rpe || "N/A"}
-									{/* <ComparisonBadge planned={plannedSet?.rpe} realized={realizedSet?.rpe} /> */}
+									<span className="inline-flex items-center">
+										{plannedSet?.weight || "N/A"}
+									</span>{" "}
+									/{" "}
+									<span className="inline-flex items-center">
+										{realizedSet?.weight || nullableValue}
+									</span>
+								</TableCell>
+								<TableCell>
+									<span className="inline-flex items-center">
+										{plannedSet?.rpe || "N/A"}
+									</span>{" "}
+									/{" "}
+									<span className="inline-flex items-center">
+										{realizedSet?.rpe || nullableValue}
+									</span>
 								</TableCell>
 							</TableRow>
 						);
@@ -76,132 +192,11 @@ const ExerciseComparison: React.FC<{
 				</TableBody>
 			</Table>
 		</div>
-		//     </AccordionContent>
-		//   </AccordionItem>
-		// </Accordion>
-	);
-};
-
-function BaseCard(props: BaseCardProps) {
-	const { isLoading, isError, type, planned, realized } = props;
-
-	const title =
-		type === "sets" ? "Volume de treino - Séries" : "Volume de treino - Carga";
-	const description =
-		type === "sets"
-			? "Compare o volume de séries planejado e realizado para aprimorar seu treino."
-			: "Analise a carga planejada e levantada para otimizar seu desempenho no treino.";
-
-	if (isLoading) {
-		return <Skeleton className="h-50 w-full rounded-xl" />;
-	}
-
-	if (isError) {
-		return (
-			<Card className="w-full h-50 bg-destructive/8">
-				<CardHeader>
-					<CardTitle>{title}</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<small>Ocorreu um erro ao carregar o volume de treino</small>
-				</CardContent>
-			</Card>
-		);
-	}
-
-	return (
-		<Card className="w-full">
-			<CardHeader className="flex flex-row items-start">
-				<div className="space-y-1">
-					<CardTitle>{title}</CardTitle>
-					<CardDescription>{description}</CardDescription>
-				</div>
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button style={{ all: "unset", cursor: "pointer" }} size={"icon"}>
-							<Icon name="questionMark" className="h-5 w-5" />
-						</Button>
-					</DialogTrigger>
-
-					<DialogContent className="sm:max-w-[425px]">
-						<DialogHeader className="gap-2">
-							<DialogTitle>Como funciona ?</DialogTitle>
-							<DialogDescription>
-								O volume de treino considera apenas as séries de trabalho para
-								os exercícios que envolvem os três principais lifts:
-								agachamento, levantamento terra e supino.
-								<br /> <br />
-								Exemplo: Se você planejou 3 séries de 5 repetições de
-								agachamento com 100 kg e completou todas, o volume contabilizado
-								será de 1.500 kg (3 séries x 5 repetições x 100 kg).
-							</DialogDescription>
-						</DialogHeader>
-					</DialogContent>
-				</Dialog>
-			</CardHeader>
-			<CardContent>
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead />
-							<TableHead>S</TableHead>
-							<TableHead>B</TableHead>
-							<TableHead>D</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						<TableRow>
-							<TableCell>Planejado</TableCell>
-							<TableCell>
-								{planned.S[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-							<TableCell>
-								{planned.B[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-							<TableCell>
-								{planned.D[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-						</TableRow>
-						<TableRow>
-							<TableCell>Realizado</TableCell>
-							<TableCell>
-								{realized.S[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-							<TableCell>
-								{realized.S[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-							<TableCell>
-								{realized.S[type === "sets" ? "sets" : "load"]}{" "}
-								<span className="hidden sm:inline-block">
-									{type === "load" && "kg"}
-								</span>
-							</TableCell>
-						</TableRow>
-					</TableBody>
-				</Table>
-			</CardContent>
-		</Card>
 	);
 }
 
 export function CardExercise() {
-	const { workoutReview, isErrorWorkoutReview, isLoadingWorkoutReview } =
-		useWorkoutReviewContext();
+	const { workoutReview } = useWorkoutReviewContext();
 
 	if (!workoutReview) return null;
 
@@ -213,11 +208,14 @@ export function CardExercise() {
 					Analise todos os exercícios realizados pelo atleta
 				</small>
 			</div>
-			<div className="flex gap-4 flex-col min-[990px]:flex-row">
-				<ExerciseComparison
-					plannedExercise={workoutReview.plannedExercises[0]}
-					realizedExercise={workoutReview.realizedExercises[0]}
-				/>
+			<div className="flex gap-4 flex-col">
+				{workoutReview.plannedExercises.map((plannedExercise, index) => (
+					<BaseCard
+						key={`${plannedExercise.name}-${plannedExercise.exerciseId}`}
+						planned={plannedExercise}
+						realized={workoutReview.realizedExercises[index]}
+					/>
+				))}
 			</div>
 		</div>
 	);

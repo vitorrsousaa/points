@@ -32,6 +32,7 @@ import {
 	StarFilledIcon,
 	StopwatchIcon,
 	TrashIcon,
+	ValueNoneIcon,
 } from "@radix-ui/react-icons";
 
 export interface IconProps {
@@ -74,6 +75,7 @@ const icons = {
 	stopwatch: StopwatchIcon,
 	avatar: AvatarIcon,
 	calendar: CalendarIcon,
+	value_none: ValueNoneIcon,
 } as const;
 
 export function Icon(props: IconProps) {

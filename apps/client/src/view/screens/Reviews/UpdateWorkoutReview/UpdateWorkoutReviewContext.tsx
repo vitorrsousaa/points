@@ -90,7 +90,10 @@ export function WorkoutReviewContextProvider(props: {
 				}
 			/>
 			<RenderIf
-				condition={isErrorWorkoutReview || workoutReview === null}
+				condition={
+					(isErrorWorkoutReview || workoutReview === null) &&
+					!isLoadingWorkoutReview
+				}
 				render={
 					<div className=" flex items-center justify-center">
 						<Card className="w-full">

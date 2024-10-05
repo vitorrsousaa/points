@@ -15,7 +15,9 @@ export type WorkoutVolume = {
 
 export interface Workout {
 	name: string;
-	exercises: Array<Omit<Exercise, "id"> & { sets: Sets[] }>;
+	exercises: Array<
+		Omit<Exercise, "id"> & { sets: Sets[]; exerciseId: string; notes: string }
+	>;
 	isActive: boolean;
 	description?: string;
 	category: string;
