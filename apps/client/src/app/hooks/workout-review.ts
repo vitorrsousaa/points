@@ -13,7 +13,11 @@ export function useGetAllWorkoutReview(params: GetAllWorkoutReviewParams) {
 	const { data, isLoading, isError, refetch, isPending, isFetching } = useQuery(
 		{
 			queryKey: QUERY_KEYS.WORKOUT_REVIEW(params),
-			queryFn: async () => workoutReviewServices.getAll(params),
+			queryFn: async () => {
+				const reviews = await workoutReviewServices.getAll(params);
+
+				return reviews as WithStatus<WorkoutReview>[];
+			},
 		},
 	);
 

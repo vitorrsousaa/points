@@ -19,6 +19,7 @@ import {
 	Icon,
 } from "@shared/ui";
 import { useMemo } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useWorkoutReviewContext } from "../UpdateWorkoutReviewContext";
 
@@ -94,9 +95,14 @@ export function CardWorkoutHeader() {
 
 	const { reviewed } = useReviewedWorkoutReview({ coachId: id || "" });
 
-	const handleReview = () => {
-		reviewed({ workoutReview });
-		navigate(-1);
+	const handleReview = async () => {
+		try {
+			navigate(-1);
+			await reviewed({ workoutReview });
+			toast.success("Treino revisado com sucesso");
+		} catch {
+			toast.error("Erro ao revisar treino");
+		}
 	};
 
 	return (

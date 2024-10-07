@@ -1,5 +1,6 @@
 import type { WorkoutReview } from "@/entitites/workout-review";
 import { useNavigate } from "@/hooks/navigate";
+import type { Status } from "@/utils/types";
 import {
 	Badge,
 	Button,
@@ -7,15 +8,17 @@ import {
 	CardContent,
 	CardHeader,
 	CardTitle,
+	cn,
 	Icon,
 } from "@shared/ui";
 
 interface WorkoutReviewCardProps {
 	workoutReview: WorkoutReview;
+	status?: Status;
 }
 
 export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
-	const { workoutReview: review } = props;
+	const { workoutReview: review, status } = props;
 
 	const formatedDate = new Intl.DateTimeFormat("pt-BR", {
 		dateStyle: "short",
@@ -32,7 +35,12 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 	};
 
 	return (
-		<Card className="hover:shadow-lg transition-shadow">
+		<Card
+			className={cn(
+				"hover:shadow-lg transition-shadow ",
+				status === "error" && "bg-destructive/5",
+			)}
+		>
 			<CardHeader className="py-4">
 				<CardTitle className="flex items-center gap-4 justify-between">
 					{review.workoutName}
@@ -55,10 +63,16 @@ export function WorkoutReviewCard(props: WorkoutReviewCardProps) {
 						<span className="text-sm">{formatedDate}</span>
 					</div>
 				</div>
-				<Button variant="outline" className="w-full" onClick={navigateToReview}>
+				<Button
+					variant="outline"
+					className={cn("w-full", status === "error" && "bg-destructive/10")}
+					onClick={navigateToReview}
+				>
 					<Icon name="eyeOpen" className="w-4 h-4 mr-2" />
 
-					{review.reviewed ? "Treino revisado" : "Revisar"}
+					{status === "error" && "Erro ao revisar treino"}
+					{status !== "error" &&
+						(review.reviewed ? "Treino revisado" : "Revisar")}
 				</Button>
 			</CardContent>
 		</Card>

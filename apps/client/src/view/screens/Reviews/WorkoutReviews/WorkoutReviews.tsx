@@ -169,7 +169,11 @@ export function WorkoutReviews() {
 							ifRender={
 								<div className="grid gap-6  lg:grid-cols-2">
 									{filteredAndSortedReviews.map((review) => (
-										<WorkoutReviewCard key={review.id} workoutReview={review} />
+										<WorkoutReviewCard
+											key={review.id}
+											workoutReview={review}
+											status={review.status}
+										/>
 									))}
 								</div>
 							}

@@ -24,6 +24,7 @@ import {
 	HeaderScreen,
 	Icon,
 } from "@shared/ui";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export function NewAthleteScreen() {
@@ -36,9 +37,14 @@ export function NewAthleteScreen() {
 
 		const newAthlete = { ...data, coachId: id };
 
-		createAthlete(newAthlete);
+		try {
+			navigate(ROUTES.ATHLETES);
+			await createAthlete(newAthlete);
 
-		navigate(ROUTES.ATHLETES);
+			toast.success("Atleta adicionado com sucesso.");
+		} catch {
+			toast.error("Erro ao adicionar atleta.");
+		}
 	}
 
 	return (
