@@ -5,8 +5,8 @@
   "scripts": {
     "lint": "biome lint --apply ./emails",
     "format": "biome format --write ./emails",
-    "dev": "email dev -p 3001",
-    "export": "email export"
+    "export": "email export",
+    "dev": "start http://localhost:3405 && email dev -p 3405 open"
   },
   "devDependencies": {
     "@types/react": "^18.2.38"
