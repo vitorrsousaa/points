@@ -25,7 +25,7 @@ getAllWorkoutReview:
         type: "boolean"
         example: true
     - name: "limit"
-      description: "The limit of items to return. Default value is 5."
+      description: "The limit of items to return. Default value is 10."
       required: true
       schema:
         type: "boolean"

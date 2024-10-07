@@ -346,6 +346,14 @@ functions:
           documentation: ${file(src/server/functions/workout-review/create/handler.doc.yml):createWorkoutReview}
           authorizer:
             name: CognitoAuthorizer
+  reviewedWorkoutReview:
+    handler: src/server/functions/workout-review/reviewed.handler
+    events:
+      - httpApi:
+          method: PUT
+          path: /workout-review
+          authorizer:
+            name: CognitoAuthorizer
   getAllWorkoutReview:
     handler: src/server/functions/workout-review/getAllWorkoutReview.handler
     events:

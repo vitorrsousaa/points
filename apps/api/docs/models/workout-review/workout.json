@@ -15,9 +15,19 @@
 		"plannedExercises",
 		"realizedExercises",
 		"plannedVolume",
-		"realizedVolume"
+		"realizedVolume",
+		"workoutName",
+		"athleteName"
 	],
 	"properties": {
+		"athleteName": {
+			"type": "string",
+			"example": "Athlete name"
+		},
+		"workoutName": {
+			"type": "string",
+			"example": "Workout name"
+		},
 		"notes": {
 			"type": "string",
 			"example": "This is a note"

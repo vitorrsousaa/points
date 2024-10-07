@@ -16,6 +16,8 @@ export type WorkoutReviewDynamoDB = Prettify<
 		end_time: WorkoutReview["endTime"];
 		start_time: WorkoutReview["startTime"];
 		reviewed_at: WorkoutReview["reviewedAt"];
+		workout_name: WorkoutReview["workoutName"];
+		athlete_name: WorkoutReview["athleteName"];
 	} & TBaseEntity &
 		TBaseIndexes &
 		Omit<
@@ -32,6 +34,8 @@ export type WorkoutReviewDynamoDB = Prettify<
 			| "endTime"
 			| "startTime"
 			| "reviewedAt"
+			| "workoutName"
+			| "athleteName"
 		>
 >;
 
@@ -56,4 +60,5 @@ export interface IWorkoutReviewRepository {
 	create(
 		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
 	): Promise<WorkoutReview>;
+	review(workout: WorkoutReview): Promise<WorkoutReview>;
 }

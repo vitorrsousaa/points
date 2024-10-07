@@ -1,5 +1,7 @@
 import {
 	ArchiveIcon,
+	AvatarIcon,
+	CalendarIcon,
 	CaretSortIcon,
 	CheckCircledIcon,
 	CheckIcon,
@@ -10,6 +12,7 @@ import {
 	CrossCircledIcon,
 	CursorArrowIcon,
 	DotsHorizontalIcon,
+	EnvelopeClosedIcon,
 	ExclamationTriangleIcon,
 	EyeOpenIcon,
 	FileIcon,
@@ -25,11 +28,11 @@ import {
 	PlusCircledIcon,
 	QuestionMarkCircledIcon,
 	ReaderIcon,
-	StarFilledIcon,
-	TrashIcon,
 	RocketIcon,
-	EnvelopeClosedIcon,
+	StarFilledIcon,
 	StopwatchIcon,
+	TrashIcon,
+	ValueNoneIcon,
 } from "@radix-ui/react-icons";
 
 export interface IconProps {
@@ -70,6 +73,9 @@ const icons = {
 	closedEnvelope: EnvelopeClosedIcon,
 	exclamationTriangle: ExclamationTriangleIcon,
 	stopwatch: StopwatchIcon,
+	avatar: AvatarIcon,
+	calendar: CalendarIcon,
+	value_none: ValueNoneIcon,
 } as const;
 
 export function Icon(props: IconProps) {

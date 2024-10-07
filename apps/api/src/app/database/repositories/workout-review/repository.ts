@@ -1,10 +1,10 @@
-import { randomUUID } from "node:crypto";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
 	TBaseIndexes,
 } from "@application/database/database";
 import type { WorkoutReview } from "@core/domain/workout-review";
+import { randomUUID } from "node:crypto";
 import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {
@@ -78,6 +78,9 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 
 		const gsi1sk = `WORKOUTREVIEW|STATUS|${skStatus}`;
 
+		console.log("gsi1pk", gsi1pk);
+		console.log("gsi1sk", gsi1sk);
+
 		const result = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
 			KeyConditionExpression:
 				"gsi1pk = :gsi1pk and begins_with(gsi1sk, :gsi1sk)",
@@ -92,7 +95,11 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 	}
 
 	async create(
-		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id">,
+		workout: Omit<WorkoutReview, "createdAt" | "updatedAt" | "id"> & {
+			createdAt?: string;
+			updatedAt?: string;
+			id?: string;
+		},
 	): Promise<WorkoutReview> {
 		const {
 			athleteId,
@@ -106,11 +113,21 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			endTime,
 			startTime,
 			reviewed,
+			workoutName,
+			athleteName,
+			createdAt: propCreatedAt,
+			updatedAt: propUpdatedAt,
+			reviewedAt: propReviewedAt,
+			id: propId,
 		} = workout;
 		const { PK, SK } = this.getKeys(athleteId, workoutId, reviewed);
-		const workoutReviewId = randomUUID();
+		const workoutReviewId = propId || randomUUID();
 		const now = new Date().toISOString();
 		const { gsi1pk, gsi1sk } = this.getIndexes(reviewed, coachId, workoutId);
+
+		const createdAt = propCreatedAt || now;
+		const updatedAt = propUpdatedAt || now;
+		const reviewedAt = propReviewedAt || null;
 
 		const newWorkout: WorkoutReviewDynamoDB = {
 			PK,
@@ -119,8 +136,8 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			gsi1sk,
 			athlete_id: athleteId,
 			coach_id: coachId,
-			created_at: now,
-			updated_at: now,
+			created_at: createdAt,
+			updated_at: updatedAt,
 			id: workoutReviewId,
 			notes,
 			workout_id: workoutId,
@@ -131,12 +148,60 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			end_time: endTime,
 			start_time: startTime,
 			reviewed,
-			reviewed_at: null,
+			reviewed_at: reviewedAt,
+			workout_name: workoutName,
+			athlete_name: athleteName,
 		};
 
 		await this.dbInstance.create({ ...newWorkout });
 
 		return this.mapToDomain(newWorkout);
+	}
+
+	async review(workout: WorkoutReview): Promise<WorkoutReview> {
+		const OLD_STATUS = false;
+
+		await this.delete(
+			workout.athleteId,
+			workout.workoutId,
+			OLD_STATUS,
+			workout.id,
+		);
+
+		const result = await this.create({
+			...workout,
+			createdAt: workout.createdAt,
+			updatedAt: new Date().toISOString(),
+		});
+
+		return result;
+	}
+
+	private async delete(
+		athleteId: string,
+		workoutId: string,
+		reviewed: boolean,
+		workoutReviewId: string,
+	) {
+		const { PK } = this.getKeys(athleteId, workoutId, reviewed);
+
+		const skStatus = this.getSkStatus(reviewed);
+
+		const SK = `WORKOUTREVIEW|STATUS|${skStatus}|WORKOUT|${workoutId}`;
+
+		const query = await this.dbInstance.query<WorkoutReviewDynamoDB[]>({
+			KeyConditionExpression: "PK = :PK and begins_with(SK, :SK)",
+			ExpressionAttributeValues: {
+				":PK": PK,
+				":SK": SK,
+			},
+		});
+
+		query?.find((item) => item.id === workoutReviewId);
+
+		const item = query?.find((item) => item.id === workoutReviewId);
+
+		await this.dbInstance.delete({ Key: { PK: item?.PK, SK: item?.SK } });
 	}
 
 	private getKeys(
@@ -188,6 +253,8 @@ export class WorkoutReviewRepository implements IWorkoutReviewRepository {
 			startTime: workout.start_time,
 			reviewed: workout.reviewed,
 			reviewedAt: workout.reviewed_at,
+			workoutName: workout.workout_name,
+			athleteName: workout.athlete_name,
 		};
 	}
 }

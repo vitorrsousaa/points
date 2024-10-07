@@ -57,6 +57,11 @@ const NAV_ITEMS: NavSectionsProps[] = [
 				icon: "stopwatch",
 				label: "Exercícios",
 			},
+			{
+				href: ROUTES.WORKOUT_REVIEW,
+				icon: "archive",
+				label: "Revisões",
+			},
 		],
 	},
 ];
@@ -67,7 +72,7 @@ export function Sidebar() {
 	const { pathname } = useLocation();
 
 	return (
-		<aside className="flex fixed sm:min-w-[280px] inset-y-2 left-2 z-10 w-fit flex-col sm:rounded-xl sm:border p-4 sm:bg-muted/30">
+		<aside className="flex fixed inset-y-2 left-2 z-10 w-[280px] flex-col sm:rounded-xl sm:border p-4 sm:bg-muted/30">
 			<nav className="flex flex-col gap-4 px-2 pt-1 w-full">
 				<span className="text-lg font-semibold">GRYPP</span>
 

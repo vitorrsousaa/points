@@ -13,4 +13,6 @@ export const ROUTES = {
 	UPDATE_WORKOUT: "/atleta/:athleteId/editar/:workoutId",
 	VERIFICATION: "/verificacao",
 	UPDATE_ATHLETE: "/atleta/:athleteId/editar-atleta",
+	WORKOUT_REVIEW: "/revisoes",
+	UPDATE_WORKOUT_REVIEW: "/revisoes/editar/:workoutReviewId",
 } as const;
