@@ -18,7 +18,7 @@ export default function RootLayout({
 }): JSX.Element {
 	return (
 		<html lang="pt-BR" className="scroll-smooth">
-			<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+			<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 			<body className={poppins.className}>{children}</body>
 		</html>
 	);
