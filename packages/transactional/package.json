@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@react-email/components": "0.0.25",
+    "@shared/typescript-config": "*",
     "react": "^18.3.1",
     "react-email": "^3.0.1"
   }

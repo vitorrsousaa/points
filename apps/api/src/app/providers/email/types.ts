@@ -16,12 +16,9 @@ export type SendEmailResponse = {
 	} | null;
 };
 
-export type RenderFunction = <
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	T extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>,
->(
-	component: T,
-	props: React.ComponentProps<T>,
+export type RenderFunction = <T>(
+	component: React.JSXElementConstructor<T>,
+	props: T,
 ) => Promise<string>;
 
 export interface IEmailProvider {
