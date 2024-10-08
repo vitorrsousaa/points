@@ -1,6 +1,6 @@
-import "./styles.css";
-import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import "./styles.css";
 
 const poppins = Poppins({
 	weight: ["200", "400", "500", "600", "700"],
@@ -18,6 +18,7 @@ export default function RootLayout({
 }): JSX.Element {
 	return (
 		<html lang="pt-BR" className="scroll-smooth">
+			<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 			<body className={poppins.className}>{children}</body>
 		</html>
 	);
