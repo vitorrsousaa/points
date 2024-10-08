@@ -1,8 +1,10 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
 import type { IHistoryExerciseRepository } from "@application/database/repositories/history-exercise";
+import type { IUserRepository } from "@application/database/repositories/user";
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import { workoutExerciseInput } from "@application/modules/workout/mocks/create";
+import type { IEmailProvider } from "@application/providers/email/types";
 import type { UnwrapPromise } from "@application/utils/types";
 import { type Mocked, vi } from "vitest";
 import {
@@ -17,6 +19,8 @@ describe("Service:Create", () => {
 	let mockedWorkoutReviewRepository: Mocked<IWorkoutReviewRepository>;
 	let mocketHistoryExerciseRepository: Mocked<IHistoryExerciseRepository>;
 	let mocketWorkoutRepository: Mocked<IWorkoutRepository>;
+	let mockedEmailProvider: Mocked<IEmailProvider>;
+	let mockedUserRepository: Mocked<IUserRepository>;
 	const inputData: ICreateInput = {
 		athleteId: "123",
 		coachId: "456",
@@ -41,12 +45,21 @@ describe("Service:Create", () => {
 		mocketWorkoutRepository = {
 			getById: vi.fn(),
 		} as unknown as Mocked<IWorkoutRepository>;
+		mockedEmailProvider = {
+			render: vi.fn(),
+			send: vi.fn(),
+		} as unknown as Mocked<IEmailProvider>;
+		mockedUserRepository = {
+			getById: vi.fn(),
+		} as unknown as Mocked<IUserRepository>;
 
 		service = new CreateService(
 			mockedAthleteRepository,
 			mockedWorkoutReviewRepository,
 			mocketWorkoutRepository,
 			mocketHistoryExerciseRepository,
+			mockedEmailProvider,
+			mockedUserRepository,
 		);
 	});
 
@@ -134,6 +147,11 @@ describe("Service:Create", () => {
 		} as unknown as UnwrapPromise<
 			ReturnType<IWorkoutReviewRepository["create"]>
 		>);
+		mockedUserRepository.getById.mockResolvedValue({
+			id: "123",
+			name: "John Doe",
+			email: "john@email.com",
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 
 		// Act
 		await service.execute(inputData);
@@ -163,6 +181,11 @@ describe("Service:Create", () => {
 		} as unknown as UnwrapPromise<
 			ReturnType<IWorkoutReviewRepository["create"]>
 		>);
+		mockedUserRepository.getById.mockResolvedValue({
+			id: "123",
+			name: "John Doe",
+			email: "john@email.com",
+		} as unknown as UnwrapPromise<ReturnType<IUserRepository["getById"]>>);
 
 		// Act
 		await service.execute(inputData);

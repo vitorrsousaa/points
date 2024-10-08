@@ -13,9 +13,8 @@ export class EmailProvider implements IEmailProvider {
 
 	constructor(private readonly resendClient: IResendClient) {}
 	async render<
-		T extends
-			| keyof JSX.IntrinsicElements
-			| React.JSXElementConstructor<unknown>,
+		T extends // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		React.JSXElementConstructor<any>,
 	>(component: T, props: React.ComponentProps<T>): Promise<string> {
 		return renderReactComponent(React.createElement(component, props));
 	}

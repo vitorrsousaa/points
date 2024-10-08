@@ -1,15 +1,18 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
 import type { IHistoryExerciseRepository } from "@application/database/repositories/history-exercise";
+import type { IUserRepository } from "@application/database/repositories/user";
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import type { IService } from "@application/interfaces/service";
 import { getWorkoutVolume } from "@application/modules/workout/functions/get-workout-volume";
+import type { IEmailProvider } from "@application/providers/email/types";
 import { AthleteNotFound } from "@application/shared/errors/athlete-not-found";
 import { WorkoutNotFound } from "@application/shared/errors/workout-not-found";
 import {
 	type WorkoutReview,
 	WorkoutReviewSchema,
 } from "@core/domain/workout-review";
+import { CreateWorkoutReview } from "@shared/transactional";
 import type * as z from "zod";
 import { AthleteNotAssigned } from "../../errors/athlete-not-assigned";
 import { WorkoutNotAssignedToCoach } from "../../errors/workout-not-assigned-coach";
@@ -36,10 +39,12 @@ export class CreateService implements ICreateService {
 	private DEFAULT_REVIEWED = false;
 
 	constructor(
-		private athleteRepository: IAthleteRepository,
-		private workoutReviewRepository: IWorkoutReviewRepository,
-		private workoutRepository: IWorkoutRepository,
-		private historyExerciseRepository: IHistoryExerciseRepository,
+		private readonly athleteRepository: IAthleteRepository,
+		private readonly workoutReviewRepository: IWorkoutReviewRepository,
+		private readonly workoutRepository: IWorkoutRepository,
+		private readonly historyExerciseRepository: IHistoryExerciseRepository,
+		private readonly emailProvider: IEmailProvider,
+		private readonly userRepository: IUserRepository,
 	) {}
 
 	async execute(createInput: ICreateInput): Promise<ICreateOutput> {
@@ -70,6 +75,12 @@ export class CreateService implements ICreateService {
 		}
 
 		if (workout.coachId !== coachId) {
+			throw new WorkoutNotAssignedToCoach();
+		}
+
+		const coach = await this.userRepository.getById(coachId);
+
+		if (!coach) {
 			throw new WorkoutNotAssignedToCoach();
 		}
 
@@ -114,6 +125,21 @@ export class CreateService implements ICreateService {
 		await this.athleteRepository.update({
 			...athlete,
 			workoutCount: newWorkoutCount,
+		});
+
+		const renderEmail = await this.emailProvider.render(CreateWorkoutReview, {
+			athleteEmail: athlete.email,
+			athleteName: athlete.name,
+			workoutDescription: workout.description,
+			workoutName: workout.name,
+			workoutReviewId: workoutReview.id,
+			coachName: coach.name,
+		});
+
+		await this.emailProvider.send({
+			html: renderEmail,
+			subject: `Novo Treino Cadastrado por ${athlete.name}`,
+			to: coach.email,
 		});
 
 		return workoutReview;
