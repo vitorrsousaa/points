@@ -9,7 +9,6 @@ import {
 	Img,
 	Link,
 	Preview,
-	Row,
 	Section,
 	Tailwind,
 	Text,
@@ -22,6 +21,7 @@ interface CreateWorkoutReviewProps {
 	workoutReviewId: string;
 	workoutName: string;
 	workoutDescription: string;
+	coachName: string;
 }
 
 const baseUrl = "https://app.grypp.com.br";
@@ -32,6 +32,7 @@ export const CreateWorkoutReview = ({
 	workoutReviewId = "workoutReviewId",
 	workoutName = "workoutName",
 	workoutDescription = "Descrição não disponível",
+	coachName = "Nome do treinador",
 }: CreateWorkoutReviewProps) => {
 	const previewText = `Novo Treino Cadastrado por ${athleteName}`;
 
@@ -57,27 +58,27 @@ export const CreateWorkoutReview = ({
 							Treino <strong>cadastrado</strong> para revisão
 						</Heading>
 						<Text className="text-black text-[14px] leading-[24px]">
-							Olá Treinador,
+							Olá {coachName},
 						</Text>
 						<Text className="text-black text-[14px] leading-[24px]">
 							O atleta <strong>{athleteName}</strong> (
 							<span className="text-blue-600 no-underline">{athleteEmail}</span>
 							) cadastrou um novo treino para revisão.
 						</Text>
-						<Section>
-							<Row>
-								<Text>Informações do treino:</Text>
+						<Section className="flex flex-col">
+							<Column align="left">
 								<Column align="left" className="gap-0 space-y-0">
+									<Text>Informações do treino:</Text>
 									<div>
 										<Text>
 											<strong>Nome:</strong> {workoutName}
 										</Text>
 										<Text>
-											<strong>Descrição:</strong> workout description
+											<strong>Descrição:</strong> {workoutDescription}
 										</Text>
 									</div>
 								</Column>
-							</Row>
+							</Column>
 						</Section>
 						<Text className="text-black text-[14px] leading-[24px]">
 							Acesse o link abaixo, ou copie e cole no seu navegador:{" "}

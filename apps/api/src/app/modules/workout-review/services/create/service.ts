@@ -1,5 +1,6 @@
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
 import type { IHistoryExerciseRepository } from "@application/database/repositories/history-exercise";
+import type { IUserRepository } from "@application/database/repositories/user";
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import type { IService } from "@application/interfaces/service";
@@ -43,6 +44,7 @@ export class CreateService implements ICreateService {
 		private readonly workoutRepository: IWorkoutRepository,
 		private readonly historyExerciseRepository: IHistoryExerciseRepository,
 		private readonly emailProvider: IEmailProvider,
+		private readonly userRepository: IUserRepository,
 	) {}
 
 	async execute(createInput: ICreateInput): Promise<ICreateOutput> {
@@ -73,6 +75,12 @@ export class CreateService implements ICreateService {
 		}
 
 		if (workout.coachId !== coachId) {
+			throw new WorkoutNotAssignedToCoach();
+		}
+
+		const coach = await this.userRepository.getById(coachId);
+
+		if (!coach) {
 			throw new WorkoutNotAssignedToCoach();
 		}
 
@@ -125,12 +133,13 @@ export class CreateService implements ICreateService {
 			workoutDescription: workout.description,
 			workoutName: workout.name,
 			workoutReviewId: workoutReview.id,
+			coachName: coach.name,
 		});
 
 		await this.emailProvider.send({
 			html: renderEmail,
 			subject: `Novo Treino Cadastrado por ${athlete.name}`,
-			to: athlete.email,
+			to: coach.email,
 		});
 
 		return workoutReview;
