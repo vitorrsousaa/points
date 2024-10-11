@@ -2,19 +2,19 @@
 
 export function Features() {
 	return (
-		<div className="mx-auto w-full md:w-10/12 max-w-4xl" id="funcionalidades">
+		<div className="mx-auto max-w-[1120px] w-full" id="funcionalidades">
 			<div className="space-y-6 sm:space-y-8">
 				{/*<!-- Title --> */}
-				<div className="space-y-2 md:space-y-4 text-center">
+				<div className="space-y-2 md:space-y-4 text-center max-w-[848px] mx-auto">
 					<span className="font-medium mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 						Nossas vantagens
 					</span>
 
-					<h2 className="text-4xl md:text-5xl font-medium text-gray-800 dark:text-gray-200">
-						Uma nova forma de
+					<h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-800 dark:text-gray-200">
+						Uma abordagem inovadora para
 						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 							{" "}
-							cuidar <br className="hidden md:block" />
+							cuidar{" "}
 						</span>
 						dos seus alunos
 					</h2>
@@ -32,7 +32,7 @@ export function Features() {
 					<div className="flex items-center gap-4">
 						<div className="h-80 overflow-hidden flex-1 border rounded-xl p-6 bg-gray-50 flex flex-col gap-4">
 							<div>
-								<h4 className="font-medium text-2xl mb-1">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Cuide de seus atletas
 								</h4>
 
@@ -48,7 +48,9 @@ export function Features() {
 					<div className="flex flex-col md:flex-row items-center gap-4 md:h-[340px]">
 						<div className="flex-1 max-md:w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
 							<div>
-								<h4 className="font-medium text-2xl mb-2">Análises</h4>
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
+									Análises
+								</h4>
 
 								<span className="text-muted-foreground text-pretty">
 									Saiba como está sua evolução.
@@ -63,9 +65,13 @@ export function Features() {
 							/>
 						</div>
 
+						<div className="flex-1 max-md:w-full h-full border rounded-xl p-6 bg-[#1E1E1E] gap-4 flex items-center justify-center">
+							<img src="white-logo.png" alt="GRYPP" title="GRYPP" />
+						</div>
+
 						<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
 							<div>
-								<h4 className="font-medium text-2xl mb-2">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Treinos individuais
 								</h4>
 
@@ -82,7 +88,7 @@ export function Features() {
 					<div className="flex items-center gap-4 ">
 						<div className="h-80 flex-1 border rounded-xl pt-6 px-6 bg-gray-50 flex justify-between items-center gap-4 flex-col md:flex-row">
 							<div className="md:w-[50%] w-full">
-								<h4 className="font-medium text-2xl mb-2">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Tudo na palma da mão
 								</h4>
 								<span className="text-muted-foreground text-pretty">

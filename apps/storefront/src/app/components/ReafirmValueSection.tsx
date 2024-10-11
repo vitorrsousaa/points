@@ -3,17 +3,17 @@ import { Button } from "@shared/ui";
 export function ReafirmValueSection() {
 	return (
 		<div className="flex flex-col items-center text-center w-full border-t-[1px] border-t-gray-200 pt-20 m">
-			<h3 className="block text-4xl font-medium text-gray-800 dark:text-gray-200">
-				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-medium">
+			<h3 className="block text-4xl font-bold tracking-tighter text-gray-800 dark:text-gray-200">
+				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-bold">
 					Esqueça{" "}
 				</strong>
 				planilhas,
-				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-medium">
+				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-bold">
 					{" "}
 					economize{" "}
 				</strong>
 				tempo e <br />
-				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-medium">
+				<strong className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent font-bold">
 					{" "}
 					evolua{" "}
 				</strong>

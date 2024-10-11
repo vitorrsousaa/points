@@ -11,7 +11,7 @@ export function Pricing() {
 					<span className="font-medium mb-4 md:mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 						Planos & Preços
 					</span>
-					<h2 className="text-4xl font-medium text-gray-800 dark:text-gray-200 md:text-5xl">
+					<h2 className="text-4xl font-bold tracking-tighter text-gray-800 dark:text-gray-200 md:text-5xl">
 						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 							Economize{" "}
 						</span>

@@ -13,7 +13,7 @@ export function Faq() {
 						FAQ
 					</span>
 
-					<h2 className="text-4xl md:text-5xl font-medium dark:text-white text-center">
+					<h2 className="text-4xl md:text-5xl font-bold tracking-tighter dark:text-white text-center">
 						Dúvidas frequentes
 					</h2>
 				</div>
