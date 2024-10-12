@@ -13,7 +13,8 @@ import {
 	Tailwind,
 	Text,
 } from "@react-email/components";
-import * as React from "react";
+/* tslint:disable:no-unused-variable */
+import React from "react";
 
 export interface CreateWorkoutReviewProps {
 	athleteName: string;
@@ -73,9 +74,11 @@ export const CreateWorkoutReview = ({
 										<Text>
 											<strong>Nome:</strong> {workoutName}
 										</Text>
-										<Text>
-											<strong>Descrição:</strong> {workoutDescription}
-										</Text>
+										<React.Fragment>
+											<Text>
+												<strong>Descrição:</strong> {workoutDescription}
+											</Text>
+										</React.Fragment>
 									</div>
 								</Column>
 							</Column>
