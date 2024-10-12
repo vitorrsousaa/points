@@ -15,7 +15,7 @@ export const defaultSettings: Omit<
 			},
 		},
 	},
-	email: {
+	preferencesEmail: {
 		createWorkoutReview: true,
 	},
 };

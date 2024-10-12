@@ -1,5 +1,7 @@
+import { AppError } from "@application/errors/app-error";
 import type { IResendClient } from "@application/libs/resend";
 import { render as renderReactComponent } from "@react-email/components";
+import { TEMPLATES, type TemplatesIds } from "@shared/transactional";
 import React from "react";
 import type {
 	IEmailProvider,
@@ -12,6 +14,18 @@ export class EmailProvider implements IEmailProvider {
 	private INTERNAL_EMAIL = "suporte@grypp.com.br";
 
 	constructor(private readonly resendClient: IResendClient) {}
+	getTemplate(
+		templateId: TemplatesIds,
+	): Extract<(typeof TEMPLATES)[number], { value: TemplatesIds }>["component"] {
+		const template = TEMPLATES.find((t) => t.value === templateId);
+
+		if (!template) {
+			throw new AppError(`Template ${templateId} not found`, 422);
+		}
+
+		return template.component;
+	}
+
 	async render<
 		T extends // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		React.JSXElementConstructor<any>,
