@@ -48,8 +48,26 @@ export function useUpdateSettings() {
 
 			return updateSettings(updatedSettings);
 		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({
+		onMutate: async (newSettings) => {
+			const oldSettings = queryClient.getQueryData<Settings>(
+				QUERY_KEYS.SETTINGS,
+			);
+
+			const mergedSettings = { ...oldSettings, ...newSettings };
+
+			queryClient.setQueryData(QUERY_KEYS.SETTINGS, () => mergedSettings);
+
+			return oldSettings;
+		},
+		onError: async (_error, _variables, context) => {
+			await queryClient.cancelQueries({
+				queryKey: QUERY_KEYS.SETTINGS,
+			});
+
+			queryClient.setQueryData(QUERY_KEYS.SETTINGS, context);
+		},
+		onSuccess: async () => {
+			await queryClient.cancelQueries({
 				queryKey: QUERY_KEYS.SETTINGS,
 			});
 		},

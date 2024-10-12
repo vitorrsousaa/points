@@ -16,7 +16,7 @@ export interface Settings {
 			};
 		};
 	};
-	email: {
+	preferencesEmail: {
 		createWorkoutReview: boolean;
 	};
 }

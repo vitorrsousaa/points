@@ -10,6 +10,7 @@ import {
 	type Theme,
 } from "@shared/ui";
 import { useCallback } from "react";
+import toast from "react-hot-toast";
 import { Section, SectionItem } from ".";
 
 export function SettingsTab() {
@@ -19,21 +20,21 @@ export function SettingsTab() {
 
 	const { execute: updateSettings } = useUpdateSettings();
 
-	console.log(settings);
-
 	const handleUpdateEmailToCreateWorkoutReview = useCallback(
-		(value: "enable" | "disable") => {
+		async (value: "enable" | "disable") => {
 			const newSettings = {
 				...settings,
-				email: {
-					...settings?.email,
+				preferencesEmail: {
+					...settings?.preferencesEmail,
 					createWorkoutReview: value === "enable",
 				},
 			};
 
-			updateSettings(newSettings);
+			await updateSettings(newSettings);
+
+			toast.success("Preferências atualizadas");
 		},
-		[],
+		[updateSettings, settings],
 	);
 
 	return (
@@ -78,10 +79,14 @@ export function SettingsTab() {
 								event as "enable" | "disable",
 							)
 						}
-						value={settings?.email.createWorkoutReview ? "enable" : "disable"}
-						disabled={isLoading || isError}
+						value={
+							settings?.preferencesEmail?.createWorkoutReview
+								? "enable"
+								: "disable"
+						}
+						disabled={isError}
 					>
-						<SelectTrigger>
+						<SelectTrigger loading={isLoading}>
 							<SelectValue placeholder="Selecione o tema" />
 						</SelectTrigger>
 						<SelectContent>

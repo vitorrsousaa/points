@@ -2,5 +2,7 @@ import type { Settings } from "@/entitites/Settings";
 import { httpClient } from "../httpClient";
 
 export async function updateSettings(settings: Settings) {
-	return httpClient.put<Settings>("/settings", settings);
+	const { data } = await httpClient.put<Settings>("/settings", settings);
+
+	return data;
 }
