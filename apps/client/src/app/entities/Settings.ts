@@ -16,4 +16,7 @@ export interface Settings {
 			};
 		};
 	};
+	email: {
+		createWorkoutReview: boolean;
+	};
 }

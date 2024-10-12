@@ -14,7 +14,7 @@ export function useGetSettings() {
 		isFetching,
 		isError,
 	} = useQuery({
-		queryKey: [QUERY_KEYS.SETTINGS],
+		queryKey: QUERY_KEYS.SETTINGS,
 		queryFn: getSettings,
 	});
 
@@ -50,7 +50,7 @@ export function useUpdateSettings() {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.SETTINGS],
+				queryKey: QUERY_KEYS.SETTINGS,
 			});
 		},
 	});

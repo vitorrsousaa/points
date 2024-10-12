@@ -24,6 +24,7 @@ export class SettingsRepository implements ISettingsRepository {
 			created_at: now,
 			updated_at: now,
 			id: settingsId,
+			email: createInput.email,
 			PK,
 			SK,
 		};
@@ -46,14 +47,16 @@ export class SettingsRepository implements ISettingsRepository {
 			await this.dbInstance.update({
 				Key: { PK, SK },
 				UpdateExpression:
-					"set #onboarding = :onboarding, #updated_at = :updated_at",
+					"set #onboarding = :onboarding, #updated_at = :updated_at, #email = :email",
 				ExpressionAttributeNames: {
 					"#onboarding": "onboarding",
 					"#updated_at": "updated_at",
+					"#email": "email",
 				},
 				ExpressionAttributeValues: {
 					":onboarding": updateInput.onboarding,
 					":updated_at": now,
+					":email": updateInput.email,
 				},
 			});
 
@@ -63,6 +66,7 @@ export class SettingsRepository implements ISettingsRepository {
 				user_id: updateInput.userId,
 				updated_at: now,
 				created_at: updateInput.createdAt,
+				email: updateInput.email,
 				PK,
 				SK,
 			};
@@ -90,6 +94,9 @@ export class SettingsRepository implements ISettingsRepository {
 			userId: item.user_id,
 			createdAt: item.created_at,
 			updatedAt: item.updated_at,
+			email: {
+				createWorkoutReview: item.email?.createWorkoutReview || true,
+			},
 		};
 	}
 

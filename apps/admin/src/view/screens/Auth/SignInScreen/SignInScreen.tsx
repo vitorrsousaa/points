@@ -66,7 +66,7 @@ export function SignInScreen() {
 				<CardHeader>
 					<CardTitle className="text-xl">Faça login</CardTitle>
 					<CardDescription>
-						Faça login e acesse o painel de administrador da sua loja.
+						Faça login e acesse o painel de administrador.
 					</CardDescription>
 				</CardHeader>
 				<CardContent>

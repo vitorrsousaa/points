@@ -9,6 +9,11 @@ const navItems = [
 		icon: <Icon name="reader" className="h-5 w-5" />,
 		label: "Exercícios",
 	},
+	{
+		href: ROUTES.EMAILS,
+		icon: <Icon name="closedEnvelope" className="h-5 w-5" />,
+		label: "E-mails",
+	},
 ];
 
 export function Sidebar() {

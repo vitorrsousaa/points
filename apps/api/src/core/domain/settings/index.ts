@@ -20,6 +20,9 @@ export const SettingsSchema = z.object({
 			}),
 		}),
 	}),
+	email: z.object({
+		createWorkoutReview: z.boolean(),
+	}),
 });
 
 export type Settings = z.infer<typeof SettingsSchema>;

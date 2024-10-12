@@ -15,7 +15,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface CreateWorkoutReviewProps {
+export interface CreateWorkoutReviewProps {
 	athleteName: string;
 	athleteEmail: string;
 	workoutReviewId: string;
