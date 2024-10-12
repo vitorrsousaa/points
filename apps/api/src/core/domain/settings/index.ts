@@ -20,7 +20,7 @@ export const SettingsSchema = z.object({
 			}),
 		}),
 	}),
-	email: z.object({
+	preferencesEmail: z.object({
 		createWorkoutReview: z.boolean(),
 	}),
 });
