@@ -29,7 +29,7 @@ export function Features() {
 				{/*<!-- List --> */}
 
 				<div className="space-y-4">
-					<div className="flex items-center gap-4">
+					<div className="flex max-md:flex-col items-center gap-4">
 						<div className="h-80 overflow-hidden flex-1 border rounded-xl p-6 bg-gray-50 flex flex-col gap-4">
 							<div>
 								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
@@ -44,7 +44,7 @@ export function Features() {
 							<img src="athletes.png" title="Atletas" alt="Atletas" />
 						</div>
 
-						<div className="flex-1 max-w-[270px] max-h-[320px] max-md:w-full max-md:max-w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
+						<div className="flex-1 max-md:hidden max-w-[270px] max-h-[320px] max-md:w-full max-md:max-w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
 							<div>
 								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Análises
@@ -86,12 +86,11 @@ export function Features() {
 								</h4>
 
 								<span className="text-muted-foreground text-pretty">
-									Crie treinos individuais personalizados que atendam exatamente
-									às necessidades de cada aluno.
+									Revise os treinos realizados pelos seus atletas, deixe feedbacks e permita uma evolução constante.
 								</span>
 							</div>
 
-							<img src="training.png" title="Treinos" alt="Treinos" />
+							<img src="workout-review.png" title="Revisão" alt="Revisão" />
 						</div>
 					</div>
 

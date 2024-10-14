@@ -12,7 +12,7 @@ export function Hero() {
 					href="https://app.grypp.com.br/registrar"
 					target="_blank"
 				>
-					Diga adeus as planilhas agora!!
+					Quero mais produtividade, agora!!
 					<span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-orange-500/20 px-2.5 py-1.5 text-sm font-semibold text-gray-600 dark:bg-orange-900 dark:text-gray-400 hover:bg-orange-600/30">
 						<Icon name="arrow_right" />
 					</span>
