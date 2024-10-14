@@ -1,7 +1,7 @@
 export function Header() {
 	return (
 		<header className="sticky top-0 z-50 p-4 bg-background/60 backdrop-blur">
-			<div className="flex justify-between items-center container max-w-[1200px]">
+			<div className="flex justify-between items-center container max-w-[1200px] max-lg:p-0">
 				<a
 					title="brand-logo"
 					className="relative mr-6 flex items-center space-x-2"
@@ -95,16 +95,23 @@ export function Header() {
 						</div>
 					</div>
 				</div>
-				<div className="mt-2 cursor-pointer block lg:hidden">
-					<button
-						type="button"
-						aria-haspopup="dialog"
-						aria-expanded="false"
-						aria-controls="radix-:R1kcv6ja:"
-						data-state="closed"
-					>
-						teste
-					</button>
+				<div className="cursor-pointer block lg:hidden">
+					<div className="gap-4 flex ml-8">
+							<a
+								className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+								href="https://app.grypp.com.br/login"
+								target="_blank"
+							>
+								Entrar
+							</a>
+							<a
+								className="items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 px-4 py-2 w-full sm:w-auto text-background flex gap-2"
+								href="https://app.grypp.com.br/registrar"
+								target="_blank"
+							>
+								Criar Conta
+							</a>
+						</div>
 				</div>
 			</div>
 		</header>
