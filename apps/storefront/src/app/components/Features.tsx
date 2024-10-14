@@ -10,18 +10,18 @@ export function Features() {
 						Nossas vantagens
 					</span>
 
-					<h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-800 dark:text-gray-200">
-						Uma abordagem inovadora para
-						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
-							{" "}
-							cuidar{" "}
+					<h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-gray-800 dark:text-gray-200">
+						Tudo o que 
+						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
+							{" "}você precisa{" "}
 						</span>
-						dos seus alunos
+						 para <br /> fazer o seu
+						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
+							{" "}melhor!{" "}
+						</span>
 					</h2>
 					<p className="text-gray-500 text-center">
-						Explore uma forma fácil e intuitiva de gerenciar seus alunos.
-						Organize treinos, planeje atividades e acompanhe o progresso de
-						maneira eficiente e sem complicação.
+						É difícil ser produtivo se você tem um espaço de trabalho desorganizado e desajeitado. <br /> Centralize tudo dos seus atletas em um só lugar.
 					</p>
 				</div>
 				{/*<!-- End Title --> */}
@@ -43,10 +43,8 @@ export function Features() {
 
 							<img src="athletes.png" title="Atletas" alt="Atletas" />
 						</div>
-					</div>
 
-					<div className="flex flex-col md:flex-row items-center gap-4 md:h-[340px]">
-						<div className="flex-1 max-md:w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
+						<div className="flex-1 max-w-[270px] max-h-[320px] max-md:w-full max-md:max-w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
 							<div>
 								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Análises
@@ -61,18 +59,30 @@ export function Features() {
 								src="graph.png"
 								alt="Análises"
 								title="Análises"
-								className=""
 							/>
 						</div>
+					</div>
 
-						<div className="flex-1 max-md:w-full h-full border rounded-xl p-6 bg-[#1E1E1E] gap-4 flex items-center justify-center">
-							<img src="white-logo.png" alt="GRYPP" title="GRYPP" />
-						</div>
-
+					<div className="flex flex-col md:flex-row items-center gap-4 md:h-[340px]">
 						<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
 							<div>
 								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Treinos individuais
+								</h4>
+
+								<span className="text-muted-foreground text-pretty">
+									Crie treinos individuais personalizados que atendam exatamente
+									às necessidades de cada aluno.
+								</span>
+							</div>
+
+							<img src="training.png" title="Treinos" alt="Treinos" />
+						</div>
+
+								<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
+							<div>
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
+									Revisões de treinos
 								</h4>
 
 								<span className="text-muted-foreground text-pretty">

@@ -29,7 +29,8 @@ export function Header() {
 									dir="ltr"
 								>
 									<li>
-										<button
+										<a
+											href="#hero"
 											id="radix-:R34cv6ja:-trigger-radix-:R2r4cv6ja:"
 											data-state="closed"
 											aria-expanded="false"
@@ -38,12 +39,12 @@ export function Header() {
 											data-radix-collection-item=""
 										>
 											Início
-										</button>
+										</a>
 									</li>
 									<li>
 										<a
+											href="#funcionalidades"
 											className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-primary/10 data-[state=open]:bg-primary/10"
-											href="/blog"
 											data-radix-collection-item=""
 										>
 											Funcionalidades
@@ -51,7 +52,8 @@ export function Header() {
 									</li>
 
 									<li>
-										<button
+										<a
+											href="#precos"
 											id="radix-:R34cv6ja:-trigger-radix-:R4r4cv6ja:"
 											data-state="closed"
 											aria-expanded="false"
@@ -60,12 +62,12 @@ export function Header() {
 											data-radix-collection-item=""
 										>
 											Preços
-										</button>
+										</a>
 									</li>
 									<li>
 										<a
 											className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-primary/10 data-[state=open]:bg-primary/10"
-											href="/blog"
+											href="#duvidas"
 											data-radix-collection-item=""
 										>
 											Dúvidas
@@ -79,12 +81,14 @@ export function Header() {
 							<a
 								className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
 								href="https://app.grypp.com.br/login"
+								target="_blank"
 							>
 								Entrar
 							</a>
 							<a
 								className="items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 px-4 py-2 w-full sm:w-auto text-background flex gap-2"
 								href="https://app.grypp.com.br/registrar"
+								target="_blank"
 							>
 								Criar Conta
 							</a>
