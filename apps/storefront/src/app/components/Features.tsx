@@ -11,17 +11,21 @@ export function Features() {
 					</span>
 
 					<h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-gray-800 dark:text-gray-200">
-						Tudo o que 
+						Tudo o que
 						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
-							{" "}você precisa{" "}
+							{" "}
+							você precisa{" "}
 						</span>
-						 para <br /> fazer o seu
+						para <br /> fazer o seu
 						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
-							{" "}melhor!{" "}
+							{" "}
+							melhor!{" "}
 						</span>
 					</h2>
 					<p className="text-gray-500 text-center">
-						É difícil ser produtivo se você tem um espaço de trabalho desorganizado e desajeitado. <br /> Centralize tudo dos seus atletas em um só lugar.
+						É difícil ser produtivo se você tem um espaço de trabalho
+						desorganizado e desajeitado. <br /> Centralize tudo dos seus atletas
+						em um só lugar.
 					</p>
 				</div>
 				{/*<!-- End Title --> */}
@@ -55,11 +59,7 @@ export function Features() {
 								</span>
 							</div>
 
-							<img
-								src="graph.png"
-								alt="Análises"
-								title="Análises"
-							/>
+							<img src="graph.png" alt="Análises" title="Análises" />
 						</div>
 					</div>
 
@@ -79,14 +79,15 @@ export function Features() {
 							<img src="training.png" title="Treinos" alt="Treinos" />
 						</div>
 
-								<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
+						<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
 							<div>
 								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Revisões de treinos
 								</h4>
 
 								<span className="text-muted-foreground text-pretty">
-									Revise os treinos realizados pelos seus atletas, deixe feedbacks e permita uma evolução constante.
+									Revise os treinos realizados pelos seus atletas, deixe
+									feedbacks e permita uma evolução constante.
 								</span>
 							</div>
 
