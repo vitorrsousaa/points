@@ -2,6 +2,7 @@ import { ROUTES } from "@/config/routes";
 
 import {
 	DashboardScreen,
+	EmailScreen,
 	ExercisesScreen,
 	SettingsScreen,
 	SignInScreen,
@@ -22,6 +23,7 @@ export function RouterStack() {
 					<Route element={<DashboardLayout />}>
 						<Route path={ROUTES.DASHBOARD} element={<DashboardScreen />} />
 						<Route path={ROUTES.SETTINGS} element={<SettingsScreen />} />
+						<Route path={ROUTES.EMAILS} element={<EmailScreen />} />
 						<Route
 							path={ROUTES.CREATE_EXERCISE}
 							element={<ExercisesScreen />}

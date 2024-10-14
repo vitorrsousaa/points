@@ -1,3 +1,4 @@
+import type { TEMPLATES, TemplatesIds } from "@shared/transactional";
 import type React from "react";
 
 export type SendEmailOptions = {
@@ -24,4 +25,9 @@ export type RenderFunction = <T>(
 export interface IEmailProvider {
 	send(options: SendEmailOptions): Promise<SendEmailResponse>;
 	render: RenderFunction;
+	getTemplate(
+		templateId: TemplatesIds,
+	): Extract<(typeof TEMPLATES)[number], { value: TemplatesIds }>["component"];
 }
+
+export type { TemplatesIds };

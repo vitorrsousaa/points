@@ -74,7 +74,10 @@ export const VercelInviteUserEmail = ({
 								{invitedByEmail}
 							</Link>
 							) has invited you to the <strong>{teamName}</strong> team on{" "}
-							<strong>Vercel</strong>.
+							<React.Fragment>
+								<strong>Vercel</strong>
+							</React.Fragment>
+							.
 						</Text>
 						<Section>
 							<Row>

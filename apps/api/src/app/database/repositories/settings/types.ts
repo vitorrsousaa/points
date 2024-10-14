@@ -7,8 +7,9 @@ export type SettingsDynamoDB = Prettify<
 		created_at: string;
 		updated_at: string;
 		user_id: string;
+		preferences_email: Settings["preferencesEmail"];
 	} & TBaseEntity &
-		Omit<Settings, "createdAt" | "updatedAt" | "userId">
+		Omit<Settings, "createdAt" | "updatedAt" | "userId" | "preferencesEmail">
 >;
 
 export interface ISettingsRepository {

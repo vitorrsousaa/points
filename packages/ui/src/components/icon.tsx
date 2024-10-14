@@ -23,6 +23,7 @@ import {
 	InstagramLogoIcon,
 	LayersIcon,
 	LightningBoltIcon,
+	PaperPlaneIcon,
 	Pencil1Icon,
 	PersonIcon,
 	PlusCircledIcon,
@@ -76,6 +77,7 @@ const icons = {
 	avatar: AvatarIcon,
 	calendar: CalendarIcon,
 	value_none: ValueNoneIcon,
+	paperPlane: PaperPlaneIcon,
 } as const;
 
 export function Icon(props: IconProps) {

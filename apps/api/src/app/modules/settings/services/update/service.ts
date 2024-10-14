@@ -1,6 +1,7 @@
 import type { ISettingsRepository } from "@application/database/repositories/settings";
 import type { IService } from "@application/interfaces/service";
 import { SettingsSchema } from "@core/domain/settings";
+import _merge from "lodash/merge";
 import type * as z from "zod";
 import { SettingsNotFound } from "../../errors/settings-not-found";
 
@@ -26,8 +27,10 @@ export class UpdateService implements IUpdateService {
 			throw new SettingsNotFound();
 		}
 
+		const mergedSettings = _merge(settings, updateInput);
+
 		await this.settingsRepository.update(updateInput.userId, {
-			...updateInput,
+			...mergedSettings,
 		});
 
 		return null;
