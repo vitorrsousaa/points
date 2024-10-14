@@ -2,26 +2,26 @@
 
 export function Features() {
 	return (
-		<div className="mx-auto w-full md:w-10/12 max-w-4xl" id="funcionalidades">
+		<div className="mx-auto max-w-[1120px] w-full" id="funcionalidades">
 			<div className="space-y-6 sm:space-y-8">
 				{/*<!-- Title --> */}
-				<div className="space-y-2 md:space-y-4 text-center">
+				<div className="space-y-2 md:space-y-4 text-center max-w-[848px] mx-auto">
 					<span className="font-medium mb-6 block bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
 						Nossas vantagens
 					</span>
 
-					<h2 className="text-4xl md:text-5xl font-medium text-gray-800 dark:text-gray-200">
-						Uma nova forma de
-						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
-							{" "}
-							cuidar <br className="hidden md:block" />
+					<h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-gray-800 dark:text-gray-200">
+						Tudo o que 
+						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
+							{" "}você precisa{" "}
 						</span>
-						dos seus alunos
+						 para <br /> fazer o seu
+						<span className="bg-gradient-to-tl font-bold from-primary to-orange-600 bg-clip-text text-transparent">
+							{" "}melhor!{" "}
+						</span>
 					</h2>
 					<p className="text-gray-500 text-center">
-						Explore uma forma fácil e intuitiva de gerenciar seus alunos.
-						Organize treinos, planeje atividades e acompanhe o progresso de
-						maneira eficiente e sem complicação.
+						É difícil ser produtivo se você tem um espaço de trabalho desorganizado e desajeitado. <br /> Centralize tudo dos seus atletas em um só lugar.
 					</p>
 				</div>
 				{/*<!-- End Title --> */}
@@ -29,10 +29,10 @@ export function Features() {
 				{/*<!-- List --> */}
 
 				<div className="space-y-4">
-					<div className="flex items-center gap-4">
+					<div className="flex max-md:flex-col items-center gap-4">
 						<div className="h-80 overflow-hidden flex-1 border rounded-xl p-6 bg-gray-50 flex flex-col gap-4">
 							<div>
-								<h4 className="font-medium text-2xl mb-1">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Cuide de seus atletas
 								</h4>
 
@@ -43,12 +43,12 @@ export function Features() {
 
 							<img src="athletes.png" title="Atletas" alt="Atletas" />
 						</div>
-					</div>
 
-					<div className="flex flex-col md:flex-row items-center gap-4 md:h-[340px]">
-						<div className="flex-1 max-md:w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
+						<div className="flex-1 max-md:hidden max-w-[270px] max-h-[320px] max-md:w-full max-md:max-w-full h-full border rounded-xl p-6 bg-gray-50 gap-4 flex flex-col">
 							<div>
-								<h4 className="font-medium text-2xl mb-2">Análises</h4>
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
+									Análises
+								</h4>
 
 								<span className="text-muted-foreground text-pretty">
 									Saiba como está sua evolução.
@@ -59,13 +59,14 @@ export function Features() {
 								src="graph.png"
 								alt="Análises"
 								title="Análises"
-								className=""
 							/>
 						</div>
+					</div>
 
+					<div className="flex flex-col md:flex-row items-center gap-4 md:h-[340px]">
 						<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
 							<div>
-								<h4 className="font-medium text-2xl mb-2">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Treinos individuais
 								</h4>
 
@@ -77,12 +78,26 @@ export function Features() {
 
 							<img src="training.png" title="Treinos" alt="Treinos" />
 						</div>
+
+								<div className="flex-[2] overflow-hidden h-full border rounded-xl pt-6 px-6 bg-gray-50 space-y-4">
+							<div>
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
+									Revisões de treinos
+								</h4>
+
+								<span className="text-muted-foreground text-pretty">
+									Revise os treinos realizados pelos seus atletas, deixe feedbacks e permita uma evolução constante.
+								</span>
+							</div>
+
+							<img src="workout-review.png" title="Revisão" alt="Revisão" />
+						</div>
 					</div>
 
 					<div className="flex items-center gap-4 ">
 						<div className="h-80 flex-1 border rounded-xl pt-6 px-6 bg-gray-50 flex justify-between items-center gap-4 flex-col md:flex-row">
 							<div className="md:w-[50%] w-full">
-								<h4 className="font-medium text-2xl mb-2">
+								<h4 className="font-semibold text-2xl mb-1 tracking-tight">
 									Tudo na palma da mão
 								</h4>
 								<span className="text-muted-foreground text-pretty">

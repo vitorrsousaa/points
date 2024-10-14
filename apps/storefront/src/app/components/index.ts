@@ -5,3 +5,4 @@ export * from "./Hero";
 export * from "./Pricing";
 export * from "./Reviews";
 export * from "./ReafirmValueSection";
+export * from "./Header";

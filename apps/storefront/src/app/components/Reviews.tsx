@@ -7,11 +7,11 @@ export function Reviews() {
 						Nossos usuários
 					</span>
 
-					<h2 className="text-4xl md:text-5xl font-medium text-gray-800 dark:text-gray-200">
-						Quem utiliza, já
-						<span className="bg-gradient-to-tl from-primary to-orange-600 bg-clip-text text-transparent">
+					<h2 className="text-4xl md:text-5xl font-medium tracking-tighter text-gray-800 dark:text-gray-200">
+						Quem usa,
+						<span className="bg-gradient-to-tl  font-bold from-primary to-orange-600 bg-clip-text text-transparent">
 							{" "}
-							aprova
+							ama!
 						</span>
 					</h2>
 				</div>
