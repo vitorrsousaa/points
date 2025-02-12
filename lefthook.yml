@@ -17,18 +17,18 @@ pre-commit:
   commands:
     lint:
       glob: "*.{js,ts,jsx,tsx,md}"
-      run: yarn lint {staged_files}
+      run: pnpm run lint {staged_files}
       stage_fixed: true
     format:
       glob: "*.{js,ts,jsx,tsx,md}"
-      run: yarn format {staged_files}
+      run: pnpm run format {staged_files}
       stage_fixed: true
 
 pre-push:
   parallel: true
   commands:
     typescript:
-      run: yarn typecheck
+      run: pnpm run typecheck
 
 commit-msg:
   scripts:

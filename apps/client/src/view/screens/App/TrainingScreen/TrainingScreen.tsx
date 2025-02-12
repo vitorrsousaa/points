@@ -65,139 +65,137 @@ export function TrainingScreen() {
 				}
 			/>
 
-			<>
-				<div className="grid flex-1 items-start gap-4 md:gap-8">
-					<RenderIf
-						condition={Boolean(athlete && !isLoadingAthlete && !isErrorAthlete)}
-						render={
-							<Card>
-								<CardContent className="py-4 flex ">
-									<div className="w-full grid gap-6 lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
-										<div className="flex flex-col gap-1">
-											<strong>Nome: </strong>
-											<small className="flex items-center gap-2">
-												{athlete?.name}
-
-												<Badge
-													variant={athlete?.isActive ? "default" : "secondary"}
-												>
-													{athlete?.isActive ? "Ativo" : "Inativo"}
-												</Badge>
-											</small>
-										</div>
-
-										<div className="flex flex-col gap-1">
-											<strong>Email: </strong>
-											<small>{athlete?.email}</small>
-										</div>
-
-										<div className="flex flex-col gap-1">
-											<strong>Idade: </strong>
-											<small> {athlete?.age} anos</small>
-										</div>
-
-										<div className="flex flex-col gap-1">
-											<strong>Peso: </strong>
-											<small>{athlete?.weight} kg</small>
-										</div>
-
-										<div className="flex flex-col gap-1">
-											<strong>Altura: </strong>
-											<small>{athlete?.height} cm</small>
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						}
-					/>
-
-					<div className="flex flex-row justify-between items-center">
-						<div className="flex flex-col gap-1">
-							<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
-
-							<span className="text-muted-foreground">
-								Clique em um treino e saiba mais informações sobre.
-							</span>
-						</div>
-						{!isErrorWorkouts && !isLoadingWorkouts && (
-							<Button
-								size="sm"
-								className="h-9 gap-1"
-								onClick={() =>
-									navigate("NEW_TRAINING", {
-										replace: { athleteId: athleteId || "" },
-									})
-								}
-							>
-								<Icon name="plusCircle" className="h-5 w-5" />
-								<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-									Adicionar treino
-								</span>
-							</Button>
-						)}
-					</div>
-
-					<RenderIfElse
-						condition={hasTraining}
-						ifRender={
-							<div className="gap-4 grid flex-wrapgrid lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
-								{workouts?.map((workout) => (
-									<WorkoutCard
-										key={workout.id}
-										id={workout.id}
-										workout={workout}
-										status={workout.status}
-									>
-										<WorkoutCardHeader>
-											{workout.name}
+			<div className="grid flex-1 items-start gap-4 md:gap-8">
+				<RenderIf
+					condition={Boolean(athlete && !isLoadingAthlete && !isErrorAthlete)}
+					render={
+						<Card>
+							<CardContent className="py-4 flex ">
+								<div className="w-full grid gap-6 lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
+									<div className="flex flex-col gap-1">
+										<strong>Nome: </strong>
+										<small className="flex items-center gap-2">
+											{athlete?.name}
 
 											<Badge
-												className="ml-2 hidden min-[490px]:inline-flex min-[640px]:hidden lg:inline-flex"
-												variant={workout.isActive ? "default" : "secondary"}
+												variant={athlete?.isActive ? "default" : "secondary"}
 											>
-												{workout.isActive ? "Ativo" : "Inativo"}
+												{athlete?.isActive ? "Ativo" : "Inativo"}
 											</Badge>
-										</WorkoutCardHeader>
+										</small>
+									</div>
 
-										<WorkoutCardContent />
-									</WorkoutCard>
-								))}
-							</div>
-						}
-						elseRender={
-							<RenderIfElse
-								condition={isLoadingWorkouts}
-								ifRender={
-									<div className="w-full flex items-center justify-center ">
-										<Skeleton className="w-full h-20" />
+									<div className="flex flex-col gap-1">
+										<strong>Email: </strong>
+										<small>{athlete?.email}</small>
 									</div>
-								}
-								elseRender={
-									<div className="flex flex-col items-center mt-12 gap-2 mb-12">
-										{isErrorWorkouts ? (
-											<>
-												<span>
-													Tivemos um erro para buscar os treinos do atleta.
-												</span>
-												<small>Tente novamente.</small>
-											</>
-										) : (
-											<>
-												<span>
-													Este atleta ainda não possui um treinamento cadastrado
-												</span>
-												<small>
-													Clique no botão acima para adicionar um novo treino.
-												</small>
-											</>
-										)}
+
+									<div className="flex flex-col gap-1">
+										<strong>Idade: </strong>
+										<small> {athlete?.age} anos</small>
 									</div>
-								}
-							/>
-						}
-					/>
+
+									<div className="flex flex-col gap-1">
+										<strong>Peso: </strong>
+										<small>{athlete?.weight} kg</small>
+									</div>
+
+									<div className="flex flex-col gap-1">
+										<strong>Altura: </strong>
+										<small>{athlete?.height} cm</small>
+									</div>
+								</div>
+							</CardContent>
+						</Card>
+					}
+				/>
+
+				<div className="flex flex-row justify-between items-center">
+					<div className="flex flex-col gap-1">
+						<h2 className="text-xl font-bold tracking-tight">Treinos</h2>
+
+						<span className="text-muted-foreground">
+							Clique em um treino e saiba mais informações sobre.
+						</span>
+					</div>
+					{!isErrorWorkouts && !isLoadingWorkouts && (
+						<Button
+							size="sm"
+							className="h-9 gap-1"
+							onClick={() =>
+								navigate("NEW_TRAINING", {
+									replace: { athleteId: athleteId || "" },
+								})
+							}
+						>
+							<Icon name="plusCircle" className="h-5 w-5" />
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+								Adicionar treino
+							</span>
+						</Button>
+					)}
 				</div>
-			</>
+
+				<RenderIfElse
+					condition={hasTraining}
+					ifRender={
+						<div className="gap-4 grid flex-wrapgrid lg:grid-cols-2 grid-cols-1 sm:grid-cols-2">
+							{workouts?.map((workout) => (
+								<WorkoutCard
+									key={workout.id}
+									id={workout.id}
+									workout={workout}
+									status={workout.status}
+								>
+									<WorkoutCardHeader>
+										{workout.name}
+
+										<Badge
+											className="ml-2 hidden min-[490px]:inline-flex min-[640px]:hidden lg:inline-flex"
+											variant={workout.isActive ? "default" : "secondary"}
+										>
+											{workout.isActive ? "Ativo" : "Inativo"}
+										</Badge>
+									</WorkoutCardHeader>
+
+									<WorkoutCardContent />
+								</WorkoutCard>
+							))}
+						</div>
+					}
+					elseRender={
+						<RenderIfElse
+							condition={isLoadingWorkouts}
+							ifRender={
+								<div className="w-full flex items-center justify-center ">
+									<Skeleton className="w-full h-20" />
+								</div>
+							}
+							elseRender={
+								<div className="flex flex-col items-center mt-12 gap-2 mb-12">
+									{isErrorWorkouts ? (
+										<>
+											<span>
+												Tivemos um erro para buscar os treinos do atleta.
+											</span>
+											<small>Tente novamente.</small>
+										</>
+									) : (
+										<>
+											<span>
+												Este atleta ainda não possui um treinamento cadastrado
+											</span>
+											<small>
+												Clique no botão acima para adicionar um novo treino.
+											</small>
+										</>
+									)}
+								</div>
+							}
+						/>
+					}
+				/>
+			</div>
 		</>
 	);
 }
