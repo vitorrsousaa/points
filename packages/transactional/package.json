@@ -7,14 +7,14 @@
     "lint": "biome lint --apply ./emails",
     "format": "biome format --write ./emails",
     "export": "email export",
-    "dev": "start http://localhost:3405 && email dev -p 3405 open"
+    "dev": "email dev -p 3405 open"
   },
   "devDependencies": {
     "@types/react": "^18.2.38"
   },
   "dependencies": {
     "@react-email/components": "0.0.25",
-    "@shared/typescript-config": "*",
+    "@shared/typescript-config": "workspace:*",
     "react": "^18.3.1",
     "react-email": "^3.0.1"
   }
