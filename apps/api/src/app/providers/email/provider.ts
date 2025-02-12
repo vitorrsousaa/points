@@ -1,8 +1,12 @@
 import { AppError } from "@application/errors/app-error";
 import type { IResendClient } from "@application/libs/resend";
-import { render as renderReactComponent } from "@react-email/components";
-import { TEMPLATES, type TemplatesIds } from "@shared/transactional";
-import React from "react";
+import {
+	TEMPLATES,
+	type TemplatesIds,
+	render as renderReactComponent,
+} from "@shared/transactional";
+import type React from "react";
+import { createElement } from "react";
 import type {
 	IEmailProvider,
 	SendEmailOptions,
@@ -30,7 +34,8 @@ export class EmailProvider implements IEmailProvider {
 		T extends // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		React.JSXElementConstructor<any>,
 	>(component: T, props: React.ComponentProps<T>): Promise<string> {
-		return renderReactComponent(React.createElement(component, props));
+		const element: React.ReactElement = createElement(component, props);
+		return renderReactComponent(element);
 	}
 
 	async send(options: SendEmailOptions): Promise<SendEmailResponse> {

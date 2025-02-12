@@ -3,4 +3,6 @@ packages:
   - "packages/*"
  
 hoistPattern:
-  - "*"
+  - "**/react-hook-form"
+  - "**/lodash"
+  - "**/axios"
