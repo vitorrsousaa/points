@@ -1,10 +1,10 @@
+import type { IAuthProvider } from "@application/providers/auth";
 import { type Mocked, vi } from "vitest";
 import {
+	ForgotPasswordService,
 	type IForgotPasswordInput,
 	type IForgotPasswordService,
-	ForgotPasswordService,
 } from "./service";
-import type { IAuthProvider } from "@application/providers/auth";
 
 describe("Service:ForgotPassword", () => {
 	let service: IForgotPasswordService;

@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { ROUTES } from "@/config/routes";
+import { useSendQuestion } from "@/hooks/question";
 import {
 	FormControl,
 	FormDescription,
@@ -20,12 +21,11 @@ import {
 	StepperNextButton,
 	Textarea,
 } from "@shared/ui";
+import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
-import type { SignupFormSchemaTypes } from "../../SignUpFormSchema";
-import { useSendQuestion } from "@/hooks/question";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "@/config/routes";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import type { SignupFormSchemaTypes } from "../../SignUpFormSchema";
 
 export function ResearchStep() {
 	const {

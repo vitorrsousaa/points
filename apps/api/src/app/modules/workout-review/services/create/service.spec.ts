@@ -8,9 +8,9 @@ import type { IEmailProvider } from "@application/providers/email/types";
 import type { UnwrapPromise } from "@application/utils/types";
 import { type Mocked, vi } from "vitest";
 import {
+	CreateService,
 	type ICreateInput,
 	type ICreateService,
-	CreateService,
 } from "./service";
 
 describe("Service:Create", () => {

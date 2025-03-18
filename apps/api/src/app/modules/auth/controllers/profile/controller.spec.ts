@@ -1,9 +1,9 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
+import type { UnwrapPromise } from "@application/utils/types";
 import type { IProfileService } from "../../services/profile";
 import { ProfileController } from "./controller";
-import type { UnwrapPromise } from "@application/utils/types";
 
 describe("Controller: Profile", () => {
 	let mockRequest: IRequest;

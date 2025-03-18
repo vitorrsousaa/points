@@ -15,10 +15,10 @@ import {
 	AvatarFallback,
 	Button,
 	Icon,
+	type IconProps,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-	type IconProps,
 } from "@shared/ui";
 import { useSidebar } from "./useSidebar";
 

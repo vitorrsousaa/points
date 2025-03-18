@@ -1,6 +1,6 @@
+import type { Prettify } from "@application/utils/types";
 import * as z from "zod";
 import type { BaseEntity } from "../base";
-import type { Prettify } from "@application/utils/types";
 
 export const CreateQuestionInputSchema = z.object({
 	userId: z.string(),

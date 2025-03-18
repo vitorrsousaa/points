@@ -17,8 +17,8 @@ import {
 import { Link } from "react-router-dom";
 
 import {
-	AthletesAnalytics,
 	AthleteTableHeader,
+	AthletesAnalytics,
 	TableActions,
 	TableAvailableAthlete,
 	TableRowAthlete,

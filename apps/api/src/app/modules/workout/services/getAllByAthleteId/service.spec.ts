@@ -1,10 +1,10 @@
+import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import { type Mocked, vi } from "vitest";
 import {
 	GetAllByAthleteIdService,
 	type IGetAllByAthleteIdInput,
 	type IGetAllByAthleteIdService,
 } from "./service";
-import type { IWorkoutRepository } from "@application/database/repositories/workout";
 
 describe("Service:GetAllByAthleteId", () => {
 	let service: IGetAllByAthleteIdService;

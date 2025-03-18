@@ -1,10 +1,10 @@
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IService } from "@application/interfaces/service";
 import * as z from "zod";
-import { UserNotFound } from "../../errors/user-not-found";
-import { userIsAdmin } from "../../utils/user-is-admin";
 import { UserNotAdmin } from "../../errors/user-not-admin";
+import { UserNotFound } from "../../errors/user-not-found";
 import { getGrowth } from "../../utils/get-growth";
+import { userIsAdmin } from "../../utils/user-is-admin";
 
 export const GetAllCoachesInputServiceSchema = z.object({
 	userId: z.string().uuid(),

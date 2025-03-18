@@ -1,10 +1,10 @@
+import type { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
 import { type Mocked, vi } from "vitest";
 import {
+	GetAllService,
 	type IGetAllInput,
 	type IGetAllService,
-	GetAllService,
 } from "./service";
-import type { ICustomExerciseRepository } from "@application/database/repositories/custom-exercises";
 
 describe("Service:GetAll", () => {
 	let service: IGetAllService;

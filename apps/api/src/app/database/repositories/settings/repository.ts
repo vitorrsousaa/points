@@ -1,8 +1,8 @@
+import { randomUUID } from "node:crypto";
 import { DATABASE_TABLE } from "@application/config/tables";
 import type { IDatabaseClient } from "@application/database/database";
 import { AppError } from "@application/errors/app-error";
 import type { Settings } from "@core/domain/settings";
-import { randomUUID } from "node:crypto";
 import type { ISettingsRepository, SettingsDynamoDB } from "./types";
 
 export class SettingsRepository implements ISettingsRepository {

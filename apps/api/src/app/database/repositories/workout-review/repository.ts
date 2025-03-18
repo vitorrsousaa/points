@@ -1,10 +1,10 @@
+import { randomUUID } from "node:crypto";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
 	TBaseIndexes,
 } from "@application/database/database";
 import type { WorkoutReview } from "@core/domain/workout-review";
-import { randomUUID } from "node:crypto";
 import type { IWorkoutReviewRepository, WorkoutReviewDynamoDB } from "./types";
 
 export class WorkoutReviewRepository implements IWorkoutReviewRepository {

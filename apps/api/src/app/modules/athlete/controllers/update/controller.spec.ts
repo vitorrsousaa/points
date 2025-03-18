@@ -1,8 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { UpdateController } from "./controller";
 import type { IUpdateService } from "../../services/update";
+import { UpdateController } from "./controller";
 
 describe("Controller: Update", () => {
 	let mockRequest: IRequest;

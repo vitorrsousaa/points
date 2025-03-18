@@ -1,5 +1,7 @@
 import { DATABASE_TABLE } from "@application/config/tables";
 import {
+	BatchWriteCommand,
+	type BatchWriteCommandInput,
 	DeleteCommand,
 	type DeleteCommandInput,
 	type DynamoDBDocumentClient,
@@ -10,13 +12,11 @@ import {
 	type QueryCommandInput,
 	ScanCommand,
 	type ScanCommandInput,
-	UpdateCommand,
-	type UpdateCommandInput,
 	// TransactionWriteCommand
 	TransactWriteCommand,
 	type TransactWriteCommandInput,
-	type BatchWriteCommandInput,
-	BatchWriteCommand,
+	UpdateCommand,
+	type UpdateCommandInput,
 } from "@aws-sdk/lib-dynamodb";
 
 export type TBaseIndexes = {

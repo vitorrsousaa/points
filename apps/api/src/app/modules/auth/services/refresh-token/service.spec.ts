@@ -1,10 +1,10 @@
+import type { IAuthProvider } from "@application/providers/auth";
 import { type Mocked, vi } from "vitest";
 import {
 	type IRefreshTokenInput,
 	type IRefreshTokenService,
 	RefreshTokenService,
 } from "./service";
-import type { IAuthProvider } from "@application/providers/auth";
 
 describe("Service:RefreshToken", () => {
 	let service: IRefreshTokenService;

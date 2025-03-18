@@ -1,7 +1,7 @@
 import { Stepper } from "@shared/ui";
 
-import { FormProvider } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { FormProvider } from "react-hook-form";
 import {
 	AccountDetailsStep,
 	ResearchStep,

@@ -1,5 +1,5 @@
-import { httpClient } from "../httpClient";
 import type { Growth } from "@/entitites/growth";
+import { httpClient } from "../httpClient";
 
 export async function growthAthlete(params: { period: number }) {
 	const { period } = params;

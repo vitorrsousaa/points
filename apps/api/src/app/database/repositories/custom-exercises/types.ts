@@ -1,6 +1,6 @@
 import type { TBaseEntity } from "@application/database/database";
 import type { Prettify } from "@application/utils/types";
-import type { Equipment, CustomExercise } from "@core/domain/exercise";
+import type { CustomExercise, Equipment } from "@core/domain/exercise";
 
 export type CustomExerciseDynamoDB = Prettify<
 	{

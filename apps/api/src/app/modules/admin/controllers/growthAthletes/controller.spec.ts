@@ -1,8 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { GrowthAthletesController } from "./controller";
 import type { IGetAllAthletesService } from "../../services/getAllAthletes";
+import { GrowthAthletesController } from "./controller";
 
 describe("Controller: GrowthAthletes", () => {
 	let mockRequest: IRequest;

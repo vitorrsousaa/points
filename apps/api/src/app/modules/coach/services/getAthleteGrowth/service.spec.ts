@@ -1,14 +1,14 @@
-import { type Mocked, vi } from "vitest";
-import {
-	type IGetAthleteGrowthInput,
-	type IGetAthleteGrowthService,
-	GetAthleteGrowthService,
-} from "./service";
-import type { ICoachRepository } from "@application/database/repositories/coach";
 import type { IAthleteRepository } from "@application/database/repositories/athlete";
-import type { UnwrapPromise } from "@application/utils/types";
+import type { ICoachRepository } from "@application/database/repositories/coach";
 import { athleteMock } from "@application/shared/mocks/athlete";
 import { getDateInTheLastMonth } from "@application/utils/date";
+import type { UnwrapPromise } from "@application/utils/types";
+import { type Mocked, vi } from "vitest";
+import {
+	GetAthleteGrowthService,
+	type IGetAthleteGrowthInput,
+	type IGetAthleteGrowthService,
+} from "./service";
 
 describe("Service:GetAthleteGrowth", () => {
 	let service: IGetAthleteGrowthService;
