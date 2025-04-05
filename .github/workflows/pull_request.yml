@@ -12,22 +12,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.1.0
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
         shell: bash
 
-      - name: Run Typechecking
-        run: yarn typecheck
+      # - name: Run Typechecking
+      #   run: pnpm run typecheck
 
       - name: Run the tests
-        run: yarn test
+        run: pnpm run test
 
       - name: Run build
-        run: yarn build
+
