@@ -1,6 +1,6 @@
 import { ROUTES } from "@/config/routes";
 import { Button, Icon, Input } from "@shared/ui";
-import { Controller, type Control } from "react-hook-form";
+import { type Control, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 interface AthleteTableHeaderProps {

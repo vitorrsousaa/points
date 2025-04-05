@@ -1,6 +1,6 @@
+import type { IAuthProvider } from "@application/providers/auth";
 import { type Mocked, vi } from "vitest";
 import { type IResetPasswordService, ResetPasswordService } from "./service";
-import type { IAuthProvider } from "@application/providers/auth";
 
 describe("Service:ResetPassword", () => {
 	let service: IResetPasswordService;

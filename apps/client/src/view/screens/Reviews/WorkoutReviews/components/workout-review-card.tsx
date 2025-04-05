@@ -8,8 +8,8 @@ import {
 	CardContent,
 	CardHeader,
 	CardTitle,
-	cn,
 	Icon,
+	cn,
 } from "@shared/ui";
 
 interface WorkoutReviewCardProps {

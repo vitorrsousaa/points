@@ -2,13 +2,13 @@ import type { IAthleteRepository } from "@application/database/repositories/athl
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { IWorkoutRepository } from "@application/database/repositories/workout";
 import type { IService } from "@application/interfaces/service";
+import { AthleteNotFound } from "@application/shared/errors/athlete-not-found";
 import { CoachNotFound } from "@application/shared/errors/coach-not-found";
 import { CreateWorkoutInputSchema, type Workout } from "@core/domain/workout";
 import * as z from "zod";
 import { CoachNotAuthorized } from "../../errors/coach-not-authorized";
 import { UserShouldBeCoach } from "../../errors/user-not-coach";
 import { getWorkoutVolume } from "../../functions/get-workout-volume";
-import { AthleteNotFound } from "@application/shared/errors/athlete-not-found";
 
 export const CreateInputServiceSchema = z.object({
 	coachId: z.string().uuid(),

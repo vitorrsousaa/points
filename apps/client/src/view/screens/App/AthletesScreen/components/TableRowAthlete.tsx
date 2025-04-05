@@ -1,3 +1,4 @@
+import type { Athlete } from "@/entitites/athlete";
 import { useNavigate } from "@/hooks/navigate";
 import {
 	Badge,
@@ -16,7 +17,6 @@ import {
 	cn,
 } from "@shared/ui";
 import type { ReactNode } from "react";
-import type { Athlete } from "@/entitites/athlete";
 
 interface TableRowProps {
 	children: ReactNode;

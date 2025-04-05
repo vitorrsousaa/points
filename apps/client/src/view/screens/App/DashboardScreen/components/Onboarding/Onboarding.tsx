@@ -1,4 +1,5 @@
 import { ROUTES } from "@/config/routes";
+import { useNavigate } from "@/hooks/navigate";
 import { useUpdateSettings } from "@/hooks/settings";
 import { porcentageCalculate } from "@/utils/porcentageCalculate";
 import {
@@ -18,7 +19,6 @@ import {
 } from "@shared/ui";
 import { Link } from "react-router-dom";
 import { useOnboarding } from "./useOnboarding";
-import { useNavigate } from "@/hooks/navigate";
 
 const COMPLETED_CARD_STYLES = {
 	container: "border-green-700 bg-green-100",

@@ -1,10 +1,10 @@
+import type { IQuestionRepository } from "@application/database/repositories/questions";
 import { type Mocked, vi } from "vitest";
 import {
+	GetAllService,
 	type IGetAllInput,
 	type IGetAllService,
-	GetAllService,
 } from "./service";
-import type { IQuestionRepository } from "@application/database/repositories/questions";
 
 describe("Service:GetAll", () => {
 	let service: IGetAllService;

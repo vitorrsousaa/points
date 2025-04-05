@@ -1,12 +1,12 @@
 import {
 	Button,
-	cn,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 	Icon,
 	Input,
+	cn,
 } from "@shared/ui";
 import { Controller } from "react-hook-form";
 import { typeOfSets } from "../../TrainingFormConstants";

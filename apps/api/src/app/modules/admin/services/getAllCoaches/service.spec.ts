@@ -1,11 +1,11 @@
-import { type Mocked, vi } from "vitest";
-import {
-	type IGetAllCoachesInput,
-	type IGetAllCoachesService,
-	GetAllCoachesService,
-} from "./service";
 import type { IUserRepository } from "@application/database/repositories/user";
 import type { UnwrapPromise } from "@application/utils/types";
+import { type Mocked, vi } from "vitest";
+import {
+	GetAllCoachesService,
+	type IGetAllCoachesInput,
+	type IGetAllCoachesService,
+} from "./service";
 
 describe("Service:GetAllCoachesService", () => {
 	let service: IGetAllCoachesService;

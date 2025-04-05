@@ -5,6 +5,8 @@
 		"client",
 		"api",
 		"admin",
-		"root"
+		"root",
+		"cli",
+		"ui"
 	]
 }

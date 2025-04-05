@@ -4,19 +4,19 @@
 	"private": true,
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"files": ["dist/**"],
+	"files": [
+		"dist/**"
+	],
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch",
 		"lint": "biome lint --apply ./src",
-		"test": "vitest run",
-		"test:watch": "vitest run --watch",
 		"format": "biome format --write ./src",
 		"check": "biome check --apply ./src"
 	},
 	"devDependencies": {
-		"@shared/typescript-config": "*",
-		"@shared/vitest-presets": "*",
+		"@shared/typescript-config": "workspace:*",
+		"@shared/vitest-presets": "workspace:*",
 		"@types/node": "^20.11.24",
 		"tsup": "^8.0.2",
 		"typescript": "^5.3.3"

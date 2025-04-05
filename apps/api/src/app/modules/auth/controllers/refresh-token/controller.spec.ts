@@ -1,8 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { RefreshTokenController } from "./controller";
 import type { IRefreshTokenService } from "../../services/refresh-token";
+import { RefreshTokenController } from "./controller";
 
 describe("Controller: RefreshToken", () => {
 	let mockRequest: IRequest;

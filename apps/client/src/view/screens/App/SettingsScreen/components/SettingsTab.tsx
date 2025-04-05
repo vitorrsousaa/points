@@ -6,8 +6,8 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-	useTheme,
 	type Theme,
+	useTheme,
 } from "@shared/ui";
 import { useCallback } from "react";
 import toast from "react-hot-toast";

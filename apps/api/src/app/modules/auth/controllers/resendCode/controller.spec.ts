@@ -1,8 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { ResendCodeController } from "./controller";
 import type { IResendCodeService } from "../../services/resendCode";
+import { ResendCodeController } from "./controller";
 
 describe("Controller: ResendCode", () => {
 	let mockRequest: IRequest;

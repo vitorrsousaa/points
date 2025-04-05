@@ -1,9 +1,9 @@
 import type { IWorkoutReviewRepository } from "@application/database/repositories/workout-review";
 import { type Mocked, vi } from "vitest";
 import {
+	GetAllWorkoutReviewService,
 	type IGetAllWorkoutReviewInput,
 	type IGetAllWorkoutReviewService,
-	GetAllWorkoutReviewService,
 } from "./service";
 
 describe("Service:GetAllWorkoutReview", () => {

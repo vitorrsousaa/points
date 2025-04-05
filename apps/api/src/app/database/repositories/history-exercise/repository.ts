@@ -1,9 +1,9 @@
+import { randomUUID } from "node:crypto";
 import type {
 	IDatabaseClient,
 	TBaseEntity,
 } from "@application/database/database";
 import type { HistoryExercise } from "@core/domain/history-exercise";
-import { randomUUID } from "node:crypto";
 import type {
 	HistoryExerciseDynamoDB,
 	IHistoryExerciseRepository,

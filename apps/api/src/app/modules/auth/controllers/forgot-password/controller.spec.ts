@@ -1,8 +1,8 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { ForgotPasswordController } from "./controller";
 import type { IForgotPasswordService } from "../../services/forgot-password";
+import { ForgotPasswordController } from "./controller";
 
 describe("Controller: ForgotPassword", () => {
 	let mockRequest: IRequest;

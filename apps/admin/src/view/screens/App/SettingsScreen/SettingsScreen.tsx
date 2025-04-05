@@ -5,9 +5,9 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
+	type Theme,
 	cn,
 	useTheme,
-	type Theme,
 } from "@shared/ui";
 
 export function SettingsScreen() {

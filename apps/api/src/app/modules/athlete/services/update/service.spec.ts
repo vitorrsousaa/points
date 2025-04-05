@@ -1,11 +1,11 @@
+import type { IAthleteRepository } from "@application/database/repositories/athlete";
+import type { UnwrapPromise } from "@application/utils/types";
 import { type Mocked, vi } from "vitest";
 import {
 	type IUpdateInput,
 	type IUpdateService,
 	UpdateService,
 } from "./service";
-import type { IAthleteRepository } from "@application/database/repositories/athlete";
-import type { UnwrapPromise } from "@application/utils/types";
 
 describe("Service:Update", () => {
 	let service: IUpdateService;

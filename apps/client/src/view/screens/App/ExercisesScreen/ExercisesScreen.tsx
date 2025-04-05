@@ -1,30 +1,30 @@
+import { ROUTES } from "@/config/routes";
+import { useGetAllCustomExercises } from "@/hooks/exercise";
 import {
-	HeaderScreen,
 	Badge,
 	Button,
 	Card,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuTrigger,
+	HeaderScreen,
+	Icon,
 	RenderIf,
 	Skeleton,
+	Spinner,
 	Table,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
-	cn,
 	Tooltip,
-	Spinner,
-	Icon,
-	DropdownMenu,
-	DropdownMenuTrigger,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
+	cn,
 } from "@shared/ui";
-import { ExercisesTableHeader } from "./components/ExercisesTableHeader";
-import { useGetAllCustomExercises } from "@/hooks/exercise";
 import { Link } from "react-router-dom";
-import { ROUTES } from "@/config/routes";
+import { ExercisesTableHeader } from "./components/ExercisesTableHeader";
 
 interface TableRowProps {
 	children: React.ReactNode;

@@ -4,8 +4,8 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-	cn,
 	Spinner,
+	cn,
 } from "@shared/ui";
 
 interface AthletesAnalyticsCardProps {

@@ -1,14 +1,14 @@
+import type { ICoachRepository } from "@application/database/repositories/coach";
 import type { IService } from "@application/interfaces/service";
+import type {
+	ICreateInput as ICreateAthleteInput,
+	ICreateService as ICreateAthleteService,
+} from "@application/modules/athlete/services/create";
 import {
 	type ISignupService,
 	SignupInputSchema,
 } from "@application/modules/auth/services/signup";
-import type {
-	ICreateService as ICreateAthleteService,
-	ICreateInput as ICreateAthleteInput,
-} from "@application/modules/athlete/services/create";
 import type * as z from "zod";
-import type { ICoachRepository } from "@application/database/repositories/coach";
 
 export const CreateInputServiceSchema = SignupInputSchema.omit({ role: true });
 

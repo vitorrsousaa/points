@@ -1,9 +1,9 @@
-import { type Mocked, vi } from "vitest";
-import { type ICreateService, CreateService } from "./service";
+import type { ICoachRepository } from "@application/database/repositories/coach";
 import type { ICreateService as ICreateAthleteService } from "@application/modules/athlete/services/create";
 import type { ISignupService } from "@application/modules/auth/services/signup";
+import { type Mocked, vi } from "vitest";
 import { inputData } from "../../mocks/coach";
-import type { ICoachRepository } from "@application/database/repositories/coach";
+import { CreateService, type ICreateService } from "./service";
 
 describe("Service:Create", () => {
 	let service: ICreateService;

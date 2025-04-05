@@ -1,8 +1,8 @@
-import type { IDatabaseClient } from "@application/database/database";
-import type { IQuestionRepository, QuestionDynamoDB } from "./types";
-import type { Question } from "@core/domain/question";
 import { randomUUID } from "node:crypto";
 import { DATABASE_TABLE } from "@application/config/tables";
+import type { IDatabaseClient } from "@application/database/database";
+import type { Question } from "@core/domain/question";
+import type { IQuestionRepository, QuestionDynamoDB } from "./types";
 
 export class QuestionRepository implements IQuestionRepository {
 	constructor(private readonly dbInstance: IDatabaseClient) {}

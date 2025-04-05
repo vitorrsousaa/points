@@ -1,9 +1,9 @@
 import type { IRequest } from "@application/interfaces/http";
 import type { Mocked } from "vitest";
 
-import { CreateController } from "./controller";
-import type { ICreateService } from "../../services/create";
 import { inputData } from "../../mocks/coach";
+import type { ICreateService } from "../../services/create";
+import { CreateController } from "./controller";
 
 describe("Controller: Create", () => {
 	let mockRequest: IRequest;

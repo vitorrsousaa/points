@@ -2,8 +2,8 @@ import type { IUserRepository } from "@application/database/repositories/user";
 import type { IService } from "@application/interfaces/service";
 import type { IAuthProvider } from "@application/providers/auth";
 import * as z from "zod";
-import { UserNotFound } from "../../errors/user-not-found";
 import { AccountAlreadyConfirmed } from "../../errors/account-already-confirmed";
+import { UserNotFound } from "../../errors/user-not-found";
 
 export const AccountConfirmationInputServiceSchema = z.object({
 	code: z.string().min(6),
