@@ -29,7 +29,8 @@
     "format": {
       "dependsOn": [
         "^build"
-      ]
+      ],
+      "cache": false
     },
     "typecheck": {
       "dependsOn": [
