@@ -1,4 +1,4 @@
 export * from "./ConfirmationAccountScreen/ConfirmationAccountScreen";
 export * from "./SignInScreen/SignInScreen";
-export * from "./SignUpScreen/SignUpScreen";
+export * from "./signup-screen";
 export * from "./VerificationCodeScreen";

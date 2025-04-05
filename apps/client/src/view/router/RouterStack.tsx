@@ -10,7 +10,7 @@ import {
 	NotFoundScreen,
 	SettingsScreen,
 	SignInScreen,
-	SignUpScreen,
+	SignupScreen,
 	TrainingScreen,
 	UpdateAthleteScreen,
 	UpdateTrainingScreen,
@@ -29,7 +29,7 @@ export function RouterStack() {
 				<Route element={<AuthGuard isPrivate={false} />}>
 					<Route path="/" element={<AuthLayout />}>
 						<Route index element={<Navigate to={ROUTES.SIGNIN} replace />} />
-						<Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
+						<Route path={ROUTES.SIGNUP} element={<SignupScreen />} />
 						<Route path={ROUTES.SIGNIN} element={<SignInScreen />} />
 						<Route
 							path={ROUTES.CONFIRMATION_ACCOUNT}
