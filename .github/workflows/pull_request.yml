@@ -20,14 +20,14 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
         shell: bash
 
       - name: Run Typechecking
-        run: yarn typecheck
+        run: pnpm run typecheck
 
       - name: Run the tests
-        run: yarn test
+        run: pnpm run test
 
       - name: Run build
-        run: yarn build
+        run: pnpm run build
