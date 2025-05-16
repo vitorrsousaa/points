@@ -9,13 +9,9 @@
     "export": "email export",
     "dev": "email dev -p 3405 open"
   },
-  "devDependencies": {
-    "@types/react": "^18.3.18"
-  },
   "dependencies": {
     "@react-email/components": "0.0.33",
     "@shared/typescript-config": "workspace:*",
-    "react": "^19.0.0",
     "react-email": "^3.0.7"
   }
 }

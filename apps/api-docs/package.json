@@ -10,7 +10,6 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@types/react-dom": "^18.3.0",
 		"@shared/vitest-presets": "workspace:*",
 		"@vitejs/plugin-react-swc": "^3.7.0",
 		"typescript": "^5.5.2",

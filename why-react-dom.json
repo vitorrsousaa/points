@@ -1,0 +1,15 @@
+[
+  {
+    "name": "monorepo-template",
+    "path": "/Users/vitorsousa/Documents/dev/grypp",
+    "private": true,
+    "dependencies": {
+      "react-dom": {
+        "from": "react-dom",
+        "version": "18.3.1",
+        "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz",
+        "path": "/Users/vitorsousa/Documents/dev/grypp/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom"
+      }
+    }
+  }
+]
